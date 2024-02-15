@@ -1,0 +1,4 @@
+- Tener HUDS para cosas como el ranking, lower thirds para entrevistas, datos etc
+- Transiciones para que aparezcan cosas en pantalla
+- Tener un sistema de control separado de los archivos de la HUD
+- ...
