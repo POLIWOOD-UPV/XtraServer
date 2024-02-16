@@ -5,6 +5,46 @@ const {Server, Namespace, Socket} = require("socket.io");
 
 const dir = require("./dir");
 
+const doGET = (req, res, commands) => {
+    for (const key in commands) {
+        if (Object.hasOwnProperty.call(commands, key) && req.url == "/" + key) {
+            try {
+                commands[key](req, res);
+            } catch (error) {
+                console.error(`command(${key})`, error.message);
+                process.exit(1);
+            }
+            return;
+        }
+    }
+    if (req.url.search("\\.") == -1) {
+        res.writeHead(404, {"Content-Type": "text/plain"});
+        res.write("Error 404: command not existent");
+        res.end();
+        return;
+    } else {
+        dir.http_file(res, req.url);
+        return;
+    }
+}
+
+const doPOST = (req, res) => {
+    if (true/*path === "/add"*/) {
+        res.writeHead(200);
+
+        fs.writeFileSync("./http/POST" + req.url, "");
+
+        req.on("data", (data) => {
+            fs.appendFileSync("./http/POST" + req.url, data);
+        })
+        res.end();
+    } else {
+        res.writeHead(400);
+        res.write('');
+        res.end();
+    }
+}
+
 exports.createServer = (port, commands) => {
     var server = http.createServer((req, res) => {
         fs.appendFileSync("./logs/http_server.csv", [
@@ -14,26 +54,9 @@ exports.createServer = (port, commands) => {
         ].join(";") + "\n");
         console.log(req.method + ": " + req.url);
         if (req.method === "GET") {
-          for (const key in commands) {
-            if (Object.hasOwnProperty.call(commands, key) && req.url == "/" + key) {
-                try {
-                    commands[key](req, res);
-                } catch (error) {
-                    console.error(`command(${key})`, error.message);
-                    process.exit(1);
-                }
-                return;
-            }
-          }
-          if (req.url.search("\\.") == -1) {
-            res.writeHead(404, {"Content-Type": "text/plain"});
-            res.write("Error 404: command not existent");
-            res.end();
-            return;
-          } else {
-            dir.http_file(res, req.url);
-            return;
-          }
+            doGET(req, res, commands);
+        } else if (req.method === "POST") {
+            doPOST(req, res);
         } else {
           res.writeHead(501, {"Content-Type": "text/plain"});
           res.write("Error 501: method not implemented");
