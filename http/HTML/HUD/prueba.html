@@ -7,6 +7,7 @@
 </head>
 <body>
     <link href = "prueba.css" rel="stylesheet">
+    
     <main>
         <!--Ranking-->
         <div id = "contenedor">
@@ -30,9 +31,18 @@
 
         <!--Controles, en un futuro irían en la página de controles-->
         <div id = "divBotones">
-            <button onclick="sumaPiloto()"> Añadir piloto</button>
-            <button onclick="quitaPiloto()"> Quitar piloto</button>
-            <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
+            <div id = "divBotonesPilotos">
+                <h2>Control pilotos</h2>
+                <button onclick="sumaPiloto()"> Añadir piloto</button>
+                <button onclick="quitaPiloto()"> Quitar piloto</button>
+            </div>
+            <div id = "divBotonesRanking">
+                <h2>Control Ranking</h2>
+                <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
+                <button onclick= "mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempo</button>
+                <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
+            </div>
+
         </div>
 
     <!-- Actualmente no lo estamos usando-->
@@ -79,112 +89,7 @@
         </div>
         
     </div>
-
     </main>
-
-
-    <script>
-        // Lista Pilotos
-        var pilotos = ["ric","jaw","abe"]
-        var i = 0
-
-        var ranking = document.getElementById("contenedor")
-        var filas = document.getElementsByClassName("fila")
-
-
-        function creaFila(nom,pos,tiemp){
-        // Creamos la fila con sus partes
-            let fila = document.createElement("div")
-            fila.className = "fila"
-            let numero = document.createElement("div")
-            numero.className = "numero"
-            numero.textContent = pos
-            let resto = document.createElement("div")
-            resto.className = "resto"
-
-            let nombre = document.createElement("div")
-            nombre.className = "nombre"
-            nombre.textContent = nom
-            let tiempo = document.createElement("div")
-            tiempo.className = "tiempo"
-            // Si es el primero, le ponemos que es el lider
-            if (i ==0){
-                tiempo.textContent = "LEADER"
-            }else{
-                tiempo.textContent = tiemp
-            }
-            
-            // Lo juntamos todo y devolvemos la fila
-            resto.append(nombre,tiempo)
-            fila.append(numero,resto)
-            return fila
-        }
-
-        function sumaPiloto() {
-            let piloto = pilotos[++i % 3];
-            let nueva_fila = creaFila(piloto,i+1 , "+1 lap");
-            ranking.append(nueva_fila);
-        }
-        function quitaPiloto() {
-            if (filas.length > 0) {
-                filas[filas.length - 1].remove();
-                --i;
-            }
-        }
-
-        // Aparecer y desaparecer ranking
-        var ranking_visible = true;
-        var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_rank_id")
-        function rankingMov() {
-            if (ranking_visible) {
-                // Ranking se pasa a oculto
-                aparecer_desaparecer_rank.textContent = "Aparecer Ranking";
-                ranking_visible = false;
-                ranking.style.left = "-500px";
-            } else {
-                // Ranking se pasa a visible
-                aparecer_desaparecer_rank.textContent = "Desaparecer Ranking";
-                ranking_visible = true;
-                ranking.style.left = "0px";
-
-            }
-        }
-
-
-        // Live Timing ( Actualmente no lo vamos a usar, o al menos así)
-
-        var prog1 = document.getElementById("prog1")
-        var prog2 = document.getElementById("prog2")
-        var prog3 = document.getElementById("prog3")
-
-        function updateProgressBar(progressBar) {
-        progressBar.value += 10;
-
-        if (progressBar.value >= 100) {
-            progressBar.value = 0;
-        }
-    }
-        function updateProgress() {
-        let prog_actual;
-
-        if (prog1.value < 100) {
-            prog_actual = prog1;
-        } else if (prog2.value < 100) {
-            prog_actual = prog2;
-        } else {
-            prog_actual = prog3;
-        }
-
-        prog_actual.value += 10
-        if (prog_actual.id == "prog3" && prog_actual.value == 100){
-            return
-        }else {
-            setTimeout(updateProgress, 100);
-        }
-         
-        }
-
-        updateProgress(); // Para que inicie el live timing nada mas cargar (es parte del live time, no se va a usar)
-    </script>
+    <script src="prueba.js"></script>
 </body>
 </html>
