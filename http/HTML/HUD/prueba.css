@@ -5,7 +5,11 @@ body{
 
 }
 
-/* Lista corredores */
+/* Ranking */
+#cabecera img {
+    height: 100%;
+    width: 100%;
+}
 #contenedor {
     background-color: rgba(52, 52, 52, 0.699);
     border-top-left-radius: 10px;
@@ -24,7 +28,7 @@ body{
     display: flex;
     flex-direction: row;
     border: 2px solid black;
-    height: 35px;
+    height: 30px;
     padding: 5px;
 }
 
@@ -46,7 +50,8 @@ body{
     display: flex;
     flex-direction: row;
 }
-.nombre,.tiempo{ /* Aquí solía estar #cabecera tambien cuando tenia texto */
+/* Modificables */
+.nombre, .tiempo, .peso{ /* Aquí solía estar #cabecera tambien cuando tenia texto */
     flex:1;
     display: flex;
     align-items: center;
@@ -59,11 +64,10 @@ body{
     /*  https://css-tricks.com/adding-stroke-to-web-text/ */
     -webkit-text-stroke: 1px black;
 }
-#cabecera img {
-    height: 100%;
-    width: 100%;
-
+.peso{
+    display: none;
 }
+
 /* Tiempo de vuelta */
 
 .liveTime {

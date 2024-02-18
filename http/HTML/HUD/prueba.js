@@ -1,12 +1,12 @@
         // Lista Pilotos
-        var pilotos = ["ric","jaw","abe"]
+        var pilotos = ["ric","jaw","abe","est"]
         var i = 0
 
         var ranking = document.getElementById("contenedor")
         var filas = document.getElementsByClassName("fila")
 
 
-        function creaFila(nom,pos,tiemp){
+        function creaFila(nom,pos,tiemp,pes){
         // Creamos la fila con sus partes
             let fila = document.createElement("div")
             fila.className = "fila"
@@ -22,6 +22,25 @@
             let nombre = document.createElement("div")
             nombre.className = "nombre"
             nombre.textContent = nom
+
+            // Informativos
+            let tiempo = crearTiempo(tiemp)
+            let peso = crearPeso(pes)
+            if (!tiempo_visible){
+                tiempo.style.display = "none"
+            }
+            if (peso_visible){
+                peso.style.display = "flex"
+            }
+            // Lo juntamos todo y devolvemos la fila
+            resto.append(nombre,tiempo,peso)
+            fila.append(numero,resto)
+            return fila
+        }
+
+        // Funciones para crear los informativos del ranking
+        // Tiempo
+        function crearTiempo(tiemp){
             let tiempo = document.createElement("div")
             tiempo.className = "tiempo"
 
@@ -32,10 +51,16 @@
                 tiempo.textContent = tiemp
             }
             
-            // Lo juntamos todo y devolvemos la fila
-            resto.append(nombre,tiempo)
-            fila.append(numero,resto)
-            return fila
+            return tiempo
+        }
+        // Peso
+        function crearPeso(pes){
+            let peso = document.createElement("div")
+            peso.className = "peso"
+
+            peso.textContent = pes;
+            return peso
+
         }
 
         // Funciones para modificar la informacion del ranking
@@ -64,10 +89,40 @@
 
         }
 
+        // Peso ( empieza desactivada)
+        var peso_visible = false;
+        var pesos = document.getElementsByClassName("peso")
 
+        function mostrarPeso(){
+            let estado;
+            if (peso_visible){
+                // Ocultar pesos
+                estado = "none";
+                boton_peso.textContent = "Mostrar Pesos"
+                peso_visible = false;
+            }else{
+                // Mostrar pesos
+                estado = "flex";
+                boton_peso.textContent = "Ocultar Pesos"
+                peso_visible = true;
+            }
+            for (var i = 0; i < pesos.length;i++){
+                pesos[i].style.display = estado
+            }
+        }
+
+        function cambiazoPesoTiempos(){
+            if ((!tiempo_visible && !peso_visible) ||(tiempo_visible && peso_visible) ) {
+                return
+            }else{
+                mostrarTiempo();
+                mostrarPeso();
+            }
+        }
+        // Poner y sacar aviones
         function sumaPiloto() {
-            let piloto = pilotos[++i % 3];
-            let nueva_fila = creaFila(piloto,i+1 , "+1 lap");
+            let piloto = pilotos[++i % 4];
+            let nueva_fila = creaFila(piloto,i+1 , "+1 lap","1Kg");
             ranking.append(nueva_fila);
         }
         function quitaPiloto() {
