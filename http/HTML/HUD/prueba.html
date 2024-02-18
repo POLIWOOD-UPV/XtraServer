@@ -3,144 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <title>Test</title>
-    <style>
-    body{
-        background-image:url("abu.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', "Geneva", Verdana, sans-serif;
 
-    }
-
-    /* Lista corredores */
-    #contenedor {
-        background-color: rgba(52, 52, 52, 0.699);
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        width: 300px;
-
-        margin: 20px 0px 0px 5px;
-
-        display: flex;
-        flex-direction: column;
-    }
-    .fila {
-        display: flex;
-        flex-direction: row;
-        border: 2px solid black;
-        height: 35px;
-        padding: 5px;
-    }
-
-    .numero {
-        flex: 1;
-        background-color: white;
-        border: 2px solid black;
-
-        border-radius: 8px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 20px;
-    }
-    .resto {
-        flex:5;
-        display: flex;
-        flex-direction: row;
-    }
-    .nombre,.tiempo, #cabecera {
-        flex:1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        font-weight: bold;
-
-        text-transform: uppercase;
-        color: white;
-        /*  https://css-tricks.com/adding-stroke-to-web-text/ */
-        -webkit-text-stroke: 1px black;
-    }
-
-    /* Tiempo de vuelta */
-
-    .liveTime {
-        background-color: rgba(52, 52, 52, 0.941);
-        width: 30%;
-        font-weight: bold;
-        border: 7px ridge black;
-        text-transform: uppercase;
-        color: white;
-    }
-
-
-    .filaBajaLT, .filaMediaLT, .filaAltaLT {
-        display: flex;
-        flex-direction: row;
-    }
-    .filaBajaLT *, .filaMediaLT * {
-        flex:1;
-        text-align: center;
-    }
-
-    .filaArribaLT {
-        display: flex;
-        flex-direction: row;
-        background-color: rgba(255, 255, 255, 0.604);
-    }
-    .filaArribaLT {
-        color: black;
-        -webkit-text-stroke: none;
-    }
-    .filaArribaLT .nombreLT {
-        text-align: center;
-        font-size: 25px;
-        flex: 9
-    }
-    .filaArribaLT .numero {
-    flex: 1
-    }
-    .filaMediaLT {
-        font-size: 20px;
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-
-    .filaMedia1{
-        display: flex;
-        flex-direction: column;
-    }
-
-    .filaMedia2 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .filaBajaLT * {
-        border: 2px solid black;
-    }
-    progress{
-        width: 100%;
-    }
-
-    /* https://www.tutorialspoint.com/how-to-set-color-of-progress-bar-using-html-and-css#:~:text=CSS%20provides%20the%20%3A%3A%2Dwebkit,style%20on%20a%20progress%20bar.&text=We%20target%20both%20the%20%3A%3A%2D,and%20set%20their%20background%20colors. */
-    #prog1::-webkit-progress-value {
-        background-color: red;
-    }
-    #prog3::-webkit-progress-value {
-        background-color: purple;
-    }
-    </style>
 </head>
 <body>
+    <link href = "prueba.css" rel="stylesheet">
     <main>
         <!--Ranking-->
         <div id = "contenedor">
             <div id = "cabecera">
-                <h2>CABECERA</h2>
+                <img src = "img/xtra2_b.png">
             </div>
             <div class = "fila">
                 <div class = "numero">
@@ -156,10 +27,12 @@
                 </div>
             </div>
         </div>
+
         <!--Controles, en un futuro irían en la página de controles-->
         <div id = "divBotones">
             <button onclick="sumaPiloto()"> Añadir piloto</button>
             <button onclick="quitaPiloto()"> Quitar piloto</button>
+            <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
         </div>
 
     <!-- Actualmente no lo estamos usando-->
@@ -215,7 +88,7 @@
         var pilotos = ["ric","jaw","abe"]
         var i = 0
 
-        var HUD = document.getElementById("contenedor")
+        var ranking = document.getElementById("contenedor")
         var filas = document.getElementsByClassName("fila")
 
 
@@ -250,7 +123,7 @@
         function sumaPiloto() {
             let piloto = pilotos[++i % 3];
             let nueva_fila = creaFila(piloto,i+1 , "+1 lap");
-            HUD.append(nueva_fila);
+            ranking.append(nueva_fila);
         }
         function quitaPiloto() {
             if (filas.length > 0) {
@@ -258,6 +131,25 @@
                 --i;
             }
         }
+
+        // Aparecer y desaparecer ranking
+        var ranking_visible = true;
+        var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_rank_id")
+        function rankingMov() {
+            if (ranking_visible) {
+                // Ranking se pasa a oculto
+                aparecer_desaparecer_rank.textContent = "Aparecer Ranking";
+                ranking_visible = false;
+                ranking.style.left = "-500px";
+            } else {
+                // Ranking se pasa a visible
+                aparecer_desaparecer_rank.textContent = "Desaparecer Ranking";
+                ranking_visible = true;
+                ranking.style.left = "0px";
+
+            }
+        }
+
 
         // Live Timing ( Actualmente no lo vamos a usar, o al menos así)
 
@@ -292,7 +184,7 @@
          
         }
 
-updateProgress(); // Para que inicie el live timing nada mas cargar (es parte del live time, no se va a usar)
+        updateProgress(); // Para que inicie el live timing nada mas cargar (es parte del live time, no se va a usar)
     </script>
 </body>
 </html>
