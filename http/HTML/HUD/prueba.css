@@ -22,7 +22,6 @@ body{
     left: 0px;
     position: relative;
     transition: left 0.5s ease;
-    
 }
 .fila {
     display: flex;
@@ -30,6 +29,10 @@ body{
     border: 2px solid black;
     height: 30px;
     padding: 5px;
+
+    position: relative;
+    left: 0px;
+    transition: left 0.2s ease;
 }
 
 .numero {

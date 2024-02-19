@@ -35,6 +35,8 @@
             // Lo juntamos todo y devolvemos la fila
             resto.append(nombre,tiempo,peso)
             fila.append(numero,resto)
+
+            fila.style.left = "-500px"
             return fila
         }
 
@@ -110,7 +112,8 @@
                 pesos[i].style.display = estado
             }
         }
-
+        
+        var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
         function cambiazoPesoTiempos(){
             if ((!tiempo_visible && !peso_visible) ||(tiempo_visible && peso_visible) ) {
                 return
@@ -124,11 +127,22 @@
             let piloto = pilotos[++i % 4];
             let nueva_fila = creaFila(piloto,i+1 , "+1 lap","1Kg");
             ranking.append(nueva_fila);
+            nueva_fila.style.left = "-500px"
+            setTimeout(() => {
+                nueva_fila.style.left = "0px"
+            }, 50);
+   
+
         }
         function quitaPiloto() {
             if (filas.length > 0) {
-                filas[filas.length - 1].remove();
-                --i;
+
+                filas[filas.length-1].style.left = "-500px"
+                setTimeout(() => {
+                    filas[filas.length - 1].remove();
+                    --i;
+                }, 150);
+
             }
         }
 
