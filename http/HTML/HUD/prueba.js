@@ -1,6 +1,6 @@
         // Lista Pilotos
         var pilotos = ["ric","jaw","abe","est"]
-        var i = 0
+        var controla_pilotos = 0
 
         var ranking = document.getElementById("contenedor")
         var filas = document.getElementsByClassName("fila")
@@ -47,7 +47,7 @@
             tiempo.className = "tiempo"
 
             // Si es el primero, le ponemos que es el lider
-            if (i ==0){
+            if ( controla_pilotos==0){
                 tiempo.textContent = "LEADER"
             }else{
                 tiempo.textContent = tiemp
@@ -122,10 +122,12 @@
                 mostrarPeso();
             }
         }
-        // Poner y sacar aviones
+
+
+        // Poner y sacar aviones (con animacion)
         function sumaPiloto() {
-            let piloto = pilotos[++i % 4];
-            let nueva_fila = creaFila(piloto,i+1 , "+1 lap","1Kg");
+            let piloto = pilotos[++controla_pilotos % 4];
+            let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
             ranking.append(nueva_fila);
             nueva_fila.style.left = "-500px"
             setTimeout(() => {
@@ -140,15 +142,40 @@
                 filas[filas.length-1].style.left = "-500px"
                 setTimeout(() => {
                     filas[filas.length - 1].remove();
-                    --i;
+                    --controla_pilotos;
                 }, 150);
 
             }
         }
+        
+        
+        // Poner y sacar aviones (sin animacion)
+        // Sumar avion instantaneamente
+        function nacerPiloto() {
+            let piloto = pilotos[++controla_pilotos % 4];
+            let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
+            ranking.append(nueva_fila);
+            nueva_fila.style.left = "0px"
+        }
 
+        // Eliminar un avion instantaneamente
+        function matarPiloto() {
+            if (filas.length > 0) {
+                filas[filas.length - 1].remove();
+                --controla_pilotos;
+            }
+        }
+        // Vaciar todos los aviones instantaneamente
+        function vaciarPilotos(){
+            for (var j = filas.length - 1; j >= 0; j--) {
+                filas[j].remove();
+                controla_pilotos--; // Decrement the global variable
+            }
+        }
         // Aparecer y desaparecer ranking
         var ranking_visible = true;
         var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_rank_id")
+
         function rankingMov() {
             if (ranking_visible) {
                 // Ranking se pasa a oculto
@@ -163,8 +190,44 @@
 
             }
         }
-
-
+        // Desaparicion dinamica
+        function desaparicionDinamica(){
+            if (!ranking_visible){
+                // Ya no esta, no se puede desaparecer
+                return
+            }else{
+                cant_filas =  filas.length
+                for (var j = 0; j <= cant_filas; j++){
+                    setTimeout(() =>{
+                        quitaPiloto()
+                    },500)
+                    
+                }
+            }
+            setTimeout(() =>{
+                rankingMov()
+            },500)
+        }
+        // Aparicion dinamica
+        function aparicionDinamica(){
+            // Lo movemos al lado y que vuelva a aparecer
+            if (ranking_visible){
+                ranking.style.left = "-500px";
+                ranking_visible = false;
+            }
+            setTimeout(() =>{
+                rankingMov()
+            },500)   
+            cant_filas =  filas.length
+            vaciarPilotos()
+            console.log(cant_filas)
+            for (var j = 0; j <= cant_filas; j++){
+                setTimeout(() =>{
+                    sumaPiloto()
+                },500)
+                
+            }
+        }
         // Live Timing ( Actualmente no lo vamos a usar, o al menos así)
 
         var prog1 = document.getElementById("prog1")

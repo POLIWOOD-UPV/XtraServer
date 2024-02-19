@@ -36,12 +36,22 @@
         <div id = "divBotones">
             <div id = "divBotonesPilotos">
                 <h2>Control pilotos</h2>
+                <h3>Dinamicos</h3>
                 <button onclick="sumaPiloto()"> Añadir piloto</button>
                 <button onclick="quitaPiloto()"> Quitar piloto</button>
+                <h3>Secos</h3>
+                <button onclick="nacerPiloto()"> Añadir piloto</button>
+                <button onclick="matarPiloto()"> Quitar piloto</button>
+                <button onclick="vaciarPilotos()"> VACIAR piloto</button>
+
             </div>
             <div id = "divBotonesRanking">
                 <h2>Control Ranking</h2>
                 <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
+                <br>Aparicion y desaparicion dinamica actualmente no funcionan<br>
+                <button onclick = "aparicionDinamica()">Aparición dinámica</button>
+                <button onclick = "desaparicionDinamica()">desaparicion Dinamica</button>
+                <h3>Informativos</h3>
                 <button onclick= "mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
                 <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
                 <button onclick = "cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
