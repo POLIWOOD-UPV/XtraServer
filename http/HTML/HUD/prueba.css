@@ -19,7 +19,6 @@ aside {
 #contenedor {
     background-color: rgba(52, 52, 52, 0.699);
     border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
     width: 300px;
     margin: 20px 0px 0px 5px;
     display: flex;
@@ -87,7 +86,7 @@ aside {
     text-transform: uppercase;
     color: white;
 
-    margin-top:30px ;
+    margin-top:30px  ;
 }
 
 

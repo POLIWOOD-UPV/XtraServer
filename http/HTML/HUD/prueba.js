@@ -36,6 +36,7 @@
             resto.append(nombre,tiempo,peso)
             fila.append(numero,resto)
 
+            // Ponemos la fila en la izquierda para que se mueva mas tarde
             fila.style.left = "-500px"
             return fila
         }
@@ -190,46 +191,55 @@
 
             }
         }
-        // Desaparicion dinamica
-        function desaparicionDinamica(){
-            if (!ranking_visible){
-                // Ya no esta, no se puede desaparecer
-                return
-            }else{
-                cant_filas =  filas.length
-                for (var j = 0; j <= cant_filas; j++){
-                    setTimeout(() =>{
-                        quitaPiloto()
-                    },500)
-                    
-                }
+        function desaparicionDinamica() {
+            if (!ranking_visible) {
+                // Ya escondido, no se ve
+                return;
+            } else {
+                let cant_filas =  filas.length;
+                let indice = 1;
+                // Se repite el codigo en un intervalo hasta que se usa clearInterval
+                let intervalId = setInterval(() => {
+                    // Comprobmos si hemos quitado todas ya
+                    if (indice < cant_filas+1) {
+                        // Lo posicionamos a la izquierda (se aplica la transicion)
+                        filas[filas.length-indice].style.left = "-500px";
+                        indice++
+                        controla_pilotos--;
+                    } else {
+                        // Una vez hemos quitado todas, movemos el contenedor entero y paramos lo otro
+                        clearInterval(intervalId);
+                        rankingMov();
+                    }
+                }, 150); // Que espere 150ms antes de quitar el siguiente 
             }
-            setTimeout(() =>{
-                rankingMov()
-            },500)
         }
-        // Aparicion dinamica
-        function aparicionDinamica(){
-            // Lo movemos al lado y que vuelva a aparecer
-            if (ranking_visible){
-                ranking.style.left = "-500px";
-                ranking_visible = false;
-            }
-            setTimeout(() =>{
-                rankingMov()
-            },500)   
-            cant_filas =  filas.length
-            vaciarPilotos()
-            console.log(cant_filas)
-            for (var j = 0; j <= cant_filas; j++){
-                setTimeout(() =>{
-                    sumaPiloto()
-                },500)
-                
+        
+        function aparicionDinamica() {
+            if (ranking_visible) {
+                // Ya se ve
+                return;
+            } else {
+                rankingMov();
+                let cant_filas = filas.length
+                // Se repite el codigo en un intervalo hasta que se usa clearInterval
+                let intervalId = setInterval(() => {
+                    if (0 < cant_filas) {
+                        // Lo ponemos cada 0.2s
+                        setTimeout(function() {
+                            // Lo posicionamos a la izquierda (se aplica la transicion)
+                            filas[filas.length-1].style.left = "0px";
+                            
+                            ++controla_pilotos;
+                        }, 200);
+                    } else {
+                        clearInterval(intervalId);
+                    }
+                }, 150); // Que espere 150ms antes de quitar el siguiente 
             }
         }
         // Live Timing ( Actualmente no lo vamos a usar, o al menos así)
-
+        /*
         var prog1 = document.getElementById("prog1")
         var prog2 = document.getElementById("prog2")
         var prog3 = document.getElementById("prog3")
@@ -262,3 +272,4 @@
         }
 
         updateProgress(); // Para que inicie el live timing nada mas cargar (es parte del live time, no se va a usar)
+        */
