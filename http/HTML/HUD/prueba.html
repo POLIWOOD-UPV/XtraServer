@@ -31,72 +31,27 @@
                 </div>
             </div>
         </div>
-
-    <!-- Actualmente no lo estamos usando-->
-    <!--Tiempo de vuelta-->
-    <!--
-    <div class = "liveTime">
-        <div class = "filaArribaLT">
-            <div class = numero>
-                1
-            </div>
-            <div class = nombreLT>
-                Ricardo Román
-            </div>
-            <div>
-
-            </div>
-        </div>
-        <div class = "filaMediaLT">
-            <div class = "filaMedia1">
-                <div>
-                    1:16:0
-                </div>
-                <div>
-                    ABEL
-                </div>
-            </div>
-            <div class = "filaMedia2">
-                1:15:9
-            </div>
-
-        </div>
-        <div class = "filaBajaLT">
-            <div class = "S1">
-                S1
-                <progress id ="prog1" value="0" max="100"></progress>
-            </div>
-            <div class = "S2">
-                S2
-                <progress id = "prog2"value="0" max="100"></progress>
-            </div>
-            <div class = "S3">
-                S3
-                <progress id = "prog3" value="0" max="100"></progress>                
-            </div>
-        </div>-->
-        
     </main>
     <aside>
         <!--Controles, en un futuro irían en la página de controles-->
         <div id = "divBotones">
             <div id = "divBotonesPilotos">
                 <h2>Control pilotos</h2>
-                <h3>Dinamicos</h3>
+                <h3>Dinamicos &LeftAngleBracket;Con animación &RightAngleBracket;</h3>
                 <button onclick="sumaPiloto()"> Añadir piloto</button>
                 <button onclick="quitaPiloto()"> Quitar piloto</button>
-                <h3>Secos</h3>
+                <h3>Secos &LeftAngleBracket;sin animación &RightAngleBracket;</h3>
                 <button onclick="nacerPiloto()"> Añadir piloto</button>
                 <button onclick="matarPiloto()"> Quitar piloto</button>
                 <button onclick="vaciarPilotos()"> VACIAR piloto</button>
 
             </div>
             <div id = "divBotonesRanking">
+                <br>Transiciones funcionan entre ellas : &RightAngleBracket; <br>
                 <h2>Control Ranking</h2>
                 <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
-                <br>Aparicion y desaparicion dinamica actualmente no funcionan<br>
                 <button onclick = "aparicionDinamica()">Aparición dinámica</button>
-                <button onclick = "desaparicionDinamica()">desaparicion Dinamica</button>
+                <button onclick = "desaparicionDinamica()">Desaparicion Dinamica</button>
                 <h3>Informativos</h3>
                 <button onclick= "mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
                 <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
