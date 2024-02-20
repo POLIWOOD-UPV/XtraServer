@@ -198,8 +198,8 @@ function rankingMov() {
         }
         
         }
+    updateRankingStatus()
 }
-
 
 // Mover filas en o fuera de pantalla
 var filas_visible = true;
@@ -258,6 +258,7 @@ function desaparicionDinamica() {
         filas_visible = true;
         filasMov()
     }
+
 }
 
 function aparicionDinamica() {
@@ -269,4 +270,23 @@ function aparicionDinamica() {
         ranking_visible = false;
         rankingMov()
     }
+
 }
+
+function updateRankingStatus(){
+    let status = document.getElementById("status_anim_ranking");
+    if (!filas_visible){
+        // Si las filas estan movidas, sera dinamico siempre
+        status.textContent = "Dinamica";
+        status.style.color = "red";
+    }else if (!ranking_visible && filas_visible){
+        // Si el ranking esta movido pero con las filas en su lugar, es estatico
+        status.textContent = "Estatica";
+        status.style.color = "red";
+    }else{
+        // Si ambas son visbles, es que estamos en el punto de partida
+        status.textContent = "-";
+        status.style.color = "black"
+    }
+
+    }

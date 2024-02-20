@@ -44,11 +44,12 @@
                 <button onclick="nacerPiloto()"> Añadir piloto</button>
                 <button onclick="matarPiloto()"> Quitar piloto</button>
                 <button onclick="vaciarPilotos()"> VACIAR piloto</button>
-
             </div>
+
             <div id = "divBotonesRanking">
                 <br>Transiciones funcionan entre ellas : &RightAngleBracket; <br>
                 <h2>Control Ranking</h2>
+                <p>La siguiente animación será: <span id = "status_anim_ranking">-</span></p>
                 <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
                 <button onclick = "aparicionDinamica()">Aparición dinámica</button>
                 <button onclick = "desaparicionDinamica()">Desaparicion Dinamica</button>
@@ -62,7 +63,6 @@
         <p>TODO:
 
         <ul>
-            <li>Poner que tipo de animación esta actualmente en el ranking</li>
             <li>Incluir despegue en menos de 15metros</li>
             <li>Separar funciones en archivos ?</li>
             <li>Generador de filas avanzado para incluir datos</li>
