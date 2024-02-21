@@ -40,44 +40,55 @@
                 <h3>Dinamicos &LeftAngleBracket;Con animación &RightAngleBracket;</h3>
                 <button onclick="sumaPiloto()"> Añadir piloto</button>
                 <button onclick="quitaPiloto()"> Quitar piloto</button>
+
                 <h3>Secos &LeftAngleBracket;sin animación &RightAngleBracket;</h3>
                 <button onclick="nacerPiloto()"> Añadir piloto</button>
                 <button onclick="matarPiloto()"> Quitar piloto</button>
-                <button onclick="vaciarPilotos()"> VACIAR piloto</button>
+                <button onclick="vaciarPilotos()"> VACIAR PILOTOS</button>
+
             </div>
 
             <div id = "divBotonesRanking">
-                <br>Transiciones funcionan entre ellas : &RightAngleBracket; <br>
                 <h2>Control Ranking</h2>
-                <p>La siguiente animación será: <span id = "status_anim_ranking">-</span></p>
+                <p>La siguiente transicion será: <span id = "status_anim_ranking">-</span></p>
                 <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
                 <button onclick = "aparicionDinamica()">Aparición dinámica</button>
                 <button onclick = "desaparicionDinamica()">Desaparicion Dinamica</button>
+
                 <h3>Informativos</h3>
                 <button onclick= "mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
                 <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
                 <button onclick = "cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
             </div>
 
+            <div id = "divDebugger">
+                <h3>Debugger</h3>
+                <h2>Posicion</h2>
+                <button>Reset filas</button>
+                <button>Reset Contendor Ranking</button>
+                <button>Reset todo</button>
+            </div>
+
         </div>
-        <p>TODO:
-
-        <ul>
-            <li>Incluir despegue en menos de 15metros</li>
-            <li>Separar funciones en archivos ?</li>
-            <li>Generador de filas avanzado para incluir datos</li>
-            <li>Hacer animaciones para el peso / tiempo</li>
-            <li>Calcular la diferencia de tiempos entre filas</li>
-            <li>Introducir Debugger para poner filas y ranking en la pantalla otra vez</li>
-        </ul>
-    
-
-        </p>
-
+        <details>
+            <summary>
+                TODO:
+            </summary>
+            <ul>
+                <li>Incluir despegue en menos de 15 metros</li>
+                <li>Generador de filas avanzado para incluir datos</li>
+                <li>Hacer animaciones para el peso / tiempo</li>
+                <li>Calcular la diferencia de tiempos entre filas</li>
+                <li>Introducir Debugger para poner filas y ranking en la pantalla otra vez</li>
+            </ul>
+        </details>
+        
 
     </aside>
 
     </div>
-    <script src="prueba.js"></script>
+    <script src="JS_RANK/filas.js"></script>
+    <script src="JS_RANK/dinamicas.js"></script>
+    <script src="JS_RANK/pilotos.js"></script>
 </body>
 </html>
