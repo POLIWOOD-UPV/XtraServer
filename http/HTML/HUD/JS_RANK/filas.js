@@ -11,7 +11,7 @@ var ranking = document.getElementById("contenedor")
 var filas = document.getElementsByClassName("fila")
 
 var pilotos_control = document.getElementById("pilotos_mas_borrar")
-var filas_control = document.getElementsByClassName("fila_control")
+var filas_control = document.getElementsByClassName("fila_control_borrar")
 
 // Cogemos los botones
 var boton_tiempo = document.getElementById("mostrar_tiempo_id");
@@ -69,22 +69,32 @@ function creaFila(nom,pos,tiemp,pes){
 function crarFilaControl(piloto){
     // Creamos la fila con sus partes
     let fila = document.createElement("div")
-    fila.className = "fila_control"
+    fila.className = "fila_control_borrar"
     // Ponemos el nombre
     let nombre = document.createElement("div")
     nombre.textContent = piloto
     fila.append(nombre)
+    // Para SUMAR
+    
+    // Rellenar con botones
+
+    // Para borrar
     //Ponemos el boton de eliminar animado
     let botoncin = document.createElement("button")
-    botoncin.onclick = quitaPiloto
+    botoncin.onclick = () => {
+        quitaPiloto('animado')
+    };
     botoncin.textContent = "BORRAR_An"
     fila.append(botoncin)
     //Ponemos el boton de eliminar seco
     let botoncin2 = document.createElement("button")
-    botoncin2.onclick = matarPiloto
+    botoncin2.onclick = () => {
+        quitaPiloto('seco');
+    };
     botoncin2.textContent = "BORRAR"
     fila.append(botoncin2)
-    //Ponemos el boton de 
+
+    //Ponemos la fila en BORRAR 
     pilotos_control.append(fila)
 
 }

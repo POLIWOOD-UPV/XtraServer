@@ -54,14 +54,34 @@
                 <h3>Sumar</h3>
                     <input id = "input_nombre" type = "text" placeholder = "Nombre" required >
                     <button onclick="sumar_test()">Enviar</button> <!--No es un submit ya que se recarga la pag-->
-                    <button onclick="sumaPiloto()"> Añadir piloto An</button>
-                    <button onclick="nacerPiloto()"> Añadir piloto</button>  
+                    <div id = "pilotos_mas_sumar">
+                        <div class = "fila_control_sumar">
+                            <div class = "nombre_control">RIC</div>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
+                        </div>
+                        <div class = "fila_control_sumar">
+                            <div class = "nombre_control">JAW</div>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
+                        </div>
+                        <div class = "fila_control_sumar">
+                            <div class = "nombre_control">ABE</div>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
+                        </div>
+                        <div class = "fila_control_sumar">
+                            <div class = "nombre_control">EST</div>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
+                        </div>
+                    </div>  
                 <h3>Borrar</h3>
                 <div id = "pilotos_mas_borrar">
-                    <div class = "fila_control">
+                    <div class = "fila_control_borrar">
                         <div class = "nombre_control">RIC</div>
-                        <button onclick="quitaPiloto()">BORRAR_An</button>
-                        <button onclick="matarPiloto()"> BORRAR</button>
+                        <button onclick="quitaPiloto('animado')">BORRAR_An</button>
+                        <button onclick="quitaPiloto('seco')"> BORRAR</button>
                     </div>
                 </div>
                 <button onclick="vaciarPilotos()"> VACIAR PILOTOS</button>

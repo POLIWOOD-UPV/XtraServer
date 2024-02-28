@@ -77,16 +77,16 @@ aside {
 }
 
 /* Control de piloto */
-#pilotos_mas_borrar{
+#pilotos_mas_borrar, #pilotos_mas_sumar{
     background-color: rgba(52, 52, 52, 0.699);
     color: white;
     text-transform: uppercase;
 } 
 
-.fila_control{
+.fila_control_borrar, .fila_control_sumar{
     display: flex;
     flex-direction: row;
 }
-.fila_control * {
+.fila_control_borrar * , .fila_control_sumar * {
     flex:1;
 }
