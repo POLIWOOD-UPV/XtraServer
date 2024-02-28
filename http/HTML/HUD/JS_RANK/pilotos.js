@@ -31,7 +31,7 @@ function crearPeso(pes){
 // Poner y sacar aviones (con animacion)
 // Poner
 function sumaPiloto() {
-    let piloto = pilotos[++controla_pilotos % 4];
+    let piloto = pilotos[++controla_pilotos % pilotos.length];
     let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
     crarFilaControl(piloto);
     ranking.append(nueva_fila);
@@ -41,6 +41,23 @@ function sumaPiloto() {
     }, 50);
 }
 
+function sumar_test() {   
+    let piloto_input = document.getElementById("input_nombre")
+    piloto = piloto_input.value
+
+    controla_pilotos++ // Subimos la posicion
+    pilotos.push(piloto)
+    console.log(pilotos)
+
+
+    let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
+    crarFilaControl(piloto);
+    ranking.append(nueva_fila);
+    nueva_fila.style.left = "-500px"
+    setTimeout(() => {
+        nueva_fila.style.left = "0px"
+    }, 50);
+}
 // Sacar
 function quitaPiloto() {
     if (filas.length > 0) {
@@ -58,7 +75,7 @@ function quitaPiloto() {
 // Poner y sacar aviones (sin animacion)
 // Sumar avion instantaneamente
 function nacerPiloto() {
-    let piloto = pilotos[++controla_pilotos % 4];
+    let piloto = pilotos[++controla_pilotos % pilotos.length];
     let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
     crarFilaControl(piloto); // Fila control
     ranking.append(nueva_fila);

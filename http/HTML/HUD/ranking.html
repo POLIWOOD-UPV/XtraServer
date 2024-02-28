@@ -49,9 +49,13 @@
             </div>
             <div id = "divIntegraPilotos">
                 <h2>Integracion de pilotos</h2>
+                    
+
                 <h3>Sumar</h3>
-                <button onclick="sumaPiloto()"> Añadir piloto An</button>
-                <button onclick="nacerPiloto()"> Añadir piloto</button>  
+                    <input id = "input_nombre" type = "text" placeholder = "Nombre" required >
+                    <button onclick="sumar_test()">Enviar</button> <!--No es un submit ya que se recarga la pag-->
+                    <button onclick="sumaPiloto()"> Añadir piloto An</button>
+                    <button onclick="nacerPiloto()"> Añadir piloto</button>  
                 <h3>Borrar</h3>
                 <div id = "pilotos_mas_borrar">
                     <div class = "fila_control">
