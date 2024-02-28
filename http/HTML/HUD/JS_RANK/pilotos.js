@@ -14,7 +14,6 @@ function crearTiempo(tiemp){
     }else{
         tiempo.textContent = tiemp
     }
-    
     return tiempo
 }
 
@@ -22,7 +21,6 @@ function crearTiempo(tiemp){
 function crearPeso(pes){
     let peso = document.createElement("div")
     peso.className = "peso"
-
     peso.textContent = pes;
     return peso
 
@@ -33,7 +31,7 @@ function crearPeso(pes){
 function sumaPiloto(estado) {
     let piloto = pilotos[++controla_pilotos % pilotos.length];
     let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
-    crarFilaControl(piloto);
+    FilaControlResta(piloto)
     ranking.append(nueva_fila);
 
     switch (estado){
@@ -47,26 +45,19 @@ function sumaPiloto(estado) {
             nueva_fila.style.left = "0px"
             break;
         }
-
-}
+    }
 
 // Controla las filas de control
-function sumar_test() {   
+function crea_Perfil() {   
     let piloto_input = document.getElementById("input_nombre")
     piloto = piloto_input.value
 
     controla_pilotos++ // Subimos la posicion
+    // Creamos la fila en el ranking y en control
+    FilaControlSuma(piloto);
+    // Metemos el nuevo perfil en la lista
     pilotos.push(piloto)
-    console.log(pilotos)
 
-
-    let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
-    crarFilaControl(piloto);
-    ranking.append(nueva_fila);
-    nueva_fila.style.left = "-500px"
-    setTimeout(() => {
-        nueva_fila.style.left = "0px"
-    }, 50);
 }
 
 // Sacar
@@ -91,7 +82,6 @@ function quitaPiloto(estado) {
     }
 }
 
-// ACABAR DE MEJORAR ELIMINAR PILOTO RICARDO DEL FUTURO
 // Hacer que sea crear perfil y no meter al ranking directamente
 // Vaciar todos los aviones instantaneamente
 function vaciarPilotos(){

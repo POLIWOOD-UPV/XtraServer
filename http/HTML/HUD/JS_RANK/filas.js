@@ -10,7 +10,8 @@ var controla_pilotos = 0
 var ranking = document.getElementById("contenedor")
 var filas = document.getElementsByClassName("fila")
 
-var pilotos_control = document.getElementById("pilotos_mas_borrar")
+var pilotos_control_resta = document.getElementById("pilotos_mas_borrar")
+var pilotos_control_suma = document.getElementById("pilotos_mas_sumar")
 var filas_control = document.getElementsByClassName("fila_control_borrar")
 
 // Cogemos los botones
@@ -66,18 +67,49 @@ function creaFila(nom,pos,tiemp,pes){
 
 
 // Filas de control
-function crarFilaControl(piloto){
+function FilaControlSuma(piloto){
+    // Para SUMAR
+    fila_sumar = document.createElement("div")
+    fila_sumar.className = "fila_control_sumar"
+    let nombre2 = document.createElement("div")
+    nombre2.textContent = piloto
+    fila_sumar.append(nombre2)
+
+    let botonzon = document.createElement("button")
+    botonzon.onclick = () => {
+        sumaPiloto('animado')
+    };
+    botonzon.textContent = "SUMAR_An"
+    fila_sumar.append(botonzon)
+    
+    let botonzon2 = document.createElement("button")
+    botonzon2.onclick = () => {
+        sumaPiloto('seco')
+    };
+    botonzon2.textContent = "SUMAR"
+    fila_sumar.append(botonzon2)
+    
+    console.log("Hello")
+    pilotos_control_suma.append(fila_sumar)
+
+
+}
+
+function FilaControlResta(piloto){
     // Creamos la fila con sus partes
-    let fila = document.createElement("div")
-    fila.className = "fila_control_borrar"
+    let fila_borrar = document.createElement("div")
+    fila_borrar.className = "fila_control_borrar"
+    fila_borrar.className = "fila_control_borrar"
+    
     // Ponemos el nombre
     let nombre = document.createElement("div")
     nombre.textContent = piloto
-    fila.append(nombre)
-    // Para SUMAR
-    
-    // Rellenar con botones
+    fila_borrar.append(nombre)
 
+    // Si no esta en los perfiles de los pilotos, agregarlo
+    if(!pilotos.includes(piloto)){
+        FilaControlSuma();
+    }
     // Para borrar
     //Ponemos el boton de eliminar animado
     let botoncin = document.createElement("button")
@@ -85,18 +117,18 @@ function crarFilaControl(piloto){
         quitaPiloto('animado')
     };
     botoncin.textContent = "BORRAR_An"
-    fila.append(botoncin)
+    fila_borrar.append(botoncin)
     //Ponemos el boton de eliminar seco
     let botoncin2 = document.createElement("button")
     botoncin2.onclick = () => {
         quitaPiloto('seco');
     };
     botoncin2.textContent = "BORRAR"
-    fila.append(botoncin2)
+    fila_borrar.append(botoncin2)
 
-    //Ponemos la fila en BORRAR 
-    pilotos_control.append(fila)
-
+    //Ponemos la fila en BORRAR y SUMAR
+    pilotos_control_resta.append(fila_borrar)
+    
 }
 // Funciones para modificar la informacion del ranking
 
