@@ -1,11 +1,32 @@
+////////////////////////////////////////////////////
+// Funciones para modificar filas y sus contenidos//
+////////////////////////////////////////////////////
 
-
-// Lista Pilotos
+// Variables Pilotos
 var pilotos = ["ric","jaw","abe","est"]
 var controla_pilotos = 0
 
+// Coger ranking y filas
 var ranking = document.getElementById("contenedor")
 var filas = document.getElementsByClassName("fila")
+
+var pilotos_control = document.getElementById("pilotos_mas_borrar")
+var filas_control = document.getElementsByClassName("fila_control")
+
+// Cogemos los botones
+var boton_tiempo = document.getElementById("mostrar_tiempo_id");
+var boton_peso = document.getElementById("mostrar_peso_id");
+var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
+
+// Tiempo ( empieza activa)
+var tiempo_visible = true;
+var tiempos = document.getElementsByClassName("tiempo")
+
+// Peso (empieza desactivada)
+var peso_visible = false;
+var pesos = document.getElementsByClassName("peso")
+
+
 
 // VCrea la fila donde se meten los datos
 function creaFila(nom,pos,tiemp,pes){
@@ -44,13 +65,30 @@ function creaFila(nom,pos,tiemp,pes){
 }
 
 
-// Funciones para modificar la informacion del ranking
-var boton_tiempo = document.getElementById("mostrar_tiempo_id");
-var boton_peso = document.getElementById("mostrar_peso_id");
+// Filas de control
+function crarFilaControl(piloto){
+    // Creamos la fila con sus partes
+    let fila = document.createElement("div")
+    fila.className = "fila_control"
+    // Ponemos el nombre
+    let nombre = document.createElement("div")
+    nombre.textContent = piloto
+    fila.append(nombre)
+    //Ponemos el boton de eliminar animado
+    let botoncin = document.createElement("button")
+    botoncin.onclick = quitaPiloto
+    botoncin.textContent = "BORRAR_An"
+    fila.append(botoncin)
+    //Ponemos el boton de eliminar seco
+    let botoncin2 = document.createElement("button")
+    botoncin2.onclick = matarPiloto
+    botoncin2.textContent = "BORRAR"
+    fila.append(botoncin2)
+    //Ponemos el boton de 
+    pilotos_control.append(fila)
 
-// Tiempo ( empieza activa)
-var tiempo_visible = true;
-var tiempos = document.getElementsByClassName("tiempo")
+}
+// Funciones para modificar la informacion del ranking
 
 // Función para mostrar el tiempo en la fila
 function mostrarTiempo(){
@@ -72,10 +110,6 @@ function mostrarTiempo(){
 
 }
 
-// Peso ( empieza desactivada)
-var peso_visible = false;
-var pesos = document.getElementsByClassName("peso")
-
 // Función para mostrar el peso en la fila
 function mostrarPeso(){
     let estado;
@@ -96,7 +130,6 @@ function mostrarPeso(){
 }
 
 // Función para alternar el peso con el tiempo y viceversa
-var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
 function cambiazoPesoTiempos(){
     if ((!tiempo_visible && !peso_visible) ||(tiempo_visible && peso_visible) ) {
         return
@@ -104,4 +137,16 @@ function cambiazoPesoTiempos(){
         mostrarTiempo();
         mostrarPeso();
     }
+}
+
+
+// Resets
+function resetFilas(){
+    
+}
+function resetRank(){
+
+}
+function resetFilaRank(){
+
 }

@@ -35,19 +35,6 @@
     <aside>
         <!--Controles, en un futuro irían en la página de controles-->
         <div id = "divBotones">
-            <div id = "divBotonesPilotos">
-                <h2>Control pilotos</h2>
-                <h3>Dinamicos &LeftAngleBracket;Con animación &RightAngleBracket;</h3>
-                <button onclick="sumaPiloto()"> Añadir piloto</button>
-                <button onclick="quitaPiloto()"> Quitar piloto</button>
-
-                <h3>Secos &LeftAngleBracket;sin animación &RightAngleBracket;</h3>
-                <button onclick="nacerPiloto()"> Añadir piloto</button>
-                <button onclick="matarPiloto()"> Quitar piloto</button>
-                <button onclick="vaciarPilotos()"> VACIAR PILOTOS</button>
-
-            </div>
-
             <div id = "divBotonesRanking">
                 <h2>Control Ranking</h2>
                 <p>La siguiente transicion será: <span id = "status_anim_ranking">-</span></p>
@@ -60,13 +47,29 @@
                 <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
                 <button onclick = "cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
             </div>
-
+            <div id = "divIntegraPilotos">
+                <h2>Integracion de pilotos</h2>
+                <h3>Sumar</h3>
+                <button onclick="sumaPiloto()"> Añadir piloto An</button>
+                <button onclick="nacerPiloto()"> Añadir piloto</button>  
+                <h3>Borrar</h3>
+                <div id = "pilotos_mas_borrar">
+                    <div class = "fila_control">
+                        <div class = "nombre_control">RIC</div>
+                        <button onclick="quitaPiloto()">BORRAR_An</button>
+                        <button onclick="matarPiloto()"> BORRAR</button>
+                    </div>
+                </div>
+                <button onclick="vaciarPilotos()"> VACIAR PILOTOS</button>
+            </div>
+            
+            <!--WIP-->
             <div id = "divDebugger">
-                <h3>Debugger</h3>
+                <h3>Debugger (WIP)</h3>
                 <h2>Posicion</h2>
-                <button>Reset filas</button>
-                <button>Reset Contendor Ranking</button>
-                <button>Reset todo</button>
+                <button onclick="resetFilas()">Reset filas</button>
+                <button onclick="resetRank()">Reset Contendor Ranking</button>
+                <button onclick="resetFilaRank()">Reset todo</button>
             </div>
 
         </div>

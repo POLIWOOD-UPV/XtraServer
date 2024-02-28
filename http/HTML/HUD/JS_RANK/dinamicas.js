@@ -6,6 +6,9 @@
 var ranking_visible = true;
 var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_rank_id")
 
+var filas_visible = true;
+
+
 // Mover el ranking en o fuera de pantalla
 function rankingMov() {
     console.log("rankingMov")
@@ -27,7 +30,7 @@ function rankingMov() {
 }
 
 // Mover filas en o fuera de pantalla
-var filas_visible = true;
+
 function filasMov(){
     // Saca o pone las filas depende del estado actual
     let cant_filas =  filas.length;
@@ -74,7 +77,8 @@ function filasMov(){
     }
 }
 
-// Funciones aparecer/desaparecer dinamicas    
+// Funciones aparecer/desaparecer dinamicas   
+// Desaparición con dinamica 
 function desaparicionDinamica() {
     if (!ranking_visible) {
         // Ya escondido, no se ve
@@ -85,7 +89,7 @@ function desaparicionDinamica() {
     }
 
 }
-
+// Aparicion con dinamica 
 function aparicionDinamica() {
     if (ranking_visible) {
         // Ya se ve
@@ -115,4 +119,4 @@ function updateRankingStatus(){
         status.style.color = "black"
     }
 
-    }
+}

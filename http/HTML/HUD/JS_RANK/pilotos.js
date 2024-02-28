@@ -17,6 +17,7 @@ function crearTiempo(tiemp){
     
     return tiempo
 }
+
 // Peso
 function crearPeso(pes){
     let peso = document.createElement("div")
@@ -28,26 +29,28 @@ function crearPeso(pes){
 }
 
 // Poner y sacar aviones (con animacion)
+// Poner
 function sumaPiloto() {
     let piloto = pilotos[++controla_pilotos % 4];
     let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
+    crarFilaControl(piloto);
     ranking.append(nueva_fila);
     nueva_fila.style.left = "-500px"
     setTimeout(() => {
         nueva_fila.style.left = "0px"
     }, 50);
-
-
 }
+
+// Sacar
 function quitaPiloto() {
     if (filas.length > 0) {
-
+        // Quita del ranking
         filas[filas.length-1].style.left = "-500px"
+        filas_control[filas_control.length-1].remove() // Esto es para quitar la fila de control
         setTimeout(() => {
             filas[filas.length - 1].remove();
             --controla_pilotos;
         }, 150);
-
     }
 }
 
@@ -57,6 +60,7 @@ function quitaPiloto() {
 function nacerPiloto() {
     let piloto = pilotos[++controla_pilotos % 4];
     let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
+    crarFilaControl(piloto); // Fila control
     ranking.append(nueva_fila);
     nueva_fila.style.left = "0px"
 }
@@ -65,6 +69,7 @@ function nacerPiloto() {
 function matarPiloto() {
     if (filas.length > 0) {
         filas[filas.length - 1].remove();
+        filas_control[filas_control.length-1].remove() // Esto es para quitar la fila de control
         --controla_pilotos;
     }
 }
@@ -72,7 +77,10 @@ function matarPiloto() {
 function vaciarPilotos(){
     for (var j = filas.length - 1; j >= 0; j--) {
         filas[j].remove();
-        controla_pilotos--; // Decrement the global variable
+        filas_control[j].remove(); // Quitar todas las filas de control
+        controla_pilotos--; // Bajar la cantidad de pilotos
+        
+
     }
 }
 
