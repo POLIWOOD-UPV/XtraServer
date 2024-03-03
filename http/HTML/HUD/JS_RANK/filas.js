@@ -100,7 +100,7 @@ function FilaControlResta(piloto){
      // Creamos la fila con sus partes
     let fila_borrar = document.createElement("div")
     fila_borrar.className = "fila_control_borrar"
-
+    
     // Ponemos el nombre
     let nombre = document.createElement("div")
     nombre.textContent = piloto
@@ -113,15 +113,19 @@ function FilaControlResta(piloto){
     // Para borrar
     //Ponemos el boton de eliminar animado
     let botoncin = document.createElement("button")
+    botoncin.id = controla_pilotos+"c_AN" // Le ponemos el id con la posicion en la que esta para luego poder quitarlo al borrar el piloto
+
     botoncin.onclick = () => {
-        quitaPiloto('animado')
+        quitaPiloto('animado',botoncin.id) // Le pasamos la ID ya que es lo que lleva en que pos estamos 
     };
     botoncin.textContent = "BORRAR_An"
     fila_borrar.append(botoncin)
     //Ponemos el boton de eliminar seco
     let botoncin2 = document.createElement("button")
+    botoncin2.id = controla_pilotos+"c" // Le ponemos el id con la posicion en la que esta para luego poder quitarlo al borrar el piloto
+
     botoncin2.onclick = () => {
-        quitaPiloto('seco');
+        quitaPiloto('seco',botoncin2.id); // Le pasamos la ID ya que es lo que lleva en que pos estamos 
     };
     botoncin2.textContent = "BORRAR"
     fila_borrar.append(botoncin2)

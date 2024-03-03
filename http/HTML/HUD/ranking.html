@@ -47,6 +47,7 @@
                 <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
                 <button onclick = "cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
             </div>
+        </div>    
             <div id = "divIntegraPilotos">
                 <h2>Integracion de pilotos</h2>
                     
@@ -80,8 +81,8 @@
                 <div id = "pilotos_mas_borrar">
                     <div class = "fila_control_borrar">
                         <div class = "nombre_control">RIC</div>
-                        <button onclick="quitaPiloto('animado')">BORRAR_An</button>
-                        <button onclick="quitaPiloto('seco')"> BORRAR</button>
+                        <button id = "0c_AN" onclick="quitaPiloto('animado',this.id)">BORRAR_An</button>
+                        <button id = "0c" onclick="quitaPiloto('seco',this.id)"> BORRAR</button>
                     </div>
                 </div>
                 <button onclick="vaciarPilotos()"> VACIAR PILOTOS</button>
@@ -95,8 +96,6 @@
                 <button onclick="resetRank()">Reset Contendor Ranking</button>
                 <button onclick="resetFilaRank()">Reset todo</button>
             </div>
-
-        </div>
         <details>
             <summary>
                 TODO:

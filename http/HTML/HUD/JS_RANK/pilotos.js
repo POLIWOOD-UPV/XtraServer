@@ -7,9 +7,8 @@
 function crearTiempo(tiemp){
     let tiempo = document.createElement("div")
     tiempo.className = "tiempo"
-
     // Si es el primero, le ponemos que es el lider
-    if ( controla_pilotos==0){
+    if ( controla_pilotos==1){
         tiempo.textContent = "LEADER"
     }else{
         tiempo.textContent = tiemp
@@ -59,24 +58,26 @@ function crea_Perfil() {
 
 }
 
-// Sacar
-function quitaPiloto(estado) {
+// Sacar los pilotos del ranking y control
+function quitaPiloto(estado,pos) {
     if (filas.length > 0) {
-        // Quita del ranking
-        filas[filas.length-1].style.left = "-500px"
-        filas_control[filas_control.length-1].remove() // Esto es para quitar la fila de control
+        //Coger la posición
+        pos = Number(pos[0])
+        console.log(pos)
+        filas[pos].style.left = "+500px"
+        filas_control[pos].remove() // Esto es para quitar la fila de control
         switch (estado){
             case "animado":
                 setTimeout(() => {
                     //filas[filas.length - 1].remove();
-                    let a_borrar = document.getElementById(controla_pilotos)
+                    let a_borrar = document.getElementById(String(pos+1))
                     a_borrar.remove()
                     controla_pilotos--;
                 }, 150);
                 break;
             case "seco":
                 //filas[filas.length - 1].remove();
-                let a_borrar = document.getElementById(controla_pilotos)
+                let a_borrar = document.getElementById(String(pos+1))
                 a_borrar.remove()               
                 controla_pilotos--;
                 break;
