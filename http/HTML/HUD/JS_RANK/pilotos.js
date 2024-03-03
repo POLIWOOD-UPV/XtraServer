@@ -28,9 +28,8 @@ function crearPeso(pes){
 
 // Poner y sacar aviones (con animacion)
 // Poner
-function sumaPiloto(estado) {
-    let piloto = pilotos[++controla_pilotos % pilotos.length];
-    let nueva_fila = creaFila(piloto,controla_pilotos+1 , "+1 lap","1Kg");
+function sumaPiloto(estado,piloto) {
+    let nueva_fila = creaFila(piloto,++controla_pilotos, "+1 lap","1Kg");
     FilaControlResta(piloto)
     ranking.append(nueva_fila);
 
@@ -48,7 +47,7 @@ function sumaPiloto(estado) {
     }
 
 // Controla las filas de control
-function crea_Perfil() {   
+function crea_Perfil() {
     let piloto_input = document.getElementById("input_nombre")
     piloto = piloto_input.value
 
@@ -66,17 +65,20 @@ function quitaPiloto(estado) {
         // Quita del ranking
         filas[filas.length-1].style.left = "-500px"
         filas_control[filas_control.length-1].remove() // Esto es para quitar la fila de control
-
         switch (estado){
             case "animado":
                 setTimeout(() => {
-                    filas[filas.length - 1].remove();
-                    --controla_pilotos;
+                    //filas[filas.length - 1].remove();
+                    let a_borrar = document.getElementById(controla_pilotos)
+                    a_borrar.remove()
+                    controla_pilotos--;
                 }, 150);
                 break;
             case "seco":
-                filas[filas.length - 1].remove();
-                --controla_pilotos;
+                //filas[filas.length - 1].remove();
+                let a_borrar = document.getElementById(controla_pilotos)
+                a_borrar.remove()               
+                controla_pilotos--;
                 break;
             }
     }

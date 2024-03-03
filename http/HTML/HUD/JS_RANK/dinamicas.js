@@ -5,7 +5,6 @@
 // Aparecer y desaparecer ranking
 var ranking_visible = true;
 var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_rank_id")
-
 var filas_visible = true;
 
 

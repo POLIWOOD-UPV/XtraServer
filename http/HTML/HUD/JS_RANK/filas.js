@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////
 
 // Variables Pilotos
-var pilotos = ["ric","jaw","abe","est"]
-var controla_pilotos = 0
+var pilotos = ["RIC","JAW","ABE","EST"]
+var controla_pilotos = 1
 
 // Coger ranking y filas
 var ranking = document.getElementById("contenedor")
@@ -31,7 +31,7 @@ var pesos = document.getElementsByClassName("peso")
 
 // VCrea la fila donde se meten los datos
 function creaFila(nom,pos,tiemp,pes){
-// Creamos la fila con sus partes
+    // Creamos la fila con sus partes
     let fila = document.createElement("div")
     fila.className = "fila"
     // Creamos la zona del numero
@@ -58,6 +58,8 @@ function creaFila(nom,pos,tiemp,pes){
     }
     // Lo juntamos todo y devolvemos la fila
     resto.append(nombre,tiempo,peso)
+    // Le ponemos de ID la posicion
+    fila.id = controla_pilotos
     fila.append(numero,resto)
 
     // Ponemos la fila en la izquierda para que se mueva mas tarde
@@ -77,30 +79,28 @@ function FilaControlSuma(piloto){
 
     let botonzon = document.createElement("button")
     botonzon.onclick = () => {
-        sumaPiloto('animado')
+        sumaPiloto('animado',piloto)
     };
     botonzon.textContent = "SUMAR_An"
     fila_sumar.append(botonzon)
     
     let botonzon2 = document.createElement("button")
     botonzon2.onclick = () => {
-        sumaPiloto('seco')
+        sumaPiloto('seco',piloto)
     };
     botonzon2.textContent = "SUMAR"
     fila_sumar.append(botonzon2)
     
-    console.log("Hello")
     pilotos_control_suma.append(fila_sumar)
 
 
 }
 
 function FilaControlResta(piloto){
-    // Creamos la fila con sus partes
+     // Creamos la fila con sus partes
     let fila_borrar = document.createElement("div")
     fila_borrar.className = "fila_control_borrar"
-    fila_borrar.className = "fila_control_borrar"
-    
+
     // Ponemos el nombre
     let nombre = document.createElement("div")
     nombre.textContent = piloto
