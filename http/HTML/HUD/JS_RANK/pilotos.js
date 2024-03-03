@@ -62,26 +62,58 @@ function crea_Perfil() {
 function quitaPiloto(estado,pos) {
     if (filas.length > 0) {
         //Coger la posición
-        pos = Number(pos[0])
+        pos = Number(pos[0]) // Actualmente hay un bug, pendiente de arreglar
+        console.log("Posicion a eliminar " + pos)
+        if (controla_pilotos==1 && filas.length == 1 ){
+            pos = 1
+            // Esto es porque empieza en 0 pero luego si lo borras y lo vuelves a poner es 1
+        }
         console.log(pos)
-        filas[pos].style.left = "+500px"
-        filas_control[pos].remove() // Esto es para quitar la fila de control
+        filas[pos-1].style.left = "+500px"
+        filas_control[pos-1].remove() // Esto es para quitar la fila de control
+        
         switch (estado){
             case "animado":
                 setTimeout(() => {
-                    //filas[filas.length - 1].remove();
-                    let a_borrar = document.getElementById(String(pos+1))
+                    let a_borrar = document.getElementById(String(pos))
                     a_borrar.remove()
                     controla_pilotos--;
+                    arregla_desastres(pos)
                 }, 150);
                 break;
             case "seco":
-                //filas[filas.length - 1].remove();
-                let a_borrar = document.getElementById(String(pos+1))
+                let a_borrar = document.getElementById(String(pos))
                 a_borrar.remove()               
                 controla_pilotos--;
+                arregla_desastres(pos)
                 break;
             }
+    }
+}
+
+function arregla_desastres(pos){
+    // Cambiar el número visible a todos los de debajo del que se ha quitado
+    for (fila of filas){
+        let posicion = fila.querySelector('.numero');
+        if (Number(posicion.textContent) > pos){
+            posicion.textContent = Number(posicion.textContent)-1
+
+            // Actualizar el ID de la fila del ranking de todos los de abajo
+            fila.id = String(Number(fila.id)-1)
+        }
+    }
+
+    // Actualizar el ID de todos los botones de la fila de control
+    for (fila of filas_control){
+        // Boton animado
+        let botones = fila.getElementsByTagName("button") // Cogemos los dos botones de la fila
+        boton_animado = botones[0]
+        boton_animado.id = String(pos-1)+"c_AN"
+
+        boton_normal = botones[1]
+        boton_normal.id = String(pos-1)+"c"
+
+        // Boton sin animacion
     }
 }
 
@@ -94,4 +126,3 @@ function vaciarPilotos(){
         controla_pilotos--; // Bajar la cantidad de pilotos
     }
 }
-
