@@ -136,7 +136,7 @@ function FilaControlResta(piloto){
 }
 // Funciones para modificar la informacion del ranking
 
-// Función para mostrar el tiempo en la fila
+// Función para mo  ar el tiempo en la fila
 function mostrarTiempo(){
     let estado;
     if (tiempo_visible){
