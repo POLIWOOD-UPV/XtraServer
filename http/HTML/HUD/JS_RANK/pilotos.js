@@ -64,7 +64,7 @@ function quitaPiloto(estado,pos) {
     if (filas.length > 0) {
         //Coger la posición
         pos = Number(pos[0])
-        filas[pos].style.left = "+500px"
+        filas[pos].style.left = "-500px"
         filas_control[pos].remove() // Esto es para quitar la fila de control
         
         switch (estado){
@@ -102,14 +102,12 @@ function arregla_desastres(pos){
     // Actualizar el ID de todos los botones de la fila de control
     for (fila of filas_control){
         // Estas son las filas de la derecha
-        // Boton animado
         let botones = fila.getElementsByTagName("button") // Cogemos los dos botones de la fila
-        //console.log(botones)
-
-        // Primero identificamos si estamos en una fila que debemos modificar
+        // Cogemos los botones a trabajar con 
         boton_animado = botones[0]
         boton_normal = botones[1]
 
+        // identificamos si estamos en una fila que debemos modificar
         let id_fila_actual = Number(boton_animado.id[0])
         if (id_fila_actual > pos){
             boton_animado.id = String(id_fila_actual-1)+"c_AN"
