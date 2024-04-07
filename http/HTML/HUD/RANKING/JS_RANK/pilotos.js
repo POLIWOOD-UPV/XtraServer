@@ -115,7 +115,6 @@ function arregla_desastres(pos){
             // Boton sin animacion
             boton_normal.id = String(id_fila_actual-1)+"c"
         }
-
     }
 }
 

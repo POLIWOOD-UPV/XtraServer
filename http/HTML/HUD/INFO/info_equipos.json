@@ -1,0 +1,116 @@
+{
+    "teams": [
+      {
+        "Dorsal": 1,
+        "Team": "RUHE",
+        "University/Clubs": "Universitat Politècnica de València",
+        "Members": 6,
+        "Team Leader": "Adrián Montoya",
+        "Pilot": "Adrián Montoya"
+      },
+      {
+        "Dorsal": 2,
+        "Team": "UVigo Aerotech",
+        "University/Clubs": "Universidad de Vigo",
+        "Members": 8,
+        "Team Leader": "Pablo Magariños"
+      },
+      {
+        "Dorsal": 3,
+        "Team": "G3",
+        "University/Clubs": "Universitat Politècnica de València",
+        "Members": 5,
+        "Team Leader": "Alex Radita",
+        "Pilot": "Juan Carlos Juan Serrano"
+      },
+      {
+        "Dorsal": 4,
+        "Team": "Matsia",
+        "University/Clubs": "Universitat Politècnica de València",
+        "Members": 6,
+        "Team Leader": "Ignacio Folch Ferrer",
+        "Pilot": "Ignacio Folch Ferrer"
+      },
+      {
+        "Dorsal": 5,
+        "Team": "LuftSieger",
+        "University/Clubs": "Universitat Politècnica de València",
+        "Members": 7,
+        "Team Leader": "Guillermo Velencoso García",
+        "Pilot": "Lorena Abad Cuadros"
+      },
+      {
+        "Dorsal": 6,
+        "Team": "ECLift",
+        "University/Clubs": "École Centrale de Lyon (Francia)",
+        "Members": 10,
+        "Team Leader": "Ethaniel Tobar",
+        "Pilot": "Hugo Pamies Moreno"
+      },
+      {
+        "Dorsal": 7,
+        "Team": "SAETA_T2",
+        "University/Clubs": "Universidad Carlos III Madrid",
+        "Members": 10,
+        "Team Leader": "Adrián Pajarón González",
+        "Pilot": "Andrés Navarro Pedregal"
+      },
+      {
+        "Dorsal": 8,
+        "Team": "DIANA UCLM",
+        "University/Clubs": "Universidad de Castilla-La Mancha",
+        "Members": 9,
+        "Team Leader": "Pablo Zamorano Fernández",
+        "Pilot": "Rodrigo Redondo Cabañas"
+      },
+      {
+        "Dorsal": 9,
+        "Team": "Trencalòs Team",
+        "University/Clubs": "Universitat Politècnica de Catalunya",
+        "Members": 10,
+        "Team Leader": "Martí Badia Codina",
+        "Pilot": "Javier Marcos Pérez"
+      },
+      {
+        "Dorsal": 10,
+        "Team": "The North Pole",
+        "University/Clubs": "Universitat Politècnica de València",
+        "Members": 6,
+        "Team Leader": "Pasqual Ayet",
+        "Pilot": "Pasqual Ayet"
+      },
+      {
+        "Dorsal": 11,
+        "Team": "SAETA_T1",
+        "University/Clubs": "Universidad Carlos III Madrid",
+        "Members": 10,
+        "Team Leader": "Iago Senén Fernández García",
+        "Pilot": "Carlos de Quinto"
+      },
+      {
+        "Dorsal": 12,
+        "Team": "UCA&Air",
+        "University/Clubs": "Universidad de Cádiz",
+        "Members": 6,
+        "Team Leader": "Irene Molina Chicón",
+        "Pilot": "Hugo Juan Hernández"
+      },
+      {
+        "Dorsal": 15,
+        "Team": "Club Xaloc",
+        "University/Clubs": "Club d'Aeromodelisme Xaloc",
+        "Members": 5,
+        "Team Leader": "Gregorio Moreno",
+        "Pilot": "Volodymyr Klubow"
+      },
+      {
+        "Dorsal": 16,
+        "Team": "Sky Eagle Team",
+        "University/Clubs": "Club Aeromodelismo Alzira",
+        "Members": 4,
+        "Team Leader": "Francisco Soto Morales",
+        "Pilot": "Leopolgo Martinez Magraner"
+      }
+    ]
+  }
+  
