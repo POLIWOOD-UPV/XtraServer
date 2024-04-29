@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Info_equipos</title>
+    <link href = "info_equipos.css" rel="stylesheet"></link>
+</head>
+<body>
+
+    <table>
+        <tr >
+            <td colspan = "2">Team Profile</td>
+        </tr>
+        <tr>
+            <td>IMG_uni</td>
+            <td>IMG_equipo?</td>
+        </tr>
+        <tr>
+            <td>NOMBRE</td>
+            <td>DORSAL</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                UNIVERSIDAD
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Team Leader:
+            </td>
+
+            <td>
+                TEAM LEADER
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Miembros:
+            </td>
+            <td>
+                CANT_MIEMBROS
+            </td>
+        </tr>
+    </table>
+
+
+    <div id = "divControl">
+        <div id = "seleccionarEquipo">
+            <label for="nombres_equipos_id"> Seleccionar equipos:</label>
+            <select name="nombres_equipos" id="nombres_equipos_id"> 
+                <option value="RUHE">RUHE</option> 
+                <option value="UVigo Aerotech">UVigo Aerotech</option> 
+                <option value="G3">G3</option> 
+                <option value="Matsia">Matsia</option> 
+                <option value="LuftSieger">LuftSieger</option> 
+                <option value="ECLift">ECLift</option> 
+                <option value="SAETA_T2">SAETA_T2</option>
+                <option value="DIANA UCLM">DIANA UCLM</option> 
+                <option value="Trencalòs Team">Trencalòs Team</option>  
+                <option value="The North Pole">The North Pole</option> 
+                <option value="SAETA_T1">SAETA_T1</option> 
+                <option value="UCA&Air">UCA&Air</option> 
+                <option value="Club Xaloc">Club Xaloc</option> 
+                <option value="Sky Eagle Team">Sky Eagle Team</option> 
+            </select>
+        </div>
+        <div id = "aparicer_desaparecer">
+            <button onclick="aparecerInfor()">Aparecer informativo</button>
+            <button onclick="deaparecerInfor()">Desaparecer informativo</button>
+        </div>
+    </div>
+    <script src = "info_equipos.js"></script>
+</body>
+</html>

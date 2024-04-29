@@ -6,13 +6,13 @@
 
 </head>
 <body>
-    <link href = "prueba.css" rel="stylesheet">
+    <link href = "ranking.css" rel="stylesheet">
     
     <main>
         <!--Ranking-->
         <div id = "contenedor">
             <div id = "cabecera">
-                <img src = "img/xtra2_b.png">
+                <img src = "../img/xtra2_b.png">
             </div>
             <div class = "fila" id = "1">
                 <div class = "numero">
@@ -54,6 +54,14 @@
 
                 <h3>Sumar</h3>
                     <input id = "input_nombre" type = "text" placeholder = "Nombre" required >
+                    <select name="test" id="tests_id"> 
+                        <option value="test1">test1</option> 
+                        <option value="test2">test2</option> 
+                        <option value="test3">test3</option> 
+                        <option value="test4">test4</option> 
+                    </select>
+                
+
                     <button onclick="crea_Perfil()">Enviar</button> <!--No es un submit ya que se recarga la pag-->
                     <div id = "pilotos_mas_sumar">
                         <div class = "fila_control_sumar">
