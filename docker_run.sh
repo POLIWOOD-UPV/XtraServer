@@ -1,0 +1,1 @@
+docker run -it --rm --name xtraserver --mount type=bind,src="$(pwd)",dst=/home/app,readonly=false -p 80:7000 avr24/xtraserver:v1.0 node server.js
