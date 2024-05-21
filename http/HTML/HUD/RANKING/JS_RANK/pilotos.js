@@ -27,13 +27,19 @@ function crearPeso(pes){
 
 // Poner y sacar aviones (con animacion)
 function sumaPiloto(estado) {
+    // Agreganis el avion a la lista y lo cogemos
     piloto = crea_Perfil();
     FilaControlResta(piloto) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
-    // Coger que avion es
 
     // Coger el tiempo del avion
-    
-    let nueva_fila = creaFila(piloto,++controla_pilotos, "+1 lap","1Kg");
+    minutos = cogerTiempo("min")
+    segundos = cogerTiempo("seg")
+    miliseg = cogerTiempo("mil")
+    tiempo = minutos + ":" + segundos + ":" + miliseg
+
+    // Coger el peso
+    peso = document.getElementById("peso_input_id")
+    let nueva_fila = creaFila(piloto,++controla_pilotos, tiempo,peso);
     // El ++ va delante para que no se genere dos veces el nº 1
     
     ranking.append(nueva_fila);
@@ -133,5 +139,24 @@ function vaciarPilotos(){
         filas[j].remove();
         filas_control[j].remove(); // Quitar todas las filas de control
         controla_pilotos--; // Bajar la cantidad de pilotos
+    }
+}
+
+
+// Coger los tiempos 
+function cogerTiempo(que){
+    switch(que){
+        case "min":
+            //Coger Minutos
+            minutos = document.getElementById("minutos_input_id").value
+            return minutos
+        case "seg":
+            //Coger segundos
+            segundos = document.getElementById("segundos_input_id").value
+            return segundos
+        case "mil":
+            // Coger milis
+            milis = document.getElementById("milisegundos_input_id").value
+            return milis           
     }
 }

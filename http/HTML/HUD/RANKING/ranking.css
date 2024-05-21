@@ -91,6 +91,6 @@ aside {
     flex:1;
 }
 
-.input_tiempo_min, .input_tiempo_seg , .input_tiempo_mili{
+.inputs{
     width: 50px;
 }

@@ -69,38 +69,14 @@
                         <option value="Club Xaloc">Club Xaloc</option>
                         <option value="Sky Eagle Team">Sky Eagle Team</option>
                     </select>
-                    <input class = "input_tiempo_min" type="text" placeholder="Minutos" required>
-                    <input class = "input_tiempo_seg" type="text" placeholder="Segundos" required>
-                    <input class = "input_tiempo_mili" type="text" placeholder="Milisegundos" required>
+                    <input class = "inputs" id = "minutos_input_id" type="text" placeholder="Minutos" required>
+                    <input class = "inputs" id = "segundos_input_id" type="text" placeholder="Segundos" required>
+                    <input class = "inputs" id = "milisegundos_input_id" type="text" placeholder="Milisegundos" required>
+                    <input class = "inputs" id = "peso_input_id" type="text" placeholder="Peso" required>
 
                     <button onclick="sumaPiloto('animado')">SUMAR_An</button>
                     <button onclick="sumaPiloto('seco')"> SUMAR</button>
 
-                    <!--Este codigo va a desaparecer-->
-                    <div id = "pilotos_mas_sumar">
-                        <div class = "fila_control_sumar">
-                            <div class = "nombre_control">RIC</div>
-                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
-
-                        </div>
-                        <div class = "fila_control_sumar">
-                            <div class = "nombre_control">JAW</div>
-                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
-                        </div>
-                        <div class = "fila_control_sumar">
-                            <div class = "nombre_control">ABE</div>
-                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
-                        </div>
-                        <div class = "fila_control_sumar">
-                            <div class = "nombre_control">EST</div>
-                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
-                        </div>
-                    </div>  
-                    <!--Hasta aqui-->
                 <h3>Borrar</h3>
                 <div id = "pilotos_mas_borrar">
                     <div class = "fila_control_borrar">
@@ -132,7 +108,6 @@
                 <li>Introducir Debugger para poner filas y ranking en la pantalla otra vez</li>
             </ul>
         </details>
-
     </aside>
 
     </div>
