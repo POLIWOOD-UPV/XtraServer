@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////
 
 // Variables Pilotos
-var pilotos = ["RIC","JAW","ABE","EST"]
+var pilotos = ["RIC"]
 var controla_pilotos = 1
 
 // Coger ranking y filas
@@ -68,34 +68,6 @@ function creaFila(nom,pos,tiemp,pes){
 }
 
 
-// Filas de control
-function FilaControlSuma(piloto){
-    // Para SUMAR
-    fila_sumar = document.createElement("div")
-    fila_sumar.className = "fila_control_sumar"
-    let nombre2 = document.createElement("div")
-    nombre2.textContent = piloto
-    fila_sumar.append(nombre2)
-
-    let botonzon = document.createElement("button")
-    botonzon.onclick = () => {
-        sumaPiloto('animado',piloto)
-    };
-    botonzon.textContent = "SUMAR_An"
-    fila_sumar.append(botonzon)
-    
-    let botonzon2 = document.createElement("button")
-    botonzon2.onclick = () => {
-        sumaPiloto('seco',piloto)
-    };
-    botonzon2.textContent = "SUMAR"
-    fila_sumar.append(botonzon2)
-    
-    pilotos_control_suma.append(fila_sumar)
-
-
-}
-
 function FilaControlResta(piloto){
      // Creamos la fila con sus partes
     let fila_borrar = document.createElement("div")
@@ -106,10 +78,6 @@ function FilaControlResta(piloto){
     nombre.textContent = piloto
     fila_borrar.append(nombre)
 
-    // Si no esta en los perfiles de los pilotos, agregarlo
-    if(!pilotos.includes(piloto)){
-        FilaControlSuma();
-    }
     // Para borrar
     //Ponemos el boton de eliminar animado
     let botoncin = document.createElement("button")

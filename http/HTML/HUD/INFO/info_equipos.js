@@ -3,6 +3,18 @@
 ////////////////////////////////////////////////////
 
 var informativo = document.querySelector("table")
+fetch('info_equipos.json', {
+    method: 'GET',
+    mode: 'cors'
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
 
 function aparecerInfor(){
     console.log("Informativo ha aparecido")
