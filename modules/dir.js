@@ -3,10 +3,15 @@ const fs = require('fs');
 exports.http_listdir =  (res) => {
   try {
     var dir = fs.readdirSync("./http");
-    console.log("listdir:", dir)
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.write(JSON.stringify(dir));
-    res.end();
+    res.writeHead(200, {"Content-Type": "text/html"});
+    res.write('<html><head><title>listdir</title></head><body style="flex-direction:column;display:flex;">');
+    dir.forEach(element => {
+      if (!element.startsWith("."))
+        {
+          res.write(`<a href="./${element}">${element}</a>`);
+        }
+    });
+    res.end('</body></html>');
   } catch (error) {
     console.error("http_listdir():", error.message);
     process.exit(1);

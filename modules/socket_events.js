@@ -39,6 +39,26 @@ class SocketManager {
   constructor() {
     this.sockets = new Array();
     this.lists = new Object();
+    this.events = {
+      "message": (socket, msj) => {
+        this.broadcast(socket, msj);
+      },
+      "list": (socket, msj) => {
+        this.list(socket, msj);
+      },
+      "join": (socket, msj) => {
+        this.join(socket, msj);
+      },
+      "exit": (socket, msj) => {
+        this.exit(socket, msj);
+      },
+      "send": (socket, key, msj) => {
+        this.send(socket, key, msj);
+      },
+      "all": (socket, key, msj) => {
+        this.all(socket, key, msj);
+      }
+    }
   }
 
   addSocket(socket){
@@ -66,8 +86,11 @@ class SocketManager {
 
   join(socket, key){
     try {
-      this.lists[key].push(socket);
-      IOlog(socket.id, "join", key);
+      if (Object.hasOwnProperty.call(this.lists, key)) {
+        this.lists[key].push(socket);
+      } else {
+        this.lists[key] = [socket];
+      }
     } catch (error) {
       console.error(`SocketManager.join(${socket.id},${key}):`, error.message);
       process.exit(1);
@@ -76,8 +99,9 @@ class SocketManager {
 
   exit(socket, key){
     try {
-      this.lists[key].pop(socket);
-      IOlog(socket.id, "exit", key);
+      if (Object.hasOwnProperty.call(this.lists, key)) {
+        this.lists[key].pop(socket);
+      }
     } catch (error) {
       console.error(`SocketManager.exit(${socket.id},${key}):`, error.message);
       process.exit(1);
@@ -87,12 +111,12 @@ class SocketManager {
   list(socket, key){
     if (key == "") {
       socket.send(stringfySocket(this.sockets));
-      IOlog(socket.id, "list", key);
       return;
     }
     try {
-      socket.send(stringfySocket(this.lists[key]));
-      IOlog(socket.id, "list", key);
+      if (Object.hasOwnProperty.call(this.lists, key)) {
+        socket.send(stringfySocket(this.lists[key]));
+      }
     } catch (error) {
       console.error(`SocketManager.list(${socket.id},${key}):`, error.message);
       process.exit(1);
@@ -101,41 +125,28 @@ class SocketManager {
 
   send(socket, key, msj){
     try {
-      this.lists[key].forEach(sock => {
-        sock.send(msj);
-      });
-      IOlog(socket.id, key, msj);
+      if (Object.hasOwnProperty.call(this.lists, key)) {
+        this.lists[key].forEach(sock => {
+          if (sock != socket) {
+            sock.emit(key ,msj);
+          }
+        });
+      }
     } catch (error) {
       console.error(`SocketManager.send(${socket.id},${key},${msj}):`, error.message);
       process.exit(1);
     }
   }
-}
 
-/*
-// RaspLog sistem #########################################################
-var log_sockets = new Array();
-setInterval(() => {
-  var log = "rasp not available";
-  if (log_sockets.length != 0) {
-    IOlog("server", "log", log.join(";"));
+  all(socket, key, msj) {
+    this.sockets.forEach(sock => {
+      if (sock != socket) {
+        sock.emit(key, msj);
+      }
+    });
   }
-  log_sockets.forEach((socket) => {
-    socket.emit("log",log.join(";"));
-  });
-}, 3000);
-
-// HUB sistem #######################################################
-var socketsHUB = new Array();
-const goHub = (socket, msj) => {
-  socketsList.forEach(sock => {
-    if (sock != socket) {
-      socket.send("enviado a:", sock.id);
-      sock.emit("hub", msj);
-    }
-  });
 }
-*/
+
 // Broadcast sistem #######################################################
 
 const goBroadcast = (socket, msj) => {
@@ -169,32 +180,8 @@ exports.events = {
   "message": (socket, msj) => {
     // goBroadcast(socket, msj);
     ioServer.broadcast(socket, msj);
-  },/*
-  "rasplog": (socket, msj) => {
-    log_sockets.push(socket);
   },
-  "hub": (socket, msj) => {
-    socketsHUB.push(socket);
-  },
-  "ajustes": (socket, msj) => {
-    goHub(socket, msj);
-  },*/
   "list": (socket, msj) => {
-    /*
-    switch (msj) {
-      case "":
-        socket.send(stringfySocket(socketsList));
-        break;
-      case "log":
-        socket.send(stringfySocket(log_sockets));
-        break;
-      case "hub":
-        socket.send(stringfySocket(socketsHUB));
-        break;
-      default:
-        socket.send(stringfySocket(socketsList));
-        break;
-    }*/
     ioServer.list(socket, msj);
   },
   "join": (socket, msj) => {
@@ -203,11 +190,42 @@ exports.events = {
   "exit": (socket, msj) => {
     ioServer.exit(socket, msj);
   },
-  "send": (socket, msj) => {
-    let data = String(msj).split("=");
-    let key = data[0];
-    data.pop(key);
-    let message = data.join("=")
-    ioServer.send(socket, key, message);
+  "send": (socket, key, msj) => {
+    ioServer.send(socket, key, msj);
+  },
+  "all": (socket, key, msj) => {
+    ioServer.all(socket, key, msj);
+  },
+  "0": (socket, msj) => {
+    ioServer.send(socket, "0", msj);
+  },
+  "1": (socket, msj) => {
+    ioServer.send(socket, "1", msj);
+  },
+  "2": (socket, msj) => {
+    ioServer.send(socket, "2", msj);
+  },
+  "3": (socket, msj) => {
+    ioServer.send(socket, "3", msj);
+  },
+  "4": (socket, msj) => {
+    ioServer.send(socket, "4", msj);
+  },
+  "5": (socket, msj) => {
+    ioServer.send(socket, "5", msj);
+  },
+  "6": (socket, msj) => {
+    ioServer.send(socket, "6", msj);
+  },
+  "7": (socket, msj) => {
+    ioServer.send(socket, "7", msj);
+  },
+  "8": (socket, msj) => {
+    ioServer.send(socket, "8", msj);
+  },
+  "9": (socket, msj) => {
+    ioServer.send(socket, "9", msj);
   }
 }
+
+exports.SocketManager = SocketManager
