@@ -82,20 +82,20 @@ function quitaPiloto(estado,pos) {
                     let a_borrar = document.getElementById(String(pos+1))
                     a_borrar.remove()
                     controla_pilotos--;
-                    arregla_desastres(pos)
+                    bajar_posiciones(pos)
                 }, 150);
                 break;
             case "seco":
                 let a_borrar = document.getElementById(String(pos+1))
                 a_borrar.remove()               
                 controla_pilotos--;
-                arregla_desastres(pos)
+                bajar_posiciones(pos)
                 break;
             }
     }
 }
 
-function arregla_desastres(pos){
+function bajar_posiciones(pos){
     // Cambiar el número visible a todos los de debajo del que se ha quitado
     for (fila of filas){
         // Estas son las filas de la izquierda
@@ -127,7 +127,19 @@ function arregla_desastres(pos){
     }
 }
 
-// Hacer que sea crear perfil y no meter al ranking directamente
+function subir_posiciones(pos){
+    // Cambiar el número visible a todos los de debajo del que se ha agregado
+    for (fila of filas){
+        // Estas son las filas de la izquierda
+        let posicion = fila.querySelector('.numero');
+        if (Number(posicion.textContent) > pos){
+            posicion.textContent = Number(posicion.textContent)-1
+            // Actualizar el ID de la fila del ranking de todos los de abajo
+            fila.id = String(Number(fila.id)+1)
+        }
+    }
+}
+
 // Vaciar todos los aviones instantaneamente
 function vaciarPilotos(){
     for (var j = filas.length - 1; j >= 0; j--) {
@@ -138,7 +150,7 @@ function vaciarPilotos(){
 }
 
 
-// Coger los tiempos 
+// Coger los tiempos del input
 function cogerTiempo(que){
     switch(que){
         case "min":
@@ -155,22 +167,24 @@ function cogerTiempo(que){
             return milis           
     }
 }
+
+
 function meter_en_ranking(nueva_fila) {
     // Funcion para extraer partes del tiempo de la fila nueva que vamos a meter
     function convertirTiempo(tipo) {
         let tiempo = nueva_fila.querySelector('.tiempo').textContent;
         // Partimos en 3 partes ya que esta en MM:SS:XXX
         let partes = tiempo.split(':');
-        if (tipo === "min") return partes[0];
-        if (tipo === "seg") return partes[1];
-        if (tipo === "mil") return partes[2];
+        if (tipo === "min") return Number(partes[0])*60;
+        if (tipo === "seg") return Number(partes[1]);
+        if (tipo === "mil") return Number(partes[2])*0.001;
     }
 
     // Convertir el tiempo de nueva_fila a segundos para poder compararlo con el resto
-    let minutos_avion = Number(convertirTiempo("min")) * 60;
-    let segundos_avion = Number(convertirTiempo("seg"));
-    let miliseg_avion = Number(convertirTiempo("mil")) * 0.001;
-    let tiempo_avion = minutos_avion + segundos_avion + miliseg; // Tiempo en segundos
+    let minutos_avion = convertirTiempo("min")
+    let segundos_avion = convertirTiempo("seg")
+    let miliseg_avion = convertirTiempo("mil")
+    let tiempo_avion = minutos_avion + segundos_avion + miliseg_avion; // Tiempo en segundos
 
     let tiempos = {};
     // Convertir HTMLCollection a un array para poder iterar
@@ -213,17 +227,34 @@ function meter_en_ranking(nueva_fila) {
     console.log("Objeto Tiempos: ")
     console.log(tiempos)
     
-    // Buscamos si hay alguna clave (posicion) que su tiempo sea menor o si no, nos tocara ir al final de la cola
+    console.log("Tiempo de nuestro avion "+tiempo_avion)
+    // Buscamos si hay alguna clave (posicion) que su tiempo sea menor que el de nuestro nuevo avion
     let claveEncontrada = null;
     for (let [clave, tiempo] of Object.entries(tiempos)) {
-        console.log()
-        // Si el tiempo de la fila ya existente es menor que el que queremos meter, tenemos posicion
-        if (tiempo < tiempo_avion) { 
+        console.log("Clave: "+clave+" Tiempo: "+tiempo)
+        // Si el tiempo de la fila ya existente es mayor que el que queremos meter, tenemos posicion, si no, seguir buscandos
+        if (tiempo > tiempo_avion) { 
+            console.log(tiempo + ">" + tiempo_avion)
             claveEncontrada = clave;
             break;
         }
     }
-    
-    // Si no hemos encontrado una clave (tiempo), nos vamos al final de la cola
+    console.log("Clave Encontrada: " + claveEncontrada)
 
+    // Si hay una posición con tiempo más pequeño que el nuestro
+    if (claveEncontrada !== null) {
+        console.log(`Insertar ${nueva_fila.id} antes de ${claveEncontrada}`);
+        // Fila con tiempo ya más grande que el que queremos meter
+        let filaExistente = document.getElementById(claveEncontrada);
+        
+        // Insertar nueva fila antes de la fila existente
+        filaExistente.parentNode.insertBefore(nueva_fila, filaExistente);
+        
+    } else { // Si NO hay una posición con tiempo menor que el de nuestro avión
+        console.log(`Insertar ${nueva_fila.id} al final`);
+        // Si no se encuentra ningún tiempo mayor, se inserta al final
+        ranking.appendChild(nueva_fila);
+    }
+
+    
 }

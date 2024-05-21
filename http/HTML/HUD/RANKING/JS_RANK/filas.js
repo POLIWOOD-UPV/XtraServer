@@ -10,9 +10,8 @@ var controla_pilotos = 1
 var ranking = document.getElementById("contenedor")
 var filas = document.getElementsByClassName("fila")
 
-var pilotos_control_resta = document.getElementById("pilotos_mas_borrar")
-var pilotos_control_suma = document.getElementById("pilotos_mas_sumar")
-var filas_control = document.getElementsByClassName("fila_control_borrar")
+var pilotos_control_resta = document.getElementById("pilotos_mas_borrar") // Bloque de las filas control borrar
+var filas_control = document.getElementsByClassName("fila_control_borrar") // Filas del bloque control borrar
 
 // Cogemos los botones
 var boton_tiempo = document.getElementById("mostrar_tiempo_id");
