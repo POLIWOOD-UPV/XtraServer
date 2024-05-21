@@ -48,7 +48,7 @@ function sumaPiloto(estado,piloto) {
 
 // Controla las filas de control
 function crea_Perfil() {
-    let piloto_input = document.getElementById("input_nombre")
+    let piloto_input = document.getElementById("nombres_equipos_constructor_id")
     piloto = piloto_input.value
 
     controla_pilotos // controla_pilotos++
