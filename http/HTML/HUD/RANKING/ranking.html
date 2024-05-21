@@ -69,31 +69,38 @@
                         <option value="Club Xaloc">Club Xaloc</option>
                         <option value="Sky Eagle Team">Sky Eagle Team</option>
                     </select>
-                    
+                    <input class = "input_tiempo_min" type="text" placeholder="Minutos" required>
+                    <input class = "input_tiempo_seg" type="text" placeholder="Segundos" required>
+                    <input class = "input_tiempo_mili" type="text" placeholder="Milisegundos" required>
 
-                    <button onclick="crea_Perfil()">Enviar</button> <!--No es un submit ya que se recarga la pag-->
+                    <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                    <button onclick="sumaPiloto('seco')"> SUMAR</button>
+
+                    <!--Este codigo va a desaparecer-->
                     <div id = "pilotos_mas_sumar">
                         <div class = "fila_control_sumar">
                             <div class = "nombre_control">RIC</div>
-                            <button onclick="sumaPiloto('animado','RIC')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco','RIC')"> SUMAR</button>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
+
                         </div>
                         <div class = "fila_control_sumar">
                             <div class = "nombre_control">JAW</div>
-                            <button onclick="sumaPiloto('animado','JAW')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco','JAW')"> SUMAR</button>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
                         </div>
                         <div class = "fila_control_sumar">
                             <div class = "nombre_control">ABE</div>
-                            <button onclick="sumaPiloto('animado','ABE')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco','ABE')"> SUMAR</button>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
                         </div>
                         <div class = "fila_control_sumar">
                             <div class = "nombre_control">EST</div>
-                            <button onclick="sumaPiloto('animado','EST')">SUMAR_An</button>
-                            <button onclick="sumaPiloto('seco','EST')"> SUMAR</button>
+                            <button onclick="sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="sumaPiloto('seco')"> SUMAR</button>
                         </div>
                     </div>  
+                    <!--Hasta aqui-->
                 <h3>Borrar</h3>
                 <div id = "pilotos_mas_borrar">
                     <div class = "fila_control_borrar">

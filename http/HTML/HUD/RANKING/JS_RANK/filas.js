@@ -68,6 +68,7 @@ function creaFila(nom,pos,tiemp,pes){
 }
 
 
+/* Este codigo va a desaparecer
 // Filas de control
 function FilaControlSuma(piloto){
     // Para SUMAR
@@ -94,7 +95,7 @@ function FilaControlSuma(piloto){
     pilotos_control_suma.append(fila_sumar)
 
 
-}
+}*/
 
 function FilaControlResta(piloto){
      // Creamos la fila con sus partes
@@ -107,9 +108,12 @@ function FilaControlResta(piloto){
     fila_borrar.append(nombre)
 
     // Si no esta en los perfiles de los pilotos, agregarlo
+    /* Este codigo va a desaparecer
     if(!pilotos.includes(piloto)){
         FilaControlSuma();
-    }
+    } */
+
+    
     // Para borrar
     //Ponemos el boton de eliminar animado
     let botoncin = document.createElement("button")

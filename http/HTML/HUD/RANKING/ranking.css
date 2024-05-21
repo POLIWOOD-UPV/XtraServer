@@ -90,3 +90,7 @@ aside {
 .fila_control_borrar * , .fila_control_sumar * {
     flex:1;
 }
+
+.input_tiempo_min, .input_tiempo_seg , .input_tiempo_mili{
+    width: 50px;
+}

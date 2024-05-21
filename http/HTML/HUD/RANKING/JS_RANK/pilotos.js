@@ -26,8 +26,13 @@ function crearPeso(pes){
 }
 
 // Poner y sacar aviones (con animacion)
-function sumaPiloto(estado,piloto) {
+function sumaPiloto(estado) {
+    piloto = crea_Perfil();
     FilaControlResta(piloto) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+    // Coger que avion es
+
+    // Coger el tiempo del avion
+    
     let nueva_fila = creaFila(piloto,++controla_pilotos, "+1 lap","1Kg");
     // El ++ va delante para que no se genere dos veces el nº 1
     
@@ -48,14 +53,17 @@ function sumaPiloto(estado,piloto) {
 
 // Controla las filas de control
 function crea_Perfil() {
+    // Cogemos el nombre del avion actual a través del drop down
     let piloto_input = document.getElementById("nombres_equipos_constructor_id")
     piloto = piloto_input.value
 
-    controla_pilotos // controla_pilotos++
+    //controla_pilotos // controla_pilotos++
     // Creamos la fila en el ranking y en control
-    FilaControlSuma(piloto);
+    //FilaControlSuma(piloto);
+
     // Metemos el nuevo perfil en la lista
     pilotos.push(piloto)
+    return piloto
 
 }
 
