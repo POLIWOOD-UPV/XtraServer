@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////
 
 // Variables Pilotos
-var pilotos = ["RIC","JAW","ABE","EST"]
+var pilotos = ["RIC"]
 var controla_pilotos = 1
 
 // Coger ranking y filas
@@ -77,13 +77,6 @@ function FilaControlResta(piloto){
     let nombre = document.createElement("div")
     nombre.textContent = piloto
     fila_borrar.append(nombre)
-
-    // Si no esta en los perfiles de los pilotos, agregarlo
-    /* Este codigo va a desaparecer
-    if(!pilotos.includes(piloto)){
-        FilaControlSuma();
-    } */
-
 
     // Para borrar
     //Ponemos el boton de eliminar animado
