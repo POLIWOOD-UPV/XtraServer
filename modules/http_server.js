@@ -29,7 +29,7 @@ const doGET = (req, res, commands) => {
 }
 
 const doPOST = (req, res) => {
-    if (true/*path === "/add"*/) {
+    if (req.url == "form.html") {
         res.writeHead(200);
 
         fs.writeFileSync("./http/POST" + req.url, "");
@@ -166,9 +166,10 @@ exports.IOserver = (server, connection, disconnect, events) => {
 
         for (const key in events) {
             if (Object.hasOwnProperty.call(events, key)) {
-                socket.on(key, (msj) => {
-                    IOlog(socket.id, key, msj)
-                    events[key](socket, msj);
+                socket.on(key, (...params) => {
+                    var args = Array.from(params);
+                    IOlog(socket.id, key, String(args));
+                    events[key](socket, ...args);
                 });
             }
         }
