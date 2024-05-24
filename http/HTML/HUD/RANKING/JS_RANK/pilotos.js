@@ -87,6 +87,8 @@ function bajar_posiciones(pos){
 }
 // Cambiar el número visible a todos los de debajo y al que se ha agregado
 function subir_posiciones(pos) {
+
+    // Cogemos los numeros desde nuestra pos hasta la longitud de la lista
     let numeros = [];
     for (let i = pos; i <= filas.length; i++) {
         numeros.push(i);
@@ -123,7 +125,6 @@ function sumaPiloto(estado) {
     // Encontrar en que posicion va a estar
     pos = sacar_pos_avion(tiempo) // Es un numero
 
-    console.log("Posicion que debería ir a", pos)
     //Poner el avion en el ranking
     let nueva_fila = creaFila(piloto,pos, tiempo,peso);
     // Incrementamos la cantidad de aviones que hay
@@ -158,22 +159,30 @@ function crea_Perfil() {
 }
 
 // Coger los tiempos del input
-function cogerTiempo(que){
-    switch(que){
+function cogerTiempo(que) {
+    switch (que) {
         case "min":
-            //Coger Minutos
-            minutos = document.getElementById("minutos_input_id").value
-            return minutos
+            // Coger Minutos
+            minutos = document.getElementById("minutos_input_id").value;
+            return validarNumero(minutos) ? parseInt(minutos) : 0;
+
         case "seg":
-            //Coger segundos
-            segundos = document.getElementById("segundos_input_id").value
-            return segundos
+            // Coger segundos
+            segundos = document.getElementById("segundos_input_id").value;
+            return validarNumero(segundos) ? parseInt(segundos) : 0;
+
         case "mil":
             // Coger milis
-            milis = document.getElementById("milisegundos_input_id").value
-            return milis           
+            milis = document.getElementById("milisegundos_input_id").value;
+            return validarNumero(milis) ? parseInt(milis) : 0;
     }
 }
+
+// Función para validar si el valor es un número
+function validarNumero(valor) {
+    return /^\d+$/.test(valor);
+}
+
 // Versión con array
 function meter_en_ranking(nueva_fila) {
     filas_array = Array.from(filas); 
@@ -190,15 +199,13 @@ function meter_en_ranking(nueva_fila) {
     }
 
     if (posicionOcupada) {
-        console.log("¡HAY COINCIDENCIA!");
         // Partir filas, introducir la nueva fila y rejuntar todo en filas
         introducir_en_filas(pos, nueva_fila);
 
-        // El problema esta en subir posiciones
+        // Subimos las posiciones de los que estan abajo de nuestra posicion
         subir_posiciones(pos);
 
     } else { // No hay coincidencia, añadir al final
-        console.log("¡AL FONDO!");
         ranking.appendChild(nueva_fila);  // Usar appendChild para elementos DOM
     }
 }
@@ -286,15 +293,13 @@ function sacar_pos_avion(tiempo){
             */
             
         });        
-        console.log("Tiempo de nuestro avion "+tiempo_avion)
      
         // Agregar el tiempo del avión a la lista de tiempos
         tiempos.push(tiempo_avion);
     
         // Ordenar la lista de tiempos
         let tiempos2 = [...tiempos].sort((a, b) => a - b); // Creamos una instancia nueva de tiempos y que los pequeños vayan delante
-        console.log("Tiempos 2: ")
-        console.log(tiempos2)
+
         // Encontrar la nueva posición del tiempo_avion
         let nueva_posicion = tiempos2.indexOf(tiempo_avion)+1;
         // CUIADADO, nueva_posicion esta cogiendo indexes de arrays entonces hay que +1
