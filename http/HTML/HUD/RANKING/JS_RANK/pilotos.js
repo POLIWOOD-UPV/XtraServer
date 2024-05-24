@@ -143,7 +143,7 @@ function subir_posiciones(pos){
         let posicion = fila.querySelector('.numero');
 
         // Posicion fila analizando > pos fila a meter
-        if (Number(posicion.textContent) >= pos){
+        if (Number(posicion.textContent) > pos){ // He quitado el >=
             posicion.textContent = Number(posicion.textContent)+1
             // Actualizar el ID de la fila del ranking de todos los de abajo
             fila.id = String(Number(fila.id)+1)
@@ -247,9 +247,6 @@ function sacar_pos_avion(tiempo){
 }
 
 function introducir_en_filas(pos, nueva_fila) {
-    var ranking = document.getElementById("contenedor");
-    var filas = document.getElementsByClassName("fila");
-
     // Convierte filas (HTMLCollection) a un array temporal
     let filas_array = Array.from(filas);
 
