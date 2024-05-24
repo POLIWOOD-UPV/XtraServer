@@ -1,10 +1,6 @@
 ////////////////////////////////////////////////////
 // Funciones de poner y quitar pilotos             //
 ////////////////////////////////////////////////////
-// Array de tiempos global - VUELVE A SER LOCAL
-//tiempos = [2013.333]
-// Iniciamos con el tiempo de RIC
-
 
 // Funciones para crear los informativos del ranking
 // Tiempo
@@ -89,21 +85,26 @@ function bajar_posiciones(pos){
         }
     }
 }
+// Cambiar el número visible a todos los de debajo y al que se ha agregado
+function subir_posiciones(pos) {
+    let numeros = [];
+    for (let i = pos; i <= filas.length; i++) {
+        numeros.push(i);
+    }
 
-function subir_posiciones(pos){
-    // Cambiar el número visible a todos los de debajo Y al que se ha agregado
-    for (fila of filas){
-        // Estas son las filas de la izquierda
-        let posicion = fila.querySelector('.numero');
-
-        // Posicion fila analizando > pos fila a meter
-        if (Number(posicion.textContent) >= pos){ // He quitado el >=
-            posicion.textContent = Number(posicion.textContent)+1
-            // Actualizar el ID de la fila del ranking de todos los de abajo
-            fila.id = String(Number(fila.id)+1)
+    let cont = 0; // Inicializa el contador
+    for (let fila of filas) {
+        let posicion = fila.querySelector('.numero'); // Encuentra el elemento con la clase 'numero'
+        // Si la posición actual es mayor o igual a la posición a subir
+        if (Number(posicion.textContent) >= pos) {
+            posicion.textContent = numeros[cont]; // Asigna el número correspondiente
+            fila.id = String(numeros[cont]); // Asigna el mismo número como ID
+            cont++; // Incrementa el contador para obtener el siguiente número en la lista
         }
     }
 }
+
+
 // Poner y sacar aviones (con animacion)
 function sumaPiloto(estado) {
     // Agreganis el avion a la lista y lo cogemos
@@ -192,6 +193,8 @@ function meter_en_ranking(nueva_fila) {
         console.log("¡HAY COINCIDENCIA!");
         // Partir filas, introducir la nueva fila y rejuntar todo en filas
         introducir_en_filas(pos, nueva_fila);
+
+        // El problema esta en subir posiciones
         subir_posiciones(pos);
 
     } else { // No hay coincidencia, añadir al final
@@ -204,7 +207,7 @@ function introducir_en_filas(pos, nueva_fila) {
     let filas_array = Array.from(filas);
 
     // Divide el array en dos partes: antes y después de la posición
-    let filas_1 = filas_array.slice(0, pos - 1);  // Elementos del inicio a pos-1
+    let filas_1 = filas_array.slice(0, pos);  // Elementos del inicio a pos-1
     let filas_2 = filas_array.slice(pos - 1);     // El resto
 
     // Inserta la nueva fila en la posición adecuada
@@ -214,7 +217,7 @@ function introducir_en_filas(pos, nueva_fila) {
     filas_array = filas_1.concat(filas_2);
 
 
-    // MANTENER FILAS COMO HTML COLLECTION Y NO COMO ARRAY
+    // MANTENER FILAS COMO HTML COLLECTION Y NO COMO ARRAY. Menudo cacao, documentar mejor a futuro:
     // Crear un fragmento de documento para eficiencia
     let fragment = document.createDocumentFragment();
 
