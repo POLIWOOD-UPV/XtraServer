@@ -42,11 +42,10 @@ function sumaPiloto(estado) {
     // Encontrar en que posicion va a estar
     pos = sacar_pos_avion(tiempo) // Es un numero
 
-    console.log("Posicion que debería ir a")
-    console.log(pos)
+    console.log("Posicion que debería ir a", pos)
     //Poner el avion en el ranking
     let nueva_fila = creaFila(piloto,pos, tiempo,peso);
-
+    console.log(nueva_fila.id)
     // Incrementamos la cantidad de aviones que hay
     ++controla_pilotos
     // El ++ va delante para que no se genere dos veces el nº 1 (old)

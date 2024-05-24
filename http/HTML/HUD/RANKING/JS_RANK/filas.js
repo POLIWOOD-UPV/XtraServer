@@ -58,7 +58,7 @@ function creaFila(nom,pos,tiemp,pes){
     // Lo juntamos todo y devolvemos la fila
     resto.append(nombre,tiempo,peso)
     // Le ponemos de ID la posicion
-    fila.id = controla_pilotos
+    fila.id = pos
     fila.append(numero,resto)
 
     // Ponemos la fila en la izquierda para que se mueva mas tarde
