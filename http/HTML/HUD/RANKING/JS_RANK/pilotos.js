@@ -48,7 +48,6 @@ function sumaPiloto(estado) {
     console.log(nueva_fila.id)
     // Incrementamos la cantidad de aviones que hay
     ++controla_pilotos
-    // El ++ va delante para que no se genere dos veces el nº 1 (old)
 
     // Metemos en el ranking
     meter_en_ranking(nueva_fila)
@@ -145,7 +144,7 @@ function subir_posiciones(pos){
 
         // Posicion fila analizando > pos fila a meter
         if (Number(posicion.textContent) >= pos){
-            posicion.textContent = Number(posicion.textContent)
+            posicion.textContent = Number(posicion.textContent)+1
             // Actualizar el ID de la fila del ranking de todos los de abajo
             fila.id = String(Number(fila.id)+1)
         }
@@ -218,9 +217,7 @@ function sacar_pos_avion(tiempo){
             let minutos = parseInt(partes[0], 10) * 60;
             let segundos = parseInt(partes[1], 10);
             let miliseg = parseInt(partes[2], 10) * 0.001;
-            
-            console.log("Miutos " + minutos + " Segundos: " + segundos + " miliseg: " + miliseg)
-            
+                        
             let tiempo_en_seg = minutos + segundos + miliseg;
     
             // Guardamos en el objeto tiempos el tiempo en segundos en la posición
@@ -240,7 +237,8 @@ function sacar_pos_avion(tiempo){
     
         // Ordenar la lista de tiempos
         let tiempos2 = [...tiempos].sort((a, b) => a - b); // Creamos una instancia nueva de tiempos y que los pequeños vayan delante
-    
+        console.log("Tiempos 2: ")
+        console.log(tiempos2)
         // Encontrar la nueva posición del tiempo_avion
         let nueva_posicion = tiempos2.indexOf(tiempo_avion)+1;
         // CUIADADO, nueva_posicion esta cogiendo indexes de arrays entonces hay que +1
@@ -248,32 +246,48 @@ function sacar_pos_avion(tiempo){
         return nueva_posicion
 }
 
-// Meter fila nueva en las filas en una pos especifica
 function introducir_en_filas(pos, nueva_fila) {
-    // Convierte filas (HTMLCollection) a un array
+    var ranking = document.getElementById("contenedor");
+    var filas = document.getElementsByClassName("fila");
+
+    // Convierte filas (HTMLCollection) a un array temporal
     let filas_array = Array.from(filas);
 
     // Divide el array en dos partes: antes y después de la posición
     let filas_1 = filas_array.slice(0, pos - 1);  // Elementos del inicio a pos-1
-    console.log("Filas 1:")
-    console.log(filas_1)
     let filas_2 = filas_array.slice(pos - 1);     // El resto
-    console.log("Filas 2:")
-    console.log(filas_2)
+
     // Inserta la nueva fila en la posición adecuada
     filas_1.push(nueva_fila);
 
     // Combina las dos partes con la nueva fila incluida
-    filas = filas_1.concat(filas_2);
-    console.log("Filas")
-    console.log(filas)
+    filas_array = filas_1.concat(filas_2);
+
+
+    // MANTENER FILAS COMO HTML COLLECTION Y NO COMO ARRAY
+    // Crear un fragmento de documento para eficiencia
+    let fragment = document.createDocumentFragment();
+
+    // Añadir la cabecera al fragmento
+    fragment.appendChild(document.getElementById("cabecera"));
+
+    // Añadir todas las filas al fragmento
+    filas_array.forEach(function(fila) {
+        fragment.appendChild(fila);
+    });
+
+    // Limpiar el contenedor y añadir el fragmento
+    while (ranking.firstChild) {
+        ranking.removeChild(ranking.firstChild);
+    }
+    ranking.appendChild(fragment);
 }
 
 
 // Versión con array
 function meter_en_ranking(nueva_fila) {
     filas_array = Array.from(filas); 
-    let tiempo = nueva_fila.querySelector('.tiempo').textContent;
+    //let tiempo = nueva_fila.querySelector('.tiempo').textContent;
     let pos = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
     // Esta pos está corregida con +1
 
@@ -287,9 +301,10 @@ function meter_en_ranking(nueva_fila) {
 
     if (posicionOcupada) {
         console.log("¡HAY COINCIDENCIA!");
-        subir_posiciones(pos);
         // Partir filas, introducir la nueva fila y rejuntar todo en filas
         introducir_en_filas(pos, nueva_fila);
+        subir_posiciones(pos);
+
     } else { // No hay coincidencia, añadir al final
         console.log("¡AL FONDO!");
         ranking.appendChild(nueva_fila);  // Usar appendChild para elementos DOM

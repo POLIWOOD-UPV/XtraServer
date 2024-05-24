@@ -10,7 +10,6 @@ var filas_visible = true;
 
 // Mover el ranking en o fuera de pantalla
 function rankingMov() {
-    console.log("rankingMov")
     if (ranking_visible) { // Es visible
         // Ranking se pasa a oculto
         aparecer_desaparecer_rank.textContent = "Aparecer Ranking";
