@@ -28,7 +28,7 @@ var pesos = document.getElementsByClassName("peso")
 
 
 
-// VCrea la fila donde se meten los datos
+// Crea la fila donde se meten los datos
 function creaFila(nom,pos,tiemp,pes){
     // Creamos la fila con sus partes
     let fila = document.createElement("div")

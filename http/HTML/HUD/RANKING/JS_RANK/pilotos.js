@@ -40,17 +40,16 @@ function sumaPiloto(estado) {
     peso = document.getElementById("peso_input_id").value + "Kg"
 
     // Encontrar en que posicion va a estar
-    pos = sacar_pos_avion(tiempo)
+    pos = Number(sacar_pos_avion(tiempo))
 
     //Poner el avion en el ranking
-    let nueva_fila = (piloto,pos, tiempo,peso);
+    let nueva_fila = creaFila(piloto,pos, tiempo,peso);
 
     // Incrementamos la cantidad de aviones que hay
     ++controla_pilotos
-    // El ++ va delante para que no se genere dos veces el nº 1
+    // El ++ va delante para que no se genere dos veces el nº 1 (old)
 
     // Metemos en el ranking
-    //ranking.append(nueva_fila);
     meter_en_ranking(nueva_fila)
 
     // Fisicamente hacerlo aparecer
@@ -138,7 +137,7 @@ function bajar_posiciones(pos){
 }
 
 function subir_posiciones(pos){
-    // Cambiar el número visible a todos los de debajo del que se ha agregado
+    // Cambiar el número visible a todos los de debajo Y al que se ha agregado
     for (fila of filas){
         // Estas son las filas de la izquierda
         let posicion = fila.querySelector('.numero');
@@ -147,7 +146,7 @@ function subir_posiciones(pos){
         if (Number(posicion.textContent) >= pos){
             posicion.textContent = Number(posicion.textContent)
             // Actualizar el ID de la fila del ranking de todos los de abajo
-            fila.id = String(Number(fila.id))+1
+            fila.id = String(Number(fila.id)+1)
         }
     }
 }
@@ -180,198 +179,144 @@ function cogerTiempo(que){
     }
 }
 
-
-// Version con objeto
-/*
-function meter_en_ranking(nueva_fila) {
-    // Funcion para extraer partes del tiempo de la fila nueva que vamos a meter
-    function convertirTiempo(tipo) {
-        let tiempo = nueva_fila.querySelector('.tiempo').textContent;
-        // Partimos en 3 partes ya que esta en MM:SS:XXX
-        let partes = tiempo.split(':');
-        if (tipo === "min") return Number(partes[0])*60;
-        if (tipo === "seg") return Number(partes[1]);
-        if (tipo === "mil") return Number(partes[2])*0.001;
+// Sacar pos_avion nueva
+// Determina la posición del nuevo piloto en el ranking basado en su tiempo.
+function sacar_pos_avion(tiempo) {
+    let pos = 1;
+    if (filas.length == 0) {
+        return pos;
+    } else {
+        tiempos.forEach((t, index) => {
+            if (comparar_tiempos(tiempo, t)) {
+                pos = Number(index + 1);
+            }
+        });
     }
-
-    // Convertir el tiempo de nueva_fila a segundos para poder compararlo con el resto
-    let minutos_avion = convertirTiempo("min")
-    let segundos_avion = convertirTiempo("seg")
-    let miliseg_avion = convertirTiempo("mil")
-    let tiempo_avion = minutos_avion + segundos_avion + miliseg_avion; // Tiempo en segundos
-
-    let tiempos = {};
-    // Convertir HTMLCollection a un array para poder iterar
-    filas_array = Array.from(filas); 
-
-    // Comprobar el tiempo del resto
-    filas_array.forEach(fila => {
-        // Cogemos el div resto
-        let resto = fila.querySelector('.resto');
-        // Cogemos el div del tiempo
-        let tiempo = resto.querySelector('.tiempo');
-        
-        // Esto es el tiempo en formato MM:SS:XXX
-        let tiempoText = tiempo.textContent;
-
-        // Separamos el texto en partes
-        let partes = tiempoText.split(':');
-        // Convertimos cada parte a un número
-        let minutos = parseInt(partes[0], 10) * 60;
-        let segundos = parseInt(partes[1], 10);
-        let miliseg = parseInt(partes[2], 10) * 0.001;
-        
-        console.log("Miutos " + minutos + " Segundos: " + segundos + " miliseg: " + miliseg)
-        
-        let tiempo_en_seg = minutos + segundos + miliseg;
-
-        // Guardamos en el objeto tiempos el tiempo en segundos en la posición
-        tiempos[fila.id] = tiempo_en_seg;
-
-        /*
-        Est nos deja un objeto  asi:
-        tiempos = {
-            1 : TIEMPO EN SEG
-            2: TIEMPO EN SEG
-            ... }
-
-        
-    });
-
-    console.log("Objeto Tiempos: ")
-    console.log(tiempos)
-    
-    console.log("Tiempo de nuestro avion "+tiempo_avion)
-    // Buscamos si hay alguna clave (posicion) que su tiempo sea menor que el de nuestro nuevo avion
-    let claveEncontrada = null;
-    for (let [clave, tiempo] of Object.entries(tiempos)) {
-        console.log("Clave: "+clave+" Tiempo: "+tiempo)
-        // Si el tiempo de la fila ya existente es mayor que el que queremos meter, tenemos posicion, si no, seguir buscandos
-        if (tiempo > tiempo_avion) { 
-            console.log(tiempo + ">" + tiempo_avion)
-            claveEncontrada = clave;
-            break;
-        }
-    }
-    console.log("Clave Encontrada: " + claveEncontrada)
-
-    // Si hay una posición con tiempo más pequeño que el nuestro
-    if (claveEncontrada !== null) {
-        console.log(`Insertar ${nueva_fila.id} antes de ${claveEncontrada}`);
-        // Fila con tiempo ya más grande que el que queremos meter
-        let filaExistente = document.getElementById(claveEncontrada);
-        
-        // Insertar nueva fila antes de la fila existente
-        filaExistente.parentNode.insertBefore(nueva_fila, filaExistente);
-        subir_posiciones(claveEncontrada)
-        
-    } else { // Si NO hay una posición con tiempo menor que el de nuestro avión
-        console.log(`Insertar ${nueva_fila.id} al final`);
-        // Si no se encuentra ningún tiempo mayor, se inserta al final
-        ranking.appendChild(nueva_fila);
-    }
-
-    
+    return pos;
 }
-*/
 
+// Compara dos tiempos y devuelve true si el nuevo tiempo es menor.
+function comparar_tiempos(tiempo_nuevo, tiempo_antiguo) {
+    let [min_n, seg_n, mil_n] = tiempo_nuevo.split(":").map(Number);
+    let [min_a, seg_a, mil_a] = tiempo_antiguo.split(":").map(Number);
 
+    if (min_n < min_a) return true;
+    if (min_n === min_a && seg_n < seg_a) return true;
+    if (min_n === min_a && seg_n === seg_a && mil_n < mil_a) return true;
+    return false;
+}
+// sacar_pos_avion antigua
 // Sacar la nueva posicion  
-function sacar_pos_avion(tiempo){
-        // Funcion para extraer partes del tiempo de la fila nueva que vamos a meter
-        function convertirTiempo(tipo) {
-            //let tiempo = nueva_fila.querySelector('.tiempo').textContent;
-            // Partimos en 3 partes ya que esta en MM:SS:XXX
-            let partes = tiempo.split(':');
-            if (tipo === "min") return Number(partes[0])*60;
-            if (tipo === "seg") return Number(partes[1]);
-            if (tipo === "mil") return Number(partes[2])*0.001;
-        }
+// function sacar_pos_avion(tiempo){
+//         // Funcion para extraer partes del tiempo de la fila nueva que vamos a meter
+//         function convertirTiempo(tipo) {
+//             //let tiempo = nueva_fila.querySelector('.tiempo').textContent;
+//             // Partimos en 3 partes ya que esta en MM:SS:XXX
+//             let partes = tiempo.split(':');
+//             if (tipo === "min") return Number(partes[0])*60;
+//             if (tipo === "seg") return Number(partes[1]);
+//             if (tipo === "mil") return Number(partes[2])*0.001;
+//         }
     
-        // Convertir el tiempo de nueva_fila a segundos para poder compararlo con el resto
-        let minutos_avion = convertirTiempo("min")
-        let segundos_avion = convertirTiempo("seg")
-        let miliseg_avion = convertirTiempo("mil")
-        let tiempo_avion = minutos_avion + segundos_avion + miliseg_avion; // Tiempo en segundos
+//         // Convertir el tiempo de nueva_fila a segundos para poder compararlo con el resto
+//         let minutos_avion = convertirTiempo("min")
+//         let segundos_avion = convertirTiempo("seg")
+//         let miliseg_avion = convertirTiempo("mil")
+//         let tiempo_avion = minutos_avion + segundos_avion + miliseg_avion; // Tiempo en segundos
     
-        // let tiempos = []; AHORA ES GLOBAL
-        // Convertir HTMLCollection a un array para poder iterar
-        filas_array = Array.from(filas); 
+//         // let tiempos = []; AHORA ES GLOBAL
+//         // Convertir HTMLCollection a un array para poder iterar
+//         filas_array = Array.from(filas); 
 
-        // Comprobar el tiempo del resto
-        filas_array.forEach(fila => {
-            // Cogemos el div resto y el div del tiempo
-            let resto = fila.querySelector('.resto');
-            let tiempo = resto.querySelector('.tiempo');
+//         // Comprobar el tiempo del resto
+//         filas_array.forEach(fila => {
+//             // Cogemos el div resto y el div del tiempo
+//             let resto = fila.querySelector('.resto');
+//             let tiempo = resto.querySelector('.tiempo');
             
-            // Esto es el tiempo en formato MM:SS:XXX
-            let tiempoText = tiempo.textContent;
+//             // Esto es el tiempo en formato MM:SS:XXX
+//             let tiempoText = tiempo.textContent;
     
-            // Separamos el texto en partes
-            let partes = tiempoText.split(':');
-            // Convertimos cada parte a un número
-            let minutos = parseInt(partes[0], 10) * 60;
-            let segundos = parseInt(partes[1], 10);
-            let miliseg = parseInt(partes[2], 10) * 0.001;
+//             // Separamos el texto en partes
+//             let partes = tiempoText.split(':');
+//             // Convertimos cada parte a un número
+//             let minutos = parseInt(partes[0], 10) * 60;
+//             let segundos = parseInt(partes[1], 10);
+//             let miliseg = parseInt(partes[2], 10) * 0.001;
             
-            console.log("Miutos " + minutos + " Segundos: " + segundos + " miliseg: " + miliseg)
+//             console.log("Miutos " + minutos + " Segundos: " + segundos + " miliseg: " + miliseg)
             
-            let tiempo_en_seg = minutos + segundos + miliseg;
+//             let tiempo_en_seg = minutos + segundos + miliseg;
     
-            // Guardamos en el objeto tiempos el tiempo en segundos en la posición
-            tiempos.push(tiempo_en_seg)
+//             // Guardamos en el objeto tiempos el tiempo en segundos en la posición
+//             tiempos.push(tiempo_en_seg)
     
-            /*
-            Est nos deja un array  asi:
-            tiempos = [TIEMPO_EN_SEG,_TIEMPO_EN_SEG]
-                ... 
-    
-            */
-        });        
-        console.log("Tiempo de nuestro avion "+tiempo_avion)
+//             /*
+//             Est nos deja un array  asi:
+//             tiempos = [TIEMPO_EN_SEG,_TIEMPO_EN_SEG]
+//                 ... 
+//             */
+            
+//         });        
+//         console.log("Tiempo de nuestro avion "+tiempo_avion)
      
-        // Agregar el tiempo del avión a la lista de tiempos
-        tiempos.push(tiempo_avion);
+//         // Agregar el tiempo del avión a la lista de tiempos
+//         tiempos.push(tiempo_avion);
     
-        // Ordenar la lista de tiempos
-        let tiempos2 = [...tiempos].sort((a, b) => a - b); // Creamos una instancia nueva de tiempos y que los pequeños vayan delante
+//         // Ordenar la lista de tiempos
+//         let tiempos2 = [...tiempos].sort((a, b) => a - b); // Creamos una instancia nueva de tiempos y que los pequeños vayan delante
     
-        // Encontrar la nueva posición del tiempo_avion
-        let nueva_posicion = tiempos2.indexOf(tiempo_avion)+1;
-        // CUIADADO, nueva_posicion esta cogiendo indexes de arrays entonces hay que +1
+//         // Encontrar la nueva posición del tiempo_avion
+//         let nueva_posicion = tiempos2.indexOf(tiempo_avion)+1;
+//         // CUIADADO, nueva_posicion esta cogiendo indexes de arrays entonces hay que +1
     
-        return nueva_posicion
+//         return nueva_posicion
+// }
+
+// Meter fila nueva en las filas en una pos especifica
+function introducir_en_filas(pos, nueva_fila) {
+    // Convierte filas (HTMLCollection) a un array
+    let filas_array = Array.from(filas);
+
+    // Divide el array en dos partes: antes y después de la posición
+    let filas_1 = filas_array.slice(0, pos - 1);  // Elementos del inicio a pos-1
+    console.log("Filas 1:")
+    console.log(filas_1)
+    let filas_2 = filas_array.slice(pos - 1);     // El resto
+    console.log("Filas 2:")
+    console.log(filas_2)
+    // Inserta la nueva fila en la posición adecuada
+    filas_1.push(nueva_fila);
+
+    // Combina las dos partes con la nueva fila incluida
+    filas = filas_1.concat(filas_2);
+    console.log("Filas")
+    console.log(filas)
 }
 
-// Version con array
+
+// Versión con array
 function meter_en_ranking(nueva_fila) {
     let tiempo = nueva_fila.querySelector('.tiempo').textContent;
-    let pos = nueva_fila.querySelector(".numero").textContent;
+    let pos = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
+    // Esta pos está corregida con +1
 
-    // Comprobar si la posicion ya esta ocupada
-    for (fila in filas){
-        if(fila.id == pos){ // Hay conicidencia
-            subir_posiciones(pos)
-            // Hacer funcion de partir filas e introducir la fila nueva y rejuntar todo filas
+    let posicionOcupada = false;
+    for (let fila of filas) {
+        if (parseInt(fila.id, 10) === pos) { // Hay coincidencia
+            posicionOcupada = true;
             break;
-        }else{ // No hay, al fondo
-            ranking.append(nueva_fila)
-            return;
         }
     }
-    /*
-    // Identificar las posiciones que cambiaron
-    let posiciones_cambiadas = [];
-    tiempos2.forEach((tiempo, index) => {
-        if (tiempos[index] !== tiempo) {
-            posiciones_cambiadas.push(index+1);
-            // CUIADADO, posiciones_cambiadas esta cogiendo indexes de arrays entonces hay que +1
-        }
-    });*/
 
-    
-    console.log(posiciones_cambiadas)
-    // Actualizar IDs de filas
-    // 
-
+    if (posicionOcupada) {
+        console.log("¡HAY COINCIDENCIA!");
+        subir_posiciones(pos);
+        // Partir filas, introducir la nueva fila y rejuntar todo en filas
+        introducir_en_filas(pos, nueva_fila);
+    } else { // No hay coincidencia, añadir al final
+        console.log("¡AL FONDO!");
+        ranking.appendChild(nueva_fila);  // Usar appendChild para elementos DOM
+        filas.push(nueva_fila); // Lo guardamos en filas
+    }
 }
