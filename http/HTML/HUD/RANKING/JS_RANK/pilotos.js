@@ -24,59 +24,14 @@ function crearPeso(pes){
 
 }
 
-// Poner y sacar aviones (con animacion)
-function sumaPiloto(estado) {
-    // Agreganis el avion a la lista y lo cogemos
-    piloto = crea_Perfil();
-    FilaControlResta(piloto) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
-
-    // Coger el tiempo del avion
-    minutos = cogerTiempo("min")
-    segundos = cogerTiempo("seg")
-    miliseg = cogerTiempo("mil")
-    tiempo = minutos + ":" + segundos + ":" + miliseg
-
-    // Coger el peso
-    peso = document.getElementById("peso_input_id").value + "Kg"
-
-    // Encontrar en que posicion va a estar
-    pos = sacar_pos_avion(tiempo) // Es un numero
-
-    console.log("Posicion que debería ir a", pos)
-    //Poner el avion en el ranking
-    let nueva_fila = creaFila(piloto,pos, tiempo,peso);
-    console.log(nueva_fila.id)
-    // Incrementamos la cantidad de aviones que hay
-    ++controla_pilotos
-
-    // Metemos en el ranking
-    meter_en_ranking(nueva_fila)
-
-    // Fisicamente hacerlo aparecer
-    switch (estado){
-        case "animado":
-            nueva_fila.style.left = "-500px"
-            setTimeout(() => {
-                nueva_fila.style.left = "0px"
-            }, 50);
-            break;
-        case "seco":
-            nueva_fila.style.left = "0px"
-            break;
-        }
+// Vaciar todos los aviones instantaneamente
+function vaciarPilotos(){
+    for (var j = filas.length - 1; j >= 0; j--) {
+        filas[j].remove();
+        filas_control[j].remove(); // Quitar todas las filas de control
+        controla_pilotos--; // Bajar la cantidad de pilotos
     }
-
-// Coge al piloto y lo mete en el sistema
-function crea_Perfil() {
-    // Cogemos el nombre del avion actual a través del drop down
-    let piloto_input = document.getElementById("nombres_equipos_constructor_id")
-    piloto = piloto_input.value
-    // Metemos el nuevo perfil en la lista
-    pilotos.push(piloto)
-    return piloto
-
 }
-
 // Borra los pilotos del ranking y control
 function quitaPiloto(estado,pos) {
     if (filas.length > 0) {
@@ -116,7 +71,6 @@ function bajar_posiciones(pos){
         }
     }
 
-    
     // Actualizar el ID de todos los botones de la fila de control
     for (fila of filas_control){
         // Estas son las filas de la derecha
@@ -143,23 +97,64 @@ function subir_posiciones(pos){
         let posicion = fila.querySelector('.numero');
 
         // Posicion fila analizando > pos fila a meter
-        if (Number(posicion.textContent) > pos){ // He quitado el >=
+        if (Number(posicion.textContent) >= pos){ // He quitado el >=
             posicion.textContent = Number(posicion.textContent)+1
             // Actualizar el ID de la fila del ranking de todos los de abajo
             fila.id = String(Number(fila.id)+1)
         }
     }
 }
+// Poner y sacar aviones (con animacion)
+function sumaPiloto(estado) {
+    // Agreganis el avion a la lista y lo cogemos
+    piloto = crea_Perfil();
+    FilaControlResta(piloto) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
-// Vaciar todos los aviones instantaneamente
-function vaciarPilotos(){
-    for (var j = filas.length - 1; j >= 0; j--) {
-        filas[j].remove();
-        filas_control[j].remove(); // Quitar todas las filas de control
-        controla_pilotos--; // Bajar la cantidad de pilotos
+    // Coger el tiempo del avion
+    minutos = cogerTiempo("min")
+    segundos = cogerTiempo("seg")
+    miliseg = cogerTiempo("mil")
+    tiempo = minutos + ":" + segundos + ":" + miliseg
+
+    // Coger el peso
+    peso = document.getElementById("peso_input_id").value + "Kg"
+
+    // Encontrar en que posicion va a estar
+    pos = sacar_pos_avion(tiempo) // Es un numero
+
+    console.log("Posicion que debería ir a", pos)
+    //Poner el avion en el ranking
+    let nueva_fila = creaFila(piloto,pos, tiempo,peso);
+    // Incrementamos la cantidad de aviones que hay
+    ++controla_pilotos
+
+    // Metemos en el ranking
+    meter_en_ranking(nueva_fila)
+
+    // Fisicamente hacerlo aparecer
+    switch (estado){
+        case "animado":
+            nueva_fila.style.left = "-500px"
+            setTimeout(() => {
+                nueva_fila.style.left = "0px"
+            }, 50);
+            break;
+        case "seco":
+            nueva_fila.style.left = "0px"
+            break;
+        }
     }
-}
 
+// Coge al piloto y lo mete en el sistema
+function crea_Perfil() {
+    // Cogemos el nombre del avion actual a través del drop down
+    let piloto_input = document.getElementById("nombres_equipos_constructor_id")
+    piloto = piloto_input.value
+    // Metemos el nuevo perfil en la lista
+    pilotos.push(piloto)
+    return piloto
+
+}
 
 // Coger los tiempos del input
 function cogerTiempo(que){
@@ -178,8 +173,66 @@ function cogerTiempo(que){
             return milis           
     }
 }
+// Versión con array
+function meter_en_ranking(nueva_fila) {
+    filas_array = Array.from(filas); 
+    //let tiempo = nueva_fila.querySelector('.tiempo').textContent;
+    let pos = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
+    // Esta pos está corregida con +1
 
-// sacar_pos_avion antigua
+    let posicionOcupada = false;
+    for (let fila of filas) {
+        if (parseInt(fila.id, 10) === pos) { // Hay coincidencia
+            posicionOcupada = true;
+            break;
+        }
+    }
+
+    if (posicionOcupada) {
+        console.log("¡HAY COINCIDENCIA!");
+        // Partir filas, introducir la nueva fila y rejuntar todo en filas
+        introducir_en_filas(pos, nueva_fila);
+        subir_posiciones(pos);
+
+    } else { // No hay coincidencia, añadir al final
+        console.log("¡AL FONDO!");
+        ranking.appendChild(nueva_fila);  // Usar appendChild para elementos DOM
+    }
+}
+function introducir_en_filas(pos, nueva_fila) {
+    // Convierte filas (HTMLCollection) a un array temporal
+    let filas_array = Array.from(filas);
+
+    // Divide el array en dos partes: antes y después de la posición
+    let filas_1 = filas_array.slice(0, pos - 1);  // Elementos del inicio a pos-1
+    let filas_2 = filas_array.slice(pos - 1);     // El resto
+
+    // Inserta la nueva fila en la posición adecuada
+    filas_1.push(nueva_fila);
+
+    // Combina las dos partes con la nueva fila incluida
+    filas_array = filas_1.concat(filas_2);
+
+
+    // MANTENER FILAS COMO HTML COLLECTION Y NO COMO ARRAY
+    // Crear un fragmento de documento para eficiencia
+    let fragment = document.createDocumentFragment();
+
+    // Añadir la cabecera al fragmento
+    fragment.appendChild(document.getElementById("cabecera"));
+
+    // Añadir todas las filas al fragmento
+    filas_array.forEach(function(fila) {
+        fragment.appendChild(fila);
+    });
+
+    // Limpiar el contenedor y añadir el fragmento
+    while (ranking.firstChild) {
+        ranking.removeChild(ranking.firstChild);
+    }
+    ranking.appendChild(fragment);
+}
+
 //Sacar la nueva posicion  
 function sacar_pos_avion(tiempo){
         // Funcion para extraer partes del tiempo de la fila nueva que vamos a meter
@@ -244,66 +297,4 @@ function sacar_pos_avion(tiempo){
         // CUIADADO, nueva_posicion esta cogiendo indexes de arrays entonces hay que +1
     
         return nueva_posicion
-}
-
-function introducir_en_filas(pos, nueva_fila) {
-    // Convierte filas (HTMLCollection) a un array temporal
-    let filas_array = Array.from(filas);
-
-    // Divide el array en dos partes: antes y después de la posición
-    let filas_1 = filas_array.slice(0, pos - 1);  // Elementos del inicio a pos-1
-    let filas_2 = filas_array.slice(pos - 1);     // El resto
-
-    // Inserta la nueva fila en la posición adecuada
-    filas_1.push(nueva_fila);
-
-    // Combina las dos partes con la nueva fila incluida
-    filas_array = filas_1.concat(filas_2);
-
-
-    // MANTENER FILAS COMO HTML COLLECTION Y NO COMO ARRAY
-    // Crear un fragmento de documento para eficiencia
-    let fragment = document.createDocumentFragment();
-
-    // Añadir la cabecera al fragmento
-    fragment.appendChild(document.getElementById("cabecera"));
-
-    // Añadir todas las filas al fragmento
-    filas_array.forEach(function(fila) {
-        fragment.appendChild(fila);
-    });
-
-    // Limpiar el contenedor y añadir el fragmento
-    while (ranking.firstChild) {
-        ranking.removeChild(ranking.firstChild);
-    }
-    ranking.appendChild(fragment);
-}
-
-
-// Versión con array
-function meter_en_ranking(nueva_fila) {
-    filas_array = Array.from(filas); 
-    //let tiempo = nueva_fila.querySelector('.tiempo').textContent;
-    let pos = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
-    // Esta pos está corregida con +1
-
-    let posicionOcupada = false;
-    for (let fila of filas) {
-        if (parseInt(fila.id, 10) === pos) { // Hay coincidencia
-            posicionOcupada = true;
-            break;
-        }
-    }
-
-    if (posicionOcupada) {
-        console.log("¡HAY COINCIDENCIA!");
-        // Partir filas, introducir la nueva fila y rejuntar todo en filas
-        introducir_en_filas(pos, nueva_fila);
-        subir_posiciones(pos);
-
-    } else { // No hay coincidencia, añadir al final
-        console.log("¡AL FONDO!");
-        ranking.appendChild(nueva_fila);  // Usar appendChild para elementos DOM
-    }
 }
