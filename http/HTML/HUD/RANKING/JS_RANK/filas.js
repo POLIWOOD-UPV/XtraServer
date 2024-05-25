@@ -67,7 +67,7 @@ function creaFila(nom,pos,tiemp,pes){
 }
 
 
-function FilaControlResta(piloto){
+function FilaControlResta(piloto,tiempo){
      // Creamos la fila con sus partes
     let fila_borrar = document.createElement("div")
     fila_borrar.className = "fila_control_borrar"
@@ -96,6 +96,13 @@ function FilaControlResta(piloto){
     };
     botoncin2.textContent = "BORRAR"
     fila_borrar.append(botoncin2)
+
+    // Ponemos el tiempo del piloto
+    let tiempin = document.createElement("div")
+    tiempin.id = "tiempo_c"
+    tiempin.textContent = tiempo
+    fila_borrar.append(tiempin)
+
 
     //Ponemos la fila en BORRAR y SUMAR
     pilotos_control_resta.append(fila_borrar)

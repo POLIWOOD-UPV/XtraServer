@@ -111,13 +111,14 @@ function subir_posiciones(pos) {
 function sumaPiloto(estado) {
     // Agreganis el avion a la lista y lo cogemos
     piloto = crea_Perfil();
-    FilaControlResta(piloto) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
     // Coger el tiempo del avion
     minutos = cogerTiempo("min")
     segundos = cogerTiempo("seg")
     miliseg = cogerTiempo("mil")
     tiempo = minutos + ":" + segundos + ":" + miliseg
+
+    FilaControlResta(piloto,tiempo) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
     // Coger el peso
     peso = document.getElementById("peso_input_id").value + "Kg"
@@ -180,7 +181,7 @@ function cogerTiempo(que) {
 
 // Función para validar si el valor es un número
 function validarNumero(valor) {
-    return /^\d+$/.test(valor);
+    return /^\d+$/.test(valor); // No se como va pero va :)
 }
 
 // Versión con array
