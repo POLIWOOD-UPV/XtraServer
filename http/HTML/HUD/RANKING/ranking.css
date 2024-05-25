@@ -20,7 +20,7 @@ aside {
 #contenedor {
     background-color: rgba(52, 52, 52, 0.699);
     border-top-left-radius: 10px;
-    width: 350px;
+    width: 400px;
     margin: 20px 0px 0px 5px;
     display: flex;
     flex-direction: column;
@@ -55,7 +55,7 @@ aside {
     font-size: 20px;
 }
 .resto {
-    flex:5;
+    flex:6;
     display: flex;
     flex-direction: row;
 }
@@ -64,6 +64,7 @@ aside {
     flex:1;
     display: flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
     font-size: 30px;
     font-weight: bold;
@@ -73,6 +74,10 @@ aside {
     /*  https://css-tricks.com/adding-stroke-to-web-text/ */
     -webkit-text-stroke: 1px black;
 }
+.nombre{
+    flex:3;
+}
+
 .peso{
     display: none;
 }
