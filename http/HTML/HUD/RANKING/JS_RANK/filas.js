@@ -118,7 +118,7 @@ function FilaControlResta(piloto,tiempo,pos){
 
     // Ponemos el tiempo del piloto
     let tiempin = document.createElement("div")
-    tiempin.id = "tiempo_c"
+    tiempin.className = "tiempo_c"
     tiempin.textContent = tiempo
     fila_borrar.append(tiempin)
 
@@ -133,6 +133,9 @@ function FilaControlResta(piloto,tiempo,pos){
 // Arregla las posiciones de abajo
 function arreglar_pos_control(pos) {
     if (pos < (filas_control.length)) {
+            // Ordenamos las filas de control
+            ordenar_control()
+
         // Guardamos los números que queremos guardar
         let numeros = [];
         for (let i = pos; i <= filas_control.length; i++) { // Corrección aquí
@@ -157,6 +160,40 @@ function arreglar_pos_control(pos) {
         }    
     }
 }
+
+
+function ordenar_control() {
+    var tiempos = [];
+
+    // Función para convertir el tiempo de formato MM:SS:XXX a segundos
+    function convertirTiempoAMilisegundos(tiempo) {
+        let partes = tiempo.split(':');
+        let minutos = Number(partes[0]) * 60;
+        let segundos = Number(partes[1]);
+        let milisegundos = Number(partes[2]) * 0.001;
+        return minutos + segundos + milisegundos;
+    }
+
+    // Obtener los tiempos de todas las filas
+    Array.from(filas_control).forEach(fila => {
+        let tiempo = fila.querySelector(".tiempo_control").textContent;
+        let tiempoEnSegundos = convertirTiempoAMilisegundos(tiempo);
+        tiempos.push(tiempoEnSegundos);
+    
+       });
+
+    // Ordenar los tiempos
+    let tiemposOrdenados = [...tiempos].sort((a, b) => a - b);
+    console.log(tiemposOrdenados)
+    // Reordenar las filas en base a los tiempos ordenados
+    Array.from(filas_control).forEach((fila, index) => {
+        let tiempoFila = convertirTiempoAMilisegundos(fila.querySelector(".tiempo_control").textContent);
+        let nuevaPosicion = tiemposOrdenados.indexOf(tiempoFila) + 1; // Agregar 1 ya que las posiciones comienzan desde 1
+        fila.style.order = nuevaPosicion; // Establecer el orden CSS 
+    });
+    
+}
+
 
 // Funciones para modificar la informacion del ranking
 
