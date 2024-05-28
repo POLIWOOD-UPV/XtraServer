@@ -117,43 +117,44 @@ function FilaControlResta(piloto,tiempo,pos){
     fila_borrar.append(tiempin)
 
 
-    //Ponemos la fila en BORRAR al final y luego lo reordenamos todo
+    //Ponemos la fila en BORRAR al final y luego lo reordenamos todo y nos da igual ya que no se va a ver
     pilotos_control_resta.append(fila_borrar)
 
     // Lo reordenamos
-    /*
+
     console.log("ANTES")
     console.log(botones_control)
-    */
+
     arreglar_pos_control(pos);
     // Poner pos no lo soluciona directamente, hay que hacer que cuando se actualicen las pos, cambie las de abajo 
-    /*
+
     console.log("DESP")
     console.log(botones_control)
-    */
-    // ESTE APPEND VA A TENER QUE CAMBIAR POR PONER LAS FILAS EN SU ORDEN
     
 }
 
 // Arregla las posiciones de abajo
 function arreglar_pos_control(pos) {
-
-    console.log("Filas_control.length: " + filas_control.length)
-    if (pos < (filas_control.length)) {
+    if (pos < (filas_control.length)) { // Si la posicion se cuela entre y otras 
         // Ordenamos las filas de control
         ordenar_control()
-        // Guardamos los números que queremos guardar
+
+        // Guardamos los números de las IDs que vamos a poner
         let numeros = [];
-        for (let i = pos; i <= filas_control.length; i++) { // Corrección aquí
+        for (let i = filas_control.length - 1; i >= pos; i--){ // Cogemos pos y los que siga sin el = para evitar unknowns
             numeros.push(i); // La posición como tal
         }
-
+        console.log("Numeros "+numeros) // ej pos:1 , nums: 1,2,3
+        console.log(numeros.length == filas_control.length)
         // Sumamos y reasignamos
-        for (let i = 0; i < numeros.length; i++) { // Corrección aquí
+        for (let i = 0; i < numeros.length; i++) { // Empezamos en 0 porque vamos a trabajar con indices en listas
+                        // <= ? 
             let boton_id = numeros[i];
+            // Cogemos el id con el que vamos a trabajar
 
-            console.log("Número que vamos a cambiar " + boton_id);
-
+            console.log("ID's que vamos a buscar "+ boton_id + "c" + " "+ boton_id + "c_AN");
+            console.log("Se van a convertir en: " + (boton_id + 1) + "c" + " " + (boton_id + 1) + "c_AN")
+            // Cogemos los botones antiguos
             let boton_seco = document.getElementById(String(boton_id + "c")); // Cogemos el botón seco antiguo
             let boton_anim = document.getElementById(String(boton_id + "c_AN")); // Cogemos el botón animado antiguo
 
@@ -197,7 +198,7 @@ function ordenar_control() {
         let nuevaPosicion = tiemposOrdenados.indexOf(tiempoFila) + 1; // Agregar 1 ya que las posiciones comienzan desde 1
         
         
-        // ESTA LINEA ES UNA BENDICION LA AMOOOOOOOOOOOOOOOOOOOOOOO
+        // ESTA LINEA ES UNA BENDICION LA AMO
         fila.style.order = nuevaPosicion; // Establecer el orden CSS 
     });
     
