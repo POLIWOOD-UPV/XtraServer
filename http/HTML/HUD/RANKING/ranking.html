@@ -73,7 +73,7 @@
                     <input class = "inputs" id = "segundos_input_id" type="text" placeholder="Segundos" required>
                     <input class = "inputs" id = "milisegundos_input_id" type="text" placeholder="Milisegundos" required>
                     <input class = "inputs" id = "peso_input_id" type="text" placeholder="Peso" required>
-
+                    <input id = "15mcheck" type= "checkbox">
                     <button onclick="sumaPiloto('animado')">SUMAR_An</button>
                     <button onclick="sumaPiloto('seco')"> SUMAR</button>
 
@@ -81,8 +81,8 @@
                 <div id = "pilotos_mas_borrar">
                     <div class = "fila_control_borrar">
                         <div class = "nombre_control">RIC</div>
-                        <button id = "0c_AN" onclick="quitaPiloto('animado',this.id)">BORRAR_An</button>
-                        <button id = "0c" onclick="quitaPiloto('seco',this.id)"> BORRAR</button>
+                        <button class = "boton_control" id = "1c_AN" onclick="quitaPiloto('animado',this.id)">BORRAR_An</button>
+                        <button class = "boton_control"  id = "1c" onclick="quitaPiloto('seco',this.id)"> BORRAR</button>
                         <div class = "tiempo_control">33:33:333</div>
                     </div>
                 </div>

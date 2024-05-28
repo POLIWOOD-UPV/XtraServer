@@ -118,16 +118,27 @@ function sumaPiloto(estado) {
     miliseg = cogerTiempo("mil")
     tiempo = minutos + ":" + segundos + ":" + miliseg
 
-    FilaControlResta(piloto,tiempo) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
-
-    // Coger el peso
-    peso = document.getElementById("peso_input_id").value + "Kg"
-
     // Encontrar en que posicion va a estar
     pos = sacar_pos_avion(tiempo) // Es un numero
 
+    // Falta ordenarlas 
+    FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+    
+    // Coger el peso
+    peso = document.getElementById("peso_input_id").value + "Kg"
+
+
+    let despegue15;
+    // Despegue en 15 metros
+    if (document.getElementById("15mcheck").checked){
+        despuegue15 = true
+        document.getElementById("15mcheck").checked = false; // Le quitamos el check para el siguiente avion
+    }else{
+        despegue15 = false
+    }
+
     //Poner el avion en el ranking
-    let nueva_fila = creaFila(piloto,pos, tiempo,peso);
+    let nueva_fila = creaFila(piloto,pos, tiempo,peso,despegue15);
     // Incrementamos la cantidad de aviones que hay
     ++controla_pilotos
 
@@ -150,7 +161,7 @@ function sumaPiloto(estado) {
 
 // Coge al piloto y lo mete en el sistema
 function crea_Perfil() {
-    // Cogemos el nombre del avion actual a través del drop down
+    // Cogemos el  del avion actual a través del drop down
     let piloto_input = document.getElementById("nombres_equipos_constructor_id")
     piloto = piloto_input.value
     // Metemos el nuevo perfil en la lista
