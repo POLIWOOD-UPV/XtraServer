@@ -87,6 +87,8 @@ aside {
     background-color: rgba(52, 52, 52, 0.699);
     color: white;
     text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
 } 
 
 .fila_control_borrar, .fila_control_sumar{

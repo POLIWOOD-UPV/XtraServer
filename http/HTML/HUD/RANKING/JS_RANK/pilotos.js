@@ -258,20 +258,16 @@ function introducir_en_filas(pos, nueva_fila) {
 //Sacar la nueva posicion  
 function sacar_pos_avion(tiempo){
         // Funcion para extraer partes del tiempo de la fila nueva que vamos a meter
-        function convertirTiempo(tipo) {
-            //let tiempo = nueva_fila.querySelector('.tiempo').textContent;
-            // Partimos en 3 partes ya que esta en MM:SS:XXX
+        function convertirTiempoAMilisegundos(tiempo) {
             let partes = tiempo.split(':');
-            if (tipo === "min") return Number(partes[0])*60;
-            if (tipo === "seg") return Number(partes[1]);
-            if (tipo === "mil") return Number(partes[2])*0.001;
+            let minutos = Number(partes[0]) * 60;
+            let segundos = Number(partes[1]);
+            let milisegundos = Number(partes[2]) * 0.001;
+            return minutos + segundos + milisegundos;
         }
     
         // Convertir el tiempo de nueva_fila a segundos para poder compararlo con el resto
-        let minutos_avion = convertirTiempo("min")
-        let segundos_avion = convertirTiempo("seg")
-        let miliseg_avion = convertirTiempo("mil")
-        let tiempo_avion = minutos_avion + segundos_avion + miliseg_avion; // Tiempo en segundos
+        let tiempo_avion = convertirTiempoAMilisegundos(tiempo) // Tiempo en segundos
     
         let tiempos = [];
         // Convertir HTMLCollection a un array para poder iterar

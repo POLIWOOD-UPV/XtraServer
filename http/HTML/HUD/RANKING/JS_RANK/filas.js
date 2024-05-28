@@ -109,33 +109,39 @@ function FilaControlResta(piloto,tiempo,pos){
     botoncin2.className = "boton_control"
     fila_borrar.append(botoncin2)
 
-    console.log("ANTES")
-    console.log(botones_control)
-    arreglar_pos_control(pos);
-    // Poner pos no lo soluciona directamente, hay que hacer que cuando se actualicen las pos, cambie las de abajo 
-    console.log("DESP")
-    console.log(botones_control)
 
     // Ponemos el tiempo del piloto
     let tiempin = document.createElement("div")
-    tiempin.className = "tiempo_c"
+    tiempin.className = "tiempo_control"
     tiempin.textContent = tiempo
     fila_borrar.append(tiempin)
 
 
-    //Ponemos la fila en BORRAR
+    //Ponemos la fila en BORRAR al final y luego lo reordenamos todo
     pilotos_control_resta.append(fila_borrar)
 
+    // Lo reordenamos
+    /*
+    console.log("ANTES")
+    console.log(botones_control)
+    */
+    arreglar_pos_control(pos);
+    // Poner pos no lo soluciona directamente, hay que hacer que cuando se actualicen las pos, cambie las de abajo 
+    /*
+    console.log("DESP")
+    console.log(botones_control)
+    */
     // ESTE APPEND VA A TENER QUE CAMBIAR POR PONER LAS FILAS EN SU ORDEN
     
 }
 
 // Arregla las posiciones de abajo
 function arreglar_pos_control(pos) {
-    if (pos < (filas_control.length)) {
-            // Ordenamos las filas de control
-            ordenar_control()
 
+    console.log("Filas_control.length: " + filas_control.length)
+    if (pos < (filas_control.length)) {
+        // Ordenamos las filas de control
+        ordenar_control()
         // Guardamos los números que queremos guardar
         let numeros = [];
         for (let i = pos; i <= filas_control.length; i++) { // Corrección aquí
@@ -163,7 +169,7 @@ function arreglar_pos_control(pos) {
 
 
 function ordenar_control() {
-    var tiempos = [];
+    var tiempos_ord_cont = [];
 
     // Función para convertir el tiempo de formato MM:SS:XXX a segundos
     function convertirTiempoAMilisegundos(tiempo) {
@@ -173,22 +179,25 @@ function ordenar_control() {
         let milisegundos = Number(partes[2]) * 0.001;
         return minutos + segundos + milisegundos;
     }
-
+    console.log(filas_control)
     // Obtener los tiempos de todas las filas
     Array.from(filas_control).forEach(fila => {
         let tiempo = fila.querySelector(".tiempo_control").textContent;
         let tiempoEnSegundos = convertirTiempoAMilisegundos(tiempo);
-        tiempos.push(tiempoEnSegundos);
-    
+        tiempos_ord_cont.push(tiempoEnSegundos);
        });
-
     // Ordenar los tiempos
-    let tiemposOrdenados = [...tiempos].sort((a, b) => a - b);
+    let tiemposOrdenados = [...tiempos_ord_cont].sort((a, b) => a - b);
+    // Los tiempos salen bien ordenados
     console.log(tiemposOrdenados)
+
     // Reordenar las filas en base a los tiempos ordenados
     Array.from(filas_control).forEach((fila, index) => {
         let tiempoFila = convertirTiempoAMilisegundos(fila.querySelector(".tiempo_control").textContent);
         let nuevaPosicion = tiemposOrdenados.indexOf(tiempoFila) + 1; // Agregar 1 ya que las posiciones comienzan desde 1
+        
+        
+        // ESTA LINEA ES UNA BENDICION LA AMOOOOOOOOOOOOOOOOOOOOOOO
         fila.style.order = nuevaPosicion; // Establecer el orden CSS 
     });
     
