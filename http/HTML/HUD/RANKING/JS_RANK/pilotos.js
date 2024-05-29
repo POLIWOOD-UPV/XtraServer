@@ -18,15 +18,14 @@ function quitaPiloto(estado, pos) {
         console.log("Posición a borrar: " + pos);
 
         let a_borrar = document.getElementById(String(pos)); // Elemento del piloto a borrar
-        let a_borrar_c_AN = document.getElementById(String(pos + "c_AN")).parentNode; // Elemento de control a borrar
-        let a_borrar_c = document.getElementById(String(pos + "c")).parentNode; // Elemento de control a borrar
+        let a_borrar_c = document.getElementById(String(pos + "c_AN")).parentNode; // Elemento de control a borrar animado
         a_borrar.style.left = "-500px"; // Animación para mover el elemento fuera de la vista
 
         switch (estado) {
             case "animado":
                 setTimeout(() => {
                     a_borrar.remove();
-                    a_borrar_c_AN.remove();
+                    a_borrar_c.remove();
                     controla_pilotos--; // Decrementar el contador de pilotos
                     bajar_posiciones(pos); // Ajustar posiciones de los pilotos restantes
                 }, 150);
@@ -90,27 +89,24 @@ function subir_posiciones(pos) {
     }
 }
 
-
-
 // Poner y sacar aviones (con animacion)
 function sumaPiloto(estado) {
     // Agreganis el avion a la lista y lo cogemos
     piloto = crea_Perfil();
 
     // Coger el tiempo del avion
-    minutos = cogerTiempo("min")
-    segundos = cogerTiempo("seg")
-    miliseg = cogerTiempo("mil")
+    minutos = cogerTiempo_Peso("min")
+    segundos = cogerTiempo_Peso("seg")
+    miliseg = cogerTiempo_Peso("mil")
     tiempo = minutos + ":" + segundos + ":" + miliseg
 
     // Encontrar en que posicion va a estar
     pos = sacar_pos_avion(tiempo) // Es un numero
 
-    // Falta ordenarlas 
     FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
     
     // Coger el peso
-    peso = document.getElementById("peso_input_id").value + "Kg"
+    peso = cogerTiempo_Peso("pes")
 
     //Poner el avion en el ranking
     let nueva_fila = creaFila(piloto,pos, tiempo,peso);
@@ -146,7 +142,7 @@ function crea_Perfil() {
 }
 
 // Coger los tiempos del input
-function cogerTiempo(que) {
+function cogerTiempo_Peso(que) {
     switch (que) {
         case "min":
             // Coger Minutos
@@ -162,6 +158,10 @@ function cogerTiempo(que) {
             // Coger milis
             milis = document.getElementById("milisegundos_input_id").value;
             return validarNumero(milis) ? parseInt(milis) : 0;
+        case "pes":
+            // Coger el peso
+            peso = document.getElementById("peso_input_id").value
+            return validarNumero(milis) ? parseInt(milis) : 0+" Kg";
     }
 }
 
@@ -230,18 +230,16 @@ function introducir_en_filas(pos, nueva_fila) {
     ranking.appendChild(fragment);
 }
 
-
+// funcion para convertir a milisegundos
+function convertirTiempoAMilisegundos(tiempo) {
+    let partes = tiempo.split(':');
+    let minutos = Number(partes[0]) * 60;
+    let segundos = Number(partes[1]);
+    let milisegundos = Number(partes[2]) * 0.001;
+    return minutos + segundos + milisegundos;
+}
 //Sacar la nueva posicion  
 function sacar_pos_avion(tiempo) {
-    // funcion para convertir a milisegundos
-    function convertirTiempoAMilisegundos(tiempo) {
-        let partes = tiempo.split(':');
-        let minutos = Number(partes[0]) * 60;
-        let segundos = Number(partes[1]);
-        let milisegundos = Number(partes[2]) * 0.001;
-        return minutos + segundos + milisegundos;
-    }
-
     let tiempo_avion = convertirTiempoAMilisegundos(tiempo);
 
     let tiempos = [];

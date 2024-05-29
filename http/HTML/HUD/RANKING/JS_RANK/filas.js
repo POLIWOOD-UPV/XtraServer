@@ -131,9 +131,11 @@ function FilaControlResta(piloto,tiempo,pos){
 
 // Arregla las posiciones de abajo
 function arreglar_pos_control(pos) {
+// Ordenamos las filas de control
+    ordenar_control()
     if (pos < (filas_control.length)) { // Si la posicion se cuela entre y otras 
         // Ordenamos las filas de control
-        ordenar_control()
+        //ordenar_control()
 
         // Guardamos los números de las IDs que vamos a poner
         let numeros = [];
@@ -163,23 +165,12 @@ function arreglar_pos_control(pos) {
             };
 
         }    
-    }else{
-        ordenar_control()
     }
 }
 
 
 function ordenar_control() {
     var tiempos_ord_cont = [];
-
-    // Función para convertir el tiempo de formato MM:SS:XXX a segundos
-    function convertirTiempoAMilisegundos(tiempo) {
-        let partes = tiempo.split(':');
-        let minutos = Number(partes[0]) * 60;
-        let segundos = Number(partes[1]);
-        let milisegundos = Number(partes[2]) * 0.001;
-        return minutos + segundos + milisegundos;
-    }
     // Obtener los tiempos de todas las filas
     Array.from(filas_control).forEach(fila => {
         let tiempo = fila.querySelector(".tiempo_control").textContent;
