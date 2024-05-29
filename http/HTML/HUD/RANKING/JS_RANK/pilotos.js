@@ -36,7 +36,7 @@ function quitaPiloto(estado, pos) {
 
         let a_borrar = document.getElementById(String(pos)); // Elemento del piloto a borrar
         let a_borrar_c_AN = document.getElementById(String(pos + "c_AN")).parentNode; // Elemento de control a borrar
-        let a_borrar =document.getElementById(String(pos + "c")).parentNode; // Elemento de control a borrar
+        let a_borrar_c = document.getElementById(String(pos + "c")).parentNode; // Elemento de control a borrar
         a_borrar.style.left = "-500px"; // Animación para mover el elemento fuera de la vista
 
         switch (estado) {
