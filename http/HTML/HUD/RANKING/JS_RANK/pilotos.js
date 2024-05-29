@@ -29,31 +29,33 @@ function vaciarPilotos(){
     }
 }
 // Borra los pilotos del ranking y control
-function quitaPiloto(estado,pos) {
-    console.log("Posicion a borrar " + pos)
+function quitaPiloto(estado, pos) {
     if (filas.length > 0) {
-        //Coger la posición
-        pos = Number(pos[0])
-        filas[pos-1].style.left = "-500px"
-        filas_control[pos-1].remove() // Esto es para quitar la fila de control
-        
-        switch (estado){
+        pos = Number(pos[0]); // Obtener la posición de la ID del botón
+        console.log("Posición a borrar: " + pos);
+
+        let a_borrar = document.getElementById(String(pos)); // Elemento del piloto a borrar
+        let a_borrar_c_AN = document.getElementById(String(pos + "c_AN")).parentNode; // Elemento de control a borrar
+        let a_borrar =document.getElementById(String(pos + "c")).parentNode; // Elemento de control a borrar
+        a_borrar.style.left = "-500px"; // Animación para mover el elemento fuera de la vista
+
+        switch (estado) {
             case "animado":
                 setTimeout(() => {
-                    let a_borrar = document.getElementById(String(pos))
-                    a_borrar.remove()
-                    controla_pilotos--;
-                    bajar_posiciones(pos) // Bajamos las posiciones del ranking visible
+                    a_borrar.remove();
+                    a_borrar_c_AN.remove();
+                    controla_pilotos--; // Decrementar el contador de pilotos
+                    bajar_posiciones(pos); // Ajustar posiciones de los pilotos restantes
                 }, 150);
                 break;
             case "seco":
-                let a_borrar = document.getElementById(String(pos))
-                a_borrar.remove()               
-                controla_pilotos--;
-                bajar_posiciones(pos) // Bajamos las posiciones del ranking visible
+                a_borrar.remove();
+                a_borrar_c.remove();
+                controla_pilotos--; // Decrementar el contador de pilotos
+                bajar_posiciones(pos); // Ajustar posiciones de los pilotos restantes
                 break;
-            }
-        ordenar_control()
+        }
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
     }
 }
 
