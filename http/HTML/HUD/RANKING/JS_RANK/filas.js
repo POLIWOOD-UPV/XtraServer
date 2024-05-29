@@ -48,8 +48,18 @@ function creaFila(nom,pos,tiemp,pes){
     nombre.textContent = nom
 
     // Informativos
-    let tiempo = crearTiempo(tiemp)
-    let peso = crearPeso(pes)
+
+    // Tiempo
+    let tiempo = document.createElement("div")
+    tiempo.className = "tiempo"
+    tiempo.textContent = tiemp
+    
+    // Peso
+
+    let peso = document.createElement("div")
+    peso.className = "peso"
+    peso.textContent = pes;
+
     if (!tiempo_visible){
         tiempo.style.display = "none"
     }
@@ -64,8 +74,6 @@ function creaFila(nom,pos,tiemp,pes){
     fila.id = pos
     fila.append(numero,resto)
 
-    
-    
     // Ponemos la fila en la izquierda para que se mueva mas tarde
     fila.style.left = "-500px"
     return fila

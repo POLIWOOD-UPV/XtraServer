@@ -2,23 +2,6 @@
 // Funciones de poner y quitar pilotos             //
 ////////////////////////////////////////////////////
 
-// Funciones para crear los informativos del ranking
-// Tiempo
-function crearTiempo(tiemp){
-    let tiempo = document.createElement("div")
-    tiempo.className = "tiempo"
-    tiempo.textContent = tiemp
-    return tiempo
-}
-
-// Peso
-function crearPeso(pes){
-    let peso = document.createElement("div")
-    peso.className = "peso"
-    peso.textContent = pes;
-    return peso
-
-}
 
 // Vaciar todos los aviones instantaneamente
 function vaciarPilotos(){
