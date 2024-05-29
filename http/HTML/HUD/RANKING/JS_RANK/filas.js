@@ -30,7 +30,7 @@ var pesos = document.getElementsByClassName("peso")
 
 
 // Crea la fila donde se meten los datos
-function creaFila(nom,pos,tiemp,pes,despegue15){
+function creaFila(nom,pos,tiemp,pes){
     // Creamos la fila con sus partes
     let fila = document.createElement("div")
     fila.className = "fila"
@@ -47,10 +47,6 @@ function creaFila(nom,pos,tiemp,pes,despegue15){
     nombre.className = "nombre"
     nombre.textContent = nom
 
-    // Le hacemos la gradiente de 15M si hace falta
-    if(despegue15){
-        nombre.textContent.style.color = rgb(89, 0, 36);
-    }
     // Informativos
     let tiempo = crearTiempo(tiemp)
     let peso = crearPeso(pes)
@@ -120,17 +116,8 @@ function FilaControlResta(piloto,tiempo,pos){
     //Ponemos la fila en BORRAR al final y luego lo reordenamos todo y nos da igual ya que no se va a ver
     pilotos_control_resta.append(fila_borrar)
 
-    // Lo reordenamos
-
-    console.log("ANTES")
-    console.log(botones_control)
-
-    arreglar_pos_control(pos);
-    // Poner pos no lo soluciona directamente, hay que hacer que cuando se actualicen las pos, cambie las de abajo 
-
-    console.log("DESP")
-    console.log(botones_control)
-    
+    // Lo reordenamo
+    arreglar_pos_control(pos)
 }
 
 // Arregla las posiciones de abajo
@@ -141,29 +128,31 @@ function arreglar_pos_control(pos) {
 
         // Guardamos los números de las IDs que vamos a poner
         let numeros = [];
-        for (let i = filas_control.length - 1; i >= pos; i--){ // Cogemos pos y los que siga sin el = para evitar unknowns
+        for (let i = filas_control.length - 1; i >= pos; i--){ // Cogemos al revés para que no haya conflictos de IDs
             numeros.push(i); // La posición como tal
         }
-        console.log("Numeros "+numeros) // ej pos:1 , nums: 1,2,3
-        console.log(numeros.length == filas_control.length)
         // Sumamos y reasignamos
         for (let i = 0; i < numeros.length; i++) { // Empezamos en 0 porque vamos a trabajar con indices en listas
-                        // <= ? 
-            let boton_id = numeros[i];
             // Cogemos el id con el que vamos a trabajar
-
-            console.log("ID's que vamos a buscar "+ boton_id + "c" + " "+ boton_id + "c_AN");
-            console.log("Se van a convertir en: " + (boton_id + 1) + "c" + " " + (boton_id + 1) + "c_AN")
+            let boton_id = numeros[i];
+            
             // Cogemos los botones antiguos
             let boton_seco = document.getElementById(String(boton_id + "c")); // Cogemos el botón seco antiguo
             let boton_anim = document.getElementById(String(boton_id + "c_AN")); // Cogemos el botón animado antiguo
 
-            if (boton_seco && boton_anim) { // Asegurarse de que los botones existan
-                boton_seco.id = String((boton_id + 1) + "c");
-                boton_anim.id = String((boton_id + 1) + "c_AN");
-            } else {
-                console.error("No se encontró el botón con id: " + boton_id + "c o " + boton_id + "c_AN");
-            }
+            // Actualizamos el ID
+            boton_seco.id = String((boton_id + 1) + "c");
+            boton_anim.id = String((boton_id + 1) + "c_AN");
+   
+            // Actualizamos el onclick
+            boton_seco.onclick = () => {
+                quitaPiloto('seco',boton_seco.id); // Le pasamos la ID ya que es lo que lleva en que pos estamos 
+            };
+
+            boton_anim.onclick = () => {
+                quitaPiloto('seco',boton_anim.id); // Le pasamos la ID ya que es lo que lleva en que pos estamos 
+            };
+
         }    
     }
 }
@@ -180,7 +169,6 @@ function ordenar_control() {
         let milisegundos = Number(partes[2]) * 0.001;
         return minutos + segundos + milisegundos;
     }
-    console.log(filas_control)
     // Obtener los tiempos de todas las filas
     Array.from(filas_control).forEach(fila => {
         let tiempo = fila.querySelector(".tiempo_control").textContent;
@@ -190,7 +178,6 @@ function ordenar_control() {
     // Ordenar los tiempos
     let tiemposOrdenados = [...tiempos_ord_cont].sort((a, b) => a - b);
     // Los tiempos salen bien ordenados
-    console.log(tiemposOrdenados)
 
     // Reordenar las filas en base a los tiempos ordenados
     Array.from(filas_control).forEach((fila, index) => {

@@ -30,28 +30,30 @@ function vaciarPilotos(){
 }
 // Borra los pilotos del ranking y control
 function quitaPiloto(estado,pos) {
+    console.log("Posicion a borrar " + pos)
     if (filas.length > 0) {
         //Coger la posición
         pos = Number(pos[0])
-        filas[pos].style.left = "-500px"
-        filas_control[pos].remove() // Esto es para quitar la fila de control
+        filas[pos-1].style.left = "-500px"
+        filas_control[pos-1].remove() // Esto es para quitar la fila de control
         
         switch (estado){
             case "animado":
                 setTimeout(() => {
-                    let a_borrar = document.getElementById(String(pos+1))
+                    let a_borrar = document.getElementById(String(pos))
                     a_borrar.remove()
                     controla_pilotos--;
-                    bajar_posiciones(pos)
+                    bajar_posiciones(pos) // Bajamos las posiciones del ranking visible
                 }, 150);
                 break;
             case "seco":
-                let a_borrar = document.getElementById(String(pos+1))
+                let a_borrar = document.getElementById(String(pos))
                 a_borrar.remove()               
                 controla_pilotos--;
-                bajar_posiciones(pos)
+                bajar_posiciones(pos) // Bajamos las posiciones del ranking visible
                 break;
             }
+        ordenar_control()
     }
 }
 
@@ -127,18 +129,8 @@ function sumaPiloto(estado) {
     // Coger el peso
     peso = document.getElementById("peso_input_id").value + "Kg"
 
-
-    let despegue15;
-    // Despegue en 15 metros
-    if (document.getElementById("15mcheck").checked){
-        despuegue15 = true
-        document.getElementById("15mcheck").checked = false; // Le quitamos el check para el siguiente avion
-    }else{
-        despegue15 = false
-    }
-
     //Poner el avion en el ranking
-    let nueva_fila = creaFila(piloto,pos, tiempo,peso,despegue15);
+    let nueva_fila = creaFila(piloto,pos, tiempo,peso);
     // Incrementamos la cantidad de aviones que hay
     ++controla_pilotos
 
