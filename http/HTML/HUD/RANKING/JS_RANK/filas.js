@@ -118,6 +118,7 @@ function FilaControlResta(piloto,tiempo,pos){
 
     // Lo reordenamo
     arreglar_pos_control(pos)
+    console.log("Metido en: "+pos+" "+tiempo)
 }
 
 // Arregla las posiciones de abajo
@@ -154,6 +155,8 @@ function arreglar_pos_control(pos) {
             };
 
         }    
+    }else{
+        ordenar_control()
     }
 }
 
@@ -186,7 +189,7 @@ function ordenar_control() {
         
         
         // ESTA LINEA ES UNA BENDICION LA AMO
-        fila.style.order = nuevaPosicion; // Establecer el orden CSS 
+        fila.style.order = nuevaPosicion; // Establecer el orden con CSS CSS 
     });
     
 }
