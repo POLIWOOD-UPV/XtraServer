@@ -126,12 +126,13 @@ const broadcastIOserver = (server) => {
 
 exports.broadcastIOserver = broadcastIOserver;
 
-const IOlog = (id, event, data) => {
+const IOlog = (id, event, ...data) => {
     try {
+        data.forEach((val, ind) => {data[ind] = String(val)});
         fs.appendFileSync("./logs/IO_server.csv", [
             id, 
             event,
-            String(data)
+            ... data
         ].join(";") + "\n");
     } catch (error) {
         console.error("IOlog():", error.message);
@@ -142,7 +143,7 @@ const IOlog = (id, event, data) => {
 exports.IOserver = (server, connection, disconnect, events) => {
     // http://.../socket.io/socket.io.js
 
-    fs.writeFileSync("./logs/IO_server.csv", "Socket;Event;Data\n");
+    fs.writeFileSync("./logs/IO_server.csv", "Socket;Event;Data;extra\n");
 
     io = new Server(server);
 

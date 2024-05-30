@@ -1,9 +1,4 @@
-// Abel Vidal Ripoll - Toni Tormo Pla
-
-// Node imports
-const http = require("http");
-const fs = require('fs');
-const ip = require('ip');
+// Abel Vidal Ripoll
 
 // Local modules
 const dir = require("./modules/dir");

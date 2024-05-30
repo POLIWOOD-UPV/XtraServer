@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Estatica</title>
+    <script>
+        var response;
+        var equipos;
+        addEventListener("DOMContentLoaded", async () => {
+            response = (await fetch("/data/equipos.json", {method:"GET"}));
+            equipos = await response.json();
+        });
+    </script>
+</head>
+<body>
+    <h1>Prueba Estatica</h1>
+    <form action="/estat" method="post">
+        <p>Ronda</p>
+        <p>Equipo</p>
+        <hr>
+        <h3>Predicción:</h3>
+        <p>
+            <label for="P_tiempo">Tiempo: </label><input type="time" name="P_tiempo" id="tiempo">
+        </p>
+        <p>
+            <label for="P_peso">Peso: </label><input type="number" name="P_peso" id="peso" readonly>
+        </p>
+        <p>
+            <label for="P_volumen">Volumen: </label><input type="number" name="P_volumen" id="volumen" readonly>
+        </p>
+        <p>
+            <label for="P_billar">Numero de Bolas de Billar: </label><input type="number" name="P_billar" id="billar">
+        </p>
+        <p>
+            <label for="P_ping">Numero de Pelotas de Ping-Pong: </label><input type="number" name="P_ping" id="ping">
+        </p>
+        <hr>
+        <h3>Tiempo de carga:</h3>
+        <p>
+            <input type="time" name="T_carga" id="t_carga">
+        </p>
+        <hr>
+        <h3>Resultante:</h3>
+        <p>
+            <label for="peso">Peso:</label><input type="number" name="peso" id="peso" readonly>
+        </p>
+        <p>
+            <label for="volumen">Volumen:</label><input type="number" name="volumen" id="volumen" readonly>
+        </p>
+        <p>
+            <label for="billar">Numero de Bolas de Billar:</label><input type="number" name="billar" id="billar">
+        </p>
+        <p>
+            <label for="ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="ping" id="ping">
+        </p>
+        <hr>
+        <h3>Piloto Externo:</h3>
+        <p>
+            <input type="checkbox" name="Piloto" id="piloto">
+        </p>
+        <hr>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

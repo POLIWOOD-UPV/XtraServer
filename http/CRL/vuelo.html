@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuelo</title>
+    <script>
+        var response;
+        var equipos;
+        addEventListener("DOMContentLoaded", async () => {
+            response = (await fetch("/data/equipos.json", {method:"GET"}));
+            equipos = response.json();
+        });
+    </script>
+</head>
+<body>
+    <form action="/vuelo" method="post">
+        <input type="url" name="File" id="utl">
+        <input type="file" name="Data" id="archivo">
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

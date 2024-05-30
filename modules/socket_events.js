@@ -8,12 +8,13 @@ const { IOserver } = require("./http_server");
 var socketsList = new Array();
 
 // Log
-const IOlog = (id, event, data) => {
+const IOlog = (id, event, ...data) => {
   try {
+      data.forEach((val, ind) => {data[ind] = String(val)});
       fs.appendFileSync("./logs/IO_server.csv", [
           id, 
           event,
-          String(data)
+          ... data
       ].join(";") + "\n");
   } catch (error) {
       console.error("IOlog():", error.message);
