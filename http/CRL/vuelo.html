@@ -7,16 +7,97 @@
     <script>
         var response;
         var equipos;
+        var rondas;
+        var carga;
+
+        const cargar_json = async () => {
+            response = (await fetch("/data/equipos.json"));
+            equipos = await response.json();
+            response = (await fetch("/data/rondas.json"));
+            rondas = await response.json();
+
+            var select_ronda = document.querySelector("#ronda");
+            var select_equipo = document.querySelector("#equipo");
+
+            rondas.forEach(element => {
+                let option = document.createElement("option");
+                option.innerText = element;
+                option.value = element;
+                select_ronda.appendChild(option);
+            });
+
+            equipos.forEach(element => {
+                let option = document.createElement("option");
+                option.innerText = element.Team;
+                option.value = element.Team;
+                select_equipo.appendChild(option);
+            });
+        }
+
+        const preparar_calculo_bolas = async () => {
+            response = (await fetch("/data/carga.json"));
+            carga = await response.json();
+
+            var input_billar = document.querySelector("#billar");
+            var input_ping = document.querySelector("#ping");
+
+            //TODO 
+        }
+
         addEventListener("DOMContentLoaded", async () => {
-            response = (await fetch("/data/equipos.json", {method:"GET"}));
-            equipos = response.json();
+            cargar_json();
+
+
         });
     </script>
 </head>
 <body>
+    <h1>Prueba Dinamica</h1>
     <form action="/vuelo" method="post">
-        <input type="url" name="File" id="utl">
-        <input type="file" name="Data" id="archivo">
+        <p>
+            <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda"></select>
+        </p>
+        <p>
+            <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo"></select>
+        </p>
+        <hr>
+        <h3>Tiempo de Vuelo:</h3>
+        <p>
+            <input type="time" name="T_vuelo" id="t_vuelo">
+        </p>
+        <hr>
+        <h3>Carga</h3>
+        <p>
+            <label for="Peso">Peso:</label><input type="number" name="Peso" id="peso" readonly>
+        </p>
+        <p>
+            <label for="Volumen">Volumen:</label><input type="number" name="Polumen" id="volumen" readonly>
+        </p>
+        <p>
+            <label for="billar">Numero de Bolas de Billar:</label><input type="number" name="billar" id="billar">
+        </p>
+        <p>
+            <label for="ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="ping" id="ping">
+        </p>
+        <hr>
+        <h3>Despegue:</h3>
+        <p>
+            <label for="_15">Menos de 15m:</label>
+            <input type="checkbox" name="_15" id="_15">
+        </p>
+        <p>
+            <label for="_60">Menos de 60m:</label>
+            <input type="checkbox" name="_60" id="_60">
+        </p>
+        <hr>
+        <h3>Vuelo Nulo:</h3>
+        <p>
+            <input type="checkbox" name="VN" id="vn">
+        </p>
+        <h3>Estrellado:</h3>
+        <p>
+            <input type="checkbox" name="Estrellado" id="estrellado">
+        </p>
         <input type="submit" value="Enviar">
     </form>
 </body>
