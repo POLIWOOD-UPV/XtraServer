@@ -7,17 +7,44 @@
     <script>
         var response;
         var equipos;
+        var rondas;
+        var carga;
         addEventListener("DOMContentLoaded", async () => {
             response = (await fetch("/data/equipos.json", {method:"GET"}));
             equipos = await response.json();
+            response = (await fetch("/data/rondas.json", {method:"GET"}));
+            rondas = await response.json();
+            response = (await fetch("/data/carga.json", {method:"GET"}));
+            carga = await response.json();
+
+            var select_ronda = document.querySelector("#ronda");
+            var select_equipo = document.querySelector("#equipo");
+
+            rondas.forEach(element => {
+                let option = document.createElement("option");
+                option.innerText = element;
+                option.value = element;
+                select_ronda.appendChild(option);
+            });
+
+            equipos.forEach(element => {
+                let option = document.createElement("option");
+                option.innerText = element.Team;
+                option.value = element.Team;
+                select_equipo.appendChild(option);
+            });
         });
     </script>
 </head>
 <body>
     <h1>Prueba Estatica</h1>
     <form action="/estat" method="post">
-        <p>Ronda</p>
-        <p>Equipo</p>
+        <p>
+            <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda"></select>
+        </p>
+        <p>
+            <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo"></select>
+        </p>
         <hr>
         <h3>Predicción:</h3>
         <p>
