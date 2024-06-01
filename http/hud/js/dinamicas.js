@@ -21,7 +21,6 @@ function rankingMov() {
         }
         
         }
-    //updateRankingStatus()
 }
 
 // Mover filas en o fuera de pantalla
@@ -96,22 +95,3 @@ function aparicionDinamica() {
     }
 
 }
-
-// Esta funcion solo la tenemos que llamar cuando se mueve el ranking entero ya que es cuando esta ocurriendo una transicion
-// function updateRankingStatus(){
-//     let status = document.getElementById("status_anim_ranking");
-//     if (!filas_visible){
-//         // Si las filas estan movidas, sera dinamico siempre
-//         status.textContent = "Dinamica";
-//         status.style.color = "red";
-//     }else if (!ranking_visible && filas_visible){
-//         // Si el ranking esta movido pero con las filas en su lugar, es estatico
-//         status.textContent = "Estatica";
-//         status.style.color = "red";
-//     }else{
-//         // Si ambas son visbles, es que estamos en el punto de partida
-//         status.textContent = "-";
-//         status.style.color = "black"
-//     }
-
-// }

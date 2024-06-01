@@ -36,12 +36,12 @@
     <script src="js/filas.js"></script>
     <script src="js/dinamicas.js"></script>
     <script src="js/pilotos.js"></script>
-
-
     <script src="/socket.io/socket.io.js"></script>
     <script>
+    // Iniciamos el socket
     const socket = io();
 
+    // Funcion de test 
     socket.on("message", (msj) => {
         console.log(msj)
     });
@@ -51,7 +51,7 @@
         aparicionDinamica();
     });
 
-    socket.on("desapaDina", () => {
+    socket.on("desDina", () => {
         desaparicionDinamica();
     });
 
