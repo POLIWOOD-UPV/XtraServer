@@ -3,7 +3,7 @@
 ////////////////////////////////////////////////////
 
 // Variables Pilotos
-var pilotos = ["RIC"]
+
 var controla_pilotos = 1
 
 // Coger ranking y filas
@@ -71,122 +71,6 @@ function creaFila(nom,pos,tiemp,pes){
     return fila
 }
 
-
-function FilaControlResta(piloto,tiempo,pos){
-     // Creamos la fila con sus partes
-    let fila_borrar = document.createElement("div")
-    fila_borrar.className = "fila_control_borrar"
-    
-    // Ponemos el nombre
-    let nombre = document.createElement("div")
-    nombre.textContent = piloto
-    fila_borrar.append(nombre)
-
-    // Para borrar
-    //Ponemos el boton de eliminar animado
-    let botoncin = document.createElement("button")
-    botoncin.id = pos+"c_AN" // Le ponemos el id con la posicion en la que esta para luego poder quitarlo al borrar el piloto
-
-    botoncin.onclick = () => {
-        quitaPiloto('animado',botoncin.id) // Le pasamos la ID ya que es lo que lleva en que pos estamos 
-    };
-    botoncin.textContent = "BORRAR_An"
-    botoncin.className = "boton_control"
-    fila_borrar.append(botoncin)
-
-    //Ponemos el boton de eliminar seco
-    let botoncin2 = document.createElement("button")
-    botoncin2.id = pos+"c" // Le ponemos el id con la posicion en la que esta para luego poder quitarlo al borrar el piloto
-
-    botoncin2.onclick = () => {
-        quitaPiloto('seco',botoncin2.id); // Le pasamos la ID ya que es lo que lleva en que pos estamos 
-    };
-    botoncin2.textContent = "BORRAR"
-    botoncin2.className = "boton_control"
-    fila_borrar.append(botoncin2)
-
-
-    // Ponemos el tiempo del piloto
-    let tiempin = document.createElement("div")
-    tiempin.className = "tiempo_control"
-    tiempin.textContent = tiempo
-    fila_borrar.append(tiempin)
-
-
-    //Ponemos la fila en BORRAR al final y luego lo reordenamos todo y nos da igual ya que no se va a ver
-    pilotos_control_resta.append(fila_borrar)
-
-    // Lo reordenamo
-    arreglar_pos_control(pos)
-    console.log("Metido en: "+pos+" "+tiempo)
-}
-
-// Arregla las posiciones de abajo
-function arreglar_pos_control(pos) {
-// Ordenamos las filas de control
-    ordenar_control()
-    if (pos < (filas_control.length)) { // Si la posicion se cuela entre y otras 
-        // Ordenamos las filas de control
-        //ordenar_control()
-
-        // Guardamos los números de las IDs que vamos a poner
-        let numeros = [];
-        for (let i = filas_control.length - 1; i >= pos; i--){ // Cogemos al revés para que no haya conflictos de IDs
-            numeros.push(i); // La posición como tal
-        }
-        // Sumamos y reasignamos
-        for (let i = 0; i < numeros.length; i++) { // Empezamos en 0 porque vamos a trabajar con indices en listas
-            // Cogemos el id con el que vamos a trabajar
-            let boton_id = numeros[i];
-            
-            // Cogemos los botones antiguos
-            let boton_seco = document.getElementById(String(boton_id + "c")); // Cogemos el botón seco antiguo
-            let boton_anim = document.getElementById(String(boton_id + "c_AN")); // Cogemos el botón animado antiguo
-
-            // Actualizamos el ID
-            boton_seco.id = String((boton_id + 1) + "c");
-            boton_anim.id = String((boton_id + 1) + "c_AN");
-   
-            // Actualizamos el onclick
-            boton_seco.onclick = () => {
-                quitaPiloto('seco',boton_seco.id); // Le pasamos la ID ya que es lo que lleva en que pos estamos 
-            };
-
-            boton_anim.onclick = () => {
-                quitaPiloto('seco',boton_anim.id); // Le pasamos la ID ya que es lo que lleva en que pos estamos 
-            };
-
-        }    
-    }
-}
-
-
-function ordenar_control() {
-    var tiempos_ord_cont = [];
-    // Obtener los tiempos de todas las filas
-    Array.from(filas_control).forEach(fila => {
-        let tiempo = fila.querySelector(".tiempo_control").textContent;
-        let tiempoEnSegundos = convertirTiempoAMilisegundos(tiempo);
-        tiempos_ord_cont.push(tiempoEnSegundos);
-       });
-    // Ordenar los tiempos
-    let tiemposOrdenados = [...tiempos_ord_cont].sort((a, b) => a - b);
-    // Los tiempos salen bien ordenados
-
-    // Reordenar las filas en base a los tiempos ordenados
-    Array.from(filas_control).forEach((fila, index) => {
-        let tiempoFila = convertirTiempoAMilisegundos(fila.querySelector(".tiempo_control").textContent);
-        let nuevaPosicion = tiemposOrdenados.indexOf(tiempoFila) + 1; // Agregar 1 ya que las posiciones comienzan desde 1
-        
-        
-        // ESTA LINEA ES UNA BENDICION LA AMO
-        fila.style.order = nuevaPosicion; // Establecer el orden con CSS CSS 
-    });
-    
-}
-
-
-// Funciones para modificar la informacion del ranking
 
 // Función para mostrar el tiempo en la fila
 function mostrarTiempo(){

@@ -90,24 +90,7 @@ function subir_posiciones(pos) {
 }
 
 // Poner y sacar aviones (con animacion)
-function sumaPiloto(estado) {
-    // Agreganis el avion a la lista y lo cogemos
-    piloto = crea_Perfil();
-
-    // Coger el tiempo del avion
-    minutos = cogerTiempo_Peso("min")
-    segundos = cogerTiempo_Peso("seg")
-    miliseg = cogerTiempo_Peso("mil")
-    tiempo = minutos + ":" + segundos + ":" + miliseg
-
-    // Encontrar en que posicion va a estar
-    pos = sacar_pos_avion(tiempo) // Es un numero
-
-    FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
-    
-    // Coger el peso
-    peso = cogerTiempo_Peso("pes")
-
+function sumaPiloto(piloto,pos,tiempo,peso,estado) {
     //Poner el avion en el ranking
     let nueva_fila = creaFila(piloto,pos, tiempo,peso);
     // Incrementamos la cantidad de aviones que hay
@@ -128,47 +111,10 @@ function sumaPiloto(estado) {
             nueva_fila.style.left = "0px"
             break;
         }
-    }
-
-// Coge al piloto y lo mete en el sistema
-function crea_Perfil() {
-    // Cogemos el  del avion actual a través del drop down
-    let piloto_input = document.getElementById("nombres_equipos_constructor_id")
-    piloto = piloto_input.value
-    // Metemos el nuevo perfil en la lista
-    pilotos.push(piloto)
-    return piloto
-
 }
 
-// Coger los tiempos del input
-function cogerTiempo_Peso(que) {
-    switch (que) {
-        case "min":
-            // Coger Minutos
-            minutos = document.getElementById("minutos_input_id").value;
-            return validarNumero(minutos) ? parseInt(minutos) : 0;
 
-        case "seg":
-            // Coger segundos
-            segundos = document.getElementById("segundos_input_id").value;
-            return validarNumero(segundos) ? parseInt(segundos) : 0;
 
-        case "mil":
-            // Coger milis
-            milis = document.getElementById("milisegundos_input_id").value;
-            return validarNumero(milis) ? parseInt(milis) : 0;
-        case "pes":
-            // Coger el peso
-            peso = document.getElementById("peso_input_id").value
-            return validarNumero(milis) ? parseInt(milis) : 0+" Kg";
-    }
-}
-
-// Función para validar si el valor es un número
-function validarNumero(valor) {
-    return /^\d+$/.test(valor); // No se como va pero va :)
-}
 
 // Versión con array
 function meter_en_ranking(nueva_fila) {
@@ -230,34 +176,3 @@ function introducir_en_filas(pos, nueva_fila) {
     ranking.appendChild(fragment);
 }
 
-// funcion para convertir a milisegundos
-function convertirTiempoAMilisegundos(tiempo) {
-    let partes = tiempo.split(':');
-    let minutos = Number(partes[0]) * 60;
-    let segundos = Number(partes[1]);
-    let milisegundos = Number(partes[2]) * 0.001;
-    return minutos + segundos + milisegundos;
-}
-//Sacar la nueva posicion  
-function sacar_pos_avion(tiempo) {
-    let tiempo_avion = convertirTiempoAMilisegundos(tiempo);
-
-    let tiempos = [];
-    filas_array = Array.from(filas);
-
-    // Cogemos todos los tiempos de los aviones
-    filas_array.forEach(fila => {
-        let tiempo = fila.querySelector('.tiempo').textContent;
-        let tiempoEnSegundos = convertirTiempoAMilisegundos(tiempo);
-        tiempos.push(tiempoEnSegundos);
-    });
-
-    // Metemos al final el nuestro y creamos una copia ordenada
-    tiempos.push(tiempo_avion);
-    let tiempos2 = [...tiempos].sort((a, b) => a - b);
-
-    // Buscamos el indice y +1 ya que es un array y las pos empiezan en 1 no 0
-    let nueva_posicion = tiempos2.lastIndexOf(tiempo_avion) + 1;
-
-    return nueva_posicion;
-}
