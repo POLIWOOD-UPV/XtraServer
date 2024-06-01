@@ -7,7 +7,7 @@
 function vaciarPilotos(){
     for (var j = filas.length - 1; j >= 0; j--) {
         filas[j].remove();
-        filas_control[j].remove(); // Quitar todas las filas de control
+       
         controla_pilotos--; // Bajar la cantidad de pilotos
     }
 }

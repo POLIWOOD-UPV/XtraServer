@@ -10,14 +10,6 @@ var controla_pilotos = 1
 var ranking = document.getElementById("contenedor")
 var filas = document.getElementsByClassName("fila")
 
-var pilotos_control_resta = document.getElementById("pilotos_mas_borrar") // Bloque de las filas control borrar
-var filas_control = document.getElementsByClassName("fila_control_borrar") // Filas del bloque control borrar
-
-var botones_control = document.getElementsByClassName("boton_control")
-// Cogemos los botones
-var boton_tiempo = document.getElementById("mostrar_tiempo_id");
-var boton_peso = document.getElementById("mostrar_peso_id");
-var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
 
 // Tiempo ( empieza activa)
 var tiempo_visible = true;

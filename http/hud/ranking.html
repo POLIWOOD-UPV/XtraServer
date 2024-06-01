@@ -7,7 +7,6 @@
 </head>
 <body>
     <link href = "css/ranking.css" rel="stylesheet">
-    
     <main>
         <!--Ranking-->
         <div id = "contenedor">
@@ -32,76 +31,33 @@
             </div>
         </div>
     </main>
-    <aside>
-        <!--Controles, en un futuro irían en la página de controles-->
-        <div id = "divBotones">
-            <div id = "divBotonesRanking">
-                <h2>Control Ranking</h2>
-                <p>La siguiente transicion será: <span id = "status_anim_ranking">-</span></p>
-                <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
-                <button onclick = "aparicionDinamica()">Aparición dinámica</button>
-                <button onclick = "desaparicionDinamica()">Desaparicion Dinamica</button>
-
-                <h3>Informativos</h3>
-                <button onclick= "mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
-                <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
-                <button onclick = "cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
-            </div>
-        </div>    
-            <div id = "divIntegraPilotos">
-                <h2>Integracion de pilotos</h2>
-                    
-
-                <h3>Sumar</h3>
-                    <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
-                        <option value="RUHE">RUHE</option>
-                        <option value="Aerotech">Aerotech</option>
-                        <option value="G3">G3</option>
-                        <option value="Matsia">Matsia</option>
-                        <option value="LuftSieger">LuftSieger</option>
-                        <option value="ECLift">ECLift</option>
-                        <option value="SAETA_T2">SAETA_T2</option>
-                        <option value="DIANA">DIANA</option>
-                        <option value="Trencalòs">Trencalòs</option>
-                        <option value="North Pole">North Pole</option>
-                        <option value="SAETA_T1">SAETA_T1</option>
-                        <option value="UCA&Air">UCA&Air</option>
-                        <option value="Club Xaloc">Club Xaloc</option>
-                        <option value="Sky Eagle">Sky Eagle</option>
-                    </select>
-                    <input class = "inputs" id = "minutos_input_id" type="text" placeholder="Minutos" required>
-                    <input class = "inputs" id = "segundos_input_id" type="text" placeholder="Segundos" required>
-                    <input class = "inputs" id = "milisegundos_input_id" type="text" placeholder="Milisegundos" required>
-                    <input class = "inputs" id = "peso_input_id" type="text" placeholder="Peso" required>
-                    <button onclick="sumaPiloto('animado')">SUMAR_An</button>
-                    <button onclick="sumaPiloto('seco')"> SUMAR</button>
-
-                <h3>Borrar</h3>
-                <div id = "pilotos_mas_borrar">
-                    <div class = "fila_control_borrar">
-                        <div class = "nombre_control">RIC</div>
-                        <button class = "boton_control" id = "1c_AN" onclick="quitaPiloto('animado',this.id)">BORRAR_An</button>
-                        <button class = "boton_control"  id = "1c" onclick="quitaPiloto('seco',this.id)"> BORRAR</button>
-                        <div class = "tiempo_control">33:33:333</div>
-                    </div>
-                </div>
-                <button onclick="vaciarPilotos()"> VACIAR PILOTOS</button>
-            </div>     
-        <details>
-            <summary>
-                TODO:
-            </summary>
-            <ul>
-                <li>Hacer animaciones para el peso / tiempo</li>
-                <li>Calcular la diferencia de tiempos entre filas</li>
-                <li>Optimizar botones de arriba de aparicon / desaparicion</li>
-            </ul>
-        </details>
-    </aside>
 
     </div>
     <script src="js/filas.js"></script>
     <script src="js/dinamicas.js"></script>
     <script src="js/pilotos.js"></script>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    const socket = io();
+
+    socket.on("message", (msj) => {
+        console.log(msj)
+    });
+    // Dinamicas
+    socket.on("desapaDina", () => {
+        desaparicionDinamica();
+    });
+
+    socket.on("apaDina", () => {
+        aparicionDinamica();
+    });
+
+    socket.on("vacPilo", () => {
+        vaciarPilotos();
+    });
+    </script>
+
 </body>
 </html>
