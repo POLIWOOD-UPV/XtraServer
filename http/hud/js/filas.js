@@ -194,12 +194,10 @@ function mostrarTiempo(){
     if (tiempo_visible){
         // Ocultar tiempos
         estado = "none";
-        boton_tiempo.textContent = "Mostrar Tiempos"
         tiempo_visible = false;
     }else{
         // Mostrar tiempos
         estado = "flex";
-        boton_tiempo.textContent = "Ocultar Tiempos"
         tiempo_visible = true;
     }
     for (var i = 0; i < tiempos.length;i++){
@@ -214,12 +212,10 @@ function mostrarPeso(){
     if (peso_visible){
         // Ocultar pesos
         estado = "none";
-        boton_peso.textContent = "Mostrar Pesos"
         peso_visible = false;
     }else{
         // Mostrar pesos
         estado = "flex";
-        boton_peso.textContent = "Ocultar Pesos"
         peso_visible = true;
     }
     for (var i = 0; i < pesos.length;i++){

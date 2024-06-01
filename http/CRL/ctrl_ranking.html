@@ -7,14 +7,14 @@
             <div id = "divBotonesRanking">
                 <h2>Control Ranking</h2>
                 <p>La anterior transicion fue: <span id = "status_anim_ranking">-</span></p>
-                <button onclick = "rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
-                <button onclick = "aparicionDinamica()">Aparicion dinamica</button>
-                <button onclick = "desaparicionDinamica()">Desaparicion Dinamica</button>
+                <button onclick = "s_rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
+                <button onclick = "s_aparicionDinamica()">Aparicion dinamica</button>
+                <button onclick = "s_desaparicionDinamica()">Desaparicion Dinamica</button>
 
                 <h3>Informativos</h3>
-                <button onclick= "mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
-                <button onclick= "mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
-                <button onclick = "cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
+                <button onclick= "s_mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
+                <button onclick= "s_mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
+                <button onclick = "s_cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
             </div>
         </div>    
             <div id = "divIntegraPilotos">
@@ -79,11 +79,56 @@
         var boton_peso = document.getElementById("mostrar_peso_id");
         var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
 
+        let peso_visible = false;
+        let tiempo_visible = true;
+
+
+        var ranking_visible = true;
+        var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_rank_id")
+        var filas_visible = true;
+
         const socket = io();
 
         function hola(){
             socket.emit("all","message","Hola!");
         }
+        // Filas
+        function s_mostrarTiempo(){
+            if (tiempo_visible){
+                // Ocultar tiempos
+                boton_tiempo.textContent = "Mostrar Tiempos"
+                tiempo_visible = false;
+            }else{
+                // Mostrar tiempos
+                boton_tiempo.textContent = "Ocultar Tiempos"
+                tiempo_visible = true;
+            }
+            socket.emit("all","mosTmpo");
+        }
+
+        function s_mostrarPeso(){
+            if (peso_visible){
+                // Ocultar pesos
+                boton_peso.textContent = "Mostrar Pesos"
+                peso_visible = false;
+            }else{
+                // Mostrar pesos
+                boton_peso.textContent = "Ocultar Pesos"
+                peso_visible = true;
+            }
+            socket.emit("all","mosPeso");
+        }
+
+        function s_cambiazoPesoTiempos(){
+            if ((!tiempo_visible && !peso_visible) ||(tiempo_visible && peso_visible) ) {
+                return
+            }else{
+                s_mostrarTiempo();
+                s_mostrarPeso();
+            }
+        }
+
+        // Pilotos
         function s_vaciarPilotos(){
             for (let j = filas_control.length-1; j>=0; j--){
                 console.log(filas_control[j])
@@ -91,7 +136,24 @@
             }
             socket.emit("all","vacPilo");
         }
-
+        // Dinamicas
+        function s_rankingMov(){
+            if (ranking_visible) { // Es visible
+                // Ranking se pasa a oculto
+                aparecer_desaparecer_rank.textContent = "Aparecer Ranking";
+                ranking_visible = false;
+            } else { // No es visible
+                aparecer_desaparecer_rank.textContent = "Desaparecer Ranking";
+                ranking_visible = true;
+                }
+            socket.emit("all","rankMov");
+        }
+        function s_aparicionDinamica(){
+            socket.emit("all","apaDina")
+        }
+        function s_desaparicionDinamica(){
+            socket.emit("all","desapaDina")
+        }
     </script>
 
 </html>

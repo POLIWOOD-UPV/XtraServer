@@ -46,16 +46,32 @@
         console.log(msj)
     });
     // Dinamicas
-    socket.on("desapaDina", () => {
-        desaparicionDinamica();
-    });
 
     socket.on("apaDina", () => {
         aparicionDinamica();
     });
 
+    socket.on("desapaDina", () => {
+        desaparicionDinamica();
+    });
+
+    socket.on("rankMov", () => {
+        rankingMov();
+    });
+
+
+    //Pilotos
     socket.on("vacPilo", () => {
         vaciarPilotos();
+    });
+
+    // Filas
+    socket.on("mosTmpo",()=>{
+        mostrarTiempo();
+    });
+
+    socket.on("mosPeso",()=>{
+        mostrarPeso();
     });
     </script>
 

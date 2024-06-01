@@ -4,7 +4,6 @@
 
 // Aparecer y desaparecer ranking
 var ranking_visible = true;
-var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_rank_id")
 var filas_visible = true;
 
 
@@ -12,19 +11,17 @@ var filas_visible = true;
 function rankingMov() {
     if (ranking_visible) { // Es visible
         // Ranking se pasa a oculto
-        aparecer_desaparecer_rank.textContent = "Aparecer Ranking";
         ranking_visible = false;
         ranking.style.left = "-500px"//"300px";
     } else { // No es visible
         ranking.style.left = "0px";
-        aparecer_desaparecer_rank.textContent = "Desaparecer Ranking";
         ranking_visible = true;
         if (!filas_visible){
             filasMov()
         }
         
         }
-    updateRankingStatus()
+    //updateRankingStatus()
 }
 
 // Mover filas en o fuera de pantalla
@@ -101,20 +98,20 @@ function aparicionDinamica() {
 }
 
 // Esta funcion solo la tenemos que llamar cuando se mueve el ranking entero ya que es cuando esta ocurriendo una transicion
-function updateRankingStatus(){
-    let status = document.getElementById("status_anim_ranking");
-    if (!filas_visible){
-        // Si las filas estan movidas, sera dinamico siempre
-        status.textContent = "Dinamica";
-        status.style.color = "red";
-    }else if (!ranking_visible && filas_visible){
-        // Si el ranking esta movido pero con las filas en su lugar, es estatico
-        status.textContent = "Estatica";
-        status.style.color = "red";
-    }else{
-        // Si ambas son visbles, es que estamos en el punto de partida
-        status.textContent = "-";
-        status.style.color = "black"
-    }
+// function updateRankingStatus(){
+//     let status = document.getElementById("status_anim_ranking");
+//     if (!filas_visible){
+//         // Si las filas estan movidas, sera dinamico siempre
+//         status.textContent = "Dinamica";
+//         status.style.color = "red";
+//     }else if (!ranking_visible && filas_visible){
+//         // Si el ranking esta movido pero con las filas en su lugar, es estatico
+//         status.textContent = "Estatica";
+//         status.style.color = "red";
+//     }else{
+//         // Si ambas son visbles, es que estamos en el punto de partida
+//         status.textContent = "-";
+//         status.style.color = "black"
+//     }
 
-}
+// }
