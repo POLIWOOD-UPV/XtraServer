@@ -74,6 +74,16 @@ function s_ocultarLogos(){
         logos_visibles = true
     }
 }
+function s_ocultarDespegue(){
+    socket.emit("all","desVis",despes_visibles)
+    if (despes_visibles){ // Son visibles y vamos a esconderlos
+        bot_despegues.textContent = "Mostrar despegues"
+        despes_visibles = false
+    }else{
+        bot_despegues.textContent = "Ocultar despegues"
+        despes_visibles = true
+    }
+}
 // Pilotos
 function s_vaciarPilotos(){
     for (let j = filas_control.length-1; j>=0; j--){
@@ -98,7 +108,10 @@ function s_sumaPiloto(estado){
     pos = sacar_pos_avion(tiempo) // Es un numero
     FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
-    info = [piloto, pos, tiempo, peso, estado]
+    // Coger el despegue
+    let despegue_input = document.querySelector("#tipos_despegue_id").value
+
+    info = [piloto, pos, tiempo, peso, estado,despegue_input]
     socket.emit("all", "sumPil",info )
     ordenar_control(); // Ordenar la lista de control después de la eliminación
 

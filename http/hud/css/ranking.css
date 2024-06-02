@@ -40,7 +40,7 @@ aside {
 }
 
 .numero {
-    flex: 1;
+    width: 30px;
     background-color: white;
     border: 2px solid black;
 
@@ -50,10 +50,11 @@ aside {
     align-items: center;
     justify-content: center;
 
-    font-size: 20px;
+    font-size: 23px;
 }
 .logo{
     flex:1;
+    margin-left: 15px;
 }
 .resto {
     flex:8;
@@ -84,17 +85,10 @@ aside {
     -webkit-text-stroke: 1px black;
 }
 
-.despegue {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex:1;
-}
-
 .dot {
     height: 15px;
     width: 15px;
-    background-color: #0dff00;
+    background-color: #00c8ff; /* Color diferente de los que puede coger por si falla verlo */
     border-radius: 50%;
 }
 

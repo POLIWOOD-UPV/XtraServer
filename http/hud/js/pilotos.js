@@ -68,9 +68,9 @@ function subir_posiciones(pos) {
 }
 
 // Poner y sacar aviones (con animacion)
-function sumaPiloto(piloto,pos,tiempo,peso,estado) {
+function sumaPiloto(piloto,pos,tiempo,peso,estado,despegue) {
     //Poner el avion en el ranking
-    let nueva_fila = creaFila(piloto,pos, tiempo,peso);
+    let nueva_fila = creaFila(piloto,pos, tiempo,peso,despegue);
     // Incrementamos la cantidad de aviones que hay
     ++controla_pilotos
 

@@ -27,7 +27,7 @@ socket.on("vacPilo", () => {
 
 socket.on("sumPil", (info) => {
     // info = [piloto, pos, tiempo, peso, estado]
-    sumaPiloto(info[0], info[1], info[2], info[3], info[4]);
+    sumaPiloto(info[0], info[1], info[2], info[3], info[4],info[5]);
 });
 
 socket.on("quiPil",(info)=>{
@@ -47,4 +47,9 @@ socket.on("mosPeso",()=>{
 socket.on("logVis",(logos_vis)=>{
     logos_visibles = logos_vis
     ocultarLogos();
+});
+
+socket.on("desVis",(desp_vis)=>{
+    despegues_visibles = desp_vis
+    ocultarDespegue();
 });

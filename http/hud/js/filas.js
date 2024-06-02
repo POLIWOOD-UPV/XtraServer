@@ -20,11 +20,12 @@ let peso_visible = false;
 let pesos = document.getElementsByClassName("peso")
 
 // Logos (empieza activado)
-let = logos_visibles = false
+let logos_visibles = true
+let despegues_visibles = true
 
 
 // Crea la fila donde se meten los datos
-function creaFila(nom,pos,tiemp,pes){
+function creaFila(nom,pos,tiemp,pes,despegue){
     // Creamos la fila con sus partes
     let fila = document.createElement("div")
     fila.className = "fila"
@@ -49,10 +50,15 @@ function creaFila(nom,pos,tiemp,pes){
     logo.append(elLogo)
 
     // Metemos el estado del despegue
-    let despegue = document.createElement("div")
     let circulo = document.createElement("span")
     circulo.className = "dot"
-    despegue.append(circulo)
+    let color = "";
+    switch (despegue){
+        case "Corto": color = "#9000ff";break;
+        case "Correcto":color = "#0dff00";break;
+        case "Ilegal": color = "#ff0000"; break;
+    }
+    circulo.style.backgroundColor = color
     // Informativos
 
     // Tiempo
@@ -74,7 +80,7 @@ function creaFila(nom,pos,tiemp,pes){
 
 
     // Lo juntamos todo y devolvemos la fila
-    resto.append(nombre,tiempo,despegue,peso)
+    resto.append(nombre,tiempo,peso,circulo)
     // Le ponemos de ID la posicion
     fila.id = pos
     fila.append(numero,logo,resto)
@@ -135,5 +141,14 @@ function ocultarLogos(){
     let estado = (logos_visibles ? "none" : "flex");
     for (logo of logos){
         logo.style.display = estado
+    }
+}
+
+// Funcion para alternar la visibilidad de los despegues
+function ocultarDespegue(){
+    despegues = document.getElementsByClassName("dot")
+    let estado = (despegues_visibles ? "none" : "flex");
+    for (despegue of despegues){
+        despegue.style.display = estado
     }
 }
