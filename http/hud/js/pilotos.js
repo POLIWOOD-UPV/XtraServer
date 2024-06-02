@@ -18,26 +18,22 @@ function quitaPiloto(estado, pos) {
         console.log("Posición a borrar: " + pos);
 
         let a_borrar = document.getElementById(String(pos)); // Elemento del piloto a borrar
-        let a_borrar_c = document.getElementById(String(pos + "c_AN")).parentNode; // Elemento de control a borrar animado
         a_borrar.style.left = "-500px"; // Animación para mover el elemento fuera de la vista
 
         switch (estado) {
             case "animado":
                 setTimeout(() => {
                     a_borrar.remove();
-                    a_borrar_c.remove();
                     controla_pilotos--; // Decrementar el contador de pilotos
                     bajar_posiciones(pos); // Ajustar posiciones de los pilotos restantes
                 }, 150);
                 break;
             case "seco":
                 a_borrar.remove();
-                a_borrar_c.remove();
                 controla_pilotos--; // Decrementar el contador de pilotos
                 bajar_posiciones(pos); // Ajustar posiciones de los pilotos restantes
                 break;
         }
-        ordenar_control(); // Ordenar la lista de control después de la eliminación
     }
 }
 
@@ -50,24 +46,6 @@ function bajar_posiciones(pos){
             posicion.textContent = Number(posicion.textContent)-1
             // Actualizar el ID de la fila del ranking de todos los de abajo
             fila.id = String(Number(fila.id)-1)
-        }
-    }
-
-    // Actualizar el ID de todos los botones de la fila de control
-    for (fila of filas_control){
-        // Estas son las filas de la derecha
-        let botones = fila.getElementsByTagName("button") // Cogemos los dos botones de la fila
-        // Cogemos los botones a trabajar con 
-        boton_animado = botones[0]
-        boton_normal = botones[1]
-
-        // identificamos si estamos en una fila que debemos modificar
-        let id_fila_actual = Number(boton_animado.id[0])
-        if (id_fila_actual > pos){
-            boton_animado.id = String(id_fila_actual-1)+"c_AN"
-            
-            // Boton sin animacion
-            boton_normal.id = String(id_fila_actual-1)+"c"
         }
     }
 }
