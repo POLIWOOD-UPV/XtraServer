@@ -44,17 +44,18 @@ function cogerTiempo_Peso(que) {
         case "seg":
             // Coger segundos
             segundos = document.getElementById("segundos_input_id").value;
-            return validarNumero(segundos) ? parseInt(segundos) : 0;
+            return validarNumero(segundos) ? parseInt(segundos) : "00";
 
         case "mil":
             // Coger milis
             milis = document.getElementById("milisegundos_input_id").value;
-            return validarNumero(milis) ? parseInt(milis) : 0;
+            milis = String(milis*0.001).split(".")
+            milis = milis[1]
+            console.log(milis)
+            return  validarNumero(milis) ? (milis): "000";
         case "pes":
             // Coger el peso
             peso = document.getElementById("peso_input_id").value
-            console.log("TEST")
-            console.log(peso)
             return validarNumero(peso) ? parseInt(peso) : 0;
     }
 }
@@ -164,7 +165,7 @@ function ordenar_control() {
     Array.from(filas_control).forEach((fila, index) => {
         let tiempoFila = convertirTiempoAMilisegundos(fila.querySelector(".tiempo_control").textContent);
         let nuevaPosicion = tiemposOrdenados.indexOf(tiempoFila) + 1; // Agregar 1 ya que las posiciones comienzan desde 1
-        
+        console.log("Posicion que va al order: "+nuevaPosicion)
         // ESTA LINEA ES UNA BENDICION LA AMO
         fila.style.order = nuevaPosicion; // Establecer el orden con CSS CSS 
     });
@@ -176,7 +177,7 @@ function convertirTiempoAMilisegundos(tiempo) {
     let partes = tiempo.split(':');
     let minutos = Number(partes[0]) * 60;
     let segundos = Number(partes[1]);
-    let milisegundos = Number(partes[2]) * 0.001;
+    let milisegundos = Number(partes[2]);
     return minutos + segundos + milisegundos;
 }
 

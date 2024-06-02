@@ -1,4 +1,3 @@
-
 ////////////////////////////////////////////////////
 // Funciones del socket del control del ranking   //
 ////////////////////////////////////////////////////
@@ -82,6 +81,7 @@ function s_sumaPiloto(estado){
     segundos = cogerTiempo_Peso("seg")
     miliseg = cogerTiempo_Peso("mil")
     tiempo = minutos + ":" + segundos + ":" + miliseg
+    console.log("TIEMPO "+tiempo)
     // Coger el peso
     peso = cogerTiempo_Peso("pes") + " Kg"
     // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
