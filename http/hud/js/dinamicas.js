@@ -24,7 +24,6 @@ function rankingMov() {
 }
 
 // Mover filas en o fuera de pantalla
-
 function filasMov(){
     // Saca o pone las filas depende del estado actual
     let cant_filas =  filas.length;

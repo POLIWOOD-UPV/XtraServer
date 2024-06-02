@@ -71,7 +71,6 @@ function creaFila(nom,pos,tiemp,pes){
     return fila
 }
 
-
 // Función para mostrar el tiempo en la fila
 function mostrarTiempo(){
     let estado;

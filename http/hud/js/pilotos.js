@@ -91,10 +91,7 @@ function sumaPiloto(piloto,pos,tiempo,peso,estado) {
         }
 }
 
-
-
-
-// Versión con array
+// Introduce en el ranking la fila nueva
 function meter_en_ranking(nueva_fila) {
     let filas_array = Array.from(filas);
 
@@ -118,7 +115,7 @@ function meter_en_ranking(nueva_fila) {
         });
     }
 }
-
+// Mete la info de la fila nueva en la posición correcta 
 function introducir_en_filas(pos, nueva_fila) {
     // Convierte la colección HTML de filas a un array temporal para itrerar etc
     let filas_array = Array.from(filas);
