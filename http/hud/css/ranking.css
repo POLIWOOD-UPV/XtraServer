@@ -15,12 +15,12 @@ aside {
 /* Ranking */
 #cabecera img {
     height: 100%;
-    width: 100%;
+    width: 60%;
 }
 #contenedor {
     background-color: rgba(52, 52, 52, 0.699);
     border-top-left-radius: 10px;
-    width: 400px;
+    width: 550px;
     margin: 20px 0px 0px 5px;
     display: flex;
     flex-direction: column;
@@ -55,13 +55,21 @@ aside {
     font-size: 20px;
 }
 .resto {
-    flex:6;
+    flex:10;
     display: flex;
     flex-direction: row;
 }
+
+.tiempo{
+    flex: 3
+}
+.nombre{
+    flex:5;
+}
+
+
 /* Modificables */
 .nombre, .tiempo, .peso{ /* Aquí solía estar #cabecera tambien cuando tenia texto */
-    flex:1;
     display: flex;
     align-items: center;
     text-align: center;
@@ -79,12 +87,9 @@ aside {
 .tiempo, .peso {
     transition: opacity 0.5s ease;
 }
-.nombre{
-    flex:3;
-}
-
 .peso{
     display: none;
+    flex:2;
 }
 
 /* Control de piloto */
