@@ -83,7 +83,7 @@ function s_sumaPiloto(estado){
     miliseg = cogerTiempo_Peso("mil")
     tiempo = minutos + ":" + segundos + ":" + miliseg
     // Coger el peso
-    peso = cogerTiempo_Peso("pes")
+    peso = cogerTiempo_Peso("pes") + " Kg"
     // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
     pos = sacar_pos_avion(tiempo) // Es un numero
     FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba

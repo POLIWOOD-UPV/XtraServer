@@ -53,7 +53,9 @@ function cogerTiempo_Peso(que) {
         case "pes":
             // Coger el peso
             peso = document.getElementById("peso_input_id").value
-            return validarNumero(milis) ? parseInt(milis) : 0+" Kg";
+            console.log("TEST")
+            console.log(peso)
+            return validarNumero(peso) ? parseInt(peso) : 0;
     }
 }
 
