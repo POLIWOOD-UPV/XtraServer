@@ -4,21 +4,23 @@
 
 // Variables Pilotos
 
-var controla_pilotos = 1
+let controla_pilotos = 1
 
 // Coger ranking y filas
-var ranking = document.getElementById("contenedor")
-var filas = document.getElementsByClassName("fila")
+let ranking = document.getElementById("contenedor")
+let filas = document.getElementsByClassName("fila")
 
 
 // Tiempo ( empieza activa)
-var tiempo_visible = true;
-var tiempos = document.getElementsByClassName("tiempo")
+let tiempo_visible = true;
+let tiempos = document.getElementsByClassName("tiempo")
 
 // Peso (empieza desactivada)
-var peso_visible = false;
-var pesos = document.getElementsByClassName("peso")
+let peso_visible = false;
+let pesos = document.getElementsByClassName("peso")
 
+// Logos (empieza activado)
+let = logos_visibles = false
 
 
 // Crea la fila donde se meten los datos
@@ -39,6 +41,18 @@ function creaFila(nom,pos,tiemp,pes){
     nombre.className = "nombre"
     nombre.textContent = nom
 
+    // Metemos la imagen
+    let logo = document.createElement("div")
+    logo.className = "logo"
+    let elLogo = document.createElement("img")
+    elLogo.src = "../favicon.ico"
+    logo.append(elLogo)
+
+    // Metemos el estado del despegue
+    let despegue = document.createElement("div")
+    let circulo = document.createElement("span")
+    circulo.className = "dot"
+    despegue.append(circulo)
     // Informativos
 
     // Tiempo
@@ -47,7 +61,6 @@ function creaFila(nom,pos,tiemp,pes){
     tiempo.textContent = tiemp
     
     // Peso
-
     let peso = document.createElement("div")
     peso.className = "peso"
     peso.textContent = pes;
@@ -61,10 +74,10 @@ function creaFila(nom,pos,tiemp,pes){
 
 
     // Lo juntamos todo y devolvemos la fila
-    resto.append(nombre,tiempo,peso)
+    resto.append(nombre,tiempo,despegue,peso)
     // Le ponemos de ID la posicion
     fila.id = pos
-    fila.append(numero,resto)
+    fila.append(numero,logo,resto)
 
     // Ponemos la fila en la izquierda para que se mueva mas tarde
     fila.style.left = "-500px"
@@ -113,5 +126,14 @@ function cambiazoPesoTiempos(){
     }else{
         mostrarTiempo();
         mostrarPeso();
+    }
+}
+ 
+// Funcion para alternar la visibilidad de los logos
+function ocultarLogos(){
+    logos = Array(document.querySelector(".logo"))
+    let estado = (logos_visibles ? "none" : "flex");
+    for (logo of logos){
+        logo.style.display = estado
     }
 }

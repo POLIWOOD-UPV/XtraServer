@@ -12,14 +12,16 @@ var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_ra
 var boton_tiempo = document.getElementById("mostrar_tiempo_id");
 var boton_peso = document.getElementById("mostrar_peso_id");
 var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
+let bot_logos = document.querySelector("#ocultar_logos_id")
 
 // Flags
 let peso_visible = false;
 let tiempo_visible = true;
 var ranking_visible = true;
 var filas_visible = true;
+logos_visibles = true;
 
-var pilotos = ["RIC"]
+var pilotos = ["POLIWOOD"]
 
 // Funciones traidas de otros archivos
 

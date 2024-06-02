@@ -43,3 +43,8 @@ socket.on("mosTmpo",()=>{
 socket.on("mosPeso",()=>{
     mostrarPeso();
 });
+
+socket.on("logVis",(logos_vis)=>{
+    logos_visibles = logos_vis
+    ocultarLogos();
+});
