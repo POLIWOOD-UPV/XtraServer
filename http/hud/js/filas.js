@@ -137,7 +137,7 @@ function cambiazoPesoTiempos(){
  
 // Funcion para alternar la visibilidad de los logos
 function ocultarLogos(){
-    logos = Array(document.querySelector(".logo"))
+    logos = document.getElementsByClassName("logo")
     let estado = (logos_visibles ? "none" : "flex");
     for (logo of logos){
         logo.style.display = estado
