@@ -12,7 +12,7 @@ function rankingMov() {
     if (ranking_visible) { // Es visible
         // Ranking se pasa a oculto
         ranking_visible = false;
-        ranking.style.left = "-500px"//"300px";
+        ranking.style.left = "-600px"//"300px";
     } else { // No es visible
         ranking.style.left = "0px";
         ranking_visible = true;
@@ -37,7 +37,7 @@ function filasMov(){
             // Comprobmos si hemos quitado todas ya
             if (indice < cant_filas+1) {
                 // Lo posicionamos a la izquierda (se aplica la transicion)
-                filas[filas.length-indice].style.left = "-500px"//"300px";
+                filas[filas.length-indice].style.left = "-600px"//"300px";
                 indice++
             } else {
                 // Una vez hemos quitado todas, movemos el contenedor entero y paramos lo otro
