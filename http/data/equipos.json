@@ -104,10 +104,18 @@
     },
     {
       "Dorsal": 16,
-      "Team": "Sky Eagle Team",
+      "Team": "Sky Eagle Team 1",
       "University/Clubs": "Club Aeromodelismo Alzira",
-      "Members": 4,
+      "Members": 2,
       "Team Leader": "Francisco Soto Morales",
+      "Pilot": "Francisco Soto Morales"
+    },
+    {
+      "Dorsal": 17,
+      "Team": "Sky Eagle Team 2",
+      "University/Clubs": "Club Aeromodelismo Alzira",
+      "Members": 2,
+      "Team Leader": "Leopolgo Martinez Magraner",
       "Pilot": "Leopolgo Martinez Magraner"
     }
   ]
