@@ -8,14 +8,12 @@
         var response;
         var equipos;
         var rondas;
-        var carga;
-
-        const cargar_json = async () => {
-            response = (await fetch("/data/equipos.json"));
-            equipos = await response.json();
-            response = (await fetch("/data/rondas.json"));
-            rondas = await response.json();
-
+        var conversion;
+        var info;
+    </script>
+    <script src="./js/rondaJSON.js"></script>
+    <script>
+        const cargar_json = () => {
             var select_ronda = document.querySelector("#ronda");
             var select_equipo = document.querySelector("#equipo");
 
@@ -32,33 +30,83 @@
                 option.value = element.Team;
                 select_equipo.appendChild(option);
             });
-        }
 
-        const preparar_calculo_bolas = async () => {
-            response = (await fetch("/data/carga.json"));
-            carga = await response.json();
+            select_ronda.addEventListener("input", () => {
+                ronda = select_ronda.value;
+                if (ronda != null && equipo != null) {
+                    loadInfo(ronda, equipo);
+                    actualizarInfo();
+                }
+            });
 
+            select_equipo.addEventListener("input", () => {
+                equipo = select_equipo.value;
+                if (ronda != null && equipo != null) {
+                    loadInfo(ronda, equipo);
+                    actualizarInfo();
+                }
+            });
+        };
+
+        const preparar_calculo_bolas = () => {
             var input_billar = document.querySelector("#billar");
             var input_ping = document.querySelector("#ping");
+            var input_peso = document.querySelector("#peso");
+            var input_volumen = document.querySelector("#volumen");
 
-            //TODO 
-        }
+            input_billar.addEventListener("input", () => {
+                input_peso.value = input_billar.value * conversion.billar.peso
+                                + input_ping.value * conversion.ping.peso;
+                input_volumen.value = input_billar.value * conversion.billar.volumen
+                                + input_ping.value * conversion.ping.volumen;
+            });
+
+            input_billar.addEventListener("input", () => {
+                input_peso.value = input_billar.value * conversion.billar.peso
+                                + input_ping.value * conversion.ping.peso;
+                input_volumen.value = input_billar.value * conversion.billar.volumen
+                                + input_ping.value * conversion.ping.volumen;
+            });
+        };
+
+        const actualizarInfo = () => {
+            if (ronda == null || equipo == null) {
+                return;
+            }
+
+            if (info == null) {
+                return;
+            }
+
+            for (const key in info) {
+                if (Object.hasOwnProperty.call(info, key)) {
+                    let element = document.getElementById(key.toLowerCase())
+                    if (element == null) {
+                        continue;
+                    }
+                    element.value = info[key];
+                }
+            }
+        };
 
         addEventListener("DOMContentLoaded", async () => {
+            await loadJSON();
+            if (ronda != null && equipo != null) {
+                await loadInfo(ronda, equipo);
+            }
             cargar_json();
-
-
+            preparar_calculo_bolas();
         });
     </script>
 </head>
 <body>
     <h1>Prueba Dinamica</h1>
-    <form action="/vuelo" method="post">
+    <form action="update()" target="/crl/vuelo.html">
         <p>
-            <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda"></select>
+            <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda" required></select>
         </p>
         <p>
-            <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo"></select>
+            <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo" required></select>
         </p>
         <hr>
         <h3>Tiempo de Vuelo:</h3>
@@ -71,13 +119,13 @@
             <label for="Peso">Peso:</label><input type="number" name="Peso" id="peso" readonly>
         </p>
         <p>
-            <label for="Volumen">Volumen:</label><input type="number" name="Polumen" id="volumen" readonly>
+            <label for="Volumen">Volumen:</label><input type="number" name="Volumen" id="volumen" readonly>
         </p>
         <p>
-            <label for="billar">Numero de Bolas de Billar:</label><input type="number" name="billar" id="billar">
+            <label for="Billar">Numero de Bolas de Billar:</label><input type="number" name="Billar" id="billar" min="0">
         </p>
         <p>
-            <label for="ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="ping" id="ping">
+            <label for="Ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="Ping" id="ping" min="0">
         </p>
         <hr>
         <h3>Despegue:</h3>

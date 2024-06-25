@@ -35,6 +35,7 @@ const doPOST = (req, res) => {
         fs.writeFileSync("./http/POST" + req.url, "");
 
         req.on("data", (data) => {
+            console.log("POSTdata: "+ data)
             fs.appendFileSync("./http/POST" + req.url, data);
         })
         res.end();

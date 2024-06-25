@@ -8,15 +8,12 @@
         var response;
         var equipos;
         var rondas;
-        var carga;
-        addEventListener("DOMContentLoaded", async () => {
-            response = (await fetch("/data/equipos.json", {method:"GET"}));
-            equipos = await response.json();
-            response = (await fetch("/data/rondas.json", {method:"GET"}));
-            rondas = await response.json();
-            response = (await fetch("/data/carga.json", {method:"GET"}));
-            carga = await response.json();
-
+        var conversion;
+        var info;
+    </script>
+    <script src="./js/rondaJSON.js"></script>
+    <script>
+        const cargar_json = () => {
             var select_ronda = document.querySelector("#ronda");
             var select_equipo = document.querySelector("#equipo");
 
@@ -33,12 +30,97 @@
                 option.value = element.Team;
                 select_equipo.appendChild(option);
             });
+
+            select_ronda.addEventListener("onchange", () => {
+                ronda = select_ronda.value;
+                if (ronda != null && equipo != null) {
+                    loadInfo(ronda, equipo);
+                    actualizarInfo();
+                }
+            });
+
+            select_equipo.addEventListener("onchange", () => {
+                equipo = select_equipo.value;
+                if (ronda != null && equipo != null) {
+                    loadInfo(ronda, equipo);
+                    actualizarInfo();
+                }
+            });
+        };
+
+        const preparar_calculo_bolas = () => {
+            var input_billar = document.querySelector("#billar");
+            var input_ping = document.querySelector("#ping");
+            var input_peso = document.querySelector("#peso");
+            var input_volumen = document.querySelector("#volumen");
+
+            input_billar.addEventListener("input", () => {
+                input_peso.value = input_billar.value * conversion.billar.peso
+                                + input_ping.value * conversion.ping.peso;
+                input_volumen.value = input_billar.value * conversion.billar.volumen
+                                + input_ping.value * conversion.ping.volumen;
+            });
+
+            input_billar.addEventListener("input", () => {
+                input_peso.value = input_billar.value * conversion.billar.peso
+                                + input_ping.value * conversion.ping.peso;
+                input_volumen.value = input_billar.value * conversion.billar.volumen
+                                + input_ping.value * conversion.ping.volumen;
+            });
+
+            var input_billar = document.querySelector("#p_billar");
+            var input_ping = document.querySelector("#p_ping");
+            var input_peso = document.querySelector("#p_peso");
+            var input_volumen = document.querySelector("#p_volumen");
+
+            input_billar.addEventListener("input", () => {
+                input_peso.value = input_billar.value * conversion.billar.peso
+                                + input_ping.value * conversion.ping.peso;
+                input_volumen.value = input_billar.value * conversion.billar.volumen
+                                + input_ping.value * conversion.ping.volumen;
+            });
+
+            input_billar.addEventListener("input", () => {
+                input_peso.value = input_billar.value * conversion.billar.peso
+                                + input_ping.value * conversion.ping.peso;
+                input_volumen.value = input_billar.value * conversion.billar.volumen
+                                + input_ping.value * conversion.ping.volumen;
+            });
+        };
+
+        const actualizarInfo = () => {
+            if (ronda == null || equipo == null) {
+                return;
+            }
+
+            if (info == null) {
+                return;
+            }
+
+            for (const key in info) {
+                if (Object.hasOwnProperty.call(info, key)) {
+                    let element = document.getElementById(key.toLowerCase())
+                    if (element == null) {
+                        continue;
+                    }
+                    element.value = info[key];
+                }
+            }
+        };
+
+        addEventListener("DOMContentLoaded", async () => {
+            await loadJSON();
+            if (ronda != null && equipo != null) {
+                await loadInfo(ronda, equipo);
+            }
+            cargar_json();
+            preparar_calculo_bolas();
         });
     </script>
 </head>
 <body>
     <h1>Prueba Estatica</h1>
-    <form action="/estat" method="post">
+    <form action="'/data/'+ronda+'/'+equipo+'.json'" method="post">
         <p>
             <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda"></select>
         </p>
@@ -76,10 +158,10 @@
             <label for="Volumen">Volumen:</label><input type="number" name="Volumen" id="volumen" readonly>
         </p>
         <p>
-            <label for="billar">Numero de Bolas de Billar:</label><input type="number" name="billar" id="billar">
+            <label for="Billar">Numero de Bolas de Billar:</label><input type="number" name="Billar" id="billar">
         </p>
         <p>
-            <label for="ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="ping" id="ping">
+            <label for="Ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="Ping" id="ping">
         </p>
         <hr>
         <h3>Piloto Externo:</h3>
