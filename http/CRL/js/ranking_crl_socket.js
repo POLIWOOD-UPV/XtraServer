@@ -6,7 +6,6 @@
 const socket = io();
 
 function hola(){
-    // socket.emit("all","message","Hola!");
     socket.emit("all","ranking",["message","Hola!"]);
 }
 // Dinamicas
@@ -19,16 +18,13 @@ function s_rankingMov(){
         aparecer_desaparecer_rank.textContent = "Desaparecer Ranking";
         ranking_visible = true;
         }
-    // socket.emit("all","rankMov");
     socket.emit("all","ranking",["rankMov"])
 }
 
 function s_aparicionDinamica(){
-    // socket.emit("all","apaDina")
     socket.emit("all","ranking",["apaDina"])
 }
 function s_desaparicionDinamica(){
-    // socket.emit("all","desDina")
     socket.emit("all","ranking",["desDina"])
 }
 
