@@ -55,10 +55,11 @@
 
 
         function play() {
+            // Escondemos el boton de play y mostramos el de pausa
             pauseButton.hidden = false
             playButton.hidden = true            
             if (!saltos) { // Si no se está incrementando el tiempo del cronómetro, empezamos
-                tiempoInicial = Date.now() - tiempo_transcurrido; // Ajustamos el tiempo inicial. No usamos Date.valueOf porq
+                tiempoInicial = Date.now() - tiempo_transcurrido; // Ajustamos el tiempo inicial. No usamos Date.valueOf porque es mas corto y sencillo usar Date.now()
                 saltos = setInterval(() => { // Empezamos a incrementarlo
                     let tiempoActual = Date.now();
                     tiempo_transcurrido = tiempoActual - tiempoInicial; // Calculamos la diferencia
@@ -67,6 +68,7 @@
             }
         }
         function pause() {
+            // Escondemos el boton de pausa y mostramos el de play
             pauseButton.hidden = true
             playButton.hidden = false
             clearInterval(saltos);   // Detenemos los incrementos
@@ -93,14 +95,12 @@
             let segundos = Math.floor(milisegundosTotales / 1000)
             let milisegundos = milisegundosTotales % 1000
 
-            // Ponemos los valores en el cronometro como tal, rellenando con 0s
+            // Ponemos los valores en el cronometro como strings, rellenando con 0s
             horasElem.textContent = String(horas).padStart(2, "0");
             minutosElem.textContent = String(minutos).padStart(2, "0");
             segundosElem.textContent = String(segundos).padStart(2, "0");
             milisegundosElem.textContent = String(milisegundos).padStart(3, "0");
         }
-
-        actualizarCronometro(); // Inicializar la pantalla
     </script>
 </body>
 </html>
