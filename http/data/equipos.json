@@ -1,18 +1,30 @@
 [
     {
+      "Dorsal": 0,
+      "Team": "POLIWOOD",
+      "University/Clubs": "Universitat Politècnica de València",
+      "Members": 8,
+      "Team Leader": "Raul Rodríguez",
+      "Pilot": "Abel Vidal",
+      "img": "test.png"
+    },
+    {
       "Dorsal": 1,
       "Team": "RUHE",
       "University/Clubs": "Universitat Politècnica de València",
       "Members": 6,
       "Team Leader": "Adrián Montoya",
-      "Pilot": "Adrián Montoya"
+      "Pilot": "Adrián Montoya",
+      "img": "Ruhe.png"
     },
     {
       "Dorsal": 2,
       "Team": "UVigo Aerotech",
       "University/Clubs": "Universidad de Vigo",
       "Members": 8,
-      "Team Leader": "Pablo Magariños"
+      "Team Leader": "Pablo Magariños",
+      "Pilot": "Marco Guiotto",
+      "img": "UVigo.png"
     },
     {
       "Dorsal": 3,
@@ -20,7 +32,8 @@
       "University/Clubs": "Universitat Politècnica de València",
       "Members": 5,
       "Team Leader": "Alex Radita",
-      "Pilot": "Juan Carlos Juan Serrano"
+      "Pilot": "Juan Carlos Juan Serrano",
+      "img": "G3.png"
     },
     {
       "Dorsal": 4,
@@ -28,7 +41,8 @@
       "University/Clubs": "Universitat Politècnica de València",
       "Members": 6,
       "Team Leader": "Ignacio Folch Ferrer",
-      "Pilot": "Ignacio Folch Ferrer"
+      "Pilot": "Ignacio Folch Ferrer",
+      "img": "Matisa.png"
     },
     {
       "Dorsal": 5,
@@ -36,7 +50,8 @@
       "University/Clubs": "Universitat Politècnica de València",
       "Members": 7,
       "Team Leader": "Guillermo Velencoso García",
-      "Pilot": "Lorena Abad Cuadros"
+      "Pilot": "Lorena Abad Cuadros",
+      "img": "Luffsieger.png"
     },
     {
       "Dorsal": 6,
@@ -44,7 +59,8 @@
       "University/Clubs": "École Centrale de Lyon (Francia)",
       "Members": 10,
       "Team Leader": "Ethaniel Tobar",
-      "Pilot": "Hugo Pamies Moreno"
+      "Pilot": "Hugo Pamies Moreno",
+      "img": "EClift.png"
     },
     {
       "Dorsal": 7,
@@ -52,7 +68,8 @@
       "University/Clubs": "Universidad Carlos III Madrid",
       "Members": 10,
       "Team Leader": "Adrián Pajarón González",
-      "Pilot": "Andrés Navarro Pedregal"
+      "Pilot": "Andrés Navarro Pedregal",
+      "img": "SAETA.png"
     },
     {
       "Dorsal": 8,
@@ -60,7 +77,8 @@
       "University/Clubs": "Universidad de Castilla-La Mancha",
       "Members": 9,
       "Team Leader": "Pablo Zamorano Fernández",
-      "Pilot": "Rodrigo Redondo Cabañas"
+      "Pilot": "Rodrigo Redondo Cabañas",
+      "img": "Diana.png"
     },
     {
       "Dorsal": 9,
@@ -68,7 +86,8 @@
       "University/Clubs": "Universitat Politècnica de Catalunya",
       "Members": 10,
       "Team Leader": "Martí Badia Codina",
-      "Pilot": "Javier Marcos Pérez"
+      "Pilot": "Javier Marcos Pérez",
+      "img": "Trencalos.png"
     },
     {
       "Dorsal": 10,
@@ -76,7 +95,8 @@
       "University/Clubs": "Universitat Politècnica de València",
       "Members": 6,
       "Team Leader": "Pasqual Ayet",
-      "Pilot": "Pasqual Ayet"
+      "Pilot": "Pasqual Ayet",
+      "img": "TheNorchPole.png"
     },
     {
       "Dorsal": 11,
@@ -84,7 +104,8 @@
       "University/Clubs": "Universidad Carlos III Madrid",
       "Members": 10,
       "Team Leader": "Iago Senén Fernández García",
-      "Pilot": "Carlos de Quinto"
+      "Pilot": "Carlos de Quinto",
+      "img": "SAETA.png"
     },
     {
       "Dorsal": 12,
@@ -92,7 +113,8 @@
       "University/Clubs": "Universidad de Cádiz",
       "Members": 6,
       "Team Leader": "Irene Molina Chicón",
-      "Pilot": "Hugo Juan Hernández"
+      "Pilot": "Hugo Juan Hernández",
+      "img": "UCA&Air.png"
     },
     {
       "Dorsal": 15,
@@ -100,7 +122,8 @@
       "University/Clubs": "Club d'Aeromodelisme Xaloc",
       "Members": 5,
       "Team Leader": "Gregorio Moreno",
-      "Pilot": "Volodymyr Klubow"
+      "Pilot": "Volodymyr Klubow",
+      "img": "Xaloc.png"
     },
     {
       "Dorsal": 16,
@@ -108,7 +131,8 @@
       "University/Clubs": "Club Aeromodelismo Alzira",
       "Members": 2,
       "Team Leader": "Francisco Soto Morales",
-      "Pilot": "Francisco Soto Morales"
+      "Pilot": "Francisco Soto Morales",
+      "img": "FlyEagle.png"
     },
     {
       "Dorsal": 17,
@@ -116,6 +140,7 @@
       "University/Clubs": "Club Aeromodelismo Alzira",
       "Members": 2,
       "Team Leader": "Leopolgo Martinez Magraner",
-      "Pilot": "Leopolgo Martinez Magraner"
+      "Pilot": "Leopolgo Martinez Magraner",
+      "img": "FlyEagle.png"
     }
   ]

@@ -2,6 +2,7 @@ const http = require("http");
 const ip = require('ip');
 const fs = require("fs");
 const {Server, Namespace, Socket} = require("socket.io");
+const URLSearchParams = require("url");
 
 const dir = require("./dir");
 
@@ -29,14 +30,16 @@ const doGET = (req, res, commands) => {
 }
 
 const doPOST = (req, res) => {
-    if (req.url == "form.html") {
+    var path = String(req.url).split(/[?#]/)[0];
+    var query = new URLSearchParams(req.url);
+    if (/*path == "/form.txt"*/true) {
         res.writeHead(200);
 
-        fs.writeFileSync("./http/POST" + req.url, "");
+        fs.writeFileSync("./http/" + path, "");
 
         req.on("data", (data) => {
             console.log("POSTdata: "+ data)
-            fs.appendFileSync("./http/POST" + req.url, data);
+            fs.appendFileSync("./http/" + path, data);
         })
         res.end();
     } else {
