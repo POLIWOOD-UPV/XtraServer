@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" />
+    <title>Cronómetro</title>
+    <style>
+        div * {
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div>
+            <span id="horas">00</span>
+            <span>:</span>
+            <span id="minutos">00</span>
+            <span>:</span>
+            <span id="segundos">00</span>
+            <span>:</span>
+            <span id="milisegundos">000</span>
+        </div>
+        <button id = "playButton" onclick="play()">Play</button>
+        <button id = "pauseButton" onclick="pause()" hidden>Pause</button>
+        <button id = "resetButton" onclick="reset()">Reset</button>
+    </main>
+    <script>
+
+        /* Webs consultadas
+        Equivalente de Millis() de arduino mas o menos
+        https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+
+        Rellena con 0s los valores, a lo mejor utilizar en ranking?
+        https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+
+        Dividir y dejar solo el entero (he puesto // por costumbre y se ha comentado jajajsaj)
+        https://www.skillreactor.io/blog/javascript-integer-division-examples-and-tips/#:~:text=For%20example%2C%20if%20we%20want,the%20result%20of%20integer%20division.
+        */
+
+        // Elementos del cronómetro
+        let horasElem = document.querySelector("#horas");
+        let minutosElem = document.querySelector("#minutos");
+        let segundosElem = document.querySelector("#segundos");
+        let milisegundosElem = document.querySelector("#milisegundos");
+        // Botones
+        let playButton = document.querySelector("#playButton")
+        let pauseButton = document.querySelector("#pauseButton")
+        let resetButton = document.querySelector("#resetButton") // No le estamos haciendo nada pero lo pongo por si le queremos hacer algo a futuro
+
+        // Valores del cronómetro globales
+        let tiempo_transcurrido = 0; // El tiempo transcurrido del cronómetro
+        let saltos;                  // Los incrementos en los que irá el cronómetro
+        let tiempoInicial;           // Será el valor de cuando empecemos el cronómetro
+
+
+        function play() {
+            // Escondemos el boton de play y mostramos el de pausa
+            pauseButton.hidden = false
+            playButton.hidden = true            
+            if (!saltos) { // Si no se está incrementando el tiempo del cronómetro, empezamos
+                tiempoInicial = Date.now() - tiempo_transcurrido; // Ajustamos el tiempo inicial. No usamos Date.valueOf porque es mas corto y sencillo usar Date.now()
+                saltos = setInterval(() => { // Empezamos a incrementarlo
+                    let tiempoActual = Date.now();
+                    tiempo_transcurrido = tiempoActual - tiempoInicial; // Calculamos la diferencia
+                    actualizarCronometro(); // Actualizamos el cronómetro
+                }, 10);
+            }
+        }
+        function pause() {
+            // Escondemos el boton de pausa y mostramos el de play
+            pauseButton.hidden = true
+            playButton.hidden = false
+            clearInterval(saltos);   // Detenemos los incrementos
+            saltos = null;           // Volver a poner a null para que la otra lógica funcione
+        }
+
+        function reset() {
+            clearInterval(saltos);
+            saltos = null;           // Volver a poner a null para que la otra lógica funcione
+            tiempo_transcurrido = 0; // Vaciamos el tiempo del cronómetro
+            actualizarCronometro();  // Actualizamos la pantalla
+        }
+
+        function actualizarCronometro() {
+            // A partir del tiempo transcurrido, sacamos los valores
+            let milisegundosTotales = tiempo_transcurrido
+            // Horas
+            let horas = Math.floor(milisegundosTotales / (1000 * 60 * 60))
+            milisegundosTotales %= (1000 * 60 * 60)
+            // Minutos
+            let minutos = Math.floor(milisegundosTotales / (1000 * 60))
+            // Milisegundos
+            milisegundosTotales %= (1000 * 60)
+            let segundos = Math.floor(milisegundosTotales / 1000)
+            let milisegundos = milisegundosTotales % 1000
+
+            // Ponemos los valores en el cronometro como strings, rellenando con 0s
+            horasElem.textContent = String(horas).padStart(2, "0");
+            minutosElem.textContent = String(minutos).padStart(2, "0");
+            segundosElem.textContent = String(segundos).padStart(2, "0");
+            milisegundosElem.textContent = String(milisegundos).padStart(3, "0");
+        }
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
 const socket = io();
 
 function hola(){
-    socket.emit("all","message","Hola!");
+    socket.emit("all","ranking",["message","Hola!"]);
 }
 // Dinamicas
 function s_rankingMov(){
@@ -18,14 +18,14 @@ function s_rankingMov(){
         aparecer_desaparecer_rank.textContent = "Desaparecer Ranking";
         ranking_visible = true;
         }
-    socket.emit("all","rankMov");
+    socket.emit("all","ranking",["rankMov"])
 }
 
 function s_aparicionDinamica(){
-    socket.emit("all","apaDina")
+    socket.emit("all","ranking",["apaDina"])
 }
 function s_desaparicionDinamica(){
-    socket.emit("all","desDina")
+    socket.emit("all","ranking",["desDina"])
 }
 
 // Filas
@@ -39,7 +39,7 @@ function s_mostrarTiempo(){
         boton_tiempo.textContent = "Ocultar Tiempos"
         tiempo_visible = true;
     }
-    socket.emit("all","mosTmpo");
+    socket.emit("all","ranking",["mosTem"]);
 }
 
 function s_mostrarPeso(){
@@ -52,7 +52,7 @@ function s_mostrarPeso(){
         boton_peso.textContent = "Ocultar Pesos"
         peso_visible = true;
     }
-    socket.emit("all","mosPeso");
+    socket.emit("all","ranking",["mosPeso"]);
 }
 
 function s_cambiazoPesoTiempos(){
@@ -65,7 +65,7 @@ function s_cambiazoPesoTiempos(){
 }
 
 function s_ocultarLogos(){
-    socket.emit("all","logVis",logos_visibles)
+    socket.emit("all","ranking",["logVis",logos_visibles])
     if (logos_visibles){ // Son visibles y vamos a esconderlos
         bot_logos.textContent = "Mostrar logos"
         logos_visibles = false
@@ -75,7 +75,7 @@ function s_ocultarLogos(){
     }
 }
 function s_ocultarDespegue(){
-    socket.emit("all","desVis",despes_visibles)
+    socket.emit("all","ranking",["desVis",despes_visibles])
     if (despes_visibles){ // Son visibles y vamos a esconderlos
         bot_despegues.textContent = "Mostrar despegues"
         despes_visibles = false
@@ -90,7 +90,7 @@ function s_vaciarPilotos(){
         console.log(filas_control[j])
         filas_control[j].remove(); // Quitar todas las filas de control                    
     }
-    socket.emit("all","vacPilo");
+    socket.emit("all","ranking",["vacPilo"]);
 }
 function s_sumaPiloto(estado){
     // Agreganis el avion a la lista y lo cogemos
@@ -111,8 +111,8 @@ function s_sumaPiloto(estado){
     // Coger el despegue
     let despegue_input = document.querySelector("#tipos_despegue_id").value
 
-    info = [piloto, pos, tiempo, peso, estado,despegue_input]
-    socket.emit("all", "sumPil",info )
+    info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
+    socket.emit("all", "ranking",info )
     ordenar_control(); // Ordenar la lista de control después de la eliminación
 
 }
@@ -120,8 +120,8 @@ function s_quitaPiloto(estado,pos){
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado
     a_borrar_c.remove();
 
-    info = [estado,pos]
-    socket.emit("all","quiPil",info)
+    info = ["quiPil",estado,pos]
+    socket.emit("all","ranking",info)
     // Actualizar el ID de todos los botones de la fila de control
     for (let i = 0; i < filas_control.length; i++) {
         fila = filas_control[i]

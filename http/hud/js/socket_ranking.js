@@ -1,55 +1,47 @@
 // Iniciamos el socket
 const socket = io();
 
-// Funcion de test 
-socket.on("message", (msj) => {
-    console.log(msj)
-});
-// Dinamicas
-
-socket.on("apaDina", () => {
-    aparicionDinamica();
-});
-
-socket.on("desDina", () => {
-    desaparicionDinamica();
-});
-
-socket.on("rankMov", () => {
-    rankingMov();
-});
-
-
-//Pilotos
-socket.on("vacPilo", () => {
-    vaciarPilotos();
-});
-
-socket.on("sumPil", (info) => {
-    // info = [piloto, pos, tiempo, peso, estado]
-    sumaPiloto(info[0], info[1], info[2], info[3], info[4],info[5]);
-});
-
-socket.on("quiPil",(info)=>{
-    //info = [estado,pos]
-    quitaPiloto(info[0],info[1])
-})
-
-// Filas
-socket.on("mosTmpo",()=>{
-    mostrarTiempo();
-});
-
-socket.on("mosPeso",()=>{
-    mostrarPeso();
-});
-
-socket.on("logVis",(logos_vis)=>{
-    logos_visibles = logos_vis
-    ocultarLogos();
+socket.on("ranking",(info) =>{
+    comando = info.shift()
+    switch (comando){
+        case "message":
+            msj = info[0]
+            console.log(msj)
+            break;
+        case "apaDina":
+            aparicionDinamica();
+            break;
+        case "desDina":
+            desaparicionDinamica();
+            break;
+        case "rankMov":
+            rankingMov();
+            break;
+        case "vacPilo":
+            vaciarPilotos();
+            break;
+        case "sumPil":
+            // info = [piloto, pos, tiempo, peso, estado]
+            sumaPiloto(info[0], info[1], info[2], info[3], info[4],info[5]);
+            break;
+        case "quiPil":
+            //info = [estado,pos]
+            quitaPiloto(info[0],info[1])
+            break;
+        case "mosTem":
+            mostrarTiempo();
+            break;
+        case "mosPeso":
+            mostrarPeso();
+            break;
+        case "logVis":
+            logos_visibles = info[0]
+            ocultarLogos();
+            break;
+        case "desVis":
+            despegues_visibles = info[0]
+            ocultarDespegue()
+            break;
+    };
 });
 
-socket.on("desVis",(desp_vis)=>{
-    despegues_visibles = desp_vis
-    ocultarDespegue();
-});
