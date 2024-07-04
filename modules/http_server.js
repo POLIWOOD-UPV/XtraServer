@@ -5,6 +5,7 @@ const {Server, Namespace, Socket} = require("socket.io");
 const URLSearchParams = require("url");
 
 const dir = require("./dir");
+const post = require("./post_server")
 
 const doGET = (req, res, commands) => {
     for (const key in commands) {
@@ -18,6 +19,10 @@ const doGET = (req, res, commands) => {
             return;
         }
     }
+    if (req.url.endsWith("/")) {
+        dir.http_listdir(res, req.url);
+        return;
+    }
     if (req.url.search("\\.") == -1) {
         res.writeHead(404, {"Content-Type": "text/plain"});
         res.write("Error 404: command not existent");
@@ -30,22 +35,25 @@ const doGET = (req, res, commands) => {
 }
 
 const doPOST = (req, res) => {
-    var path = String(req.url).split(/[?#]/)[0];
-    var query = new URLSearchParams(req.url);
-    if (/*path == "/form.txt"*/true) {
-        res.writeHead(200);
-
-        fs.writeFileSync("./http/" + path, "");
-
-        req.on("data", (data) => {
-            console.log("POSTdata: "+ data)
-            fs.appendFileSync("./http/" + path, data);
-        })
+    for (const key in post.commands) {
+        if (Object.hasOwnProperty.call(post.commands, key) && req.url == "/" + key) {
+            try {
+                post.commands[key](req, res);
+            } catch (error) {
+                console.error(`command(${key})`, error.message);
+                process.exit(1);
+            }
+            return;
+        }
+    }
+    if (req.url.search("\\.") == -1) {
+        res.writeHead(404, {"Content-Type": "text/plain"});
+        res.write("Error 404: command not existent");
         res.end();
+        return;
     } else {
-        res.writeHead(400);
-        res.write('');
-        res.end();
+        post.file(req, res);
+        return;
     }
 }
 

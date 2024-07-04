@@ -3,21 +3,89 @@ const fs = require("fs");
 exports.file = (req, res) => {
     var path = String(req.url).split(/[?#]/)[0];
     var query = new URLSearchParams(req.url);
-    if (path == "/form.txt") {
-        res.writeHead(200);
-
+    var code = 201;
+    var msg = "";
+    try {
         fs.writeFileSync("./http/" + path, "");
-
+    } catch (error) {
+        res.writeHead(404);
+        res.write("Directory not Found");
+        res.end();
+        return;
+    }
+    try {
         req.on("data", (data) => {
-            console.log("POSTdata: "+ data)
             fs.appendFileSync("./http/" + path, data);
         })
-        res.end();
-    } else {
-        res.writeHead(400);
-        res.write('');
-        res.end();
+        code = 201;
+        msg = "File uploaded"
+    } catch (error) {
+        code = 202;
+        msg = "Directory not Found"
     }
+    req.eq("end", () => {
+        res.writeHead(code);
+        res.write(msg);
+        res.end();
+    });
 }
 
-exports.commands = {};
+// TODO: req.on("end", () => guardarVuelo)
+
+const guardar_vuelo = (req, res) => {
+    var labels = JSON.parse(fs.readFileSync("./http/crl/labels.json"));
+    let body = "";
+    req.on("data", (chunk) => {
+        body += chunk;
+    });
+    req.on('end', () => {
+        const form = new URLSearchParams(body);
+        const client = new Object();
+        const server = new Object();
+        const object = new Object();
+        for (const [key, value] of form) {
+            client[key] = value;
+        }
+        const filename = `${client.Ronda}/${client.Equipo}.json`;
+
+        try {
+            let data = fs.readFileSync(path);
+            server = JSON.parse(data);
+        } catch (error) {
+            labels.forEach(element => {
+                server[element] = null;
+            });
+        }
+
+        for (const key in server) {
+            if (Object.hasOwnProperty.call(client, key)) {
+                if (client[key] != null){
+                    object[key] = client[key];
+                } else {
+                    object[key] = server[key];
+                }
+                continue;
+            }
+            object[key] = server[key];
+        }
+
+
+        fs.writeFileSync("./http/data/"+filename, JSON.stringify(object, null, 2));
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(`Form data saved to ${filename}`);
+    });
+}
+
+const aux = (req, res) => {
+    fs.writeFileSync("./http/post.txt", "");
+    req.on("data", (data) => {
+        fs.appendFileSync("./http/post.txt", data);
+    })
+    res.writeHead(201);
+    res.end();
+}
+
+exports.commands = {
+    "vuelo": guardar_vuelo,
+    "aux": aux
+};

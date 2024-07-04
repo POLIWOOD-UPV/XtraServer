@@ -1,13 +1,16 @@
 const fs = require('fs');
 
-exports.http_listdir =  (res) => {
+exports.http_listdir = (res, path) => {
   try {
-    var dir = fs.readdirSync("./http");
+    var dir = fs.readdirSync("./http" + path);
     res.writeHead(200, {"Content-Type": "text/html"});
     res.write('<html><head><title>listdir</title></head><body style="flex-direction:column;display:flex;">');
     dir.forEach(element => {
       if (!element.startsWith("."))
         {
+          if (element.search("\\.") == -1) {
+            element += "/";
+          }
           res.write(`<a href="./${element}">${element}</a>`);
         }
     });

@@ -21,7 +21,7 @@ const commands = {
       res.end();
   },
   "listdir": (req, res) => {
-    dir.http_listdir(res);
+    dir.http_listdir(res, req.url);
   },
   "temperatura": (req, res) => {
     rasp.respondTemp(res);
