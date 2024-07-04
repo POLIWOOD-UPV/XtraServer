@@ -1,1 +1,0 @@
-Ronda=pruebas&Equipo=POLIWOOD&T_vuelo=&Peso=&Volumen=&Billar=&Ping=

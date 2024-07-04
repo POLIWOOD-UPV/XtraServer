@@ -1,10 +1,17 @@
-const fs = require('fs');
+const fs = require('fs')
+const path = require("path")
 
-exports.http_listdir = (res, path) => {
+exports.http_listdir = (res, url) => {
   try {
-    var dir = fs.readdirSync("./http" + path);
+    const dir = fs.readdirSync("./http" + url);
+    const parent = (path.dirname(url).split(path.sep).pop());
     res.writeHead(200, {"Content-Type": "text/html"});
     res.write('<html><head><title>listdir</title></head><body style="flex-direction:column;display:flex;">');
+    if (parent != "") {
+      res.write(`<a href="/${parent}/">..</a>`);
+    } else {
+      res.write(`<a href="/">..</a>`);
+    }
     dir.forEach(element => {
       if (!element.startsWith("."))
         {

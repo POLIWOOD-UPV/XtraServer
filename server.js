@@ -10,11 +10,12 @@ const socket_events = require("./modules/socket_events");
 // %%%%%%%%%%%%%%%% COMMANDS %%%%%%%%%%%%%%%%%%%
 
 const commands = {
+  /*
   "": (req, res) => {
       res.writeHead(200, {"Content-Type": "text/plain"});
       res.write("Welcome!\nplease introduce the file you want to see in the url.");
       res.end();
-  },
+  },*/
   "hola": (req, res) => {
       res.writeHead(200, {"Content-Type": "text/plain"});
       res.write("¡Hola Mundo!");

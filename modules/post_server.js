@@ -30,7 +30,31 @@ exports.file = (req, res) => {
     });
 }
 
-// TODO: req.on("end", () => guardarVuelo)
+const upload = (req, res) => {
+    let body = "";
+    req.on("data", (chunk) => {
+        body += chunk;
+    });
+    req.eq("end", () => {
+        const form = new URLSearchParams(body);
+        const filename = form["File"];
+        const data = form["Data"];
+        var code = 201;
+        var msg = "File Uploaded";
+        
+        try {
+            fs.writeFileSync("./http/" + filename, data);
+        } catch (error) {
+            res.writeHead(404);
+            res.write("Directory not Found");
+            res.end();
+            return;
+        }
+        res.writeHead(code);
+        res.write(msg);
+        res.end();
+    });
+}
 
 const guardar_vuelo = (req, res) => {
     var labels = JSON.parse(fs.readFileSync("./http/crl/labels.json"));
@@ -87,5 +111,6 @@ const aux = (req, res) => {
 
 exports.commands = {
     "vuelo": guardar_vuelo,
-    "aux": aux
+    "upload": upload,
+    "aux": aux,
 };

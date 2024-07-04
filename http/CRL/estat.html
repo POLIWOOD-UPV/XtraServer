@@ -61,7 +61,7 @@
                                 + input_ping.value * conversion.ping.volumen;
             });
 
-            input_billar.addEventListener("input", () => {
+            input_ping.addEventListener("input", () => {
                 input_peso.value = input_billar.value * conversion.billar.peso
                                 + input_ping.value * conversion.ping.peso;
                 input_volumen.value = input_billar.value * conversion.billar.volumen
@@ -80,7 +80,7 @@
                                 + input_ping.value * conversion.ping.volumen;
             });
 
-            input_billar.addEventListener("input", () => {
+            input_ping.addEventListener("input", () => {
                 input_peso.value = input_billar.value * conversion.billar.peso
                                 + input_ping.value * conversion.ping.peso;
                 input_volumen.value = input_billar.value * conversion.billar.volumen
@@ -120,7 +120,7 @@
 </head>
 <body>
     <h1>Prueba Estatica</h1>
-    <form action="'/data/'+ronda+'/'+equipo+'.json'" method="post">
+    <form action="/vuelo" target="/crl/vuelo.html" method="post">
         <p>
             <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda"></select>
         </p>
