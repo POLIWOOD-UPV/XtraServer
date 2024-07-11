@@ -138,19 +138,19 @@ function ordenar_control() {
     Array.from(filas_control).forEach(fila => {
         let punto = parseInt(fila.querySelector(".puntos_control").textContent);
         puntos_ord_cont.push(punto);
-        console.log("Punto cogido de la fila: "+ punto)
+        // console.log("Punto cogido de la fila: "+ punto)
     });
     // Ordenar los puntos
     let puntosOrdenados = [...puntos_ord_cont].sort((a, b) => a - b);
     // Los tiempos salen bien ordenados
-    console.log("Puntos Ordenados")
-    console.log(puntosOrdenados)
+    // console.log("Puntos Ordenados")
+    // console.log(puntosOrdenados)
     // Reordenar las filas en base a los tiempos ordenados
     Array.from(filas_control).forEach((fila, index) => {
         let puntoFila = parseInt(fila.querySelector(".puntos_control").textContent)
-        console.log("puntoFila ",puntoFila)
+        // console.log("puntoFila ",puntoFila)
         let nuevaPosicion = puntosOrdenados.indexOf(puntoFila) + 1; // Agregar 1 ya que las posiciones comienzan desde 1
-        console.log("Posicion que va al order: "+ nuevaPosicion)
+        // console.log("Posicion que va al order: "+ nuevaPosicion)
         // ESTA LINEA ES UNA BENDICION LA AMO
         fila.style.order = nuevaPosicion; // Establecer el orden con CSS!! 
     });
@@ -186,23 +186,25 @@ function sacar_pos_avion(puntazo) {
 }
 
 function remplazar_piloto(piloto,estado){
+    console.log("remplazar_piloto")
         // Primero borramos la entrada existente ya
     // Necesitamos saber en que posicion esta
-    let i = 1;
+    let i = 0;
     for (let fila_piloto of filas_control) {
         // Cogemos el nombre y lo comparamos
         let nombre = fila_piloto.querySelector(".nombre_control").textContent;
-        console.log(nombre);
         if (nombre === piloto) { // Coinciden los nombres
-            // Sacamos la posicion
-            pos = String(i - filas_control.length +1)+"c" // Hay que hacer esto ya que esta del reves
-            console.log(pos)
+            // Sacamos la posicion con el style order
+            pos = fila_piloto.style.order
+            console.info("POS CALCULADA:",pos)
             break
+        }else{
+            i++
         }
-        i++
+        
     }
     // Quitamos el piloto y de la lista tambien
-    s_quitaPiloto(estado,pos)
+    s_quitaPiloto(estado,pos+"c")
     pilotos = pilotos.filter(item => item !== piloto); // StackOverflow, devuevlve pilotos sin piloto
     
     setTimeout(()=>{

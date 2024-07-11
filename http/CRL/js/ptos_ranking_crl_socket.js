@@ -87,6 +87,8 @@ function s_sumaPiloto(estado){
     }
 }
 function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emit y filas control
+    console.log("s_quitaPiloto")
+    console.log(pos)
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado
     a_borrar_c.remove();
 
@@ -103,7 +105,7 @@ function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emi
 
         // identificamos si estamos en una fila que debemos modificar
         let id_fila_actual = Number(boton_animado.id[0])
-        console.log(id_fila_actual)
+        // console.log(id_fila_actual)
         pos = pos[0]
         if (id_fila_actual > pos){
             boton_animado.id = String(id_fila_actual-1)+"c_AN"
