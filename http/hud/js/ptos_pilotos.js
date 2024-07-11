@@ -73,6 +73,7 @@ function sumaPiloto(piloto,pos,puntos,estado,) {
     let nueva_fila = creaFila(piloto,pos, puntos);
     // Incrementamos la cantidad de aviones que hay
     ++controla_pilotos
+    console.log("Introduciendo piloto " + piloto + " en "+pos+" con puntos: "+puntos)
 
     // Metemos en el ranking
     meter_en_ranking(nueva_fila)

@@ -18,11 +18,12 @@ let puntos_visibles = true;
 logos_visibles = true;
 var pilotos = ["POLIWOOD"]
 
+
 // Funciones traidas de otros archivos
 
 // Coge al piloto y lo mete en el sistema
 function cogerPiloto() {
-    console.log("cogerPiloto")
+    // console.log("cogerPiloto")
     // Cogemos el  del avion actual a través del drop down
     let piloto_input = document.getElementById("nombres_equipos_constructor_id")
     piloto = piloto_input.value
@@ -31,7 +32,7 @@ function cogerPiloto() {
 
 // Coger los tiempos del input
 function cogerPuntos() {
-    console.log("cogerPuntos")
+    // console.log("cogerPuntos")
     let puntos = parseInt(document.querySelector("#puntos_input_id").value);
     return isNaN(puntos) ? 0 : puntos; // Si no es un numero, devolvemos 0
 }
@@ -39,7 +40,7 @@ function cogerPuntos() {
 
 // Crea la fila de control        
 function FilaControlResta(piloto,puntos,pos){
-    console.log("FilaControlResta")
+    // console.log("FilaControlResta")
 
     // Creamos la fila con sus partes
     let fila_borrar = document.createElement("div")
@@ -91,7 +92,7 @@ function FilaControlResta(piloto,puntos,pos){
 
 // Arregla las posiciones de abajo de las filas de control
 function arreglar_pos_control(pos) {
-    console.log("arreglar_pos_control")
+    // console.log("arreglar_pos_control")
 
 // Ordenamos las filas de control
     ordenar_control()
@@ -132,7 +133,7 @@ function arreglar_pos_control(pos) {
 
 // Ordena las filas de control 
 function ordenar_control() {
-    console.log("ordenar_control")
+    // console.log("ordenar_control")
     var puntos_ord_cont = [];
     // Obtener los puntos de todas las filas
     Array.from(filas_control).forEach(fila => {
@@ -165,7 +166,7 @@ function validarNumero(valor) {
 
 //Sacar la nueva posicion  - PERO AHORA DESDE CONTROL LOOOL
 function sacar_pos_avion(puntazo) {
-    console.log("sacar_pos_avion")
+    // console.log("sacar_pos_avion")
     let puntos = [];
     filas_array = Array.from(filas_control);
 
@@ -186,24 +187,22 @@ function sacar_pos_avion(puntazo) {
 }
 
 function remplazar_piloto(piloto,estado){
-    console.log("remplazar_piloto")
-        // Primero borramos la entrada existente ya
+    // console.log("remplazar_piloto")
+    // Primero borramos la entrada existente ya
     // Necesitamos saber en que posicion esta
     let i = 0;
     for (let fila_piloto of filas_control) {
         // Cogemos el nombre y lo comparamos
         let nombre = fila_piloto.querySelector(".nombre_control").textContent;
         if (nombre === piloto) { // Coinciden los nombres
-            // Sacamos la posicion con el style order
-            pos = fila_piloto.style.order
-            console.info("POS CALCULADA:",pos)
+            pos = fila_piloto.querySelector(".boton_control[id*='c']").id[0]; // Obtenemos el id del boton y sacamos la pos
             break
-        }else{
+        }else{ // No coinciden
             i++
         }
-        
     }
     // Quitamos el piloto y de la lista tambien
+    console.log("Reemplazar piloto "+piloto+" en "+pos)
     s_quitaPiloto(estado,pos+"c")
     pilotos = pilotos.filter(item => item !== piloto); // StackOverflow, devuevlve pilotos sin piloto
     

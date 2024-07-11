@@ -62,7 +62,7 @@ function s_vaciarPilotos(){ // Esta tambien es igual, filas control cuidado
     socket.emit("all","puntos",["vacPilo"]);
 }
 function s_sumaPiloto(estado){
-    console.log("s_sumaPiloto")
+    // console.info("s_sumaPiloto")
     // Coger el piloto
     piloto = cogerPiloto();
     console.log(piloto)
@@ -87,10 +87,12 @@ function s_sumaPiloto(estado){
     }
 }
 function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emit y filas control
-    console.log("s_quitaPiloto")
-    console.log(pos)
+    // console.info("s_quitaPiloto")
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado
     a_borrar_c.remove();
+
+    a_borrar_nombre = a_borrar_c.querySelector(".nombre_control").textContent
+    console.log("Quitando "+a_borrar_nombre+" en "+pos[0])
 
     info = ["quiPil",estado,pos]
     socket.emit("all","puntos",info)
@@ -109,9 +111,9 @@ function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emi
         pos = pos[0]
         if (id_fila_actual > pos){
             boton_animado.id = String(id_fila_actual-1)+"c_AN"
-            console.log("boton_id "+boton_animado.id)
             // Boton sin animacion
             boton_normal.id = String(id_fila_actual-1)+"c"
         }
     }
+    ordenar_control()
 }
