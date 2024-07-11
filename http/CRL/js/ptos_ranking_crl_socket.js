@@ -63,21 +63,28 @@ function s_vaciarPilotos(){ // Esta tambien es igual, filas control cuidado
 }
 function s_sumaPiloto(estado){
     console.log("s_sumaPiloto")
-    // Agreganis el avion a la lista y lo cogemos
-    piloto = crea_Perfil();
+    // Coger el piloto
+    piloto = cogerPiloto();
+    console.log(piloto)
+    // Comprobamos si existe ya una entrada de ese piloto
+    if (pilotos.includes(piloto)){ // Ya existe -> Hay que reemplazarlo
+        remplazar_piloto(piloto,estado)
+    }else{                          // No existe -> Hay que crearlo 
+        // Metemos el nuevo perfil en la lista
+        pilotos.push(piloto)
 
-    // Coger los puntos del avion
-    puntos = cogerPuntos();
+        // Coger los puntos del avion
+        puntos = cogerPuntos();
 
-    // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
-    pos = sacar_pos_avion(puntos) // Es un numero
-    FilaControlResta(piloto,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+        pos = sacar_pos_avion(puntos) // Es un numero
+        FilaControlResta(piloto,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
-    // Empaquetado de informacion
-    info = ["sumPil",piloto, pos, puntos,estado]
-    socket.emit("all", "puntos",info )
-    ordenar_control(); // Ordenar la lista de control después de la eliminación
-
+        // Empaquetado de informacion
+        info = ["sumPil",piloto, pos, puntos,estado]
+        socket.emit("all", "puntos",info )
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+    }
 }
 function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emit y filas control
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado

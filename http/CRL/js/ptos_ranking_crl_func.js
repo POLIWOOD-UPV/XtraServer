@@ -21,13 +21,11 @@ var pilotos = ["POLIWOOD"]
 // Funciones traidas de otros archivos
 
 // Coge al piloto y lo mete en el sistema
-function crea_Perfil() {
-    console.log("crea_Perfil")
+function cogerPiloto() {
+    console.log("cogerPiloto")
     // Cogemos el  del avion actual a través del drop down
     let piloto_input = document.getElementById("nombres_equipos_constructor_id")
     piloto = piloto_input.value
-    // Metemos el nuevo perfil en la lista
-    pilotos.push(piloto)
     return piloto
 }
 
@@ -50,6 +48,7 @@ function FilaControlResta(piloto,puntos,pos){
     // Ponemos el nombre
     let nombre = document.createElement("div")
     nombre.textContent = piloto
+    nombre.className = "nombre_control"
     fila_borrar.append(nombre)
 
     // Para borrar
@@ -184,4 +183,31 @@ function sacar_pos_avion(puntazo) {
     let nueva_posicion = puntos2.lastIndexOf(puntazo) + 1;
 
     return nueva_posicion;
+}
+
+function remplazar_piloto(piloto,estado){
+        // Primero borramos la entrada existente ya
+    // Necesitamos saber en que posicion esta
+    let i = 1;
+    for (let fila_piloto of filas_control) {
+        // Cogemos el nombre y lo comparamos
+        let nombre = fila_piloto.querySelector(".nombre_control").textContent;
+        console.log(nombre);
+        if (nombre === piloto) { // Coinciden los nombres
+            // Sacamos la posicion
+            pos = String(i - filas_control.length +1)+"c" // Hay que hacer esto ya que esta del reves
+            console.log(pos)
+            break
+        }
+        i++
+    }
+    // Quitamos el piloto y de la lista tambien
+    s_quitaPiloto(estado,pos)
+    pilotos = pilotos.filter(item => item !== piloto); // StackOverflow, devuevlve pilotos sin piloto
+    
+    setTimeout(()=>{
+        // Volvemos a introducirlo con los puntos nuevos
+        s_sumaPiloto(estado)
+    },500) // Retraso, podemos variarlo
+
 }
