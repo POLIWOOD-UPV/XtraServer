@@ -141,7 +141,7 @@ function ordenar_control() {
         // console.log("Punto cogido de la fila: "+ punto)
     });
     // Ordenar los puntos
-    let puntosOrdenados = [...puntos_ord_cont].sort((a, b) => a - b);
+    let puntosOrdenados = [...puntos_ord_cont].sort((a, b) => b - a);
     // Los tiempos salen bien ordenados
     // console.log("Puntos Ordenados")
     // console.log(puntosOrdenados)
@@ -177,7 +177,7 @@ function sacar_pos_avion(puntazo) {
 
     // Metemos al final el nuestro y creamos una copia ordenada
     puntos.push(puntazo);
-    let puntos2 = [...puntos].sort((a, b) => a - b);
+    let puntos2 = [...puntos].sort((a, b) => b - a);
 
     // Buscamos el indice y +1 ya que es un array y las pos empiezan en 1 no 0
     let nueva_posicion = puntos2.lastIndexOf(puntazo) + 1;
