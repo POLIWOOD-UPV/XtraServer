@@ -132,9 +132,9 @@ function s_quitaPiloto(estado,pos){
         boton_normal = botones[1]
 
         // identificamos si estamos en una fila que debemos modificar
-        let id_fila_actual = Number(boton_animado.id[0])
+        let id_fila_actual = Number(boton_animado.id.split("c")[0])
         console.log(id_fila_actual)
-        pos = pos[0]
+        pos = pos.split("c")[0]
         if (id_fila_actual > pos){
             boton_animado.id = String(id_fila_actual-1)+"c_AN"
             console.log("boton_id "+boton_animado.id)

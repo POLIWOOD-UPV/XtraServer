@@ -92,7 +92,8 @@ function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emi
     a_borrar_c.remove();
 
     a_borrar_nombre = a_borrar_c.querySelector(".nombre_control").textContent
-    console.log("Quitando "+a_borrar_nombre+" en "+pos[0])
+    pos = pos.split("c")[0]
+    console.log("Quitando "+a_borrar_nombre+" en "+pos)
 
     info = ["quiPil",estado,pos]
     socket.emit("all","puntos",info)
@@ -106,9 +107,9 @@ function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emi
         boton_normal = botones[1]
 
         // identificamos si estamos en una fila que debemos modificar
-        let id_fila_actual = Number(boton_animado.id[0])
+        let id_fila_actual = Number(boton_animado.id.split("c")[0])
         // console.log(id_fila_actual)
-        pos = pos[0]
+        pos = pos.split("c")[0]
         if (id_fila_actual > pos){
             boton_animado.id = String(id_fila_actual-1)+"c_AN"
             // Boton sin animacion

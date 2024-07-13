@@ -14,7 +14,8 @@ function vaciarPilotos(){
 // Borra los pilotos del ranking y control
 function quitaPiloto(estado, pos) {
     if (filas.length > 0) {
-        pos = Number(pos[0]); // Obtener la posición de la ID del botón
+
+        pos = Number(pos.split("c")[0]); // Obtener la posición de la ID del botón
         console.log("Posición a borrar: " + pos);
 
         let a_borrar = document.getElementById(String(pos)); // Elemento del piloto a borrar
