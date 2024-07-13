@@ -196,7 +196,7 @@ function remplazar_piloto(piloto,estado){
         // Cogemos el nombre y lo comparamos
         let nombre = fila_piloto.querySelector(".nombre_control").textContent;
         if (nombre === piloto) { // Coinciden los nombres
-            pos = fila_piloto.querySelector(".boton_control[id*='c']").id[0]; // Obtenemos el id del boton y sacamos la pos
+            pos = fila_piloto.querySelector(".boton_control[id*='c']").id.split("c")[0]; // Obtenemos el id del boton y sacamos la pos
             break
         }else{ // No coinciden
             i++
