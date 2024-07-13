@@ -21,7 +21,7 @@ socket.on("ranking",(info) =>{
             vaciarPilotos();
             break;
         case "sumPil":
-            // info = [piloto, pos, tiempo, peso, estado]
+            // info = [piloto, pos, tiempo, peso, estado,despegue]
             sumaPiloto(info[0], info[1], info[2], info[3], info[4],info[5]);
             break;
         case "quiPil":

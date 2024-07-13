@@ -59,6 +59,8 @@ function s_vaciarPilotos(){ // Esta tambien es igual, filas control cuidado
         console.log(filas_control[j])
         filas_control[j].remove(); // Quitar todas las filas de control                    
     }
+    // Vaciamos la lista de pilotos
+    pilotos = []
     socket.emit("all","puntos",["vacPilo"]);
 }
 function s_sumaPiloto(estado){
@@ -91,10 +93,13 @@ function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emi
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado
     a_borrar_c.remove();
 
+    // Sacar datos
     a_borrar_nombre = a_borrar_c.querySelector(".nombre_control").textContent
     pos = pos.split("c")[0]
     console.log("Quitando "+a_borrar_nombre+" en "+pos)
+    pilotos = pilotos.filter(item => item !== a_borrar_nombre)
 
+    // Mandar la info al ranking
     info = ["quiPil",estado,pos]
     socket.emit("all","puntos",info)
     // Actualizar el ID de todos los botones de la fila de control
@@ -117,4 +122,28 @@ function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emi
         }
     }
     ordenar_control()
+}
+
+function s_mandar_zeros(){
+    // Primero vaciamos todos los pilotos
+    s_vaciarPilotos();
+    
+    // Rellenamos el control con todo 0s
+    let estado = "animado"
+    for (equipo of equipos){
+    // Metemos el nuevo perfil en la lista
+    pilotos.push(equipo)
+    // Coger los puntos del avion
+    puntos = "0";
+    
+    // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+    pos = sacar_pos_avion(puntos) // Es un numero
+    FilaControlResta(equipo,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+    
+    // Empaquetado de informacion
+    info = ["sumPil",equipo, pos, puntos,estado]
+    socket.emit("all", "puntos",info )
+    ordenar_control(); // Ordenar la lista de control después de la eliminación
+    
+    }
 }

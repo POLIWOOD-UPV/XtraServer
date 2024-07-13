@@ -22,16 +22,16 @@ var filas_visible = true;
 logos_visibles = true;
 despes_visibles = true;
 var pilotos = ["POLIWOOD"]
+var equipos = ["RUHE", "Aerotech", "G3", "Matsia", "LuftSieger", "ECLift", "SAETA_T2", "DIANA", "Trencalòs", "North Pole", "SAETA_T1", "UCA&Air", "Club Xaloc", "Sky Eagle"];
 
 // Funciones traidas de otros archivos
 
 // Coge al piloto y lo mete en el sistema
-function crea_Perfil() {
+function cogerPiloto() {
     // Cogemos el  del avion actual a través del drop down
     let piloto_input = document.getElementById("nombres_equipos_constructor_id")
     piloto = piloto_input.value
     // Metemos el nuevo perfil en la lista
-    pilotos.push(piloto)
     return piloto
 }
 
@@ -71,6 +71,7 @@ function FilaControlResta(piloto,tiempo,pos){
     // Ponemos el nombre
     let nombre = document.createElement("div")
     nombre.textContent = piloto
+    nombre.className = "nombre_control"
     fila_borrar.append(nombre)
 
     // Para borrar
@@ -176,6 +177,9 @@ function ordenar_control() {
 
 // convertir tiempo a milisegundos
 function convertirTiempoAMilisegundos(tiempo) {
+    if (tiempo === '-:-:-') {
+        return Number.MAX_SAFE_INTEGER; // Un valor muy alto para asegurar que se posicionen al final
+    }
     let partes = tiempo.split(':');
     let minutos = Number(partes[0]) * 60;
     let segundos = Number(partes[1]);
@@ -210,4 +214,72 @@ function sacar_pos_avion(tiempo) {
     let nueva_posicion = tiempos2.lastIndexOf(tiempo_avion) + 1;
 
     return nueva_posicion;
+}
+
+function remplazar_piloto(piloto,estado,negado = false){
+    // console.log("remplazar_piloto")
+    // Primero borramos la entrada existente ya
+    // Necesitamos saber en que posicion esta
+    let i = 0;
+    for (let fila_piloto of filas_control) {
+        // Cogemos el nombre y lo comparamos
+        let nombre = fila_piloto.querySelector(".nombre_control").textContent;
+        if (nombre === piloto) { // Coinciden los nombres
+            pos = fila_piloto.querySelector(".boton_control[id*='c']").id.split("c")[0]; // Obtenemos el id del boton y sacamos la pos
+            break
+        }else{ // No coinciden
+            i++
+        }
+    }
+    // Quitamos el piloto y de la lista tambien
+    console.log("Reemplazar piloto "+piloto+" en "+pos)
+    s_quitaPiloto(estado,pos+"c")
+    pilotos = pilotos.filter(item => item !== piloto); // StackOverflow, devuevlve pilotos sin piloto
+    
+    setTimeout(()=>{
+        if (negado){
+            negar_piloto(piloto)
+        }else{
+            // Volvemos a introducirlo con los puntos nuevos
+            s_sumaPiloto(estado)
+        }
+    },500) // Retraso, podemos variarlo
+
+}
+
+function s_mandar_zeros(){
+    // Primero vaciamos todos los pilotos
+    s_vaciarPilotos();
+    
+    // Rellenamos el control con todo 0s
+    for (piloto of equipos){
+        negar_piloto(piloto,estado)
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+    }
+}
+
+function negar_piloto(piloto=cogerPiloto()){
+    let estado = "animado"
+    if (pilotos.includes(piloto)){ // Hay que reemplazarlo
+        remplazar_piloto(piloto,estado,true)
+    }else{
+        pilotos.push(piloto)
+        // Coger el tiempo del avion
+        minutos = "-"
+        segundos = "-"
+        miliseg = "-"
+        tiempo = minutos + ":" + segundos + ":" + miliseg
+        console.log("TIEMPO "+tiempo)
+        // Coger el peso
+        peso = "- Kg"
+        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+        pos = sacar_pos_avion(tiempo) // Es un numero
+        FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+
+        // Coger el despegue
+        let despegue_input = "Pendiente"
+
+        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
+        socket.emit("all", "ranking",info )
+    }
 }
