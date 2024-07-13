@@ -131,19 +131,19 @@ function s_mandar_zeros(){
     // Rellenamos el control con todo 0s
     let estado = "animado"
     for (equipo of equipos){
-    // Metemos el nuevo perfil en la lista
-    pilotos.push(equipo)
-    // Coger los puntos del avion
-    puntos = "0";
-    
-    // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
-    pos = sacar_pos_avion(puntos) // Es un numero
-    FilaControlResta(equipo,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
-    
-    // Empaquetado de informacion
-    info = ["sumPil",equipo, pos, puntos,estado]
-    socket.emit("all", "puntos",info )
-    ordenar_control(); // Ordenar la lista de control después de la eliminación
-    
+        // Metemos el nuevo perfil en la lista
+        pilotos.push(equipo)
+        // Coger los puntos del avion
+        puntos = "0";
+        
+        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+        pos = sacar_pos_avion(puntos) // Es un numero
+        FilaControlResta(equipo,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+        
+        // Empaquetado de informacion
+        info = ["sumPil",equipo, pos, puntos,estado]
+        socket.emit("all", "puntos",info )
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+        
     }
 }
