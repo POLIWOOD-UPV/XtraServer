@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Ranking</title>
+</head>
+
 <link rel = "stylesheet" href="../hud/css/ranking.css"></link>
 <html lang="es">
     <main>
@@ -24,6 +28,7 @@
         </div>    
         <div id = "divIntegraPilotos">
             <h2>Integracion de pilotos</h2>
+            <button onclick="s_mandar_zeros()">Zeros</button>
             <h3>Sumar</h3>
                 <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
                     <option value="RUHE">RUHE</option>
@@ -49,14 +54,16 @@
                     <option value = "Corto">Corto</option>
                     <option value = "Correcto">Correcto</option>
                     <option value = "Ilegal">Ilegal</option>
+                    <option value = "Pendiente">Pendiente</option>
                 </select>
                 <button onclick="s_sumaPiloto('animado')">SUMAR_An</button>
                 <button onclick="s_sumaPiloto('seco')"> SUMAR</button>
+                <button onclick="negar_piloto()">Zero</button>
 
             <h3>Borrar</h3>
             <div id = "pilotos_mas_borrar">
                 <div class = "fila_control_borrar">
-                    <div class = "nombre_control">RIC</div>
+                    <div class = "nombre_control">poliwood</div>
                     <button class = "boton_control" id = "1c_AN" onclick="s_quitaPiloto('animado',this.id)">BORRAR_An</button>
                     <button class = "boton_control"  id = "1c" onclick="s_quitaPiloto('seco',this.id)"> BORRAR</button>
                     <div class = "tiempo_control">33:33:333</div>

@@ -14,7 +14,7 @@ function vaciarPilotos(){
 // Borra los pilotos del ranking y control
 function quitaPiloto(estado, pos) {
     if (filas.length > 0) {
-        pos = Number(pos[0]); // Obtener la posición de la ID del botón
+        pos = Number(pos.split("c")[0]); // Obtener la posición de la ID del botón
         console.log("Posición a borrar: " + pos);
 
         let a_borrar = document.getElementById(String(pos)); // Elemento del piloto a borrar
@@ -69,6 +69,7 @@ function subir_posiciones(pos) {
 
 // Poner y sacar aviones (con animacion)
 function sumaPiloto(piloto,pos,tiempo,peso,estado,despegue) {
+    console.log("SumaPiloto")
     //Poner el avion en el ranking
     let nueva_fila = creaFila(piloto,pos, tiempo,peso,despegue);
     // Incrementamos la cantidad de aviones que hay
@@ -93,6 +94,8 @@ function sumaPiloto(piloto,pos,tiempo,peso,estado,despegue) {
 
 // Introduce en el ranking la fila nueva
 function meter_en_ranking(nueva_fila) {
+    console.log("meter_en_ranking")
+
     let filas_array = Array.from(filas);
 
     // Pillamos la posicion
@@ -117,6 +120,8 @@ function meter_en_ranking(nueva_fila) {
 }
 // Mete la info de la fila nueva en la posición correcta 
 function introducir_en_filas(pos, nueva_fila) {
+    console.log("introducir_en_filas")
+
     // Convierte la colección HTML de filas a un array temporal para itrerar etc
     let filas_array = Array.from(filas);
 

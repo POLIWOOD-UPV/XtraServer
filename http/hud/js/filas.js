@@ -19,7 +19,7 @@ let tiempos = document.getElementsByClassName("tiempo")
 let peso_visible = false;
 let pesos = document.getElementsByClassName("peso")
 
-// Logos (empieza activado)
+// Logos y despegues (empieza activados los dos)
 let logos_visibles = true
 let despegues_visibles = true
 
@@ -57,6 +57,7 @@ function creaFila(nom,pos,tiemp,pes,despegue){
         case "Corto": color = "#9000ff";break;
         case "Correcto":color = "#0dff00";break;
         case "Ilegal": color = "#ff0000"; break;
+        case "Pendiente": color = "#ffffff";break;
     }
     circulo.style.backgroundColor = color
     // Informativos

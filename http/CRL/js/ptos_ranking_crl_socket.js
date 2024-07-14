@@ -59,30 +59,47 @@ function s_vaciarPilotos(){ // Esta tambien es igual, filas control cuidado
         console.log(filas_control[j])
         filas_control[j].remove(); // Quitar todas las filas de control                    
     }
+    // Vaciamos la lista de pilotos
+    pilotos = []
     socket.emit("all","puntos",["vacPilo"]);
 }
 function s_sumaPiloto(estado){
-    console.log("s_sumaPiloto")
-    // Agreganis el avion a la lista y lo cogemos
-    piloto = crea_Perfil();
+    // console.info("s_sumaPiloto")
+    // Coger el piloto
+    piloto = cogerPiloto();
+    console.log(piloto)
+    // Comprobamos si existe ya una entrada de ese piloto
+    if (pilotos.includes(piloto)){ // Ya existe -> Hay que reemplazarlo
+        remplazar_piloto(piloto,estado)
+    }else{                          // No existe -> Hay que crearlo 
+        // Metemos el nuevo perfil en la lista
+        pilotos.push(piloto)
 
-    // Coger los puntos del avion
-    puntos = cogerPuntos();
+        // Coger los puntos del avion
+        puntos = cogerPuntos();
 
-    // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
-    pos = sacar_pos_avion(puntos) // Es un numero
-    FilaControlResta(piloto,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+        pos = sacar_pos_avion(puntos) // Es un numero
+        FilaControlResta(piloto,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
-    // Empaquetado de informacion
-    info = ["sumPil",piloto, pos, puntos,estado]
-    socket.emit("all", "puntos",info )
-    ordenar_control(); // Ordenar la lista de control después de la eliminación
-
+        // Empaquetado de informacion
+        info = ["sumPil",piloto, pos, puntos,estado]
+        socket.emit("all", "puntos",info )
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+    }
 }
 function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emit y filas control
+    // console.info("s_quitaPiloto")
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado
     a_borrar_c.remove();
 
+    // Sacar datos
+    a_borrar_nombre = a_borrar_c.querySelector(".nombre_control").textContent
+    pos = pos.split("c")[0]
+    console.log("Quitando "+a_borrar_nombre+" en "+pos)
+    pilotos = pilotos.filter(item => item !== a_borrar_nombre)
+
+    // Mandar la info al ranking
     info = ["quiPil",estado,pos]
     socket.emit("all","puntos",info)
     // Actualizar el ID de todos los botones de la fila de control
@@ -95,14 +112,38 @@ function s_quitaPiloto(estado,pos){ // Esta es igial tambien, cuidado con el emi
         boton_normal = botones[1]
 
         // identificamos si estamos en una fila que debemos modificar
-        let id_fila_actual = Number(boton_animado.id[0])
-        console.log(id_fila_actual)
-        pos = pos[0]
+        let id_fila_actual = Number(boton_animado.id.split("c")[0])
+        // console.log(id_fila_actual)
+        pos = pos.split("c")[0]
         if (id_fila_actual > pos){
             boton_animado.id = String(id_fila_actual-1)+"c_AN"
-            console.log("boton_id "+boton_animado.id)
             // Boton sin animacion
             boton_normal.id = String(id_fila_actual-1)+"c"
         }
+    }
+    ordenar_control()
+}
+
+function s_mandar_zeros(){
+    // Primero vaciamos todos los pilotos
+    s_vaciarPilotos();
+    
+    // Rellenamos el control con todo 0s
+    let estado = "animado"
+    for (equipo of equipos){
+        // Metemos el nuevo perfil en la lista
+        pilotos.push(equipo)
+        // Coger los puntos del avion
+        puntos = "0";
+        
+        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+        pos = sacar_pos_avion(puntos) // Es un numero
+        FilaControlResta(equipo,puntos,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+        
+        // Empaquetado de informacion
+        info = ["sumPil",equipo, pos, puntos,estado]
+        socket.emit("all", "puntos",info )
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+        
     }
 }

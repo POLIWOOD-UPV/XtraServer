@@ -17,23 +17,23 @@ var filas_visible = true;
 let puntos_visibles = true;
 logos_visibles = true;
 var pilotos = ["POLIWOOD"]
+var equipos = ["RUHE", "Aerotech", "G3", "Matsia", "LuftSieger", "ECLift", "SAETA_T2", "DIANA", "Trencalòs", "North Pole", "SAETA_T1", "UCA&Air", "Club Xaloc", "Sky Eagle"];
+
 
 // Funciones traidas de otros archivos
 
 // Coge al piloto y lo mete en el sistema
-function crea_Perfil() {
-    console.log("crea_Perfil")
+function cogerPiloto() {
+    // console.log("cogerPiloto")
     // Cogemos el  del avion actual a través del drop down
     let piloto_input = document.getElementById("nombres_equipos_constructor_id")
     piloto = piloto_input.value
-    // Metemos el nuevo perfil en la lista
-    pilotos.push(piloto)
     return piloto
 }
 
 // Coger los tiempos del input
 function cogerPuntos() {
-    console.log("cogerPuntos")
+    // console.log("cogerPuntos")
     let puntos = parseInt(document.querySelector("#puntos_input_id").value);
     return isNaN(puntos) ? 0 : puntos; // Si no es un numero, devolvemos 0
 }
@@ -41,7 +41,7 @@ function cogerPuntos() {
 
 // Crea la fila de control        
 function FilaControlResta(piloto,puntos,pos){
-    console.log("FilaControlResta")
+    // console.log("FilaControlResta")
 
     // Creamos la fila con sus partes
     let fila_borrar = document.createElement("div")
@@ -50,6 +50,7 @@ function FilaControlResta(piloto,puntos,pos){
     // Ponemos el nombre
     let nombre = document.createElement("div")
     nombre.textContent = piloto
+    nombre.className = "nombre_control"
     fila_borrar.append(nombre)
 
     // Para borrar
@@ -92,7 +93,7 @@ function FilaControlResta(piloto,puntos,pos){
 
 // Arregla las posiciones de abajo de las filas de control
 function arreglar_pos_control(pos) {
-    console.log("arreglar_pos_control")
+    // console.log("arreglar_pos_control")
 
 // Ordenamos las filas de control
     ordenar_control()
@@ -133,25 +134,25 @@ function arreglar_pos_control(pos) {
 
 // Ordena las filas de control 
 function ordenar_control() {
-    console.log("ordenar_control")
+    // console.log("ordenar_control")
     var puntos_ord_cont = [];
     // Obtener los puntos de todas las filas
     Array.from(filas_control).forEach(fila => {
         let punto = parseInt(fila.querySelector(".puntos_control").textContent);
         puntos_ord_cont.push(punto);
-        console.log("Punto cogido de la fila: "+ punto)
+        // console.log("Punto cogido de la fila: "+ punto)
     });
     // Ordenar los puntos
-    let puntosOrdenados = [...puntos_ord_cont].sort((a, b) => a - b);
+    let puntosOrdenados = [...puntos_ord_cont].sort((a, b) => b - a);
     // Los tiempos salen bien ordenados
-    console.log("Puntos Ordenados")
-    console.log(puntosOrdenados)
+    // console.log("Puntos Ordenados")
+    // console.log(puntosOrdenados)
     // Reordenar las filas en base a los tiempos ordenados
     Array.from(filas_control).forEach((fila, index) => {
         let puntoFila = parseInt(fila.querySelector(".puntos_control").textContent)
-        console.log("puntoFila ",puntoFila)
+        // console.log("puntoFila ",puntoFila)
         let nuevaPosicion = puntosOrdenados.indexOf(puntoFila) + 1; // Agregar 1 ya que las posiciones comienzan desde 1
-        console.log("Posicion que va al order: "+ nuevaPosicion)
+        // console.log("Posicion que va al order: "+ nuevaPosicion)
         // ESTA LINEA ES UNA BENDICION LA AMO
         fila.style.order = nuevaPosicion; // Establecer el orden con CSS!! 
     });
@@ -166,7 +167,7 @@ function validarNumero(valor) {
 
 //Sacar la nueva posicion  - PERO AHORA DESDE CONTROL LOOOL
 function sacar_pos_avion(puntazo) {
-    console.log("sacar_pos_avion")
+    // console.log("sacar_pos_avion")
     let puntos = [];
     filas_array = Array.from(filas_control);
 
@@ -178,10 +179,39 @@ function sacar_pos_avion(puntazo) {
 
     // Metemos al final el nuestro y creamos una copia ordenada
     puntos.push(puntazo);
-    let puntos2 = [...puntos].sort((a, b) => a - b);
+    let puntos2 = [...puntos].sort((a, b) => b - a);
 
     // Buscamos el indice y +1 ya que es un array y las pos empiezan en 1 no 0
     let nueva_posicion = puntos2.lastIndexOf(puntazo) + 1;
 
     return nueva_posicion;
 }
+
+function remplazar_piloto(piloto,estado){
+    // console.log("remplazar_piloto")
+    // Primero borramos la entrada existente ya
+    // Necesitamos saber en que posicion esta
+    let i = 0;
+    for (let fila_piloto of filas_control) {
+        // Cogemos el nombre y lo comparamos
+        let nombre = fila_piloto.querySelector(".nombre_control").textContent;
+        if (nombre === piloto) { // Coinciden los nombres
+            pos = fila_piloto.querySelector(".boton_control[id*='c']").id.split("c")[0]; // Obtenemos el id del boton y sacamos la pos
+            break
+        }else{ // No coinciden
+            i++
+        }
+    }
+    // Quitamos el piloto y de la lista tambien
+    console.log("Reemplazar piloto "+piloto+" en "+pos)
+    s_quitaPiloto(estado,pos+"c")
+    pilotos = pilotos.filter(item => item !== piloto); // StackOverflow, devuevlve pilotos sin piloto
+    
+    setTimeout(()=>{
+        // Volvemos a introducirlo con los puntos nuevos
+        s_sumaPiloto(estado)
+    },500) // Retraso, podemos variarlo
+
+}
+
+

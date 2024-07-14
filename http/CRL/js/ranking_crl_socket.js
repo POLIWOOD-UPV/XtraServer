@@ -94,32 +94,58 @@ function s_vaciarPilotos(){
 }
 function s_sumaPiloto(estado){
     // Agreganis el avion a la lista y lo cogemos
-    piloto = crea_Perfil();
+    piloto = cogerPiloto();
+    if (pilotos.includes(piloto)){
+        remplazar_piloto(piloto,estado)
+    }else if (estado == "negado"){
+        pilotos.push(piloto)
+        // Coger el tiempo del avion
+        minutos = cogerTiempo_Peso("min")
+        segundos = cogerTiempo_Peso("seg")
+        miliseg = cogerTiempo_Peso("mil")
+        tiempo = minutos + ":" + segundos + ":" + miliseg
+        console.log("TIEMPO "+tiempo)
+        // Coger el peso
+        peso = cogerTiempo_Peso("pes") + " Kg"
+        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+        pos = sacar_pos_avion(tiempo) // Es un numero
+        FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
-    // Coger el tiempo del avion
-    minutos = cogerTiempo_Peso("min")
-    segundos = cogerTiempo_Peso("seg")
-    miliseg = cogerTiempo_Peso("mil")
-    tiempo = minutos + ":" + segundos + ":" + miliseg
-    console.log("TIEMPO "+tiempo)
-    // Coger el peso
-    peso = cogerTiempo_Peso("pes") + " Kg"
-    // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
-    pos = sacar_pos_avion(tiempo) // Es un numero
-    FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
+        // Coger el despegue
+        let despegue_input = document.querySelector("#tipos_despegue_id").value
 
-    // Coger el despegue
-    let despegue_input = document.querySelector("#tipos_despegue_id").value
+        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
+        socket.emit("all", "ranking",info )
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+    }else {
+        pilotos.push(piloto)
+        // Coger el tiempo del avion
+        minutos = cogerTiempo_Peso("min")
+        segundos = cogerTiempo_Peso("seg")
+        miliseg = cogerTiempo_Peso("mil")
+        tiempo = minutos + ":" + segundos + ":" + miliseg
+        console.log("TIEMPO "+tiempo)
+        // Coger el peso
+        peso = cogerTiempo_Peso("pes") + " Kg"
+        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
+        pos = sacar_pos_avion(tiempo) // Es un numero
+        FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
-    info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
-    socket.emit("all", "ranking",info )
-    ordenar_control(); // Ordenar la lista de control después de la eliminación
+        // Coger el despegue
+        let despegue_input = document.querySelector("#tipos_despegue_id").value
 
+        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
+        socket.emit("all", "ranking",info )
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+    }
 }
 function s_quitaPiloto(estado,pos){
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado
     a_borrar_c.remove();
 
+    a_borrar_nombre = a_borrar_c.querySelector(".nombre_control").textContent.toUpperCase()
+    console.log("TEST: ", a_borrar_nombre)
+    pilotos = pilotos.filter(item => item !== a_borrar_nombre)
     info = ["quiPil",estado,pos]
     socket.emit("all","ranking",info)
     // Actualizar el ID de todos los botones de la fila de control
@@ -132,9 +158,9 @@ function s_quitaPiloto(estado,pos){
         boton_normal = botones[1]
 
         // identificamos si estamos en una fila que debemos modificar
-        let id_fila_actual = Number(boton_animado.id[0])
+        let id_fila_actual = Number(boton_animado.id.split("c")[0])
         console.log(id_fila_actual)
-        pos = pos[0]
+        pos = pos.split("c")[0]
         if (id_fila_actual > pos){
             boton_animado.id = String(id_fila_actual-1)+"c_AN"
             console.log("boton_id "+boton_animado.id)
@@ -142,4 +168,5 @@ function s_quitaPiloto(estado,pos){
             boton_normal.id = String(id_fila_actual-1)+"c"
         }
     }
+    ordenar_control()
 }
