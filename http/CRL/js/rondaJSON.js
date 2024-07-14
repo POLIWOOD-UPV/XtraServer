@@ -13,7 +13,12 @@ const loadJSON = async () => {
 
 const loadInfo = async (rond, equip) => {
     response = (await fetch(`/data/${rond}/${equip}.json`));
-    info = await response.json();
+    try {
+        info = await response.json();
+        return info;
+    } catch { // No se ha completado correctamente
+        return;
+    }
 };
 
 const update = () => {
@@ -32,6 +37,56 @@ const update = () => {
     })
     .then((res) => {console.log(res)})
     .catch((res) => {console.log(res)});
+}
+
+const actualizarInfo = () => {
+    if (ronda == null || equipo == null) {
+        return;
+    }
+
+    if (info == null) {
+        return;
+    }
+    for (const key in info) {
+        if (Object.hasOwnProperty.call(info, key)) {
+            let element = document.getElementById(key.toLowerCase())
+            if (element == null) {
+                continue;
+            }
+            if (element.type == "checkbox") {
+                if (info[key] == "on") {
+                    element.checked = true;
+                    element.value = "on";
+                } else {
+                    element.checked = false;
+                    element.value = "";
+                }
+            } else {
+                element.value = info[key];
+            }
+            
+        }
+    }
+};
+
+const upload = async () => {
+    var msg = ""
+    var inputs = document.querySelectorAll("form input");
+    inputs.forEach((element) => {
+        msg += element.name;
+        msg += "=";
+        if (element.type = "checkbox") {
+            msg += element.checked
+        } else {
+            msg += element.value;
+        }
+        msg += "&"
+    });
+    var response = await fetch("/vuelo", {
+        method: "POST",
+        body: msg.slice(0,-1)
+    });
+    console.log(".")
 }
 
 /*

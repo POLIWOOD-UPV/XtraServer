@@ -73,24 +73,27 @@ const guardar_vuelo = (req, res) => {
         const filename = `${client.Ronda}/${client.Equipo}.json`;
 
         try {
-            let data = fs.readFileSync(path);
-            server = JSON.parse(data);
+            let data = fs.readFileSync("./http/data/"+filename);
+            let obj = JSON.parse(data);
+            for (const key in obj) {
+                server[key] = obj[key];
+            }
         } catch (error) {
             labels.forEach(element => {
-                server[element] = null;
+                server[element] = "";
             });
         }
 
         for (const key in server) {
             if (Object.hasOwnProperty.call(client, key)) {
-                if (client[key] != null){
+                if (client[key] == null || client[key] == ""){
+                    object[key] = (server[key] == "on")? "": server[key];
+                } else { // Not checkbox
                     object[key] = client[key];
-                } else {
-                    object[key] = server[key];
                 }
-                continue;
+            } else {
+                object[key] = server[key];
             }
-            object[key] = server[key];
         }
 
 

@@ -31,18 +31,18 @@
                 select_equipo.appendChild(option);
             });
 
-            select_ronda.addEventListener("input", () => {
+            select_ronda.addEventListener("input", async () => {
                 ronda = select_ronda.value;
                 if (ronda != null && equipo != null) {
-                    loadInfo(ronda, equipo);
+                    info = await loadInfo(ronda, equipo);
                     actualizarInfo();
                 }
             });
 
-            select_equipo.addEventListener("input", () => {
+            select_equipo.addEventListener("input", async () => {
                 equipo = select_equipo.value;
                 if (ronda != null && equipo != null) {
-                    loadInfo(ronda, equipo);
+                    info = await loadInfo(ronda, equipo);
                     actualizarInfo();
                 }
             });
@@ -69,25 +69,14 @@
             });
         };
 
-        const actualizarInfo = () => {
-            if (ronda == null || equipo == null) {
-                return;
-            }
-
-            if (info == null) {
-                return;
-            }
-
-            for (const key in info) {
-                if (Object.hasOwnProperty.call(info, key)) {
-                    let element = document.getElementById(key.toLowerCase())
-                    if (element == null) {
-                        continue;
-                    }
-                    element.value = info[key];
-                }
-            }
-        };
+        const preparar_checkbox = () => {
+            var inputs = document.querySelectorAll("form input['type'='checkbox']");
+            inputs.forEach((element) => {
+                element.setAttribute("input", () => {
+                    self.value = (self.checked)? "on": "";
+                });
+            });
+        }
 
         addEventListener("DOMContentLoaded", async () => {
             await loadJSON();
@@ -96,6 +85,7 @@
             }
             cargar_json();
             preparar_calculo_bolas();
+            preparar_checkbox();
         });
     </script>
 </head>
