@@ -7,7 +7,7 @@
 let controla_pilotos = 1
 
 // Coger ranking y filas
-let ranking = document.getElementById("contenedor")
+let ranking = document.querySelector("main");
 let filas = document.getElementsByClassName("fila")
 
 
@@ -75,6 +75,9 @@ function creaFila(nom,pos,tiemp,pes,despegue){
         peso.style.display = "flex"
     }
 
+    if (logos_visibles){
+        logo.style.display = "flex"
+    }
 
     // Lo juntamos todo y devolvemos la fila
     resto.append(nombre,tiempo,peso,circulo)
@@ -102,6 +105,7 @@ function mostrarTiempo(){
     for (var i = 0; i < tiempos.length;i++){
         tiempos[i].style.display = estado
     }
+    document.getElementById("cab_tie").style.display = estado
 
 }
 
@@ -120,6 +124,7 @@ function mostrarPeso(){
     for (var i = 0; i < pesos.length;i++){
         pesos[i].style.display = estado
     }
+    document.getElementById("cab_pes").style.display = estado
 }
 
 // Función para alternar el peso con el tiempo y viceversa
@@ -135,10 +140,13 @@ function cambiazoPesoTiempos(){
 // Funcion para alternar la visibilidad de los logos
 function ocultarLogos(){
     logos = document.getElementsByClassName("logo")
-    let estado = (logos_visibles ? "none" : "flex");
+    let estado = (logos_visibles ? "flex" : "none");
     for (logo of logos){
         logo.style.display = estado
     }
+    logos_visibles = (estado == "flex") ? true : false;
+
+    document.getElementById("cab_log").style.display = estado
 }
 
 // Funcion para alternar la visibilidad de los despegues
@@ -159,7 +167,10 @@ function meterLogos(nom){
 
     let logo = document.createElement("div")
     logo.className = "logo"
-    logo.style.display = "flex"
+
+    let estado = (logos_visibles ? "flex" : "none");
+
+    logo.style.display = estado
     let elLogo = document.createElement("img")
     
     if (complicados.includes(nom)){

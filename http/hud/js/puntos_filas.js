@@ -7,7 +7,7 @@
 let controla_pilotos = 1
 
 // Coger ranking y filas
-let ranking = document.getElementById("contenedor")
+let ranking = document.querySelector("main");
 let filas = document.getElementsByClassName("fila")
 
 // Puntos ( empieza activa)
@@ -55,6 +55,9 @@ function creaFila(nom,pos, puntos){
         puntos_dto.style.display = "none"
     }
 
+    if (logos_visibles){
+        logo.style.display = "flex"
+    }
     // Le ponemos de ID la posicion
     fila.id = pos
     fila.append(numero,logo,nombre,puntazos)
@@ -79,16 +82,20 @@ function mostrarPuntos(){
     for (var i = 0; i < puntos_dto.length;i++){
         puntos_dto[i].style.display = estado
     }
+    document.getElementById("cab_pun").style.display = estado
 
 }
 
 // Funcion para alternar la visibilidad de los logos
 function ocultarLogos(){
     logos = document.getElementsByClassName("logo")
-    let estado = (logos_visibles ? "none" : "flex");
+    let estado = (logos_visibles ? "flex" : "none");
     for (logo of logos){
         logo.style.display = estado
     }
+    logos_visibles = (estado == "flex") ? true : false;
+
+    document.getElementById("cab_log").style.display = estado
 }
 
 
@@ -101,7 +108,10 @@ function meterLogos(nom){
 
     let logo = document.createElement("div")
     logo.className = "logo"
-    logo.style.display = "flex"
+
+    let estado = (logos_visibles ? "flex" : "none");
+
+    logo.style.display = estado
     let elLogo = document.createElement("img")
     
     if (complicados.includes(nom)){

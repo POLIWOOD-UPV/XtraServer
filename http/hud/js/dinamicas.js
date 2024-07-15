@@ -5,22 +5,23 @@
 // Aparecer y desaparecer ranking
 var ranking_visible = true;
 var filas_visible = true;
-
+cabeza = document.querySelector("#cabeza")
+contenedor = document.querySelector("#contenedor")
 
 // Mover el ranking en o fuera de pantalla
 function rankingMov() {
     if (ranking_visible) { // Es visible
         // Ranking se pasa a oculto
         ranking_visible = false;
-        ranking.style.left = "-600px"//"300px";
+        cabeza.style.left = "-600px"//"300px";
+        contenedor.style.left = "-600px"//"300px";
+
     } else { // No es visible
-        ranking.style.left = "0px";
+        cabeza.style.left = "0px";
+        contenedor.style.left = "0px";
         ranking_visible = true;
-        if (!filas_visible){
-            filasMov()
-        }
-        
-        }
+        if (!filas_visible){ filasMov()}
+    }
 }
 
 // Mover filas en o fuera de pantalla

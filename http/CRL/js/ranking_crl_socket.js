@@ -65,7 +65,6 @@ function s_cambiazoPesoTiempos(){
 }
 
 function s_ocultarLogos(){
-    socket.emit("all","ranking",["logVis",logos_visibles])
     if (logos_visibles){ // Son visibles y vamos a esconderlos
         bot_logos.textContent = "Mostrar logos"
         logos_visibles = false
@@ -73,6 +72,7 @@ function s_ocultarLogos(){
         bot_logos.textContent = "Ocultar logos"
         logos_visibles = true
     }
+    socket.emit("all","ranking",["logVis",logos_visibles])
 }
 function s_ocultarDespegue(){
     socket.emit("all","ranking",["desVis",despes_visibles])
@@ -107,7 +107,7 @@ function s_sumaPiloto(estado){
         tiempo = minutos + ":" + segundos + ":" + miliseg
         console.log("TIEMPO "+tiempo)
         // Coger el peso
-        peso = cogerTiempo_Peso("pes") + " Kg"
+        peso = cogerTiempo_Peso("pes")
         // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
         pos = sacar_pos_avion(tiempo) // Es un numero
         FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
@@ -127,7 +127,7 @@ function s_sumaPiloto(estado){
         tiempo = minutos + ":" + segundos + ":" + miliseg
         console.log("TIEMPO "+tiempo)
         // Coger el peso
-        peso = cogerTiempo_Peso("pes") + " Kg"
+        peso = cogerTiempo_Peso("pes")
         // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
         pos = sacar_pos_avion(tiempo) // Es un numero
         FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba

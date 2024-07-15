@@ -43,7 +43,6 @@ function s_mostrarPuntos(){
 }
 
 function s_ocultarLogos(){ 
-    socket.emit("all","puntos",["logVis",logos_visibles])
     if (logos_visibles){ // Son visibles y vamos a esconderlos
         bot_logos.textContent = "Mostrar logos"
         logos_visibles = false
@@ -51,6 +50,7 @@ function s_ocultarLogos(){
         bot_logos.textContent = "Ocultar logos"
         logos_visibles = true
     }
+    socket.emit("all","puntos",["logVis",logos_visibles])
 }
 
 // Pilotos

@@ -260,7 +260,7 @@ function negar_piloto(piloto=cogerPiloto()){
         tiempo = minutos + ":" + segundos + ":" + miliseg
         console.log("TIEMPO "+tiempo)
         // Coger el peso
-        peso = "- Kg"
+        peso = "-"
         // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
         pos = sacar_pos_avion(tiempo) // Es un numero
         FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba

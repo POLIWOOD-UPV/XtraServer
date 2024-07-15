@@ -141,13 +141,22 @@ function introducir_en_filas(pos, nueva_fila) {
 
     // Crea un fragmento de documento para eficiencia en la actualización del DOM
     let fragment = document.createDocumentFragment();
+    
     // Añade la cabecera al fragmento
-    fragment.appendChild(document.getElementById("cabecera"));
+    let cabeza = document.getElementById("cabeza");
+    fragment.appendChild(cabeza);
 
-    // Añade todas las filas al fragmento
+    // Crea un nuevo contenedor para las filas
+    let contenedor = document.createElement("div");
+    contenedor.id = "contenedor";
+    
+    // Añade todas las filas al nuevo contenedor
     filas_array.forEach(function(fila) {
-        fragment.appendChild(fila);
+        contenedor.appendChild(fila);
     });
+
+    // Añade el contenedor al fragmento
+    fragment.appendChild(contenedor);
 
     // Limpia el contenedor actual del ranking y añade el fragmento actualizado
     while (ranking.firstChild) {
