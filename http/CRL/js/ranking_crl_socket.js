@@ -90,6 +90,7 @@ function s_vaciarPilotos(){
         console.log(filas_control[j])
         filas_control[j].remove(); // Quitar todas las filas de control                    
     }
+    pilotos = []
     socket.emit("all","ranking",["vacPilo"]);
 }
 function s_sumaPiloto(estado){
@@ -139,12 +140,15 @@ function s_sumaPiloto(estado){
         ordenar_control(); // Ordenar la lista de control después de la eliminación
     }
 }
-function s_quitaPiloto(estado,pos){
+function s_quitaPiloto(estado,pos,negado = false){
+    console.log("Parametros QuitaPilotos: "+estado+" "+pos)
     let a_borrar_c = document.getElementById(pos).parentNode; // Elemento de control a borrar animado
     a_borrar_c.remove();
 
     a_borrar_nombre = a_borrar_c.querySelector(".nombre_control").textContent.toUpperCase()
     console.log("TEST: ", a_borrar_nombre)
+
+    // Quitamos el piloto
     pilotos = pilotos.filter(item => item !== a_borrar_nombre)
     info = ["quiPil",estado,pos]
     socket.emit("all","ranking",info)
@@ -170,3 +174,15 @@ function s_quitaPiloto(estado,pos){
     }
     ordenar_control()
 }
+
+function s_mandar_zeros(){
+    // Primero vaciamos todos los pilotos
+    s_vaciarPilotos();
+    let estado = "animado"
+    // Rellenamos el control con todo 0s
+    for (let piloto of equipos){
+        negar_piloto(piloto,estado)
+        ordenar_control(); // Ordenar la lista de control después de la eliminación
+    }
+}
+

@@ -44,6 +44,7 @@ function creaFila(nom,pos, puntos){
     // Metemos la imagen
     let logo = document.createElement("div")
     logo.className = "logo"
+    logo.style.display = "flex"
     let elLogo = document.createElement("img")
     elLogo.src = "../favicon.ico"
     logo.append(elLogo)

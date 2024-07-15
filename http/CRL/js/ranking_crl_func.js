@@ -247,17 +247,6 @@ function remplazar_piloto(piloto,estado,negado = false){
 
 }
 
-function s_mandar_zeros(){
-    // Primero vaciamos todos los pilotos
-    s_vaciarPilotos();
-    let estado = "animado"
-    // Rellenamos el control con todo 0s
-    for (piloto of equipos){
-        negar_piloto(piloto,estado)
-        ordenar_control(); // Ordenar la lista de control después de la eliminación
-    }
-}
-
 function negar_piloto(piloto=cogerPiloto()){
     let estado = "animado"
     if (pilotos.includes(piloto)){ // Hay que reemplazarlo
