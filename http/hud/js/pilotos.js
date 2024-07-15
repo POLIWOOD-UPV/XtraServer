@@ -92,9 +92,10 @@ function sumaPiloto(piloto,pos,tiempo,peso,estado,despegue) {
         }
 }
 
+
 // Introduce en el ranking la fila nueva
 function meter_en_ranking(nueva_fila) {
-    console.log("meter_en_ranking")
+    console.log("meter_en_ranking");
 
     let filas_array = Array.from(filas);
 
@@ -102,14 +103,13 @@ function meter_en_ranking(nueva_fila) {
     let pos = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
 
     // Verifica si la posición ya está ocupada
-    // Miramos si esta ocupada (a lo mejor implementar este metodo en otros sitios??)
     let posicionOcupada = filas_array.some(fila => parseInt(fila.id, 10) === pos);
 
     if (posicionOcupada) {  // Si la posición está ocupada, inserta la nueva fila y ajusta las posiciones de las filas posteriores
         introducir_en_filas(pos, nueva_fila);
         subir_posiciones(pos);
     } else { // Si la posición no está ocupada, añade la nueva fila al final del ranking
-        ranking.appendChild(nueva_fila);
+        document.getElementById("contenedor").appendChild(nueva_fila); // Append to contenedor
         filas_array.push(nueva_fila);
 
         filas_array.forEach((fila, index) => {
@@ -117,19 +117,21 @@ function meter_en_ranking(nueva_fila) {
             fila.id = (index + 1).toString();                      // Ajusta el ID
         });
     }
+    filas = document.querySelectorAll("#contenedor .fila"); // Update the filas NodeList
 }
+
 // Mete la info de la fila nueva en la posición correcta 
 function introducir_en_filas(pos, nueva_fila) {
-    console.log("introducir_en_filas")
+    console.log("introducir_en_filas");
 
-    // Convierte la colección HTML de filas a un array temporal para itrerar etc
+    // Convierte la colección HTML de filas a un array temporal para iterar etc
     let filas_array = Array.from(filas);
 
     // Divide el array en dos partes: una antes y otra después de la posición indicada
     let filas_1 = filas_array.slice(0, pos - 1);  // Elementos del inicio hasta pos-1
     let filas_2 = filas_array.slice(pos - 1);     // Elementos desde pos-1 hasta el final
 
-    // Inserta la nueva fila en donde va a estar y la juntamos con la segunda mitard 
+    // Inserta la nueva fila en donde va a estar y la juntamos con la segunda mitad 
     filas_1.push(nueva_fila);
     filas_array = filas_1.concat(filas_2);
 
@@ -163,5 +165,7 @@ function introducir_en_filas(pos, nueva_fila) {
         ranking.removeChild(ranking.firstChild);
     }
     ranking.appendChild(fragment);
+
+    filas = document.querySelectorAll("#contenedor .fila"); // Update the filas NodeList
 }
 
