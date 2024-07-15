@@ -43,12 +43,7 @@ function creaFila(nom,pos,tiemp,pes,despegue){
     nombre.textContent = nom
 
     // Metemos la imagen
-    let logo = document.createElement("div")
-    logo.className = "logo"
-    logo.style.display = "flex"
-    let elLogo = document.createElement("img")
-    elLogo.src = "../favicon.ico"
-    logo.append(elLogo)
+    logo = meterLogos(nom);
 
     // Metemos el estado del despegue
     let circulo = document.createElement("span")
@@ -153,4 +148,35 @@ function ocultarDespegue(){
     for (despegue of despegues){
         despegue.style.display = estado
     }
+}
+
+function meterLogos(nom){
+    complicados = ["SAETA_T2", "Trencalòs", "SAETA_T1", "Club Xaloc", "Eagle Fly T1","Eagle Fly T2","North Pole","Aerotech"];
+
+    console.log("CAFCFA")
+    console.log(nom)
+    console.log(complicados.includes(nom))
+
+    let logo = document.createElement("div")
+    logo.className = "logo"
+    logo.style.display = "flex"
+    let elLogo = document.createElement("img")
+    
+    if (complicados.includes(nom)){
+        switch (nom){
+            case "Aerotech": nom = "UVigo";break;
+            case "North Pole": nom = "TheNorthPole";break;
+            case "SAETA_T2": nom = "SAETA";break;
+            case "Trencalòs": nom = "Trencalos";break;
+            case "SAETA_T1": nom = "SAETA";break;
+            case "Club Xaloc": nom = "Xaloc";break;
+            case "Eagle Fly T1": nom = "FlyEagle";break;
+            case "Eagle Fly T2": nom = "FlyEagle";break;
+        }
+    }
+    elLogo.src = "../img/logos/"+nom+".png"
+    logo.append(elLogo)
+    
+
+    return logo
 }

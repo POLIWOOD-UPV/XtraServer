@@ -17,7 +17,7 @@ var filas_visible = true;
 let puntos_visibles = true;
 logos_visibles = true;
 var pilotos = ["POLIWOOD"]
-var equipos = ["RUHE", "Aerotech", "G3", "Matsia", "LuftSieger", "ECLift", "SAETA_T2", "DIANA", "Trencalòs", "North Pole", "SAETA_T1", "UCA&Air", "Club Xaloc", "Sky Eagle"];
+var equipos = ["RUHE", "Aerotech", "G3", "Matsia", "LuftSieger", "ECLift", "SAETA_T2", "DIANA", "Trencalòs", "North Pole", "SAETA_T1", "UCA&Air", "Club Xaloc","Eagle Fly T1","Eagle Fly T2"];
 
 
 // Funciones traidas de otros archivos
