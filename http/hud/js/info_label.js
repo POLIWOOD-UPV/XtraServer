@@ -183,7 +183,7 @@ var nombre_lider = document.getElementById("nombre_lider");
             // foto.src = "../img/grupos/" + name_foto;
             // nombre_grupo.textContent = data.Team;
             // uni.textContent = data.Institucion;
-            // miembros.textContent = data.Members + "\nppl";
+            // miembros.textContent = data.Members + "<br>ppl";
             // nombre_lider.innerHTML = "Team Leader:<br>" + data.TeamLeader;
 //     console.log(data);
 //     })
@@ -202,7 +202,7 @@ sele_pruv.addEventListener("change", function() {
     foto.src = "../img/grupos/" + name_foto;
     nombre_grupo.textContent = data.Team;
     uni.textContent = data.Institucion;
-    miembros.textContent = data.Members + "\nppl";
+    miembros.innerHTML = data.Members + "<br>ppl";
     nombre_lider.innerHTML = "Team Leader:<br>" + data.TeamLeader;
 
 });

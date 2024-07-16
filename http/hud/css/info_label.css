@@ -13,25 +13,27 @@ body {
 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
+    font-size: 90%;
 }
 div{
     position: fixed;
-    top: 45%;
+    top: 40%;
     right: 0%;
-    left: 68%;
+    left: 74%;
     display: inline-block;
     flex-direction: column;
 
     padding: 2%;
     
-    background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgb(255, 229, 94, 0.65));
-    
+    /* background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgb(255, 229, 94, 0.65)); */
+    background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgba(67, 67, 67, 0.65));
+
     border-top-left-radius: 7%;
     border-bottom-left-radius: 7%;
 }
 #logo{
     float: left;
-    width: 125px;
+    width: 100px;
     height: auto;
 
     padding-right: 2%;
@@ -40,8 +42,8 @@ div{
 }
 #foto{
     float: right;
-    width: 350px;
-    height: 125px;
+    width: 210px;
+    height: 100px;
 
     padding-top: 2%;
     padding-bottom: 2%;
@@ -52,7 +54,6 @@ div{
 
     color: white;
     text-align: center;
-    font-size: 150%;
 
     padding: 3%;
 
@@ -71,7 +72,6 @@ div{
 
     color: white;
     text-align: center;
-    font-size: 150%;
 
     padding: 3%;
 
@@ -91,7 +91,7 @@ div{
 
     color: white;
     text-align: center;
-    font-size: 150%;
+    
     padding: 3%;
 
     padding-top: 2%;
@@ -110,7 +110,7 @@ div{
 
     color: white;
     text-align: center;
-    font-size: 150%;
+    
     padding: 3%;
 
     padding-top: 2%;
