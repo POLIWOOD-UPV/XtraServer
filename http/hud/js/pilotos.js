@@ -117,7 +117,6 @@ function meter_en_ranking(nueva_fila) {
             fila.id = (index + 1).toString();                      // Ajusta el ID
         });
     }
-    filas = document.querySelectorAll("#contenedor .fila"); // Update the filas NodeList
 }
 
 // Mete la info de la fila nueva en la posición correcta 
@@ -166,6 +165,5 @@ function introducir_en_filas(pos, nueva_fila) {
     }
     ranking.appendChild(fragment);
 
-    filas = document.querySelectorAll("#contenedor .fila"); // Update the filas NodeList
 }
 

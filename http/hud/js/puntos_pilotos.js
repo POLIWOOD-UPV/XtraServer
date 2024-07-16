@@ -167,6 +167,6 @@ function introducir_en_filas(pos, nueva_fila) {
     }
     ranking.appendChild(fragment);
 
-    filas = document.querySelectorAll("#contenedor .fila"); // Update the filas NodeList
+    filas = document.querySelectorAll("#contenedor .fila"); 
 }
 

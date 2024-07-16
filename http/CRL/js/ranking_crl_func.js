@@ -217,7 +217,7 @@ function sacar_pos_avion(tiempo) {
 }
 
 function remplazar_piloto(piloto,estado,negado = false){
-    // console.log("remplazar_piloto")
+    console.log("remplazar_piloto")
     // Primero borramos la entrada existente ya
     // Necesitamos saber en que posicion esta
     let i = 0;
@@ -238,8 +238,10 @@ function remplazar_piloto(piloto,estado,negado = false){
     
     setTimeout(()=>{
         if (negado){
+            console.log("COMA1")
             negar_piloto(piloto)
         }else{
+            console.log("COMA1")
             // Volvemos a introducirlo con los puntos nuevos
             s_sumaPiloto(estado)
         }
