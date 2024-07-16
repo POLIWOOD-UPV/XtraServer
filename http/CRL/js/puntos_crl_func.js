@@ -10,12 +10,14 @@ var aparecer_desaparecer_rank = document.getElementById("aparecer_desaparecer_ra
 
 // Cogemos los botones
 var boton_puntos = document.getElementById("mostrar_puntos_id");
-let bot_logos = document.querySelector("#ocultar_logos_id")
+let bot_logos = document.querySelector("#ocultar_logos_id");
+let bot_dorsales = document.querySelector("#mostrar_dorsal_id");
 // Flags
 var ranking_visible = true;
 var filas_visible = true;
 let puntos_visibles = true;
-logos_visibles = true;
+let logos_visibles = true;
+let dorsal_visible = false;
 var pilotos = ["WOOD"]
 var equipos = ["RUHE", "UVIGA", "G3", "MATSI", "LUFTS", "ECLFT", "SAET2", "DIANA", "TRENC", "NTHPO", "SAET1", "UCAIR", "XALOC", "EAFT1", "EAFT2"];
 

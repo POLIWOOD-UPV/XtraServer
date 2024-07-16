@@ -65,15 +65,17 @@ aside {
 #cab_pos, #cab_log {
     flex: 1;
 }
-#cab_nom, #cab_pun {
+#cab_pun {
     flex: 4;
 }
 #cab_tie {
     flex: 3;
 }
-#cab_pes {
+#cab_pes , #cab_dor{
     display: none;
-    flex: 2;
+}
+#cab_nom, #cab_pes{
+    flex:2
 }
 /* Logo Xtra2 */
 #imagen_xtra2 {
@@ -125,7 +127,7 @@ aside {
 
 .logo {
     flex: 1;
-    margin-left: 15px;
+    margin-left: 25px;
     height: 60px;
     width: 60px;
 }
@@ -139,7 +141,7 @@ aside {
     flex: 8;
 }
 
-.nombre, .tiempo, .peso, .puntos {
+.nombre, .tiempo, .peso, .puntos, .dorsal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,14 +156,16 @@ aside {
 .tiempo {
     flex: 3;
 }
-.nombre, .puntos {
+.puntos {
     flex: 4;
 }
-.peso {
+.peso , .dorsal {
     display: none;
-    flex: 2;
 }
 
+.nombre, .dorsal {
+    flex:2;
+}
 .dot {
     height: 15px;
     width: 15px;

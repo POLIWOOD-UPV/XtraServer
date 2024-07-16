@@ -147,3 +147,15 @@ function s_mandar_zeros(){
         
     }
 }
+function s_mostrarDorsal(){
+    if (dorsal_visible){ // Son visibles y vamos a esconderlos
+        bot_dorsales.textContent = "Mostrar dorsales"
+        dorsal_visible = false
+    }else{
+        bot_dorsales.textContent = "Ocultar dorsales"
+        dorsal_visible = true
+    }
+
+    info = ["mosDor",dorsal_visible]
+    socket.emit("all", "ranking",info )
+}
