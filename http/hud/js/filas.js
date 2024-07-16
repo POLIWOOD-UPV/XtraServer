@@ -54,6 +54,7 @@ function creaFila(nom,pos,tiemp,pes,despegue){
         case "Correcto":color = "#0dff00";break;
         case "Ilegal": color = "#ff0000"; break;
         case "Pendiente": color = "#ffffff";break;
+        case "Fallido": color = "#E6FE00";break;
     }
     circulo.style.backgroundColor = color
     // Informativos
