@@ -159,36 +159,21 @@ function ocultarDespegue(){
 }
 
 function meterLogos(nom){
-    complicados = ["SAETA_T2", "Trencalòs", "SAETA_T1", "Club Xaloc", "Eagle Fly T1","Eagle Fly T2","North Pole","Aerotech"];
-
-    console.log("CAFCFA")
-    console.log(nom)
-    console.log(complicados.includes(nom))
-
     let logo = document.createElement("div")
     logo.className = "logo"
 
     let estado = (logos_visibles ? "flex" : "none");
-
     logo.style.display = estado
-    let elLogo = document.createElement("img")
-    
-    if (complicados.includes(nom)){
-        switch (nom){
-            case "Aerotech": nom = "UVigo";break;
-            case "North Pole": nom = "TheNorthPole";break;
-            case "SAETA_T2": nom = "SAETA";break;
-            case "Trencalòs": nom = "Trencalos";break;
-            case "SAETA_T1": nom = "SAETA";break;
-            case "Club Xaloc": nom = "Xaloc";break;
-            case "Eagle Fly T1": nom = "FlyEagle";break;
-            case "Eagle Fly T2": nom = "FlyEagle";break;
-        }
+
+    if (nom.substring(0, 4) === "SAET") {
+        nom = "SAETA"
+    } else if (nom.substring(0,4) === "EAFT"){
+        nom = "FlyEagle"
     }
+    
+    let elLogo = document.createElement("img")
     elLogo.src = "../img/logos/"+nom+".png"
     logo.append(elLogo)
-    
-
     return logo
 }
 

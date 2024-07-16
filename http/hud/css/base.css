@@ -90,7 +90,6 @@ aside {
 /* Filas */
 #contenedor {
     background: rgba(52, 52, 52, 0.699);
-    width: 550px;
     margin: 0 0 0 5px;
     display: flex;
     flex-direction: column;
