@@ -191,3 +191,8 @@ function meterLogos(nom){
 
     return logo
 }
+
+function cambiarRonda(num){
+    let ronda = document.getElementById("num_ronda")
+    ronda.textContent = num
+}

@@ -42,6 +42,8 @@ socket.on("ranking",(info) =>{
             despegues_visibles = info[0]
             ocultarDespegue()
             break;
+        case "camRon":
+            cambiarRonda(info[0])
     };
 });
 

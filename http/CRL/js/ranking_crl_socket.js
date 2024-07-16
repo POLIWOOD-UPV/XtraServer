@@ -186,3 +186,11 @@ function s_mandar_zeros(){
     }
 }
 
+function s_ponerRonda(){
+    console.log("s_ponerRodna")
+    // Cogemos el valor de la ronda
+    let ronda = document.getElementById("numero_ronda_id").value
+    // Lo enviamos a que se cambie
+    info = ["camRon",ronda]
+    socket.emit("all", "ranking",info )
+}
