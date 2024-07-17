@@ -5,7 +5,6 @@
 // Aparecer y desaparecer ranking
 var ranking_visible = true;
 var filas_visible = true;
-cabeza = document.querySelector("#cabeza")
 contenedor = document.querySelector("#contenedor")
 
 // Mover el ranking en o fuera de pantalla
@@ -16,14 +15,9 @@ function rankingMov() {
 
     if (ranking_visible) { // Es visible
         // Ranking se pasa a oculto
-        console.log("TEST1")
-        cabeza.style.left = "-600px"//"300px";
-        console.log("TEST2")
         contenedor.style.left = "-600px"//"300px";
-        console.log("TEST2")
         ranking_visible = false;
     } else { // No es visible
-        cabeza.style.left = "0px";
         contenedor.style.left = "0px";
         ranking_visible = true;
         

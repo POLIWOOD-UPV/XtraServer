@@ -157,5 +157,5 @@ function s_mostrarDorsal(){
     }
 
     info = ["mosDor",dorsal_visible]
-    socket.emit("all", "ranking",info )
+    socket.emit("all", "puntos",info )
 }

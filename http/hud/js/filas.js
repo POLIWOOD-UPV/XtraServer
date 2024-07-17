@@ -8,7 +8,7 @@ let controla_pilotos = 1
 let valores_dorsal = {"RUHE":1,"UVIGA":2, "G3":3,"MATSI": 4,"LUFTS": 5,"ECLFT": 6,"SAET2": 7,"DIANA": 8,"TRENC": 9,"NTHPO": 10,"SAET1": 11,"UCAIR": 12,"XALOC": 15,"EAFT1": 16,"EAFT2":17,}
 
 // Coger ranking y filas
-let ranking = document.querySelector("main");
+let ranking = document.getElementById("contenedor")
 let filas = document.getElementsByClassName("fila")
 
 
