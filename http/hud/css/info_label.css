@@ -11,6 +11,7 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
     font-size: 90%;
+    text-align: center;
 
     color: #FFE55E;
 }
@@ -18,7 +19,7 @@ div{
     position: fixed;
     top: 40%;
     right: 0%;
-    left: 74%;
+    left: 75%;
     display: inline-block;
     flex-direction: column;
 
@@ -31,43 +32,72 @@ div{
 }
 #logo{
     float: left;
-    width: 100px;
+    width: 90px;
     height: auto;
 
-    padding-right: 2%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 2%;
+    
 }
 #foto{
     float: right;
-    width: 210px;
-    height: 100px;
+    width: 200px;
+    height: 90px;
 
-    padding-top: 2%;
-    padding-bottom: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
-#nombre_grupo{
+#dorsal{
     float:left;
-    width: 94%;
-
-    text-align: center;
+    width: 6%;
 
     padding: 3%;
 
     padding-top: 2%;
     padding-bottom: 2%;
 
-    margin: 0%;
     margin-top: 2%;
+    margin-bottom: 0%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0.7);
+}
+#acr{
+    float:left;
+    width: 18.7%;
+
+    padding: 3%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 2%;
+    margin-bottom: 0%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0.7);
+}
+#nombre_grupo{
+    float:left;
+    width: 48%;
+
+    padding: 3%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin-top: 2%;
+    margin-bottom: 0%;
 
     border: 2px solid;
     border-color: rgba(255, 229, 94, 0.7);
 }
 #uni{
     float: left;
-    width: 94%;
-
-    text-align: center;
+    width: 93%;
 
     padding: 3%;
 
@@ -79,13 +109,24 @@ div{
 
     border: 2px solid;
     border-color: rgba(255, 229, 94, 0.7);
+}
+#titulo_miembros{
+    float: left;
+    width: 10%;
+    
+    padding: 3%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin: 0%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0);
 }
 #miembros{
     float: left;
     width: 10%;
-    height: auto;
-
-    text-align: center;
     
     padding: 3%;
 
@@ -93,17 +134,26 @@ div{
     padding-bottom: 2%;
 
     margin: 0%;
-    margin-top: 3%;
+    /* margin-top: 3%; */
 
     border: 2px solid;
     border-color: rgba(255, 229, 94, 0.7);
 }
+#titulo_lider{
+    float: right;
+    width: 72%;  
+
+    padding: 2%;
+
+    margin: 0%;
+    margin-right: 1%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0);
+}
 #nombre_lider{
     float: right;
-    width: 70%;
-    height: auto;  
-
-    text-align: center;
+    width: 72%;  
     
     padding: 3%;
 
@@ -111,7 +161,6 @@ div{
     padding-bottom: 2%;
 
     margin: 0%;
-    margin-top: 3%;
 
     border: 2px solid;
     border-color: rgba(255, 229, 94, 0.7);

@@ -139,7 +139,7 @@ var JSONdata = {
           "Acr": "UCAIR",
           "Institucion": "Universidad de Cádiz",
           "Members": 6,
-          "Team Leader": "Irene Molina Chicón",
+          "TeamLeader": "Irene Molina Chicón",
           "Pilot": "Hugo Juan Hernández",
           "img_logo": "UCAIR.png",
           "img_grupo": "UCAIR.jpeg"
@@ -181,10 +181,13 @@ var JSONdata = {
 
 var logo = document.getElementById("logo");
 var foto = document.getElementById("foto");
+var dorsal = document.getElementById("dorsal");
+var acr = document.getElementById("acr");
 var nombre_grupo = document.getElementById("nombre_grupo");
 var uni = document.getElementById("uni");
 var miembros = document.getElementById("miembros");
 var nombre_lider = document.getElementById("nombre_lider");
+
 
 // fetch('../data/equipos.json', {
 //     method: 'GET',
@@ -196,28 +199,32 @@ var nombre_lider = document.getElementById("nombre_lider");
             // logo.src = "../img/logos/" + name_logo;
             // name_foto = data.img_grupo
             // foto.src = "../img/grupos/" + name_foto;
+            // dorsal.innerHTML = data.Dorsal;
+            // acr.textContent = data.Acr;
             // nombre_grupo.textContent = data.Team;
             // uni.textContent = data.Institucion;
-            // miembros.textContent = data.Members + "<br>ppl";
-            // nombre_lider.innerHTML = "Team Leader:<br>" + data.TeamLeader;
+            // miembros.textContent = data.Members;
+            // nombre_lider.innerHTML = data.TeamLeader;
 //     console.log(data);
 //     })
 //     .catch(error => {
 //     console.error('Error:', error);
 //     });
 
-const hola = new URLSearchParams(window.location.search)
-var dorsal = hola.get("d")
+const url = new URLSearchParams(window.location.search)
+var num_equipo = url.get("d")
 
 window.addEventListener("DOMContentLoaded", () => {
     
-    var data = JSONdata.equipos[dorsal];
+    var data = JSONdata.equipos[num_equipo];
     name_logo = data.img_logo
     logo.src = "../img/logos/" + name_logo;
     name_foto = data.img_grupo
     foto.src = "../img/grupos/" + name_foto;
+    dorsal.innerHTML = data.Dorsal;
+    acr.textContent = data.Acr;
     nombre_grupo.textContent = data.Team;
     uni.textContent = data.Institucion;
-    miembros.innerHTML = data.Members + "<br>ppl";
-    nombre_lider.innerHTML = "Team Leader:<br>" + data.TeamLeader;
+    miembros.innerHTML = data.Members;
+    nombre_lider.innerHTML = data.TeamLeader;
 });
