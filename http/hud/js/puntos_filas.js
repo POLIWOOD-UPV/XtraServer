@@ -66,6 +66,9 @@ function creaFila(nom,pos, puntos){
     if (dorsal_visible){
         dor.style.display = "flex"
     }
+    if (!despegues_visibles){
+        circulo.style.display = "none"
+    }
 
     // Le ponemos de ID la posicion
     fila.id = pos

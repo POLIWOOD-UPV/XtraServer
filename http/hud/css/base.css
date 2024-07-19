@@ -20,10 +20,20 @@ aside {
     display: flex;
     flex-direction: column;
 }
+/* Logo Xtra2 */
+#imagen_xtra2 {
+    height: 150px;
+    width: 450px;
+}
+#imagen_xtra2 img {
+    height: 100%;
+    width: 100%;
+}
 #imagen_xtra2 {
     display: flex;
     flex-direction: row;
 }
+/* Rondas */
 #rondero {
     display: flex;
     flex-direction: column;
@@ -50,7 +60,7 @@ aside {
 #cabecera {
     display: flex;
     flex-direction: row;
-    flex: 10;
+    flex: 11;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
@@ -59,28 +69,11 @@ aside {
     border-left: 2px solid black;
     align-items: center;
     font-size: 22px;
-
     padding: 5px;
-
     justify-content: center;
-    align-items: center;
     border-radius: 10px;
 }
-/*
-#cabecera {
-    display: flex;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    -webkit-text-stroke: 1px black;
-    border-top: 2px solid black;
-    border-left: 2px solid black;
-    align-items: center;
-    font-size: 22px;
-}
-
-*/
-
+/* Elementos cabecera */
 .cabecera-item {
     text-align: center;
     border-right: 2px solid black;
@@ -90,44 +83,45 @@ aside {
 }
 
 #cab_pos, #cab_log {
-    flex: 1;
+    flex: 1; /* Ajustamos el flex de los elementos de la cabecera para que coincida con los de la fila */
 }
-#cab_pun {
-    flex: 4;
+#cab_log{
+    min-width: 60px;
 }
-#cab_tie {
-    flex: 3;
+#cab_pos {
+    min-width: 46px;
 }
-#cab_pes , #cab_dor{
-    display: none;
+#cabecera_resto {
+    display: flex;
+    flex: 8; 
 }
-#cab_nom, #cab_pes{
+
+#cab_pes {
+    flex: 1; 
+}
+#cab_nom {
     flex:2
 }
-/* Logo Xtra2 */
-#imagen_xtra2 {
-    height: 150px;
-    width: 450px;
+#cab_tie {
+    flex : 3
 }
-#imagen_xtra2 img {
-    height: 100%;
-    width: 100%;
+#cab_dor, #cab_pes {
+    display: none;
 }
+
 /* Filas */
 #contenedor {
     background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
     margin: 0 0 0 5px;
     display: flex;
     flex-direction: column;
-    flex: 10;
     border-radius: 10px;
-
 }
 
 .fila {
     display: flex;
     flex-direction: row;
-    flex: 10;
+    flex: 11;
     border: 2px solid black;
     height: 70px;
     padding: 5px;
@@ -138,11 +132,10 @@ aside {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-
 }
 
 .numero {
-    min-width: 30px;
+    min-width: 36px;
     min-height: 40px;
     background: white;
     border: 2px solid black;
@@ -152,11 +145,13 @@ aside {
     justify-content: center;
     font-size: 23px;
 
-    margin-left: 10px;
-    margin-right: 18px;
+    flex: 1;
+    
+    margin-right: 6px;
+    
 }
 
-.logo {
+.logo, .dorsal {
     flex: 1;
     height: 60px;
     width: 60px;
@@ -168,7 +163,7 @@ aside {
 }
 
 .resto {
-    flex: 8;
+    flex: 8; 
 }
 
 .nombre, .tiempo, .peso, .puntos, .dorsal {
@@ -184,17 +179,21 @@ aside {
 }
 
 .tiempo {
-    flex: 3;
+    flex: 5;
 }
 .puntos {
     flex: 4;
 }
-.peso , .dorsal {
+.peso, .dorsal {
     display: none;
 }
 
 .nombre, .dorsal {
-    flex:2;
+    flex: 4;
+}
+
+.peso {
+    flex: 1;
 }
 .nombre {
     padding-left: 5px;

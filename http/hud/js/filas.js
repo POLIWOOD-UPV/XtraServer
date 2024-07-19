@@ -88,7 +88,9 @@ function creaFila(nom,pos,tiemp,pes,despegue){
     if (dorsal_visible){
         dor.style.display = "flex"
     }
-
+    if (!despegues_visibles){
+        circulo.style.display = "none"
+    }
     // Lo juntamos todo y devolvemos la fila
     resto.append(dor,nombre,tiempo,peso,circulo)
     // Le ponemos de ID la posicion
@@ -107,15 +109,16 @@ function mostrarTiempo(){
         // Ocultar tiempos
         estado = "none";
         tiempo_visible = false;
+        document.getElementById("cab_tie").style.display = "none"
     }else{
         // Mostrar tiempos
-        estado = "flex";
+        estado = "block";
         tiempo_visible = true;
+        document.getElementById("cab_tie").style.display = "block"
     }
     for (var i = 0; i < tiempos.length;i++){
         tiempos[i].style.display = estado
     }
-    document.getElementById("cab_tie").style.display = estado
 
 }
 
@@ -126,15 +129,16 @@ function mostrarPeso(){
         // Ocultar pesos
         estado = "none";
         peso_visible = false;
+        document.getElementById("cab_pes").style.display = "none"
     }else{
         // Mostrar pesos
         estado = "flex";
         peso_visible = true;
+        document.getElementById("cab_pes").style.display = "block"
     }
     for (var i = 0; i < pesos.length;i++){
         pesos[i].style.display = estado
     }
-    document.getElementById("cab_pes").style.display = estado
 }
 
 // Función para mostrar / ocultar los dorsales de los 
@@ -142,17 +146,19 @@ function mostrarDorsal(){
     let estado;
     if (dorsal_visible){
         // Mostrar dorsal
-        estado = "flex";
+        estado = "block";
         dorsal_visible = true;
+        document.getElementById("cab_dor").style.display = "block"
     }else{
         // Ocultar dorsal
         estado = "none";
         dorsal_visible = false;
+        document.getElementById("cab_dor").style.display = "none"
+
     }
     for (var i = 0; i < dorsales.length;i++){
         dorsales[i].style.display = estado
     }
-    document.getElementById("cab_dor").style.display = estado
 }
 // Función para alternar el peso con el tiempo y viceversa
 function cambiazoPesoTiempos(){
@@ -173,13 +179,15 @@ function ocultarLogos(){
     }
     logos_visibles = (estado == "flex") ? true : false;
 
-    document.getElementById("cab_log").style.display = estado
+    document.getElementById("cab_log").style.display = (estado == "flex") ? "block" : "none";
+
 }
 
 // Funcion para alternar la visibilidad de los despegues
 function ocultarDespegue(){
     despegues = document.getElementsByClassName("dot")
     let estado = (despegues_visibles ? "none" : "flex");
+    despegues_visibles = !despegues_visibles
     for (despegue of despegues){
         despegue.style.display = estado
     }
