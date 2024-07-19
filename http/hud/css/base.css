@@ -25,33 +25,34 @@ aside {
     flex-direction: row;
 }
 #rondero {
-    background: white ;
     display: flex;
+    flex-direction: column;
     align-items: flex-end;
 }
-#rondero span {
+#rondero div {
     padding: 3px;
-    background: rgba(52, 52, 52, 0.699);
-    border-width: 2px 0px 0px 0px;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
     -webkit-text-stroke: 1px black;
     font-size: 23px;
+    align-items: center;
+    justify-content: center;
 }
 /* Cabecera */
 #cabecera {
     display: flex;
-    background: rgba(52, 52, 52, 0.699);
     color: white;
     font-weight: bold;
     text-transform: uppercase;
     -webkit-text-stroke: 1px black;
-    margin: 0 0 0 5px;
-    border: 2px solid black;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
     align-items: center;
     font-size: 22px;
 }
+
 
 .cabecera-item {
     text-align: center;
@@ -65,23 +66,22 @@ aside {
 #cab_pos, #cab_log {
     flex: 1;
 }
-#cab_nom, #cab_pun {
+#cab_pun {
     flex: 4;
 }
 #cab_tie {
     flex: 3;
 }
-#cab_pes {
+#cab_pes , #cab_dor{
     display: none;
-    flex: 2;
+}
+#cab_nom, #cab_pes{
+    flex:2
 }
 /* Logo Xtra2 */
 #imagen_xtra2 {
-    background: rgba(52, 52, 52, 0.699);
     height: 150px;
     width: 450px;
-    margin: 20px 0 0 5px;
-    border-top-left-radius: 10px;
 }
 #imagen_xtra2 img {
     height: 100%;
@@ -89,12 +89,13 @@ aside {
 }
 /* Filas */
 #contenedor {
-    background: rgba(52, 52, 52, 0.699);
-    width: 550px;
+    background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
     margin: 0 0 0 5px;
     display: flex;
     flex-direction: column;
     flex: 10;
+    border-radius: 10px;
+
 }
 
 .fila {
@@ -110,6 +111,8 @@ aside {
     min-height: 60px;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+
 }
 
 .numero {
@@ -126,7 +129,7 @@ aside {
 
 .logo {
     flex: 1;
-    margin-left: 15px;
+    margin-left: 25px;
     height: 60px;
     width: 60px;
 }
@@ -140,7 +143,7 @@ aside {
     flex: 8;
 }
 
-.nombre, .tiempo, .peso, .puntos {
+.nombre, .tiempo, .peso, .puntos, .dorsal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,14 +158,16 @@ aside {
 .tiempo {
     flex: 3;
 }
-.nombre, .puntos {
+.puntos {
     flex: 4;
 }
-.peso {
+.peso , .dorsal {
     display: none;
-    flex: 2;
 }
 
+.nombre, .dorsal {
+    flex:2;
+}
 .dot {
     height: 15px;
     width: 15px;

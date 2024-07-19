@@ -5,27 +5,32 @@
 // Aparecer y desaparecer ranking
 var ranking_visible = true;
 var filas_visible = true;
-cabeza = document.querySelector("#cabeza")
 contenedor = document.querySelector("#contenedor")
 
 // Mover el ranking en o fuera de pantalla
 function rankingMov() {
+    console.log("din rankingMov")
+    cabeza = document.querySelector("#cabeza")
+    contenedor = document.querySelector("#contenedor")
+
     if (ranking_visible) { // Es visible
         // Ranking se pasa a oculto
-        ranking_visible = false;
-        cabeza.style.left = "-600px"//"300px";
         contenedor.style.left = "-600px"//"300px";
-
+        ranking_visible = false;
     } else { // No es visible
-        cabeza.style.left = "0px";
         contenedor.style.left = "0px";
         ranking_visible = true;
-        if (!filas_visible){ filasMov()}
+        
+        if (!filas_visible){  // Mover las filas con el ranking
+            filasMov()
+        }
     }
 }
 
 // Mover filas en o fuera de pantalla
 function filasMov(){
+    console.log("din filasMov")
+
     // Saca o pone las filas depende del estado actual
     let cant_filas =  filas.length;
 
@@ -74,6 +79,8 @@ function filasMov(){
 // Funciones aparecer/desaparecer dinamicas   
 // Desaparición con dinamica 
 function desaparicionDinamica() {
+    console.log("din desaparicionDinamica")
+
     if (!ranking_visible) {
         // Ya escondido, no se ve
         return;
@@ -85,6 +92,7 @@ function desaparicionDinamica() {
 }
 // Aparicion con dinamica 
 function aparicionDinamica() {
+    console.log("din aparicionDinamica")
     if (ranking_visible) {
         // Ya se ve
         return;
@@ -93,5 +101,4 @@ function aparicionDinamica() {
         ranking_visible = false;
         rankingMov()
     }
-
 }

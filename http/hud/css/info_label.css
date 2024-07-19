@@ -8,70 +8,96 @@ body {
     max-width: 1920px;
     max-height: 1080px;
 
-    background-image: url('../../img/prueba_paisaje.jpg');
-    background-size: cover;
-
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
+    font-size: 90%;
+    text-align: center;
+
+    color: #FFE55E;
 }
 div{
     position: fixed;
-    top: 45%;
+    top: 40%;
     right: 0%;
-    left: 68%;
+    left: 75%;
     display: inline-block;
     flex-direction: column;
 
     padding: 2%;
     
-    background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgb(255, 229, 94, 0.65));
-    
+    background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
+
     border-top-left-radius: 7%;
     border-bottom-left-radius: 7%;
 }
 #logo{
     float: left;
-    width: 125px;
+    width: 90px;
     height: auto;
 
-    padding-right: 2%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-right: 2%;
+    
 }
 #foto{
     float: right;
-    width: 350px;
-    height: 125px;
+    width: 200px;
+    height: 90px;
 
-    padding-top: 2%;
-    padding-bottom: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
-#nombre_grupo{
+#dorsal{
     float:left;
-    width: 94%;
-
-    color: white;
-    text-align: center;
-    font-size: 150%;
+    width: 6%;
 
     padding: 3%;
 
     padding-top: 2%;
     padding-bottom: 2%;
 
-    margin: 0%;
     margin-top: 2%;
+    margin-bottom: 0%;
 
     border: 2px solid;
-    border-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 229, 94, 0.7);
+}
+#acr{
+    float:left;
+    width: 18.7%;
+
+    padding: 3%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 2%;
+    margin-bottom: 0%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0.7);
+}
+#nombre_grupo{
+    float:left;
+    width: 48%;
+
+    padding: 3%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin-top: 2%;
+    margin-bottom: 0%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0.7);
 }
 #uni{
     float: left;
-    width: 94%;
-
-    color: white;
-    text-align: center;
-    font-size: 150%;
+    width: 93%;
 
     padding: 3%;
 
@@ -82,43 +108,60 @@ div{
     margin-top: 3%;
 
     border: 2px solid;
-    border-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 229, 94, 0.7);
+}
+#titulo_miembros{
+    float: left;
+    width: 10%;
+    
+    padding: 3%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin: 0%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0);
 }
 #miembros{
     float: left;
     width: 10%;
-    height: auto;
-
-    color: white;
-    text-align: center;
-    font-size: 150%;
+    
     padding: 3%;
 
     padding-top: 2%;
     padding-bottom: 2%;
 
     margin: 0%;
-    margin-top: 3%;
+    /* margin-top: 3%; */
 
     border: 2px solid;
-    border-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 229, 94, 0.7);
+}
+#titulo_lider{
+    float: right;
+    width: 72%;  
+
+    padding: 2%;
+
+    margin: 0%;
+    margin-right: 1%;
+
+    border: 2px solid;
+    border-color: rgba(255, 229, 94, 0);
 }
 #nombre_lider{
     float: right;
-    width: 70%;
-    height: auto;  
-
-    color: white;
-    text-align: center;
-    font-size: 150%;
+    width: 72%;  
+    
     padding: 3%;
 
     padding-top: 2%;
     padding-bottom: 2%;
 
     margin: 0%;
-    margin-top: 3%;
 
     border: 2px solid;
-    border-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 229, 94, 0.7);
 }

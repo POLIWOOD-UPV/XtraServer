@@ -14,16 +14,18 @@ var boton_peso = document.getElementById("mostrar_peso_id");
 var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
 let bot_logos = document.querySelector("#ocultar_logos_id")
 let bot_despegues = document.querySelector("#ocultar_despegue_id")
+let bot_dorsales = document.querySelector("#mostrar_dorsal_id")
 // Flags
 let peso_visible = false;
 let tiempo_visible = true;
-var ranking_visible = true;
-var filas_visible = true;
-logos_visibles = true;
-despes_visibles = true;
-var pilotos = ["POLIWOOD"]
-var equipos = ["RUHE", "Aerotech", "G3", "Matsia", "LuftSieger", "ECLift", "SAETA_T2", "DIANA", "Trencalòs", "North Pole", "SAETA_T1", "UCA&Air", "Club Xaloc","Eagle Fly T1","Eagle Fly T2"];
-
+let ranking_visible = true;
+let filas_visible = true;
+let logos_visibles = true;
+let despes_visibles = true;
+let dorsal_visible = false;
+// Listas
+let pilotos = ["WOOD"]
+let equipos = ["RUHE", "UVIGA", "G3", "MATSI", "LUFTS", "ECLFT", "SAET2", "DIANA", "TRENC", "NTHPO", "SAET1", "UCAIR", "XALOC", "EAFT1", "EAFT2"];
 // Funciones traidas de otros archivos
 
 // Coge al piloto y lo mete en el sistema
@@ -238,10 +240,8 @@ function remplazar_piloto(piloto,estado,negado = false){
     
     setTimeout(()=>{
         if (negado){
-            console.log("COMA1")
             negar_piloto(piloto)
         }else{
-            console.log("COMA1")
             // Volvemos a introducirlo con los puntos nuevos
             s_sumaPiloto(estado)
         }

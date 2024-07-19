@@ -5,9 +5,10 @@
 // Variables Pilotos
 
 let controla_pilotos = 1
+let valores_dorsal = {"RUHE":1,"UVIGA":2, "G3":3,"MATSI": 4,"LUFTS": 5,"ECLFT": 6,"SAET2": 7,"DIANA": 8,"TRENC": 9,"NTHPO": 10,"SAET1": 11,"UCAIR": 12,"XALOC": 15,"EAFT1": 16,"EAFT2":17,}
 
 // Coger ranking y filas
-let ranking = document.querySelector("main");
+let ranking = document.getElementById("contenedor")
 let filas = document.getElementsByClassName("fila")
 
 
@@ -15,10 +16,12 @@ let filas = document.getElementsByClassName("fila")
 let tiempo_visible = true;
 let tiempos = document.getElementsByClassName("tiempo")
 
-// Peso (empieza desactivada)
+// Peso y Dorsales (empiezan desactivadas)
 let peso_visible = false;
 let pesos = document.getElementsByClassName("peso")
 
+let dorsal_visible = false;
+let dorsales = document.getElementsByClassName("dorsal")
 // Logos y despegues (empieza activados los dos)
 let logos_visibles = true
 let despegues_visibles = true
@@ -45,6 +48,9 @@ function creaFila(nom,pos,tiemp,pes,despegue){
     // Metemos la imagen
     logo = meterLogos(nom);
 
+    // Metemos el dorsal
+    dor = meterDorsal(nom);
+
     // Metemos el estado del despegue
     let circulo = document.createElement("span")
     circulo.className = "dot"
@@ -54,6 +60,7 @@ function creaFila(nom,pos,tiemp,pes,despegue){
         case "Correcto":color = "#0dff00";break;
         case "Ilegal": color = "#ff0000"; break;
         case "Pendiente": color = "#ffffff";break;
+        case "Fallido": color = "#E6FE00";break;
     }
     circulo.style.backgroundColor = color
     // Informativos
@@ -78,9 +85,12 @@ function creaFila(nom,pos,tiemp,pes,despegue){
     if (logos_visibles){
         logo.style.display = "flex"
     }
+    if (dorsal_visible){
+        dor.style.display = "flex"
+    }
 
     // Lo juntamos todo y devolvemos la fila
-    resto.append(nombre,tiempo,peso,circulo)
+    resto.append(dor,nombre,tiempo,peso,circulo)
     // Le ponemos de ID la posicion
     fila.id = pos
     fila.append(numero,logo,resto)
@@ -127,6 +137,23 @@ function mostrarPeso(){
     document.getElementById("cab_pes").style.display = estado
 }
 
+// Función para mostrar / ocultar los dorsales de los 
+function mostrarDorsal(){
+    let estado;
+    if (dorsal_visible){
+        // Mostrar dorsal
+        estado = "flex";
+        dorsal_visible = true;
+    }else{
+        // Ocultar dorsal
+        estado = "none";
+        dorsal_visible = false;
+    }
+    for (var i = 0; i < dorsales.length;i++){
+        dorsales[i].style.display = estado
+    }
+    document.getElementById("cab_dor").style.display = estado
+}
 // Función para alternar el peso con el tiempo y viceversa
 function cambiazoPesoTiempos(){
     if ((!tiempo_visible && !peso_visible) ||(tiempo_visible && peso_visible) ) {
@@ -158,40 +185,38 @@ function ocultarDespegue(){
     }
 }
 
+// Meter los logos en las filas del ranking
 function meterLogos(nom){
-    complicados = ["SAETA_T2", "Trencalòs", "SAETA_T1", "Club Xaloc", "Eagle Fly T1","Eagle Fly T2","North Pole","Aerotech"];
-
-    console.log("CAFCFA")
-    console.log(nom)
-    console.log(complicados.includes(nom))
-
     let logo = document.createElement("div")
     logo.className = "logo"
 
     let estado = (logos_visibles ? "flex" : "none");
-
     logo.style.display = estado
-    let elLogo = document.createElement("img")
-    
-    if (complicados.includes(nom)){
-        switch (nom){
-            case "Aerotech": nom = "UVigo";break;
-            case "North Pole": nom = "TheNorthPole";break;
-            case "SAETA_T2": nom = "SAETA";break;
-            case "Trencalòs": nom = "Trencalos";break;
-            case "SAETA_T1": nom = "SAETA";break;
-            case "Club Xaloc": nom = "Xaloc";break;
-            case "Eagle Fly T1": nom = "FlyEagle";break;
-            case "Eagle Fly T2": nom = "FlyEagle";break;
-        }
+
+    if (nom.substring(0, 4) === "SAET") {
+        nom = "SAETA"
+    } else if (nom.substring(0,4) === "EAFT"){
+        nom = "FlyEagle"
     }
+    
+    let elLogo = document.createElement("img")
     elLogo.src = "../img/logos/"+nom+".png"
     logo.append(elLogo)
-    
-
     return logo
 }
 
+// Meter los dorsales en las filas del ranking
+function meterDorsal(nom){
+    let dors = document.createElement("div")
+    dors.className = "dorsal"
+
+    let estado = (dorsal_visible ? "flex" : "none");
+    dors.style.display = estado
+
+    dors.textContent = valores_dorsal[nom]
+    return dors
+}
+// Cambiar el nº de ronda arriba
 function cambiarRonda(num){
     let ronda = document.getElementById("num_ronda")
     ronda.textContent = num

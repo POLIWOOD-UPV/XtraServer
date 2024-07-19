@@ -98,26 +98,6 @@ function s_sumaPiloto(estado){
     piloto = cogerPiloto();
     if (pilotos.includes(piloto)){
         remplazar_piloto(piloto,estado)
-    }else if (estado == "negado"){
-        pilotos.push(piloto)
-        // Coger el tiempo del avion
-        minutos = cogerTiempo_Peso("min")
-        segundos = cogerTiempo_Peso("seg")
-        miliseg = cogerTiempo_Peso("mil")
-        tiempo = minutos + ":" + segundos + ":" + miliseg
-        console.log("TIEMPO "+tiempo)
-        // Coger el peso
-        peso = cogerTiempo_Peso("pes")
-        // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
-        pos = sacar_pos_avion(tiempo) // Es un numero
-        FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
-
-        // Coger el despegue
-        let despegue_input = document.querySelector("#tipos_despegue_id").value
-
-        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
-        socket.emit("all", "ranking",info )
-        ordenar_control(); // Ordenar la lista de control después de la eliminación
     }else {
         pilotos.push(piloto)
         // Coger el tiempo del avion
@@ -128,6 +108,7 @@ function s_sumaPiloto(estado){
         console.log("TIEMPO "+tiempo)
         // Coger el peso
         peso = cogerTiempo_Peso("pes")
+
         // Encontrar en que posicion va a estar AHORA A TRAVES DE CONTROL!!!!!
         pos = sacar_pos_avion(tiempo) // Es un numero
         FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
@@ -193,4 +174,18 @@ function s_ponerRonda(){
     // Lo enviamos a que se cambie
     info = ["camRon",ronda]
     socket.emit("all", "ranking",info )
+}
+
+function s_mostrarDorsal(){
+    if (dorsal_visible){ // Son visibles y vamos a esconderlos
+        bot_dorsales.textContent = "Mostrar dorsales"
+        dorsal_visible = false
+    }else{
+        bot_dorsales.textContent = "Ocultar dorsales"
+        dorsal_visible = true
+    }
+
+    info = ["mosDor",dorsal_visible]
+    socket.emit("all", "ranking",info )
+
 }

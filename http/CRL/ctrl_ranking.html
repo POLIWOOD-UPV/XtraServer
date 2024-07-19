@@ -20,9 +20,10 @@
                 <button onclick= "s_mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
                 <button onclick= "s_mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
                 <button onclick = "s_cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
-                <h4>Logos y despegue</h4>
+                <h4>Logos, despegue y dorsal</h4>
                 <button onclick = "s_ocultarLogos()" id = "ocultar_logos_id">Ocultar logos</button>
                 <button onclick = "s_ocultarDespegue()" id = "ocultar_despegue_id">Ocultar despegues</button>
+                <button onclick = "s_mostrarDorsal()" id = "mostrar_dorsal_id">Mostrar dorsales</button>
 
             </div>
         </div>    
@@ -43,28 +44,30 @@
             <h3>Sumar</h3>
             <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
                 <option value="RUHE">RUHE</option>
-                <option value="Aerotech">Aerotech</option>
+                <option value="UVIGA">UVIGA</option>
                 <option value="G3">G3</option>
-                <option value="Matsia">Matsia</option>
-                <option value="LuftSieger">LuftSieger</option>
-                <option value="ECLift">ECLift</option>
-                <option value="SAETA_T2">SAETA_T2</option>
+                <option value="MATSI">MATSI</option>
+                <option value="LUFTS">LUFTS</option>
+                <option value="ECLFT">ECLFT</option>
+                <option value="SAET2">SAET2</option>
                 <option value="DIANA">DIANA</option>
-                <option value="Trencalòs">Trencalòs</option>
-                <option value="North Pole">North Pole</option>
-                <option value="SAETA_T1">SAETA_T1</option>
-                <option value="UCA&Air">UCA&Air</option>
-                <option value="Club Xaloc">Club Xaloc</option>
-                <option value="Eagle Fly T1">Sky Eagle T1</option>
-                <option value="Eagle Fly T2">Sky Eagle T2</option>
+                <option value="TRENC">TRENC</option>
+                <option value="NTHPO">NTHPO</option>
+                <option value="SAET1">SAET1</option>
+                <option value="UCAIR">UCAIR</option>
+                <option value="XALOC">XALOC</option>
+                <option value="EAFT1">EAFT1</option>
+                <option value="EAFT2">EAFT2</option>
             </select>
+            
                 <input class = "inputs" id = "minutos_input_id" type="text" placeholder="Minutos" required>
                 <input class = "inputs" id = "segundos_input_id" type="text" placeholder="Segundos" required>
                 <input class = "inputs" id = "milisegundos_input_id" type="text" placeholder="Milisegundos" required>
                 <input class = "inputs" id = "peso_input_id" type="text" placeholder="Peso" required>
                 <select name = "tipos_despegue" id = "tipos_despegue_id">
-                    <option value = "Corto">Corto</option>
-                    <option value = "Correcto">Correcto</option>
+                    <option value = "Corto">15m</option>
+                    <option value = "Correcto">60m</option>
+                    <option value = "Fallido">Fallido</option>
                     <option value = "Ilegal">Ilegal</option>
                     <option value = "Pendiente">Pendiente</option>
                 </select>
@@ -75,7 +78,7 @@
             <h3>Borrar</h3>
             <div id = "pilotos_mas_borrar">
                 <div class = "fila_control_borrar">
-                    <div class = "nombre_control">poliwood</div>
+                    <div class = "nombre_control">wood</div>
                     <button class = "boton_control" id = "1c_AN" onclick="s_quitaPiloto('animado',this.id)">BORRAR_An</button>
                     <button class = "boton_control"  id = "1c" onclick="s_quitaPiloto('seco',this.id)"> BORRAR</button>
                     <div class = "tiempo_control">33:33:333</div>
@@ -91,8 +94,6 @@
             <ul>
                 <li>Hacer animaciones para el peso / tiempo</li>
                 <li>Calcular la diferencia de tiempos entre filas</li>
-                <li>Introducir logos en el lado </li>
-                <li>Introducir estado de despegue</li>
             </ul>
         </details>
     </main>

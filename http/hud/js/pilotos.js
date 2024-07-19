@@ -119,21 +119,23 @@ function meter_en_ranking(nueva_fila) {
     }
 }
 
-// Mete la info de la fila nueva en la posición correcta 
 function introducir_en_filas(pos, nueva_fila) {
     console.log("introducir_en_filas");
-
-    // Convierte la colección HTML de filas a un array temporal para iterar etc
+    
+    // Obtiene todas las filas actuales
+    let filas = document.querySelectorAll("#contenedor .fila");
+    
+    // Convierte la colección HTML de filas a un array temporal para iterar
     let filas_array = Array.from(filas);
-
+    
     // Divide el array en dos partes: una antes y otra después de la posición indicada
     let filas_1 = filas_array.slice(0, pos - 1);  // Elementos del inicio hasta pos-1
     let filas_2 = filas_array.slice(pos - 1);     // Elementos desde pos-1 hasta el final
-
-    // Inserta la nueva fila en donde va a estar y la juntamos con la segunda mitad 
+    
+    // Inserta la nueva fila en donde va a estar y la junta con la segunda mitad 
     filas_1.push(nueva_fila);
     filas_array = filas_1.concat(filas_2);
-
+    
     // Actualiza el número visible y el ID de cada fila para reflejar su nueva posición
     filas_array.forEach((fila, index) => {
         fila.querySelector('.numero').textContent = index + 1; // Ajusta el número visible
@@ -142,28 +144,17 @@ function introducir_en_filas(pos, nueva_fila) {
 
     // Crea un fragmento de documento para eficiencia en la actualización del DOM
     let fragment = document.createDocumentFragment();
-    
     // Añade la cabecera al fragmento
-    let cabeza = document.getElementById("cabeza");
-    fragment.appendChild(cabeza);
+    fragment.appendChild(document.getElementById("cabeza"));
 
-    // Crea un nuevo contenedor para las filas
-    let contenedor = document.createElement("div");
-    contenedor.id = "contenedor";
-    
-    // Añade todas las filas al nuevo contenedor
+    // Añade todas las filas al fragmento
     filas_array.forEach(function(fila) {
-        contenedor.appendChild(fila);
+        fragment.appendChild(fila);
     });
-
-    // Añade el contenedor al fragmento
-    fragment.appendChild(contenedor);
-
-    // Limpia el contenedor actual del ranking y añade el fragmento actualizado
-    while (ranking.firstChild) {
+      // Limpia el contenedor actual del ranking y añade el fragmento actualizado
+      while (ranking.firstChild) {
         ranking.removeChild(ranking.firstChild);
     }
     ranking.appendChild(fragment);
-
 }
 

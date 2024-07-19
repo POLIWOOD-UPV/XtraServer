@@ -12,9 +12,11 @@
                 <button onclick = "s_aparicionDinamica()">Aparicion dinamica</button>
                 <button onclick = "s_desaparicionDinamica()">Desaparicion Dinamica</button>
 
-                <h4>Logos y Puntos</h4>
+                <h4>Logos, Puntos y Dorsales</h4>
                 <button onclick= "s_mostrarPuntos()" id = "mostrar_puntos_id">Ocultar Puntos</button>
                 <button onclick = "s_ocultarLogos()" id = "ocultar_logos_id">Ocultar logos</button>
+                <button onclick = "s_mostrarDorsal()" id = "mostrar_dorsal_id">Mostrar dorsales</button>
+
             </div>
         </div>    
         <div id = "divIntegraPilotos">
@@ -23,20 +25,20 @@
                 <button onclick="s_mandar_zeros()">Zeros</button>
                 <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
                     <option value="RUHE">RUHE</option>
-                    <option value="Aerotech">Aerotech</option>
+                    <option value="UVIGA">UVIGA</option>
                     <option value="G3">G3</option>
-                    <option value="Matsia">Matsia</option>
-                    <option value="LuftSieger">LuftSieger</option>
-                    <option value="ECLift">ECLift</option>
-                    <option value="SAETA_T2">SAETA_T2</option>
+                    <option value="MATSI">MATSI</option>
+                    <option value="LUFTS">LUFTS</option>
+                    <option value="ECLFT">ECLFT</option>
+                    <option value="SAET2">SAET2</option>
                     <option value="DIANA">DIANA</option>
-                    <option value="Trencalòs">Trencalòs</option>
-                    <option value="North Pole">North Pole</option>
-                    <option value="SAETA_T1">SAETA_T1</option>
-                    <option value="UCA&Air">UCA&Air</option>
-                    <option value="Club Xaloc">Club Xaloc</option>
-                    <option value="Eagle Fly T1">Sky Eagle T1</option>
-                    <option value="Eagle Fly T2">Sky Eagle T2</option>
+                    <option value="TRENC">TRENC</option>
+                    <option value="NTHPO">NTHPO</option>
+                    <option value="SAET1">SAET1</option>
+                    <option value="UCAIR">UCAIR</option>
+                    <option value="XALOC">XALOC</option>
+                    <option value="EAFT1">EAFT1</option>
+                    <option value="EAFT2">EAFT2</option>
                 </select>
                 <input class = "inputs" id = "puntos_input_id" type="text" placeholder="Puntos" required>
                 <button onclick="s_sumaPiloto('animado')">SUMAR_An</button>
@@ -45,7 +47,7 @@
             <h3>Borrar</h3>
             <div id = "pilotos_mas_borrar">
                 <div class = "fila_control_borrar">
-                    <div class = "nombre_control">POLIWOOD</div>
+                    <div class = "nombre_control">WOOD</div>
                     <button class = "boton_control" id = "1c_AN" onclick="s_quitaPiloto('animado',this.id)">BORRAR_An</button>
                     <button class = "boton_control"  id = "1c" onclick="s_quitaPiloto('seco',this.id)"> BORRAR</button>
                     <div class = "puntos_control">33</div>
@@ -61,8 +63,6 @@
             <ul>
                 <li>Hacer animaciones para el peso / tiempo</li>
                 <li>Calcular la diferencia de tiempos entre filas</li>
-                <li>Introducir logos en el lado </li>
-                <li>Introducir estado de despegue</li>
             </ul>
         </details>
     </main>

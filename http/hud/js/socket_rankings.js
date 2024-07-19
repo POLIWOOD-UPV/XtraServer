@@ -43,7 +43,12 @@ socket.on("ranking",(info) =>{
             ocultarDespegue()
             break;
         case "camRon":
-            cambiarRonda(info[0])
+            cambiarRonda(info[0]);
+            break;
+        case "mosDor":
+            dorsal_visible = info[0]
+            mostrarDorsal();
+            break;
     };
 });
 
@@ -83,6 +88,10 @@ socket.on("puntos",(info) =>{
         case "logVis":
             logos_visibles = info[0]
             ocultarLogos();
+            break;
+        case "mosDor":
+            dorsal_visible = info[0]
+            mostrarDorsal();
             break;
     };
 });
