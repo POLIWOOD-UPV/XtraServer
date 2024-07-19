@@ -57,7 +57,7 @@ const upload = (req, res) => {
 }
 
 const guardar_vuelo = (req, res) => {
-    var labels = JSON.parse(fs.readFileSync("./http/crl/labels.json"));
+    var labels = JSON.parse(fs.readFileSync("./http/data/labels.json"));
     let body = "";
     req.on("data", (chunk) => {
         body += chunk;

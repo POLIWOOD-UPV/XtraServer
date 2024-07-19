@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vuelo</title>
+    <title>Ficha de Carga</title>
     <script src="./js/RondaEquipo.js"></script>
     <script>
         var rondaEquipo;
@@ -62,7 +62,7 @@
     </script>
 </head>
 <body>
-    <h1>Ficha de Vuelo</h1>
+    <h1>Ficha de Carga</h1>
     <form action="/vuelo" target="/crl/vuelo.html" method="post">
         <p>
             <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda" required></select>
@@ -71,13 +71,34 @@
             <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo" required></select>
         </p>
         <hr>
-        <h3>Tiempo de Carga:</h3>
+        <h3>Predicción de Vuelo:</h3>
         <p>
-            <label for="T_carga"><input type="number" name="T_carga" id="t_carga" readonly>&nbsp;ms</label>
+            <input type="number" name="P_tiempo" id="p_tiempo" step="1000" value="0" min="0" required>
+            <label for="P_tiempo">Milisegundos (ms)</label>
         </p>
-        <h3>Tiempo de Vuelo:</h3>
+        <script>
+            const addMin = (add) => {
+                let elem = document.getElementById('p_tiempo');
+                if (add) {
+                    elem.value = Number(elem.value) + 60000;
+                } else {
+                    elem.value = Number(elem.value) + 60000;
+                }
+            }
+        </script>
         <p>
-            <label for="T_vuelo"><input type="number" name="T_vuelo" id="t_vuelo" readonly>&nbsp;ms</label>
+            <button id="addMin" onclick="addMin(true)">
+                añadir Minuto
+            </button>
+            <button id="subMin" onclick="addMin(false)">
+                quitar Minuto
+            </button>
+        </p>
+        <hr>
+        <h3>Predicción de Peso:</h3>
+        <p>
+            <input type="number" name="P_peso" id="p_peso" required>
+            <label for="P_peso">Gramos (g)</label>
         </p>
         <hr>
         <h3>Carga</h3>
@@ -88,34 +109,40 @@
             <label for="Volumen">Volumen:</label><input type="number" name="Volumen" id="volumen" readonly>
         </p>
         <p>
-            <label for="Billar">Numero de Bolas de Billar:</label><input type="number" name="Billar" id="billar" min="0">
+            <label for="Billar">Numero de Bolas de Billar:</label><input type="number" name="Billar" id="billar" min="0" required>
         </p>
         <p>
-            <label for="Ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="Ping" id="ping" min="0">
+            <label for="Ping">Numero de Pelotas de Ping-Pong:</label><input type="number" name="Ping" id="ping" min="0" required>
         </p>
         <hr>
         <h3>Despegue:</h3>
         <p>
-            <label for="Despegue"><input type="text" name="D_despegue" id="d_despegue" readonly></label>
-            <br>
-            <label for="Despegue">Correcto <input type="radio" name="Despegue" id="despegue_t" value="true"></label>
-
-            <label for="Despegue">Incorrecto <input type="radio" name="Despegue" id="despegue_f" value="false"></label>
+            <label for="D_despegue">Menos de 15m:</label>
+            <input type="radio" name="D_despegue" id="_15" value="15">
+        </p>
+        <p>
+            <label for="D_despegue">Menos de 60m:</label>
+            <input type="radio" name="D_despegue" id="_60" value="60">
         </p>
         <hr>
-        <h3>Vuelo Nulo:</h3>
+        <h3>Piloto Externo:</h3>
         <p>
-            <label for="VN">Verdadero <input type="radio" name="VN" id="VN_t" value="true"></label>
+            <label for="Piloto">Propio:</label>
+            <input type="radio" name="Piloto" id="propio" value="true">
         </p>
         <p>
-            <label for="VN">Falso <input type="radio" name="VN" id="VN_f" value="false"></label>
+            <label for="Piloto">Externo:</label>
+            <input type="radio" name="Piloto" id="externo" value="false">
         </p>
-        <h3>Estrellado:</h3>
+        <hr>
+        <h3>Repuestos:</h3>
         <p>
-            <label for="Estrellado">Verdadero <input type="radio" name="Estrellado" id="Estrellado_t" value="true"></label>
+            <label for="Repuestos">Declarados:</label>
+            <input type="radio" name="Repuestos" id="declarados" value="true">
         </p>
         <p>
-            <label for="Estrellado">Falso <input type="radio" name="Estrellado" id="Estrellado_f" value="false"></label>
+            <label for="Repuestos">No declarados:</label>
+            <input type="radio" name="Repuestos" id="no_declarados" value="false">
         </p>
         <input type="submit" value="Enviar">
     </form>

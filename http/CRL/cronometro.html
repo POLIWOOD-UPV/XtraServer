@@ -5,16 +5,32 @@
     <link rel="stylesheet" />
     <title>Cronómetro</title>
     <style>
-        div * {
-            font-size: 25px;
+        span {
+            font-size: 6dvi;
         }
     </style>
+    <script src="./js/RondaEquipo.js"></script>
 </head>
 <body>
+    <header>
+        <div>
+            <p>
+                <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda" required></select>
+            </p>
+            <p>
+                <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo" required></select>
+            </p>
+            <p>
+                <label for="Prueba">Carga/Vuelo: </label><select name="Prueba" id="prueba" required>
+                    <option value="T_carga">Carga</option>
+                    <option value="T_vuelo">Vuelo</option>
+                </select>
+            </p>
+        </div>
+    </header>
+    <hr>
     <main>
         <div>
-            <span id="horas">00</span>
-            <span>:</span>
             <span id="minutos">00</span>
             <span>:</span>
             <span id="segundos">00</span>
@@ -23,9 +39,17 @@
         </div>
         <button id = "playButton" onclick="play()">Play</button>
         <button id = "pauseButton" onclick="pause()" hidden>Pause</button>
+        <b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b>
         <button id = "resetButton" onclick="reset()">Reset</button>
+        <br>
     </main>
+    <hr>
+    <footer>
+        <button id = "uploadButton" onclick="upload()" hidden>Upload</button>
+    </footer>
     <script>
+        rondaEquipo = new RondaEquipo();
+        rondaEquipo.get_dependencies();
 
         /* Webs consultadas
         Equivalente de Millis() de arduino mas o menos
@@ -39,39 +63,45 @@
         */
 
         // Elementos del cronómetro
-        let horasElem = document.querySelector("#horas");
         let minutosElem = document.querySelector("#minutos");
         let segundosElem = document.querySelector("#segundos");
         let milisegundosElem = document.querySelector("#milisegundos");
         // Botones
-        let playButton = document.querySelector("#playButton")
-        let pauseButton = document.querySelector("#pauseButton")
-        let resetButton = document.querySelector("#resetButton") // No le estamos haciendo nada pero lo pongo por si le queremos hacer algo a futuro
+        let playButton = document.querySelector("#playButton");
+        let pauseButton = document.querySelector("#pauseButton");
+        let resetButton = document.querySelector("#resetButton"); // No le estamos haciendo nada pero lo pongo por si le queremos hacer algo a futuro
+        let uploadButton = document.querySelector("#uploadButton");
 
         // Valores del cronómetro globales
         let tiempo_transcurrido = 0; // El tiempo transcurrido del cronómetro
         let saltos;                  // Los incrementos en los que irá el cronómetro
         let tiempoInicial;           // Será el valor de cuando empecemos el cronómetro
 
+        function stepConometro() {
+            let tiempoActual = Date.now();
+            tiempo_transcurrido = tiempoActual - tiempoInicial; // Calculamos la diferencia
+            actualizarCronometro(); // Actualizamos el cronómetro
+        }
 
         function play() {
             // Escondemos el boton de play y mostramos el de pausa
-            pauseButton.hidden = false
-            playButton.hidden = true            
+            pauseButton.hidden = false;
+            playButton.hidden = true;
+            uploadButton.hidden = true;          
             if (!saltos) { // Si no se está incrementando el tiempo del cronómetro, empezamos
                 tiempoInicial = Date.now() - tiempo_transcurrido; // Ajustamos el tiempo inicial. No usamos Date.valueOf porque es mas corto y sencillo usar Date.now()
                 saltos = setInterval(() => { // Empezamos a incrementarlo
-                    let tiempoActual = Date.now();
-                    tiempo_transcurrido = tiempoActual - tiempoInicial; // Calculamos la diferencia
-                    actualizarCronometro(); // Actualizamos el cronómetro
+                    stepConometro();
                 }, 10);
             }
         }
         function pause() {
             // Escondemos el boton de pausa y mostramos el de play
-            pauseButton.hidden = true
-            playButton.hidden = false
+            pauseButton.hidden = true;
+            playButton.hidden = false;
+            uploadButton.hidden = false;
             clearInterval(saltos);   // Detenemos los incrementos
+            stepConometro();         // Hacemos un ultimo paso para que se quede como toca
             saltos = null;           // Volver a poner a null para que la otra lógica funcione
         }
 
@@ -96,10 +126,16 @@
             let milisegundos = milisegundosTotales % 1000
 
             // Ponemos los valores en el cronometro como strings, rellenando con 0s
-            horasElem.textContent = String(horas).padStart(2, "0");
             minutosElem.textContent = String(minutos).padStart(2, "0");
             segundosElem.textContent = String(segundos).padStart(2, "0");
             milisegundosElem.textContent = String(milisegundos).padStart(3, "0");
+        }
+
+        function upload() {
+            let prueba = document.getElementById("prueba")
+            let object = Object();
+            object[prueba.value] = tiempo_transcurrido;
+            rondaEquipo.upload(object);
         }
     </script>
 </body>
