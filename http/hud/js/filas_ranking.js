@@ -5,8 +5,6 @@
 // Variables de visibilidad específicas
 let tiempo_visible = true;
 let tiempos = document.getElementsByClassName("tiempo");
-let peso_visible = false;
-let pesos = document.getElementsByClassName("peso");
 
 // Crea la fila donde se meten los datos
 function creaFila(nom, pos, tiemp, pes, despegue) {

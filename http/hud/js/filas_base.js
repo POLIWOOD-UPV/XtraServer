@@ -64,3 +64,13 @@ function meterDorsal(nom) {
     dors.textContent = valores_dorsal[nom];
     return dors;
 }
+
+// Función para mostrar / ocultar los dorsales
+function mostrarDorsal() {
+    let estado = dorsal_visible ? "flex" : "none";
+    dorsal_visible = !dorsal_visible;
+    document.getElementById("cab_dor").style.display = estado;
+    for (let i = 0; i < dorsales.length; i++) {
+        dorsales[i].style.display = estado;
+    }
+}
