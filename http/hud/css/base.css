@@ -146,7 +146,7 @@ aside {
     font-size: 23px;
 
     flex: 1;
-    
+    max-width: 43px;
     margin-right: 6px;
     
 }
@@ -155,6 +155,7 @@ aside {
     flex: 1;
     height: 60px;
     width: 60px;
+    max-width: 60px;
 }
 
 .resto, .fila_control_borrar, .fila_control_sumar {

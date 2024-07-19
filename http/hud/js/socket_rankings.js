@@ -1,7 +1,9 @@
 // Iniciamos el socket
-const socket = io();
+socket = io();
 
 socket.on("ranking",(info) =>{
+    console.log("En el socket ranking, info recibida:")
+    console.log(info)
     comando = info.shift()
     switch (comando){
         case "message":
@@ -49,10 +51,14 @@ socket.on("ranking",(info) =>{
             dorsal_visible = info[0]
             mostrarDorsal();
             break;
+        default:
+            console.log("En el default de Ranking")
     };
 });
 
 socket.on("puntos",(info) =>{
+    console.log("En el socket puntos, info recibida:")
+    console.log(info)
     comando = info.shift()
     switch (comando){
         case "message":
@@ -93,5 +99,8 @@ socket.on("puntos",(info) =>{
             dorsal_visible = info[0]
             mostrarDorsal();
             break;
+            default:
+                console.log("En el default de Puntos")
     };
 });
+

@@ -1,20 +1,18 @@
 ////////////////////////////////////////////////////
-// Funciones de poner y quitar pilotos             //
+// Funciones comunes de pilotos                    //
 ////////////////////////////////////////////////////
-
 
 // Vaciar todos los aviones instantaneamente
 function vaciarPilotos(){
     for (var j = filas.length - 1; j >= 0; j--) {
         filas[j].remove();
-       
         controla_pilotos--; // Bajar la cantidad de pilotos
     }
 }
+
 // Borra los pilotos del ranking y control
 function quitaPiloto(estado, pos) {
     if (filas.length > 0) {
-
         pos = Number(pos.split("c")[0]); // Obtener la posición de la ID del botón
         console.log("Posición a borrar: " + pos);
 
@@ -38,8 +36,8 @@ function quitaPiloto(estado, pos) {
     }
 }
 
+// Cambiar el número visible a todos los de debajo del que se ha quitado
 function bajar_posiciones(pos){
-    // Cambiar el número visible a todos los de debajo del que se ha quitado
     for (fila of filas){
         // Estas son las filas de la izquierda
         let posicion = fila.querySelector('.numero');
@@ -50,6 +48,7 @@ function bajar_posiciones(pos){
         }
     }
 }
+
 // Cambiar el número visible a todos los de debajo y al que se ha agregado
 function subir_posiciones(pos) {
     let numeros = [];
@@ -66,32 +65,6 @@ function subir_posiciones(pos) {
             cont++;
         }
     }
-}
-
-// Poner y sacar aviones (con animacion)
-function sumaPiloto(piloto,pos,puntos,estado,) {
-    console.log("SumaPiloto")
-    //Poner el avion en el ranking
-    let nueva_fila = creaFila(piloto,pos, puntos);
-    // Incrementamos la cantidad de aviones que hay
-    ++controla_pilotos
-    console.log("Introduciendo piloto " + piloto + " en "+pos+" con puntos: "+puntos)
-
-    // Metemos en el ranking
-    meter_en_ranking(nueva_fila)
-
-    // Fisicamente hacerlo aparecer
-    switch (estado){
-        case "animado":
-            nueva_fila.style.left = "-500px"
-            setTimeout(() => {
-                nueva_fila.style.left = "0px"
-            }, 50);
-            break;
-        case "seco":
-            nueva_fila.style.left = "0px"
-            break;
-        }
 }
 
 // Introduce en el ranking la fila nueva
@@ -118,10 +91,9 @@ function meter_en_ranking(nueva_fila) {
             fila.id = (index + 1).toString();                      // Ajusta el ID
         });
     }
-    filas = document.querySelectorAll("#contenedor .fila"); // Update the filas NodeList
 }
 
-// Mete la info de la fila nueva en la posición correcta 
+// Introduce la fila entre las posiciones en las que deberia estar
 function introducir_en_filas(pos, nueva_fila) {
     console.log("introducir_en_filas");
     
