@@ -123,6 +123,13 @@ function convertirTiempoAMilisegundos(tiempo) {
     let milisegundos = Number(partes[2]);
     return minutos + segundos + milisegundos;
 }
+// convertir tiempo a milisegundos
+function convertirMilisegundosATiempo(tiempo) {
+    let minutos = Math.floor(tiempo / 60000);
+    let segundos = Math.floor((tiempo % 60000) / 1000);
+    let milisegundos = tiempo % 1000;
+    return [minutos, segundos, milisegundos];
+}
 
 //Sacar la nueva posicion  - PERO AHORA DESDE CONTROL LOOOL
 function sacar_pos_avion(tiempo) {
@@ -171,5 +178,105 @@ function negar_piloto(piloto=cogerPiloto()){
 
         info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
         socket.emit("all", "ranking",info )
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const rondaEquipo = new RondaEquipo("rondaSelect", "equipoSelect");
+    await rondaEquipo.get_dependencies();
+
+    // Función para cargar datos y actualizar campos
+    async function cargarDatos() {
+        rondaEquipo.ronda = rondaEquipo.select_ronda.value;
+        rondaEquipo.equipo = rondaEquipo.select_equipo.value;
+
+        if (rondaEquipo.ronda && rondaEquipo.equipo) {
+            await rondaEquipo.loadInfo();
+            if (rondaEquipo.info) {
+                console.log("Datos del equipo:", rondaEquipo.info);
+
+                // Actualizar inputs con los datos obtenidos
+                tiempos_server(rondaEquipo)       // Tiempos          
+                document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso/1000  // Peso
+
+                // Ponemos los datos en el input de despegue
+                despegues_server(rondaEquipo)
+
+                // Ponemos el nombre 
+                nombre_server(rondaEquipo)
+            } else {
+                console.log("No se encontraron datos para la ronda y equipo seleccionados.");
+            }
+        } else {
+            console.log("Ronda o equipo no seleccionados. No se puede cargar la información.");
+        }
+    }
+
+    // Boton para cargar datos
+    document.getElementById("cargaDatosBot").addEventListener("click", cargarDatos);
+});
+
+
+function despegues_server(rondaEquipo){
+    // Actualizar el select de tipo de despegue
+    let despegueSelect = document.getElementById("tipos_despegue_id");
+
+    // Mapeamos los valores de despegue validos
+    let despegueOptionValue;
+    switch (rondaEquipo.info.D_despegue) {
+        case "15":despegueOptionValue = "Corto";break;
+        case "60":despegueOptionValue = "Correcto";break;
+    }
+    if (despegueOptionValue) {
+        // Poner la opción en el select
+        for (let option of despegueSelect.options) {
+            if (option.value === despegueOptionValue) {option.selected = true;break;}
+        }
+    } else {
+        console.log("No hay una opción de despegue.");
+    }
+}
+
+function tiempos_server(rondaEquipo){
+    tiempo_en_milis = rondaEquipo.info.P_tiempo
+    tiempo = convertirMilisegundosATiempo(tiempo_en_milis)
+    document.getElementById("minutos_input_id").value = tiempo[0]
+    document.getElementById("segundos_input_id").value = tiempo[1];
+    document.getElementById("milisegundos_input_id").value = tiempo[2];
+}
+
+function traduce_nombre(nombre){
+    switch (nombre) {
+        case "RUHE":return "RUHE";
+        case "UVigo Aerotech":return "UVIGA";
+        case "G3":return "G3";
+        case "Matsia":return "MATSI";
+        case "LuftSieger":return "LUFTS";
+        case "ECLift":return "ECLFT";
+        case "SAETA_T2":return "SAET2";
+        case "DIANA UCLM":return "DIANA";
+        case "Trencalòs Team":return "TRENC";
+        case "The North Pole":return "NTHPO";
+        case "SAETA_T1":return "SAET1";
+        case "UCA&Air":return "UCAIR";
+        case "Club Xaloc":return "XALOC";
+        case "Eagle Fly Team 1":return "EAFT1";
+        case "Eagle Fly Team 2":return "EAFT2";
+        default:return "Nombre desconocido";
+    }
+}
+
+function nombre_server(rondaEquipo){
+    let nombre = traduce_nombre(rondaEquipo.equipo);
+    let nombreSelect = document.getElementById("nombres_equipos_constructor_id");
+
+    // Poner la opción en el select
+    for (let option of nombreSelect.options) {
+        if (option.value === nombre) {
+            option.selected = true;
+            break;
+        }else {
+            console.log("Se ha intentado poner a Poliwood u otro NO guardado")
+        }
     }
 }

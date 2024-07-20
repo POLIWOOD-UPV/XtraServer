@@ -41,7 +41,12 @@
                 <option value = "7">7</option>
             </select>
             <button onclick="s_ponerRonda()">RONDA</button>
-            <h3>Sumar</h3>
+            <h3>Datos Server</h3>
+            <select id = "rondaSelect"></select>
+            <select id = "equipoSelect"></select>
+            <button id="cargaDatosBot">Cargar Datos</button>
+
+            <h3>Introductor</h3>
             <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
                 <option value="RUHE">RUHE</option>
                 <option value="UVIGA">UVIGA</option>
@@ -97,6 +102,7 @@
             </ul>
         </details>
     </main>
+    <script src = "js/RondaEquipo.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src = "js/func_base.js"></script>
     <script src = "js/func_ranking.js"></script>
