@@ -30,7 +30,7 @@ class RondaEquipo {
         this.equipos.forEach(element => {
             let option = document.createElement("option");
             option.innerText = element.Team;
-            option.value = element.Team;
+            option.value = element.Acr;
             this.select_equipo.appendChild(option);
         });
     }
@@ -45,20 +45,20 @@ class RondaEquipo {
         }
     }
 
-    set_onInput(callback){
-        this.select_ronda.addEventListener("input", async () => {
+    set_onInput(callback = actualizarInfo){
+        this.select_ronda.addEventListener("input", async (event) => {
             this.ronda = this.select_ronda.value;
             if (this.ronda != null && this.equipo != null) {
-                await loadInfo();
-                callback(this.info);
+                await this.loadInfo();
+                callback(this.info); // actualizar info
             }
         });
 
-        this.select_equipo.addEventListener("input", async () => {
+        this.select_equipo.addEventListener("input", async (event) => {
             this.equipo = this.select_equipo.value;
             if (this.ronda != null && this.equipo != null) {
-                await loadInfo();
-                callback(this.info);
+                await this.loadInfo();
+                callback(this.info); // actualizar info
             }
         });
     }
@@ -78,3 +78,28 @@ class RondaEquipo {
         });
     }
 }
+
+function actualizarInfo(info) {
+    if (info == null) {
+        return;
+    }
+    for (const key in info) {
+        if (Object.hasOwnProperty.call(info, key)) {
+            if (info[key] == "true") {
+                let element = document.getElementById(key.toLowerCase()+"_t");
+                if (element == null) {continue;}
+                element.click();
+                continue;
+            }if (info[key] == "false") {
+                let element = document.getElementById(key.toLowerCase()+"_f");
+                if (element == null) {continue;}
+                element.click();
+                continue;
+            }else{
+                let element = document.getElementById(key.toLowerCase())
+                if (element == null) {continue;}
+                element.value = info[key];
+            }
+        }
+    }
+};

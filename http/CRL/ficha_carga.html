@@ -56,9 +56,21 @@
                 await rondaEquipo.loadInfo();
             }
 
+            rondaEquipo.set_onInput(actualizarInfo);
             preparar_calculo_bolas();
-            preparar_checkbox();
         });
+    </script>
+    <script>
+        function addMin(add){
+            console.log(`AddMin(${add})`)
+            let elem = document.getElementById('p_tiempo');
+            elem.value = Number(elem.value) + 60000;
+            if (add) {
+                elem.value = Number(elem.value) + 60000;
+            } else {
+                elem.value = Number(elem.value) + 60000;
+            }
+        }
     </script>
 </head>
 <body>
@@ -76,21 +88,17 @@
             <input type="number" name="P_tiempo" id="p_tiempo" step="1000" value="0" min="0" required>
             <label for="P_tiempo">Milisegundos (ms)</label>
         </p>
-        <script>
-            const addMin = (add) => {
-                let elem = document.getElementById('p_tiempo');
-                if (add) {
-                    elem.value = Number(elem.value) + 60000;
-                } else {
-                    elem.value = Number(elem.value) + 60000;
-                }
-            }
-        </script>
         <p>
-            <button id="addMin" onclick="addMin(true)">
+            <button id="addMin" onclick="{
+                let elem = document.getElementById('p_tiempo');
+                elem.value = Number(elem.value) + 60000;
+                }">
                 añadir Minuto
             </button>
-            <button id="subMin" onclick="addMin(false)">
+            <button id="subMin" onclick="{
+                let elem = document.getElementById('p_tiempo');
+                elem.value = Number(elem.value) - 60000;
+                }">
                 quitar Minuto
             </button>
         </p>
@@ -118,31 +126,31 @@
         <h3>Despegue:</h3>
         <p>
             <label for="D_despegue">Menos de 15m:</label>
-            <input type="radio" name="D_despegue" id="_15" value="15">
+            <input type="radio" name="D_despegue" id="d_despegue_t" value="true">
         </p>
         <p>
             <label for="D_despegue">Menos de 60m:</label>
-            <input type="radio" name="D_despegue" id="_60" value="60">
+            <input type="radio" name="D_despegue" id="d_despegue_f" value="false">
         </p>
         <hr>
         <h3>Piloto Externo:</h3>
         <p>
             <label for="Piloto">Propio:</label>
-            <input type="radio" name="Piloto" id="propio" value="true">
+            <input type="radio" name="Piloto" id="piloto_t" value="true">
         </p>
         <p>
             <label for="Piloto">Externo:</label>
-            <input type="radio" name="Piloto" id="externo" value="false">
+            <input type="radio" name="Piloto" id="piloto_f" value="false">
         </p>
         <hr>
         <h3>Repuestos:</h3>
         <p>
             <label for="Repuestos">Declarados:</label>
-            <input type="radio" name="Repuestos" id="declarados" value="true">
+            <input type="radio" name="Repuestos" id="repuestos_t" value="true">
         </p>
         <p>
             <label for="Repuestos">No declarados:</label>
-            <input type="radio" name="Repuestos" id="no_declarados" value="false">
+            <input type="radio" name="Repuestos" id="repuestos_f" value="false">
         </p>
         <input type="submit" value="Enviar">
     </form>
