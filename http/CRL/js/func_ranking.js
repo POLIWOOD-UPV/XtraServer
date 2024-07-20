@@ -12,6 +12,9 @@ let bot_despegues = document.querySelector("#ocultar_despegue_id")
 let peso_visible = false;
 let tiempo_visible = true;
 let despes_visibles = true;
+
+const rondaEquipo = new RondaEquipo("rondaSelect", "equipoSelect");
+
 // Coger los tiempos del input
 function cogerTiempo_Peso(que) {
     switch (que) {
@@ -182,7 +185,6 @@ function negar_piloto(piloto=cogerPiloto()){
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const rondaEquipo = new RondaEquipo("rondaSelect", "equipoSelect");
     await rondaEquipo.get_dependencies();
 
     // Función para cargar datos y actualizar campos
@@ -279,15 +281,12 @@ function nombre_server(rondaEquipo){
         if (option.value === nombre) {
             option.selected = true;
             break;
-        }else {
-            console.log("Se ha intentado poner a Poliwood u otro NO guardado")
         }
     }
 }
 function ronda_server(rondaEquipo) {
     rondaSelect = document.querySelector("#numero_ronda_id");
     num_ronda = rondaEquipo.ronda.split("ronda")[1]
-    console.log(num_ronda)
     // Poner la opción en el select
     for (let option of rondaSelect.options) {
         if (option.value === num_ronda) {
@@ -296,3 +295,32 @@ function ronda_server(rondaEquipo) {
         }
     }
 }
+
+async function cargarRondaServer() {
+    const rondaSelect = document.getElementById("server_ronda_id");
+    const ronda = rondaSelect.value;
+    const equipos = [
+        "RUHE", "UVIGA", "G3", "MATSI", "LUFTS", "ECLFT", "SAET2",
+        "DIANA", "TRENC", "NTHPO", "SAET1", "UCAIR", "XALOC", "EAFT1", "EAFT2"
+    ];
+
+    if (ronda && ronda !== "-") {
+        rondaEquipo.ronda = `ronda${ronda}`;
+
+        for (const equipo of equipos) {
+            rondaEquipo.equipo = equipo;
+            await rondaEquipo.loadInfo();
+
+            if (rondaEquipo.info) {
+                console.log(`Datos del equipo ${equipo}:`, rondaEquipo.info);
+            } else {
+                console.log(`No se encontraron datos para la ronda ${ronda} y el equipo ${equipo}.`);
+            }
+        }
+    } else {
+        console.log("Ronda no seleccionada. No se puede cargar la información.");
+    }
+}
+
+// Botón para cargar datos de la ronda específica
+document.getElementById("cargaRondasServerBot").addEventListener("click", cargarRondaServer);
