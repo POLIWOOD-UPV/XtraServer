@@ -204,6 +204,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // Ponemos el nombre 
                 nombre_server(rondaEquipo)
+
+                // Ponemos la ronda
+
+                ronda_server(rondaEquipo)
             } else {
                 console.log("No se encontraron datos para la ronda y equipo seleccionados.");
             }
@@ -277,6 +281,18 @@ function nombre_server(rondaEquipo){
             break;
         }else {
             console.log("Se ha intentado poner a Poliwood u otro NO guardado")
+        }
+    }
+}
+function ronda_server(rondaEquipo) {
+    rondaSelect = document.querySelector("#numero_ronda_id");
+    num_ronda = rondaEquipo.ronda.split("ronda")[1]
+    console.log(num_ronda)
+    // Poner la opción en el select
+    for (let option of rondaSelect.options) {
+        if (option.value === num_ronda) {
+            option.selected = true;
+            break;
         }
     }
 }
