@@ -38,7 +38,9 @@ function cogerTiempo_Peso(que) {
         case "pes":
             // Coger el peso
             peso = document.getElementById("peso_input_id").value
-            return validarNumero(peso) ? parseInt(peso) : 0;
+            console.log("El peso cogido es",peso)
+            console.log(validarNumero(peso))
+            return validarNumero(peso) ? parseFloat(peso) : 0;
     }
 }
 // Crea la fila de control        
@@ -199,7 +201,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // Actualizar inputs con los datos obtenidos
                 tiempos_server(rondaEquipo)       // Tiempos          
-                document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso/1000  // Peso
+                document.getElementById("peso_input_id").value = rondaEquipo.info.Peso/1000  // Peso
 
                 // Ponemos los datos en el input de despegue
                 despegues_server(rondaEquipo)
@@ -230,8 +232,8 @@ function despegues_server(rondaEquipo){
     // Mapeamos los valores de despegue validos
     let despegueOptionValue;
     switch (rondaEquipo.info.D_despegue) {
-        case "15":despegueOptionValue = "Corto";break;
-        case "60":despegueOptionValue = "Correcto";break;
+        case "true":despegueOptionValue = "Corto";break; // 15m
+        case "false":despegueOptionValue = "Correcto";break; // 60m
     }
     if (despegueOptionValue) {
         // Poner la opción en el select
@@ -251,29 +253,9 @@ function tiempos_server(rondaEquipo){
     document.getElementById("milisegundos_input_id").value = tiempo[2];
 }
 
-function traduce_nombre(nombre){
-    switch (nombre) {
-        case "RUHE":return "RUHE";
-        case "UVigo Aerotech":return "UVIGA";
-        case "G3":return "G3";
-        case "Matsia":return "MATSI";
-        case "LuftSieger":return "LUFTS";
-        case "ECLift":return "ECLFT";
-        case "SAETA_T2":return "SAET2";
-        case "DIANA UCLM":return "DIANA";
-        case "Trencalòs Team":return "TRENC";
-        case "The North Pole":return "NTHPO";
-        case "SAETA_T1":return "SAET1";
-        case "UCA&Air":return "UCAIR";
-        case "Club Xaloc":return "XALOC";
-        case "Eagle Fly Team 1":return "EAFT1";
-        case "Eagle Fly Team 2":return "EAFT2";
-        default:return "Nombre desconocido";
-    }
-}
 
 function nombre_server(rondaEquipo){
-    let nombre = traduce_nombre(rondaEquipo.equipo);
+    let nombre = rondaEquipo.equipo
     let nombreSelect = document.getElementById("nombres_equipos_constructor_id");
 
     // Poner la opción en el select
