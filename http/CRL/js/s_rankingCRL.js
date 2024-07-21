@@ -87,7 +87,6 @@ function s_ocultarDespegue(){
 // Pilotos
 function s_vaciarPilotos(){
     for (let j = filas_control.length-1; j>=0; j--){
-        console.log(filas_control[j])
         filas_control[j].remove(); // Quitar todas las filas de control                    
     }
     pilotos = []
@@ -167,10 +166,17 @@ function s_mandar_zeros(){
     }
 }
 
-function s_ponerRonda(){
+function s_ponerRonda(server = false){
     console.log("s_ponerRodna")
-    // Cogemos el valor de la ronda
-    let ronda = document.getElementById("numero_ronda_id").value
+    let ronda
+    if (server){
+        console.log("e")
+        ronda = document.getElementById("server_ronda_id").value
+    }else{
+        console.log("o")
+        // Cogemos el valor de la ronda
+        ronda = document.getElementById("numero_ronda_id").value
+    }
     // Lo enviamos a que se cambie
     info = ["camRon",ronda]
     socket.emit("all", "ranking",info )

@@ -7,7 +7,9 @@ var boton_tiempo = document.getElementById("mostrar_tiempo_id");
 var boton_peso = document.getElementById("mostrar_peso_id");
 var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
 let bot_despegues = document.querySelector("#ocultar_despegue_id")
-
+let rondaSelect = document.getElementById("server_ronda_id");
+// Botón para cargar datos de la ronda específica
+document.getElementById("cargaRondasServerBot").addEventListener("click", cargarRondaServer);
 // Flags
 let peso_visible = false;
 let tiempo_visible = true;
@@ -277,31 +279,65 @@ function ronda_server(rondaEquipo) {
     }
 }
 
-async function cargarRondaServer() {
-    const rondaSelect = document.getElementById("server_ronda_id");
-    const ronda = rondaSelect.value;
-    const equipos = [
-        "RUHE", "UVIGA", "G3", "MATSI", "LUFTS", "ECLFT", "SAET2",
-        "DIANA", "TRENC", "NTHPO", "SAET1", "UCAIR", "XALOC", "EAFT1", "EAFT2"
-    ];
-
-    if (ronda && ronda !== "-") {
-        rondaEquipo.ronda = `ronda${ronda}`;
-
-        for (const equipo of equipos) {
-            rondaEquipo.equipo = equipo;
-            await rondaEquipo.loadInfo();
-
-            if (rondaEquipo.info) {
-                console.log(`Datos del equipo ${equipo}:`, rondaEquipo.info);
-            } else {
-                console.log(`No se encontraron datos para la ronda ${ronda} y el equipo ${equipo}.`);
+async function cargaEquipoRonda(equipo,ronda) {
+    return fetch("http://127.0.0.1:7000/data/"+ ronda+"/"+equipo+".json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        }
-    } else {
-        console.log("Ronda no seleccionada. No se puede cargar la información.");
-    }
+            return response.json();
+        })
+        .catch(error => {
+            console.log(`Archivo ${equipo}.json no encontrado: `, error);
+            return null; // Devuelve null si el archivo no existe
+        });
 }
 
-// Botón para cargar datos de la ronda específica
-document.getElementById("cargaRondasServerBot").addEventListener("click", cargarRondaServer);
+
+async function cargarRondaServer() {
+    const ronda = document.querySelector("#numero_ronda_id").value;
+    // Primero vaciamos los pilotos
+    s_vaciarPilotos();
+
+    // Ponemos la ronda que se quiere
+    s_ponerRonda(true);
+    await rondaEquipo.get_dependencies();
+    
+    for (let equipo of equipos) {
+        rondaEquipo.ronda = "ronda" + document.querySelector("#server_ronda_id").value;
+        rondaEquipo.equipo = equipo;
+        console.log(rondaEquipo.ronda + " " + rondaEquipo.equipo);
+        
+        if (rondaEquipo.ronda && rondaEquipo.equipo) {
+            let datosEquipo = await cargaEquipoRonda(equipo,rondaEquipo.ronda );
+            if (datosEquipo === null) {
+                negar_piloto(rondaEquipo.equipo) // Si no hay archivo, lo mandamos negado
+            }
+            rondaEquipo.info = datosEquipo;
+
+            if (rondaEquipo.info) {
+                console.log("Datos del equipo:", rondaEquipo.info);
+
+                // Actualizar inputs con los datos obtenidos
+                tiempos_server(rondaEquipo); // Tiempos          
+                document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso / 1000;  // Peso
+
+                // Ponemos los datos en el input de despegue
+                despegues_server(rondaEquipo);
+
+                // Ponemos el nombre 
+                nombre_server(rondaEquipo);
+
+                // Ponemos la ronda
+                ronda_server(rondaEquipo);
+
+                // Sumar el piloto al sistema
+                s_sumaPiloto("animado");
+            } else {
+                console.log("No se encontraron datos para la ronda y equipo seleccionados.");
+            }
+        }else {
+            console.log("Ronda o equipo no seleccionados. No se puede cargar la información.");
+        }
+    }
+}
