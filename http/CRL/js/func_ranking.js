@@ -31,14 +31,13 @@ function cogerTiempo_Peso(que) {
         case "mil":
             // Coger milis
             milis = document.getElementById("milisegundos_input_id").value;
-            milis = String(milis*0.001).split(".")
+            milis = String(milis * 0.001).split(".")
             milis = milis[1]
             console.log("milis " + milis)
-            return  validarNumero(milis) ? (milis.slice(0, 3)): "000";
+            return validarNumero(milis) ? (milis.slice(0, 3)[0]) : "0";
         case "pes":
             // Coger el peso
             peso = document.getElementById("peso_input_id").value
-            console.log("El peso cogido es",peso)
             console.log(validarNumero(peso))
             return validarNumero(peso) ? parseFloat(peso) : 0;
     }
