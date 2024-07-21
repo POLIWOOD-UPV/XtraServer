@@ -279,20 +279,21 @@ function ronda_server(rondaEquipo) {
     }
 }
 
-async function cargaEquipoRonda(equipo,ronda) {
-    return fetch("http://127.0.0.1:7000/data/"+ ronda+"/"+equipo+".json")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .catch(error => {
-            console.log(`Archivo ${equipo}.json no encontrado: `, error);
-            return null; // Devuelve null si el archivo no existe
-        });
+async function cargarEquipoRonda(equipo, ronda) {
+    try {
+        // Intenta coger el archivo
+        const response = await fetch(`http://127.0.0.1:7000/data/${ronda}/${equipo}.json`);
+        
+        if (!response.ok) { // Error
+            throw new Error('Network response was not ok');
+        }
+        return await response.json(); // Ha salido bien, hay archivo
+    } catch (error) {
+        // Error, no encuentra el archivo
+        console.log(`Archivo ${equipo}.json no encontrado: `, error);
+        return null;
+    }
 }
-
 
 async function cargarRondaServer() {
     const ronda = document.querySelector("#numero_ronda_id").value;
@@ -301,42 +302,43 @@ async function cargarRondaServer() {
 
     // Ponemos la ronda que se quiere
     s_ponerRonda(true);
+    // Cargamos los datos
     await rondaEquipo.get_dependencies();
-    
+
+    // Cogemos la ronda que vamos a cargar
+    serverRonda = "ronda" + document.querySelector("#server_ronda_id").value
+    rondaEquipo.ronda = serverRonda;
+    // Vamos equipo a equipo
     for (let equipo of equipos) {
-        rondaEquipo.ronda = "ronda" + document.querySelector("#server_ronda_id").value;
         rondaEquipo.equipo = equipo;
-        console.log(rondaEquipo.ronda + " " + rondaEquipo.equipo);
-        
+
         if (rondaEquipo.ronda && rondaEquipo.equipo) {
-            let datosEquipo = await cargaEquipoRonda(equipo,rondaEquipo.ronda );
-            if (datosEquipo === null) {
-                negar_piloto(rondaEquipo.equipo) // Si no hay archivo, lo mandamos negado
+            let datosEquipo = await cargarEquipoRonda(equipo, rondaEquipo.ronda); // Comprobamos si hay archivo
+            if (!datosEquipo) {
+                negar_piloto(rondaEquipo.equipo); // Si no hay archivo, lo mandamos negado
+                continue; // Pasamos al siguiente equipo
             }
+
             rondaEquipo.info = datosEquipo;
 
-            if (rondaEquipo.info) {
-                console.log("Datos del equipo:", rondaEquipo.info);
+            console.log("Datos del equipo:", rondaEquipo.info);
 
-                // Actualizar inputs con los datos obtenidos
-                tiempos_server(rondaEquipo); // Tiempos          
-                document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso / 1000;  // Peso
+            // Actualizar inputs con los datos obtenidos
+            tiempos_server(rondaEquipo); // Tiempos
+            document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso / 1000; // Peso
 
-                // Ponemos los datos en el input de despegue
-                despegues_server(rondaEquipo);
+            // Ponemos los datos en el input de despegue
+            despegues_server(rondaEquipo);
 
-                // Ponemos el nombre 
-                nombre_server(rondaEquipo);
+            // Ponemos el nombre
+            nombre_server(rondaEquipo);
 
-                // Ponemos la ronda
-                ronda_server(rondaEquipo);
+            // Ponemos la ronda
+            ronda_server(rondaEquipo);
 
-                // Sumar el piloto al sistema
-                s_sumaPiloto("animado");
-            } else {
-                console.log("No se encontraron datos para la ronda y equipo seleccionados.");
-            }
-        }else {
+            // Sumar el piloto al sistema
+            s_sumaPiloto("animado");
+        } else {
             console.log("Ronda o equipo no seleccionados. No se puede cargar la información.");
         }
     }
