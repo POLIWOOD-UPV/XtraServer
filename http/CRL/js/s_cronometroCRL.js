@@ -16,7 +16,7 @@ const c_start = (tiempo_inicial) => {
         "start", 
         tiempo_inicial
     ];
-    socket.emit("all", "conometro", info);
+    socket.emit("all", "cronometro", info);
 }
 
 const c_pause = (tiempo_trnascurrido) => {
@@ -28,7 +28,7 @@ const c_pause = (tiempo_trnascurrido) => {
         "pause",
         tiempo_trnascurrido
     ];
-    socket.emit("all", "conometro", info);
+    socket.emit("all", "cronometro", info);
 }
 
 const c_reset = () => {
@@ -39,7 +39,7 @@ const c_reset = () => {
         prueba, 
         "reset"
     ];
-    socket.emit("all", "conometro", info);
+    socket.emit("all", "cronometro", info);
 }
 
 const c_set = (value) => {
@@ -51,7 +51,7 @@ const c_set = (value) => {
         "set",
         value
     ];
-    socket.emit("all", "conometro", info);
+    socket.emit("all", "cronometro", info);
 }
 
 const c_update = (tiempo_trnascurrido) => {
@@ -63,5 +63,5 @@ const c_update = (tiempo_trnascurrido) => {
         "update", 
         tiempo_trnascurrido
     ];
-    socket.emit("all", "conometro", info);
+    socket.emit("all", "cronometro", info);
 }
