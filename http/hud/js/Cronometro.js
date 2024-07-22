@@ -96,11 +96,14 @@ class Conometro {
     pause(tiempo_trnascurrido){
         clearInterval(this.stepper);    // Detenemos los incrementos¡
         this.stepper = null;            // Volver a poner a null para que la otra lógica funcione
+        console.log("Paused in -> ", this.t_trs);
         this.t_trs = tiempo_trnascurrido;
         this.interface();
     }
 
     set(value){
+        clearInterval(this.stepper);    // Detenemos los incrementos¡
+        this.stepper = null;            // Volver a poner a null para que la otra lógica funcione
         this.t_trs = value;
         this.interface();
     }
