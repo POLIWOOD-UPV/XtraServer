@@ -4,12 +4,7 @@ class Conometro {
         if (info[0] != this.ronda ||
             info[1] != this.equipo ||
             info[2] != this.prueba
-            ){
-            console.log(info[0], this.ronda, info[0] == this.ronda);
-            console.log(info[0], this.equipo, info[0] == this.equipo);
-            console.log(info[0], this.prueba, info[0] == this.prueba);
-            return;
-        }
+            ){return;}
 
         switch (info[3]) {
             case "start":
