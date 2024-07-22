@@ -45,7 +45,7 @@ div{
 
     border-radius: 10px;
 }
-#tiempo{
+/* #tiempo{
     float:left;
     width: 50%;
 
@@ -60,8 +60,58 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
-}
+} */
+#tiempo1{
+    float:left;
+    width: 9%;
 
+    font-size: 160%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 2%;
+
+    margin-top: 1%;
+    margin-left: 14%;
+
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    border-color: rgba(0, 0, 0, 0.551);
+}
+#tiempo2{
+    float:left;
+    width: 9%;
+
+    font-size: 160%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    margin-top: 1%;
+
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-color: rgba(0, 0, 0, 0.551);
+}
+#tiempo3{
+    float:left;
+    width: 9%;
+
+    font-size: 160%;
+
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 6%;
+
+    margin-top: 1%;
+    margin-right: 16%;
+
+    border-top: 2px solid;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    border-color: rgba(0, 0, 0, 0.551);
+}
 #peso{
     float:left;
     width: 19%;
@@ -73,7 +123,7 @@ div{
 
     margin-left: 2%;
     margin-right: 3%;
-    margin-top: 0.6%;
+    margin-top: 3%;
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
@@ -89,7 +139,7 @@ div{
 
     margin-left: 2%;
     margin-right: 2%;
-    margin-top: 0.6%;
+    margin-top: 3%;
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
