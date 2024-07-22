@@ -51,18 +51,18 @@ class Conometro {
         this.html_sec.textContent = "00";
         this.html_milsec.textContent = "000";
 
-        this.socket.send("New Conometro!"); // Debug only
+        this.socket.send("New Cronometro!"); // Debug only
     }
 
     bind(ronda, equipo, prueba){
         this.ronda = ronda;
         this.equipo = equipo;
         this.prueba = prueba;
-        this.socket.on("conometro", (info) => {
+        this.socket.on("cronometro", (info) => {
             this.crl(info);
         });
 
-        this.socket.send(`Conometro: ${ronda}/${equipo}/${prueba}`); // Debug only
+        this.socket.send(`Cronometro: ${ronda}/${equipo}/${prueba}`); // Debug only
     }
 
     interface(){
