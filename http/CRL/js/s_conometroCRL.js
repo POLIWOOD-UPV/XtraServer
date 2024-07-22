@@ -8,9 +8,11 @@ const socket = io();
 // utilizamos la variable de clase RondaEquipo.js
 
 const c_start = (tiempo_inicial) => {
+    let prueba = document.getElementById("prueba").value;
     let info = [
         rondaEquipo.ronda, 
         rondaEquipo.equipo, 
+        prueba,
         "start", 
         tiempo_inicial
     ];
@@ -18,9 +20,11 @@ const c_start = (tiempo_inicial) => {
 }
 
 const c_pause = (tiempo_trnascurrido) => {
+    let prueba = document.getElementById("prueba").value;
     let info = [
         rondaEquipo.ronda, 
-        rondaEquipo.equipo, 
+        rondaEquipo.equipo,
+        prueba, 
         "pause",
         tiempo_trnascurrido
     ];
@@ -28,18 +32,22 @@ const c_pause = (tiempo_trnascurrido) => {
 }
 
 const c_reset = () => {
+    let prueba = document.getElementById("prueba").value;
     let info = [
         rondaEquipo.ronda, 
-        rondaEquipo.equipo, 
+        rondaEquipo.equipo,
+        prueba, 
         "reset"
     ];
     socket.emit("all", "conometro", info);
 }
 
 const c_set = (value) => {
+    let prueba = document.getElementById("prueba").value;
     let info = [
         rondaEquipo.ronda, 
         rondaEquipo.equipo, 
+        prueba,
         "set",
         value
     ];
@@ -47,9 +55,11 @@ const c_set = (value) => {
 }
 
 const c_update = (tiempo_trnascurrido) => {
+    let prueba = document.getElementById("prueba").value;
     let info = [
         rondaEquipo.ronda, 
         rondaEquipo.equipo, 
+        prueba,
         "update", 
         tiempo_trnascurrido
     ];

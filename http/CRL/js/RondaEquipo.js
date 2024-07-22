@@ -63,7 +63,17 @@ class RondaEquipo {
         });
     }
 
+    setup(){
+        this.get_dependencies();
+        this.set_onInput();
+    }
+
     async upload(object) {
+        if (this.ronda == null || this.equipo == null){
+            alert("No ha seleccionado la ronda o el equipo");
+            return
+        }
+
         let msg = `Ronda=${this.ronda}&Equipo=${this.equipo}&`
 
         for (const key in object) {

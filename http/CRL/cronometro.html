@@ -10,6 +10,7 @@
         }
     </style>
     <script src="./js/RondaEquipo.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="./js/s_conometroCRL.js"></script>
 </head>
 <body>
@@ -50,8 +51,7 @@
     </footer>
     <script>
         rondaEquipo = new RondaEquipo();
-        rondaEquipo.get_dependencies();
-
+        rondaEquipo.setup();
         /* Webs consultadas
         Equivalente de Millis() de arduino mas o menos
         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now

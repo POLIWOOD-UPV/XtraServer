@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket IO</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./hud/js/Conometro.js"></script>
+    <script src="./crl/js/RondaEquipo.js"></script>
+    <style>
+        span {
+            font-size: 6dvi;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda" required></select>
+        </p>
+        <p>
+            <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo" required></select>
+        </p>
+        <p>
+            <label for="Prueba">Carga/Vuelo: </label><select name="Prueba" id="prueba" required>
+                <option value="T_carga">Carga</option>
+                <option value="T_vuelo">Vuelo</option>
+            </select>
+        </p>
+    </div>
+    <div>
+        <span id="minutos">esto</span>
+        <span>:</span>
+        <span id="segundos">no</span>
+        <span>:</span>
+        <span id="milisegundos">funciona</span>
+    </div>
+    <script>
+        var conometro = new Conometro("minutos", "segundos", "milisegundos");
+        var rondaEquipo = new RondaEquipo();
+        var html_prueba = document.getElementById("prueba");
+
+        rondaEquipo.get_dependencies();
+
+        function change() {
+            let prueba = html_prueba.value;
+            conometro.bind(
+                rondaEquipo.ronda,
+                rondaEquipo.equipo,
+                prueba
+            );
+            conometro.set(rondaEquipo.info[prueba]);
+        }
+
+        html_prueba.addEventListener("input", change);
+        rondaEquipo.set_onInput(change)
+    </script>
+</body>
+</html>

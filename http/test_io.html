@@ -6,10 +6,16 @@
     <title>Socket IO</title>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    const socket = io();
+    const socket1 = io();
 
-    socket.on("message", (msj) => {
-        console.log(msj)
+    socket1.on("message", (msj) => {
+        console.log("1",msj)
+    });
+
+    const socket2 = io();
+
+    socket2.on("message", (msj) => {
+        console.log("2",msj)
     });
     </script>
 </head>
