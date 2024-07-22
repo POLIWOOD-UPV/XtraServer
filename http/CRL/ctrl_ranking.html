@@ -11,36 +11,35 @@
         <div id = "divBotones">
             <div id = "divBotonesRanking">
                 <h2>Control Ranking</h2>
-                <button onclick = "s_rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
-                <button onclick = "s_aparicionDinamica()">Aparicion dinamica</button>
-                <button onclick = "s_desaparicionDinamica()">Desaparicion Dinamica</button>
-
-                <h3>Informativos</h3>
-                <h4>Tiempo y peso</h4>
-                <button onclick= "s_mostrarTiempo()" id = "mostrar_tiempo_id">Ocultar Tiempos</button>
-                <button onclick= "s_mostrarPeso()" id = "mostrar_peso_id">Mostrar Peso</button>
-                <button onclick = "s_cambiazoPesoTiempos()" id = "cambiazoPesoTiempos"> Alternar Peso / Tiempo</button>
-                <h4>Logos, despegue y dorsal</h4>
-                <button onclick = "s_ocultarLogos()" id = "ocultar_logos_id">Ocultar logos</button>
-                <button onclick = "s_ocultarDespegue()" id = "ocultar_despegue_id">Ocultar despegues</button>
-                <button onclick = "s_mostrarDorsal()" id = "mostrar_dorsal_id">Mostrar dorsales</button>
-
+                <table>
+                    <tr>
+                        <th>Dinámicas</th>
+                        <th>Tiempo y peso</th>
+                        <th>Logos, despegue y dorsal</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onclick="s_rankingMov()" id="aparecer_desaparecer_rank_id">Ocultar ranking</button>
+                            <button onclick="s_aparicionDinamica()">Aparicion dinamica</button>
+                            <button onclick="s_desaparicionDinamica()">Desaparicion Dinamica</button>
+                        </td>
+                        <td>
+                            <button onclick="s_mostrarTiempo()" id="mostrar_tiempo_id">Ocultar Tiempos</button>
+                            <button onclick="s_mostrarPeso()" id="mostrar_peso_id">Mostrar Peso</button>
+                            <button onclick="s_cambiazoPesoTiempos()" id="cambiazoPesoTiempos">Alternar Peso / Tiempo</button>
+                        </td>
+                        <td>
+                            <button onclick="s_ocultarLogos()" id="ocultar_logos_id">Ocultar logos</button>
+                            <button onclick="s_ocultarDespegue()" id="ocultar_despegue_id">Ocultar despegues</button>
+                            <button onclick="s_mostrarDorsal()" id="mostrar_dorsal_id">Mostrar dorsales</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>    
         <div id = "divIntegraPilotos">
             <h2>Integracion de pilotos</h2>
-            <button onclick="s_mandar_zeros()">Zeros</button>
-            <select name = "numero_ronda" id = "numero_ronda_id">
-                <option value = "-">-</option>
-                <option value = "1">1</option>
-                <option value = "2">2</option>
-                <option value = "3">3</option>
-                <option value = "4">4</option>
-                <option value = "5">5</option>
-                <option value = "6">6</option>
-                <option value = "7">7</option>
-            </select>
-            <button onclick="s_ponerRonda()">RONDA</button>
+
             <h3>Datos Server</h3>
             <select id = "rondaSelect"></select>
             <select id = "equipoSelect"></select>
@@ -60,39 +59,77 @@
 
 
             <h3>Introductor</h3>
-            <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
-                <option value="RUHE">RUHE</option>
-                <option value="UVIGA">UVIGA</option>
-                <option value="G3">G3</option>
-                <option value="MATSI">MATSI</option>
-                <option value="LUFTS">LUFTS</option>
-                <option value="ECLFT">ECLFT</option>
-                <option value="SAET2">SAET2</option>
-                <option value="DIANA">DIANA</option>
-                <option value="TRENC">TRENC</option>
-                <option value="NTHPO">NTHPO</option>
-                <option value="SAET1">SAET1</option>
-                <option value="UCAIR">UCAIR</option>
-                <option value="XALOC">XALOC</option>
-                <option value="EAFT1">EAFT1</option>
-                <option value="EAFT2">EAFT2</option>
+            <select name = "numero_ronda" id = "numero_ronda_id">
+                <option value = "-">-</option>
+                <option value = "1">1</option>
+                <option value = "2">2</option>
+                <option value = "3">3</option>
+                <option value = "4">4</option>
+                <option value = "5">5</option>
+                <option value = "6">6</option>
+                <option value = "7">7</option>
             </select>
-            
-                <input class = "inputs" id = "minutos_input_id" type="text" placeholder="Minutos" required>
-                <input class = "inputs" id = "segundos_input_id" type="text" placeholder="Segundos" required>
-                <input class = "inputs" id = "milisegundos_input_id" type="text" placeholder="Milisegundos" required>
-                <input class = "inputs" id = "peso_input_id" type="text" placeholder="Peso" required>
-                <select name = "tipos_despegue" id = "tipos_despegue_id">
-                    <option value = "Corto">15m</option>
-                    <option value = "Correcto">60m</option>
-                    <option value = "Fallido">Fallido</option>
-                    <option value = "Ilegal">Ilegal</option>
-                    <option value = "Pendiente">Pendiente</option>
-                </select>
-                <button onclick="s_sumaPiloto('animado')">SUMAR_An</button>
-                <button onclick="s_sumaPiloto('seco')"> SUMAR</button>
-                <button onclick="negar_piloto()">Zero</button>
+            <button onclick="s_ponerRonda()">RONDA</button>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Min</th>
+                    <th>Seg</th>
+                    <th>Mili</th>
+                    <th>Peso</th>
+                    <th>Despegue</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
+                            <option value="RUHE">RUHE</option>
+                            <option value="UVIGA">UVIGA</option>
+                            <option value="G3">G3</option>
+                            <option value="MATSI">MATSI</option>
+                            <option value="LUFTS">LUFTS</option>
+                            <option value="ECLFT">ECLFT</option>
+                            <option value="SAET2">SAET2</option>
+                            <option value="DIANA">DIANA</option>
+                            <option value="TRENC">TRENC</option>
+                            <option value="NTHPO">NTHPO</option>
+                            <option value="SAET1">SAET1</option>
+                            <option value="UCAIR">UCAIR</option>
+                            <option value="XALOC">XALOC</option>
+                            <option value="EAFT1">EAFT1</option>
+                            <option value="EAFT2">EAFT2</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input class="inputs" id="minutos_input_id" type="text" placeholder="Minutos" required>
+                    </td>
+                    <td>
+                        <input class="inputs" id="segundos_input_id" type="text" placeholder="Segundos" required>
+                    </td>
+                    <td>
+                        <input class="inputs" id="milisegundos_input_id" type="text" placeholder="Milisegundos" required>
+                    </td>
+                    <td>
+                        <input class="inputs" id="peso_input_id" type="text" placeholder="Peso" required>
+                    </td>
+                    <td>
+                        <select name="tipos_despegue" id="tipos_despegue_id">
+                            <option value="Corto">15m</option>
+                            <option value="Correcto">60m</option>
+                            <option value="Fallido">Fallido</option>
+                            <option value="Ilegal">Ilegal</option>
+                            <option value="Pendiente">Pendiente</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button onclick="s_sumaPiloto('animado')">SUMAR_An</button>
+                        <button onclick="s_sumaPiloto('seco')">SUMAR</button>
+                        <button onclick="negar_piloto()">Negar</button>
+                        <button onclick="s_mandar_zeros()">Zeros</button>
 
+                    </td>
+                </tr>
+            </table>
             <h3>Borrar</h3>
             <div id = "pilotos_mas_borrar">
                 <div class = "fila_control_borrar">
@@ -105,15 +142,6 @@
             <button onclick="s_vaciarPilotos()"> VACIAR PILOTOS</button>
             <button onclick="hola()"> Hola!</button>
         </div>     
-        <details>
-            <summary>
-                TODO:
-            </summary>
-            <ul>
-                <li>Hacer animaciones para el peso / tiempo</li>
-                <li>Calcular la diferencia de tiempos entre filas</li>
-            </ul>
-        </details>
     </main>
     <script src = "js/RondaEquipo.js"></script>
     <script src="/socket.io/socket.io.js"></script>

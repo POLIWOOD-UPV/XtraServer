@@ -8,41 +8,76 @@
         <div id = "divBotones">
             <div id = "divBotonesRanking">
                 <h2>Control Ranking Puntos</h2>
-                <button onclick = "s_rankingMov()" id = "aparecer_desaparecer_rank_id">Ocultar ranking</button>
-                <button onclick = "s_aparicionDinamica()">Aparicion dinamica</button>
-                <button onclick = "s_desaparicionDinamica()">Desaparicion Dinamica</button>
+                <table>
+                    <tr>
+                        <th>Dinamicas</th>
+                        <th>Logos</th>
+                        <th>Puntos</th>
+                        <th>Dorsales</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button onclick="s_rankingMov()" id="aparecer_desaparecer_rank_id">Ocultar ranking</button>
+                            <button onclick="s_aparicionDinamica()">Aparicion dinamica</button>
+                            <button onclick="s_desaparicionDinamica()">Desaparicion Dinamica</button>
+                        </td>
+                        <td>
+                            <button onclick="s_ocultarLogos()" id="ocultar_logos_id">Ocultar logos</button>
+                        </td>
+                        <td>
+                            <button onclick="s_mostrarPuntos()" id="mostrar_puntos_id">Ocultar Puntos</button>
+                        </td>
+                        <td>
+                            <button onclick="s_mostrarDorsal()" id="mostrar_dorsal_id">Mostrar dorsales</button>
+                        </td>
+                    </tr>
+                </table>
 
-                <h4>Logos, Puntos y Dorsales</h4>
-                <button onclick= "s_mostrarPuntos()" id = "mostrar_puntos_id">Ocultar Puntos</button>
-                <button onclick = "s_ocultarLogos()" id = "ocultar_logos_id">Ocultar logos</button>
-                <button onclick = "s_mostrarDorsal()" id = "mostrar_dorsal_id">Mostrar dorsales</button>
+                <h4></h4>
+
 
             </div>
         </div>    
         <div id = "divIntegraPilotos">
             <h2>Integracion de pilotos</h2>
-            <h3>Sumar</h3>
-                <button onclick="s_mandar_zeros()">Zeros</button>
-                <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
-                    <option value="RUHE">RUHE</option>
-                    <option value="UVIGA">UVIGA</option>
-                    <option value="G3">G3</option>
-                    <option value="MATSI">MATSI</option>
-                    <option value="LUFTS">LUFTS</option>
-                    <option value="ECLFT">ECLFT</option>
-                    <option value="SAET2">SAET2</option>
-                    <option value="DIANA">DIANA</option>
-                    <option value="TRENC">TRENC</option>
-                    <option value="NTHPO">NTHPO</option>
-                    <option value="SAET1">SAET1</option>
-                    <option value="UCAIR">UCAIR</option>
-                    <option value="XALOC">XALOC</option>
-                    <option value="EAFT1">EAFT1</option>
-                    <option value="EAFT2">EAFT2</option>
-                </select>
-                <input class = "inputs" id = "puntos_input_id" type="text" placeholder="Puntos" required>
-                <button onclick="s_sumaPiloto('animado')">SUMAR_An</button>
-                <button onclick="s_sumaPiloto('seco')"> SUMAR</button>
+            <h3>Introductor</h3>
+                <table>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Puntos</th>
+                        <th>Acciones</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="nombres_equipos_constructor" id="nombres_equipos_constructor_id">
+                                <option value="RUHE">RUHE</option>
+                                <option value="UVIGA">UVIGA</option>
+                                <option value="G3">G3</option>
+                                <option value="MATSI">MATSI</option>
+                                <option value="LUFTS">LUFTS</option>
+                                <option value="ECLFT">ECLFT</option>
+                                <option value="SAET2">SAET2</option>
+                                <option value="DIANA">DIANA</option>
+                                <option value="TRENC">TRENC</option>
+                                <option value="NTHPO">NTHPO</option>
+                                <option value="SAET1">SAET1</option>
+                                <option value="UCAIR">UCAIR</option>
+                                <option value="XALOC">XALOC</option>
+                                <option value="EAFT1">EAFT1</option>
+                                <option value="EAFT2">EAFT2</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input class = "inputs" id = "puntos_input_id" type="text" placeholder="Puntos" required>
+                        </td>
+                        <td>
+                            <button onclick="s_sumaPiloto('animado')">SUMAR_An</button>
+                            <button onclick="s_sumaPiloto('seco')"> SUMAR</button>
+                            <button onclick="s_mandar_zeros()">Zeros</button>
+                        </td>
+                    </tr>
+                </table>
+
 
             <h3>Borrar</h3>
             <div id = "pilotos_mas_borrar">
@@ -56,15 +91,6 @@
             <button onclick="s_vaciarPilotos()"> VACIAR PILOTOS</button>
             <button onclick="hola()"> Hola!</button>
         </div>     
-        <details>
-            <summary>
-                TODO:
-            </summary>
-            <ul>
-                <li>Hacer animaciones para el peso / tiempo</li>
-                <li>Calcular la diferencia de tiempos entre filas</li>
-            </ul>
-        </details>
     </main>
     <script src="/socket.io/socket.io.js"></script>
     <script src = "js/func_base.js"></script>
