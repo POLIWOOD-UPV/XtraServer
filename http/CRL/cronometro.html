@@ -10,6 +10,7 @@
         }
     </style>
     <script src="./js/RondaEquipo.js"></script>
+    <script src="./js/s_conometroCRL.js"></script>
 </head>
 <body>
     <header>
@@ -93,6 +94,7 @@
                 saltos = setInterval(() => { // Empezamos a incrementarlo
                     stepConometro();
                 }, 10);
+                c_start(tiempoInicial); // enviamos el inicio al servidor
             }
         }
         function pause() {
@@ -103,6 +105,8 @@
             clearInterval(saltos);   // Detenemos los incrementos
             stepConometro();         // Hacemos un ultimo paso para que se quede como toca
             saltos = null;           // Volver a poner a null para que la otra lógica funcione
+            
+            c_pause(tiempo_transcurrido); // pausamos el servidor 
         }
 
         function reset() {
@@ -110,6 +114,8 @@
             saltos = null;           // Volver a poner a null para que la otra lógica funcione
             tiempo_transcurrido = 0; // Vaciamos el tiempo del cronómetro
             actualizarCronometro();  // Actualizamos la pantalla
+
+            c_reset(); // reseteamos el servidor
         }
 
         function actualizarCronometro() {
@@ -136,6 +142,8 @@
             let object = Object();
             object[prueba.value] = tiempo_transcurrido;
             rondaEquipo.upload(object);
+
+            c_update(tiempo_transcurrido); // avisamos al servidor
         }
     </script>
 </body>
