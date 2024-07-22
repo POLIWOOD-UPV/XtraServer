@@ -42,7 +42,7 @@ const commands = {
 // Servidor HTTP.
 //
 
-const SERVER_PORT = 7000;
+const SERVER_PORT = 80;
 
 const server = http_server.IOserver(http_server.createServer(SERVER_PORT, commands, true),
   socket_events.connect,
