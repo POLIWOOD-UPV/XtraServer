@@ -16,6 +16,12 @@ function creaFila(nom, pos, tiemp, pes, despegue) {
     let numero = document.createElement("div");
     numero.className = "numero";
     numero.textContent = pos;
+
+    // Si es un club, que el numero sea de otro color
+    if (nom === "XALOC" || nom.substring(0, 4) === "EAFT") {
+        numero.style.backgroundColor = "rgb(70 157 243)";
+        numero.style.color = "white"
+    }
     
     // Creamos la zona del nombre, peso/tiempo
     let resto = document.createElement("div");

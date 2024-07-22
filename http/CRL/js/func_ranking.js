@@ -7,7 +7,9 @@ var boton_tiempo = document.getElementById("mostrar_tiempo_id");
 var boton_peso = document.getElementById("mostrar_peso_id");
 var boton_cambiazo = document.getElementById("cambiazoPesoTiempos")
 let bot_despegues = document.querySelector("#ocultar_despegue_id")
-
+let rondaSelect = document.getElementById("server_ronda_id");
+// Botón para cargar datos de la ronda específica
+document.getElementById("cargaRondasServerBot").addEventListener("click", cargarRondaServer);
 // Flags
 let peso_visible = false;
 let tiempo_visible = true;
@@ -31,14 +33,15 @@ function cogerTiempo_Peso(que) {
         case "mil":
             // Coger milis
             milis = document.getElementById("milisegundos_input_id").value;
-            milis = String(milis*0.001).split(".")
+            milis = String(milis * 0.001).split(".")
             milis = milis[1]
             console.log("milis " + milis)
-            return  validarNumero(milis) ? (milis.slice(0, 3)): "000";
+            return validarNumero(milis) ? (milis.slice(0, 3)[0]) : "0";
         case "pes":
             // Coger el peso
             peso = document.getElementById("peso_input_id").value
-            return validarNumero(peso) ? parseInt(peso) : 0;
+            console.log(validarNumero(peso))
+            return validarNumero(peso) ? parseFloat(peso) : 0;
     }
 }
 // Crea la fila de control        
@@ -199,7 +202,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 // Actualizar inputs con los datos obtenidos
                 tiempos_server(rondaEquipo)       // Tiempos          
-                document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso/1000  // Peso
+                document.getElementById("peso_input_id").value = rondaEquipo.info.Peso/1000  // Peso
 
                 // Ponemos los datos en el input de despegue
                 despegues_server(rondaEquipo)
@@ -230,8 +233,8 @@ function despegues_server(rondaEquipo){
     // Mapeamos los valores de despegue validos
     let despegueOptionValue;
     switch (rondaEquipo.info.D_despegue) {
-        case "15":despegueOptionValue = "Corto";break;
-        case "60":despegueOptionValue = "Correcto";break;
+        case "true":despegueOptionValue = "Corto";break; // 15m
+        case "false":despegueOptionValue = "Correcto";break; // 60m
     }
     if (despegueOptionValue) {
         // Poner la opción en el select
@@ -251,29 +254,9 @@ function tiempos_server(rondaEquipo){
     document.getElementById("milisegundos_input_id").value = tiempo[2];
 }
 
-function traduce_nombre(nombre){
-    switch (nombre) {
-        case "RUHE":return "RUHE";
-        case "UVigo Aerotech":return "UVIGA";
-        case "G3":return "G3";
-        case "Matsia":return "MATSI";
-        case "LuftSieger":return "LUFTS";
-        case "ECLift":return "ECLFT";
-        case "SAETA_T2":return "SAET2";
-        case "DIANA UCLM":return "DIANA";
-        case "Trencalòs Team":return "TRENC";
-        case "The North Pole":return "NTHPO";
-        case "SAETA_T1":return "SAET1";
-        case "UCA&Air":return "UCAIR";
-        case "Club Xaloc":return "XALOC";
-        case "Eagle Fly Team 1":return "EAFT1";
-        case "Eagle Fly Team 2":return "EAFT2";
-        default:return "Nombre desconocido";
-    }
-}
 
 function nombre_server(rondaEquipo){
-    let nombre = traduce_nombre(rondaEquipo.equipo);
+    let nombre = rondaEquipo.equipo
     let nombreSelect = document.getElementById("nombres_equipos_constructor_id");
 
     // Poner la opción en el select
@@ -296,31 +279,67 @@ function ronda_server(rondaEquipo) {
     }
 }
 
-async function cargarRondaServer() {
-    const rondaSelect = document.getElementById("server_ronda_id");
-    const ronda = rondaSelect.value;
-    const equipos = [
-        "RUHE", "UVIGA", "G3", "MATSI", "LUFTS", "ECLFT", "SAET2",
-        "DIANA", "TRENC", "NTHPO", "SAET1", "UCAIR", "XALOC", "EAFT1", "EAFT2"
-    ];
-
-    if (ronda && ronda !== "-") {
-        rondaEquipo.ronda = `ronda${ronda}`;
-
-        for (const equipo of equipos) {
-            rondaEquipo.equipo = equipo;
-            await rondaEquipo.loadInfo();
-
-            if (rondaEquipo.info) {
-                console.log(`Datos del equipo ${equipo}:`, rondaEquipo.info);
-            } else {
-                console.log(`No se encontraron datos para la ronda ${ronda} y el equipo ${equipo}.`);
-            }
+async function cargarEquipoRonda(equipo, ronda) {
+    try {
+        // Intenta coger el archivo
+        const response = await fetch(`http://127.0.0.1:7000/data/${ronda}/${equipo}.json`);
+        
+        if (!response.ok) { // Error
+            throw new Error('Network response was not ok');
         }
-    } else {
-        console.log("Ronda no seleccionada. No se puede cargar la información.");
+        return await response.json(); // Ha salido bien, hay archivo
+    } catch (error) {
+        // Error, no encuentra el archivo
+        console.log(`Archivo ${equipo}.json no encontrado: `, error);
+        return null;
     }
 }
 
-// Botón para cargar datos de la ronda específica
-document.getElementById("cargaRondasServerBot").addEventListener("click", cargarRondaServer);
+async function cargarRondaServer() {
+    const ronda = document.querySelector("#numero_ronda_id").value;
+    // Primero vaciamos los pilotos
+    s_vaciarPilotos();
+
+    // Ponemos la ronda que se quiere
+    s_ponerRonda(true);
+    // Cargamos los datos
+    await rondaEquipo.get_dependencies();
+
+    // Cogemos la ronda que vamos a cargar
+    serverRonda = "ronda" + document.querySelector("#server_ronda_id").value
+    rondaEquipo.ronda = serverRonda;
+    // Vamos equipo a equipo
+    for (let equipo of equipos) {
+        rondaEquipo.equipo = equipo;
+
+        if (rondaEquipo.ronda && rondaEquipo.equipo) {
+            let datosEquipo = await cargarEquipoRonda(equipo, rondaEquipo.ronda); // Comprobamos si hay archivo
+            if (!datosEquipo) {
+                negar_piloto(rondaEquipo.equipo); // Si no hay archivo, lo mandamos negado
+                continue; // Pasamos al siguiente equipo
+            }
+
+            rondaEquipo.info = datosEquipo;
+
+            console.log("Datos del equipo:", rondaEquipo.info);
+
+            // Actualizar inputs con los datos obtenidos
+            tiempos_server(rondaEquipo); // Tiempos
+            document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso / 1000; // Peso
+
+            // Ponemos los datos en el input de despegue
+            despegues_server(rondaEquipo);
+
+            // Ponemos el nombre
+            nombre_server(rondaEquipo);
+
+            // Ponemos la ronda
+            ronda_server(rondaEquipo);
+
+            // Sumar el piloto al sistema
+            s_sumaPiloto("animado");
+        } else {
+            console.log("Ronda o equipo no seleccionados. No se puede cargar la información.");
+        }
+    }
+}

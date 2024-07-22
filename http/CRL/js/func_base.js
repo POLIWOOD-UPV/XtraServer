@@ -31,9 +31,9 @@ function cogerPiloto() {
     return piloto
 }
 
-// Función para validar si el valor es un número
+// Función para validar si el valor es un número (entero o decimal, positivo o negativo)
 function validarNumero(valor) {
-    return /^\d+$/.test(valor); // No se como va pero va :)
+    return /^-?\d+(\.\d+)?$/.test(valor);
 }
 
 function remplazar_piloto(piloto,estado){
