@@ -226,3 +226,18 @@ aside {
 .inputs {
     width: 50px;
 }
+
+table, th, td {
+    border: 1px solid black;
+  }
+
+.contenedor_control {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+.item_cc {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
