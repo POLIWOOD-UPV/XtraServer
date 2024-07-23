@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download</title>
+</head>
+<body>
+    <a id="link">No funciona</a>
+    <script>
+        const urlQuery = new URLSearchParams(window.location.search);
+        var url = urlQuery.get("file");
+        var filename = filename.split("/")
+        filename = filename[filename.lengh - 1]
+        var elem = document.getElementById("link");
+        elem.setAttribute("href", url);
+        elem.setAttribute("download", filename);
+        elem.innerText = filename;
+    </script>
+</body>
+</html>

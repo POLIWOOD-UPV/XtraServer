@@ -23,7 +23,7 @@ exports.file = (req, res) => {
         code = 202;
         msg = "Directory not Found"
     }
-    req.eq("end", () => {
+    req.on("end", () => {
         res.writeHead(code);
         res.write(msg);
         res.end();
@@ -35,7 +35,9 @@ const upload = (req, res) => {
     req.on("data", (chunk) => {
         body += chunk;
     });
-    req.eq("end", () => {
+    req.on("end", () => {
+        console.log("UPLOAD: ", body);
+
         const form = new URLSearchParams(body);
         const filename = form["File"];
         const data = form["Data"];
@@ -46,7 +48,7 @@ const upload = (req, res) => {
             fs.writeFileSync("./http/" + filename, data);
         } catch (error) {
             res.writeHead(404);
-            res.write("Directory not Found");
+            res.write("Directory not Found \n" + String(error));
             res.end();
             return;
         }

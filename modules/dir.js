@@ -1,3 +1,4 @@
+const { assert } = require('console');
 const fs = require('fs')
 const path = require("path")
 
@@ -87,11 +88,11 @@ exports.http_file = (res, url) => {
       res.end();
       return;
     }
-    try {
-      var c_type = content_types[end]
-    } catch {
-      res.writeHead(501, {"Content-Type": "text/plain"});
-      res.write("Error 501: file-type not implemented");
+    var c_type = content_types[end];
+    if (c_type == null) {
+      res.writeHead(302, {
+        'Location': "./download.html?file="+url
+      });
       res.end();
       return;
     }
@@ -99,7 +100,7 @@ exports.http_file = (res, url) => {
     res.write(data);
     res.end();
   } catch (error) {
-    console.error("http_file():", error.message);
+    console.error(`http_file(${url}):`, error.message);
     process.exit(1);
   }
 }
