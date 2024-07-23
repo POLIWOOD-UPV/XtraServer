@@ -40,7 +40,7 @@ div{
     margin-bottom: 2%;
     margin-right: 3%;
 
-    border-radius: 10px;
+    border-radius: 6px;
 }
 #foto{
     float: right;
@@ -50,7 +50,7 @@ div{
     margin-top: 2%;
     margin-bottom: 2%;
 
-    border-radius: 10px;
+    border-radius: 6px;
 }
 #dorsal{
     float:left;
@@ -66,7 +66,7 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
-    border-radius: 10px;
+    border-radius: 6px;
 }
 #acr{
     float:left;
@@ -84,7 +84,7 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
-    border-radius: 10px;
+    border-radius: 6px;
 }
 #nombre_grupo{
     float:left;
@@ -100,7 +100,7 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
-    border-radius: 10px;
+    border-radius: 6px;
 }
 #uni{
     float: left;
@@ -116,6 +116,7 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
+    border-radius: 6px;
 }
 #titulo_miembros{
     float: left;
@@ -130,6 +131,7 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0);
+    border-radius: 6px;
 }
 #miembros{
     float: left;
@@ -145,6 +147,7 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
+    border-radius: 6px;
 }
 #titulo_lider{
     float: right;
@@ -157,6 +160,7 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0);
+    border-radius: 6px;
 }
 #nombre_lider{
     float: right;
@@ -171,4 +175,5 @@ div{
 
     border: 2px solid;
     border-color: rgba(0, 0, 0, 0.551);
+    border-radius: 6px;
 }
