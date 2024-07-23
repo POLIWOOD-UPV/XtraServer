@@ -116,3 +116,10 @@ class Conometro {
         this.update = func;
     }
 };
+
+export class Conometro {
+    constructor(idMinutos, idSegundos, idMilisegundos) {
+        this.idMinutos = idMinutos;
+        this.idSegundos = idSegundos;
+        this.idMilisegundos = idMilisegundos;
+    }}

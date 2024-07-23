@@ -177,10 +177,14 @@ var JSONdata = {
           "img_logo": "FlyEagle.png",
           "img_grupo": "Fly_Eager.jpg"
         }
-]}
+]};
+
+import { Conometro } from './Cronometro.js';
 
 var logo = document.getElementById("logo");
-var tiempo = document.getElementById("tiempo");
+var tiempo1 = document.getElementById("tiempo1");
+var tiempo2 = document.getElementById("tiempo2");
+var tiempo3 = document.getElementById("tiempo3");
 var peso = document.getElementById("peso");
 var volumen = document.getElementById("volumen");
 var estado = document.getElementById("estado");
@@ -209,12 +213,17 @@ var estado = document.getElementById("estado");
 
 const url = new URLSearchParams(window.location.search)
 var num_equipo = url.get("d")
+// cronometro = new Conometro(tiempo1, tiempo2, tiempo3)
 
 window.addEventListener("DOMContentLoaded", () => {
     
     var data = JSONdata.equipos[num_equipo];
     name_logo = data.img_logo
     logo.src = "../img/logos/" + name_logo;
+    cronometro = new Conometro(tiempo1, tiempo2, tiempo3)
+    tiempo1.innerHTML = cronometro[0];
+    tiempo2.innerHTML = cronometro[1];
+    tiempo3.innerHTML = cronometro[2];
 
     // dorsal.innerHTML = data.Dorsal;
     // acr.textContent = data.Acr;
