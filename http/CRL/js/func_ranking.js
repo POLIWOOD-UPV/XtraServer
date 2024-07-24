@@ -119,8 +119,8 @@ function ordenar_control() {
 }
 
 // convertir tiempo a milisegundos
-function convertirTiempoAMilisegundos(tiempo) {
-    if (tiempo === '-:-:-') {
+function convertirTiempoAMilisegundos(tiempo,despegue) {
+    if (tiempo === '-:-:-' && despegue == "Pendiente") {
         return Number.MAX_SAFE_INTEGER; // Un valor muy alto para asegurar que se posicionen al final
     }
     let partes = tiempo.split(':');
@@ -161,7 +161,7 @@ function sacar_pos_avion(tiempo) {
     return nueva_posicion;
 }
 
-function negar_piloto(piloto=cogerPiloto()){
+function negar_piloto(piloto=cogerPiloto(),negacion_new = false){
     let estado = "animado"
     if (pilotos.includes(piloto)){ // Hay que reemplazarlo
         remplazar_piloto(piloto,estado,true)
@@ -180,9 +180,11 @@ function negar_piloto(piloto=cogerPiloto()){
         FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
         // Coger el despegue
-        let despegue_input = "Pendiente"
+        let despegue;
+        despegue = negacion_new ? document.getElementById("tipos_despegue_id").value : "Pendiente";
 
-        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
+        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue]
+        console.log(info)
         socket.emit("all", "ranking",info )
     }
 }
