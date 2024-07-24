@@ -86,6 +86,8 @@ class RondaEquipo {
             method: "POST",
             body: msg.slice(0,-1)
         });
+        
+        alert("Subido correctamente");
     }
 }
 
