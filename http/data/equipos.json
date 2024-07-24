@@ -174,5 +174,17 @@
       "Pilot": "Leopolgo Martinez Magraner",
       "img_logo": "FlyEagle.png",
       "img_grupo": "Fly_Eager.jpg"
+    },
+    {
+      "Dorsal": 18,
+      "Team": "Eagle Fly Team3",
+      "Acr": "EAFT2",
+      "Institucion": "Club Aeromodelismo Alzira",
+      "Members": 2,
+      "TeamLeader": "Leopolgo Martinez Magraner",
+      "Pilot": "Leopolgo Martinez Magraner",
+      "img_logo": "FlyEagle.png",
+      "img_grupo": "Fly_Eager.jpg"
     }
+    
   ]

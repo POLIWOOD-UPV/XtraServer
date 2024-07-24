@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" />
     <title>Cronómetro</title>
+    <script src="./js/RondaEquipo.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/s_cronometroCRL.js"></script>
     <style>
         span {
             font-size: 6dvi;
         }
+        button {
+            font-size: 6dvi;
+        }
     </style>
-    <script src="./js/RondaEquipo.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/s_cronometroCRL.js"></script>
 </head>
 <body>
     <header>
@@ -144,6 +147,7 @@
             rondaEquipo.upload(object);
 
             c_update(tiempo_transcurrido); // avisamos al servidor
+            window.location.reload();
         }
     </script>
 </body>

@@ -102,6 +102,7 @@ const guardar_vuelo = (req, res) => {
         fs.writeFileSync("./http/data/"+filename, JSON.stringify(object, null, 2));
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.end(`Form data saved to ${filename}`);
+        console.log("-->"+filename+"\n")
     });
 }
 
