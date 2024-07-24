@@ -28,7 +28,7 @@ function cogerTiempo_Peso(que) {
         case "seg":
             // Coger segundos
             segundos = document.getElementById("segundos_input_id").value;
-            return validarNumero(segundos) ? parseInt(segundos) : "00";
+            return validarNumero(segundos) ? segundos.padStart(2, '0') : "00";
 
         case "mil":
             // Coger milis
