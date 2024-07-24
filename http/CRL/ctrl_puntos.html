@@ -40,6 +40,36 @@
         </div>    
         <div id = "divIntegraPilotos">
             <h2>Integracion de pilotos</h2>
+            <h3>Recogedor</h3>
+            <table>
+                <tr>
+                    <th>Ronda</th>
+                    <th>Cargar</th>
+                    <th>Guardar</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="rondas" id="rondas_id">
+                            <option value="ronda1">ronda1</option>
+                            <option value="ronda2">ronda2</option>
+                            <option value="ronda3">ronda3</option>
+                            <option value="ronda4">ronda4</option>
+                            <option value="ronda5">ronda5</option>
+                            <option value="ronda6">ronda6</option>
+                            <option value="ronda7">ronda7</option>
+
+                        </select>
+                    </td>
+                    <td>
+                        <button onclick="server_cargar_puntos_ronda()">Cargar Ronda</button>
+                    </td>
+                    <td>
+                        <button onclick="server_guardar_puntos_ronda()">Guardar ronda</button>
+                    </td>
+                </tr>
+            </table>
+
+
             <h3>Introductor</h3>
                 <table>
                     <tr>
@@ -78,7 +108,7 @@
                         </td>
                     </tr>
                 </table>
-
+                <p id="jsonero"></p>
 
             <h3>Borrar</h3>
             <div id = "pilotos_mas_borrar">

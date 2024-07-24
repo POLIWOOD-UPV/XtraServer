@@ -249,7 +249,7 @@ function despegues_server(rondaEquipo){
 }
 
 function tiempos_server(rondaEquipo){
-    tiempo_en_milis = rondaEquipo.info.P_tiempo
+    tiempo_en_milis = rondaEquipo.info.T_vuelo
     tiempo = convertirMilisegundosATiempo(tiempo_en_milis)
     document.getElementById("minutos_input_id").value = tiempo[0]
     document.getElementById("segundos_input_id").value = tiempo[1];
@@ -284,7 +284,7 @@ function ronda_server(rondaEquipo) {
 async function cargarEquipoRonda(equipo, ronda) {
     try {
         // Intenta coger el archivo
-        const response = await fetch(`http://127.0.0.1:7000/data/${ronda}/${equipo}.json`);
+        const response = await fetch(`../data/${ronda}/${equipo}.json`);
         
         if (!response.ok) { // Error
             throw new Error('Network response was not ok');
@@ -327,7 +327,7 @@ async function cargarRondaServer() {
 
             // Actualizar inputs con los datos obtenidos
             tiempos_server(rondaEquipo); // Tiempos
-            document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso / 1000; // Peso
+            document.getElementById("peso_input_id").value = rondaEquipo.info.Peso / 1000; // Peso
 
             // Ponemos los datos en el input de despegue
             despegues_server(rondaEquipo);
