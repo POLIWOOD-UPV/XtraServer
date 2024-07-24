@@ -67,7 +67,9 @@ const content_types = {
   "xml":  "text/xml",
   "html": "text/html",
   "css":  "text/css",
-  "js":   "text/javascript"
+  "js":   "text/javascript",
+  "sdp":  "text/plain",
+  "bat":  "text/plain"
 }
 
 exports.http_file = (res, url) => {
