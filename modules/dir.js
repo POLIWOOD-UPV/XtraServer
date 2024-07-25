@@ -1,6 +1,6 @@
-const { assert } = require('console');
 const fs = require('fs')
 const path = require("path")
+const URL = require("url")
 
 exports.http_listdir = (res, url) => {
   try {
@@ -71,6 +71,8 @@ const content_types = {
 }
 
 exports.http_file = (res, url) => {
+  var parse = URL.parse(url);
+  var url = parse.pathname;
   try {
     var end = String(url).slice(String(url).search(/\w*$/));
     if (end == "") {
@@ -91,7 +93,7 @@ exports.http_file = (res, url) => {
     var c_type = content_types[end];
     if (c_type == null) {
       res.writeHead(302, {
-        'Location': "./download.html?file="+url
+        'Location': "./download.html?file="+String(url).replace("/", "\\")
       });
       res.end();
       return;
