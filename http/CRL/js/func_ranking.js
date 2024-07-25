@@ -28,7 +28,7 @@ function cogerTiempo_Peso(que) {
         case "seg":
             // Coger segundos
             segundos = document.getElementById("segundos_input_id").value;
-            return validarNumero(segundos) ? parseInt(segundos) : "00";
+            return validarNumero(segundos) ? segundos.padStart(2, '0') : "00";
 
         case "mil":
             // Coger milis
@@ -119,8 +119,8 @@ function ordenar_control() {
 }
 
 // convertir tiempo a milisegundos
-function convertirTiempoAMilisegundos(tiempo) {
-    if (tiempo === '-:-:-') {
+function convertirTiempoAMilisegundos(tiempo,despegue) {
+    if (tiempo === '-:-:-' && despegue == "Pendiente") {
         return Number.MAX_SAFE_INTEGER; // Un valor muy alto para asegurar que se posicionen al final
     }
     let partes = tiempo.split(':');
@@ -161,7 +161,7 @@ function sacar_pos_avion(tiempo) {
     return nueva_posicion;
 }
 
-function negar_piloto(piloto=cogerPiloto()){
+function negar_piloto(piloto=cogerPiloto(),negacion_new = false){
     let estado = "animado"
     if (pilotos.includes(piloto)){ // Hay que reemplazarlo
         remplazar_piloto(piloto,estado,true)
@@ -180,9 +180,11 @@ function negar_piloto(piloto=cogerPiloto()){
         FilaControlResta(piloto,tiempo,pos) // Lo llamo antes para que cree la fila con id 1, o sino se la saltaba
 
         // Coger el despegue
-        let despegue_input = "Pendiente"
+        let despegue;
+        despegue = negacion_new ? document.getElementById("tipos_despegue_id").value : "Pendiente";
 
-        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue_input]
+        info = ["sumPil",piloto, pos, tiempo, peso, estado,despegue]
+        console.log(info)
         socket.emit("all", "ranking",info )
     }
 }
@@ -247,7 +249,7 @@ function despegues_server(rondaEquipo){
 }
 
 function tiempos_server(rondaEquipo){
-    tiempo_en_milis = rondaEquipo.info.P_tiempo
+    tiempo_en_milis = rondaEquipo.info.T_vuelo
     tiempo = convertirMilisegundosATiempo(tiempo_en_milis)
     document.getElementById("minutos_input_id").value = tiempo[0]
     document.getElementById("segundos_input_id").value = tiempo[1];
@@ -282,7 +284,7 @@ function ronda_server(rondaEquipo) {
 async function cargarEquipoRonda(equipo, ronda) {
     try {
         // Intenta coger el archivo
-        const response = await fetch(`http://127.0.0.1:7000/data/${ronda}/${equipo}.json`);
+        const response = await fetch(`../data/${ronda}/${equipo}.json`);
         
         if (!response.ok) { // Error
             throw new Error('Network response was not ok');
@@ -325,7 +327,7 @@ async function cargarRondaServer() {
 
             // Actualizar inputs con los datos obtenidos
             tiempos_server(rondaEquipo); // Tiempos
-            document.getElementById("peso_input_id").value = rondaEquipo.info.P_peso / 1000; // Peso
+            document.getElementById("peso_input_id").value = rondaEquipo.info.Peso / 1000; // Peso
 
             // Ponemos los datos en el input de despegue
             despegues_server(rondaEquipo);

@@ -14,7 +14,7 @@ let bot_dorsales = document.querySelector("#mostrar_dorsal_id")
 
 // Listas
 let pilotos = ["WOOD"]
-let equipos = ["RUHE", "UVIGA", "G3", "MATSI", "LUFTS", "ECLFT", "SAET2", "DIANA", "TRENC", "NTHPO", "SAET1", "UCAIR", "XALOC", "EAFT1", "EAFT2"];
+let equipos = ["RUHE", "UVIGA", "G3", "MATSI", "LUFTS", "ECLFT", "SAET2", "DIANA", "TRENC", "NTHPO", "SAET1", "UCAIR", "XALOC", "EAFT1", "EAFT2","EAFT3"];
 
 // Flags
 let ranking_visible = true;

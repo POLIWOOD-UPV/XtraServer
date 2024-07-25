@@ -159,3 +159,66 @@ function s_mostrarDorsal(){
     info = ["mosDor",dorsal_visible]
     socket.emit("all", "puntos",info )
 }
+
+
+// Cargar rondas
+async function server_cargar_puntos_ronda() {
+    try {
+        // Obtener el valor del input
+        const ronda = document.querySelector("#rondas_id").value;
+
+        // Intenta coger el archivo
+        const response = await fetch(`/data/puntos/${ronda}.json`);
+
+        // Verificar si la respuesta es correcta
+        if (!response.ok) {
+            throw new Error('Error de respuesta: ' + response.status);
+        }
+
+        // Convertir la respuesta a JSON
+        const data = await response.json();
+
+        meter_datos_server(data)
+    } catch (error) {
+        // Mostrar el error en consola
+        console.log(`Archivo .json no encontrado o error en la solicitud: `, error);
+    }
+}
+
+function meter_datos_server(data){
+    s_vaciarPilotos()
+    // Ponemos los pilotos y puntos
+    let pilotin = document.querySelector("#nombres_equipos_constructor_id")
+    let puntitos = document.querySelector("#puntos_input_id")
+
+    for (const [key, value] of Object.entries(data)) {
+        pilotin.value = key; // Nombre piloto
+        puntitos.value = value; // Valor de puntos
+        s_sumaPiloto("animado");
+    }
+}
+function server_guardar_puntos_ronda() {
+    const ronda = document.querySelector("#rondas_id").value;
+
+    // Obtener todas las filas de control
+    const filas = document.querySelectorAll(".fila_control_borrar");
+
+    // Crear un objeto para almacenar los datos
+    const datos = {};
+
+    filas.forEach(fila => {
+        // Obtener el nombre del piloto y los puntos
+        const nombre = fila.querySelector(".nombre_control").textContent.trim();
+        const puntos = fila.querySelector(".puntos_control").textContent.trim();
+
+        // Añadir al objeto JSON
+        datos[nombre] = parseInt(puntos, 10);
+    });
+
+    // Convertir el objeto a una cadena JSON
+    const datosJson = JSON.stringify(datos, null, 2);
+
+    // Obtener el elemento con id 'jsonero' y asignar el contenido JSON
+    const jsonero = document.getElementById("jsonero");
+    jsonero.textContent = datosJson;
+}

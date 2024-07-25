@@ -161,7 +161,7 @@ function s_mandar_zeros(){
     let estado = "animado"
     // Rellenamos el control con todo 0s
     for (let piloto of equipos){
-        negar_piloto(piloto,estado)
+        negar_piloto(piloto,false)
         ordenar_control(); // Ordenar la lista de control después de la eliminación
     }
 }
