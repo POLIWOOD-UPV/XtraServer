@@ -94,7 +94,7 @@ function FilaControlResta(piloto,tiempo,pos){
     arreglar_pos_control(pos)
 }
 
-// Ordena las filas de control 
+// Ordena las filas de control F
 function ordenar_control() {
     var tiempos_ord_cont = [];
     // Obtener los tiempos de todas las filas
@@ -119,8 +119,8 @@ function ordenar_control() {
 }
 
 // convertir tiempo a milisegundos
-function convertirTiempoAMilisegundos(tiempo,despegue) {
-    if (tiempo === '-:-:-' && despegue == "Pendiente") {
+function convertirTiempoAMilisegundos(tiempo) {
+    if (tiempo === '-:-:-') {
         return Number.MAX_SAFE_INTEGER; // Un valor muy alto para asegurar que se posicionen al final
     }
     let partes = tiempo.split(':');

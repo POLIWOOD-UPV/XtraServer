@@ -7,4 +7,4 @@ ffmpeg ^
 -f rtp ^
 -sdp_file ^
 test.sdp ^
-rtp://192.168.1.25:6000
+rtp://192.168.1.148:6000
