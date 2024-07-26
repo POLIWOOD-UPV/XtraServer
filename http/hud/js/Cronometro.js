@@ -1,4 +1,4 @@
-class Conometro {
+class Cronometro {
     crl(info){
         // [ronda, equipo, prueba, comando, tiempo]
         if (info[0] != this.ronda ||
@@ -116,10 +116,11 @@ class Conometro {
         this.update = func;
     }
 };
-
+/*
 export class Conometro {
     constructor(idMinutos, idSegundos, idMilisegundos) {
         this.idMinutos = idMinutos;
         this.idSegundos = idSegundos;
         this.idMilisegundos = idMilisegundos;
     }}
+*/

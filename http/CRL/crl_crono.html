@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" />
+    <title>Cronómetro</title>
+    <script src="./js/RondaEquipo.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        span {
+            font-size: 6dvi;
+        }
+        button {
+            font-size: 6dvi;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <p>
+                <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda" required></select>
+            </p>
+            <p>
+                <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo" required></select>
+            </p>
+            <p>
+                <label for="Prueba">Carga/Vuelo: </label><select name="Prueba" id="prueba" required>
+                    <option value="T_carga">Carga</option>
+                    <option value="T_vuelo">Vuelo</option>
+                </select>
+            </p>
+        </div>
+    </header>
+    <hr>
+    <main>
+        <button id = "show" onclick="show()">Show</button>
+        <b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b>
+        <button id = "hide" onclick="hide()">Hide</button>
+        <b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b>
+        <button id = "team" onclick="team()">Team</button>
+        <br>
+    </main>
+    <script>
+        rondaEquipo = new RondaEquipo();
+        rondaEquipo.setup();
+        // Botones
+        let showButton = document.querySelector("#show");
+        let hideButton = document.querySelector("#hide");
+        let teamButton = document.querySelector("#team");
+
+        var socket = io();
+
+        const show = () => {
+            console.log("show");
+            socket.emit("all", "show");
+        }
+        
+        const hide = () => {
+            console.log("hide");
+            socket.emit("all", "hide");
+        }
+        
+        const team = () => {
+            console.log("team",
+                [
+                    rondaEquipo.ronda,
+                    rondaEquipo.equipo,
+                    document.getElementById("prueba").value
+                ]
+            );
+            socket.emit("all", "team",
+                [
+                    rondaEquipo.ronda,
+                    rondaEquipo.equipo,
+                    document.getElementById("prueba").value
+                ]
+            );
+        }
+    </script>
+</body>
+</html>

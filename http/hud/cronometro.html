@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/Cronometro.js"></script>
+    <style>
+        span {
+            text-align: center;
+            font-size: 128px;
+        }
+        img {
+            height: 128px;
+            width: 128px;
+        }
+        #elemento_id {
+            position: relative;
+            bottom: 0px;
+        }
+        div {
+            display: flex;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-right: 10px;
+            border: 3px solid #000000;
+            background: linear-gradient(to top, #313131, #343434b2);
+            width: min-content;
+        }
+    </style>
+</head>
+<body>
+    <div id="crono">
+        <img src="../img/logos/WOOD.png" id="img">
+        <span>&nbsp;</span>
+        <span id="minutos">esto</span>
+        <span>:</span>
+        <span id="segundos">no</span>
+        <span>:</span>
+        <span id="milisegundos">funciona</span>
+    </div>
+    <script>
+        var cronometro = new Cronometro("minutos", "segundos", "milisegundos");
+        var html_crono = document.getElementById("crono")
+        var html_img = document.getElementById("img")
+
+        socket = io();
+
+        socket.on("show", () => {
+            html_crono.style.bottom = "0px";
+            html_crono.style.display = "flex";
+        });
+
+        socket.on("hide", () => {
+            html_crono.style.bottom = "-1000px";
+            html_crono.style.display = "none";
+        });
+
+        socket.on("team", (rondaequipo) => {
+            console.log("ini");
+            let ronda = rondaequipo[0];
+            let equipo = rondaequipo[1];
+            let prueba = rondaequipo[2];
+            cronometro.bind(
+                ronda, equipo, prueba
+            );
+            console.log("bind");
+            let img = document.getElementById("img");
+            img.setAttribute("src", `/img/logos/${equipo}.png`);
+            console.log("fin");
+        })
+    </script>
+</body>
+</html>
