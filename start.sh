@@ -1,1 +1,1 @@
-echo Server Nor Ready
+docker-compose up

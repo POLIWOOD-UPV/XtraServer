@@ -1,5 +1,9 @@
-!logs/
-logs/*
+# Volumes
+!mysql/
+!mongodb/
+mysql/*
+mongodb/*
 
-http/data/pruebas/*
-http/data/ronda?/*
+# Logs
+!**/logs/
+**/logs/*
