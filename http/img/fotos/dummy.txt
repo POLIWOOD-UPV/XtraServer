@@ -1,1 +1,0 @@
-Para que Git-Hub tenga en cuenta la carpeta

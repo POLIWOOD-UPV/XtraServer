@@ -1,0 +1,70 @@
+version: "3.5"
+services:
+
+  # Orion is the context broker
+  orion:
+    image: telefonicaiot/fiware-orion
+    hostname: orion
+    container_name: fiware-orion
+    depends_on:
+      - mongo
+    ports:
+      - "1026:1026"
+    command: -dbURI mongodb://mongo
+
+  # Databases - Orion uses Mongo-DB
+  mongo:
+    image: mongo:3.6
+    hostname: mongo
+    container_name: db-mongo
+    ports:
+      - "27017:27017" 
+    command: --nojournal
+    volumes:
+      - type: volume
+        source: mongo-db
+        target: /data
+      - type: bind
+        source: ./mongodb
+        target: /data
+        read_only: false
+
+  # Databases - Excel uses MySQL
+  mariadb:
+    image: mariadb
+    hostname: mariadb
+    container_name: mariadb
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      MYSQL_DATABASE: mysql
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - type: volume
+        source: mysql-db
+        target: /var/lib/mysql
+      - type: bind
+        source: ./mysql
+        target: /var/lib/mysql
+        read_only: false
+
+  xtraserver:
+    image: avr24/xtraserver:v1.0
+    hostname: xtraserver
+    container_name: xtraserver
+    ports:
+      - "80:80"
+    restart: always
+    entrypoint: ["node", "server.js"]
+    volumes:
+      - type: bind
+        source: ./server
+        target: /home/app
+        read_only: false
+
+volumes:
+  mongo-db: ~
+  mysql-db: ~

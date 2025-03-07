@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./hud/js/Cronometro.js"></script>
+    <script src="./crl/js/RondaEquipo.js"></script>
+    <style>
+        span {
+            font-size: 6dvi;
+        }
+    </style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Abel Vidal Ripoll</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Abel Vidal Ripoll</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:ContentTypeId msdt:dt="string">0x0101007750D0F23108224F90FEF5B9FC8631C3</mso:ContentTypeId>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+    <div>
+        <p>
+            <label for="Ronda">Ronda: </label><select name="Ronda" id="ronda" required></select>
+        </p>
+        <p>
+            <label for="Equipo">Equipo: </label><select name="Equipo" id="equipo" required></select>
+        </p>
+        <p>
+            <label for="Prueba">Carga/Vuelo: </label><select name="Prueba" id="prueba" required>
+                <option value="T_carga">Carga</option>
+                <option value="T_vuelo">Vuelo</option>
+            </select>
+        </p>
+    </div>
+    <div>
+        <span id="minutos">esto</span>
+        <span>:</span>
+        <span id="segundos">no</span>
+        <span>:</span>
+        <span id="milisegundos">funciona</span>
+    </div>
+    <script>
+        var conometro = new Conometro("minutos", "segundos", "milisegundos");
+        var rondaEquipo = new RondaEquipo();
+        var html_prueba = document.getElementById("prueba");
+
+        rondaEquipo.get_dependencies();
+
+        function change() {
+            let prueba = html_prueba.value;
+            conometro.bind(
+                rondaEquipo.ronda,
+                rondaEquipo.equipo,
+                prueba
+            );
+            conometro.set(rondaEquipo.info[prueba]);
+        }
+
+        html_prueba.addEventListener("input", change);
+        rondaEquipo.set_onInput(change)
+    </script>
+</body>
+</html>
