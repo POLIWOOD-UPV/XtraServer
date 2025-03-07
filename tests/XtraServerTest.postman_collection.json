@@ -1,0 +1,431 @@
+{
+	"info": {
+		"_postman_id": "024638af-91a2-44f2-a7b8-b14e8287507f",
+		"name": "XtraServerTest",
+		"description": "¡Bienvenidos a la coleción de tests del Xtraserver!\n\nAqui vamos ha tener los diferentes comandos para poder jugar con los datos y testear asi nuestro servicio.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39335636"
+	},
+	"item": [
+		{
+			"name": "CrearEntidades",
+			"item": [
+				{
+					"name": "Universidades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"actionType\": \"append\",\r\n    \"entities\": [\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:UPV\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Universitat Poliècnica de Valencia\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"UPV\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ES\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"upv.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:UPC\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Universitat Poliècnica de Catalunya\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"UPC\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ES\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"upc.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:UVigo\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Universidad de Vigo\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"UVigo\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ES\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"uvigo.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:UCA\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Universidad de Cádiz\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"UCA\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ES\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"uca.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:US\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Universidad de Sevilla\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"US\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ES\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"us.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:UCLM\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Universidad de Castilla la Mancha\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"UCLM\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ES\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"uclm.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:UC3M\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Universidad Carlos III de Madrid\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"UC3M\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ES\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"uc3m.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:ECL\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Ecole Centrale de Lyon\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ECL\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"FR\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"ecl.png\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": \"urn:ngsi-ld:Universidad:TUD\",\r\n            \"type\": \"Universidad\",\r\n            \"name\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Technische Universität Darmstadt\"\r\n            },\r\n            \"acr\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"TUD\"\r\n            },\r\n            \"pais\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"DE\"\r\n            },\r\n            \"logo\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"tud.png\"\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crono0",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"urn:ngsi-ld:Crono:000\",\r\n    \"type\": \"Crono\",\r\n    \"ronda\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    },\r\n    \"equipo\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    },\r\n    \"tipo\": {\r\n        \"type\": \"Text\",\r\n        \"value\": \"Mission\"\r\n    },\r\n    \"start\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    },\r\n    \"stop\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BorrarEntidades",
+			"item": [
+				{
+					"name": "Crono0",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/urn:ngsi-ld:Crono:000",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Crono:000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Universidades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"actionType\":\"delete\",\r\n    \"entities\": [\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UPV\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UPC\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UVigo\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UCA\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:US\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UCLM\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UC3M\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:ECL\",\r\n        \"type\": \"Universidad\"\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:TUD\",\r\n        \"type\": \"Universidad\"\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Visualizar",
+			"item": [
+				{
+					"name": "Todo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/?limit=1000",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1000"
+								},
+								{
+									"key": "options",
+									"value": "keyValues",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Universidades",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/?type=Universidad&options=keyValues",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Universidad"
+								},
+								{
+									"key": "options",
+									"value": "keyValues"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crono0",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/urn:ngsi-ld:Crono:000",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Crono:000"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "keyValues",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ModificarEntidades",
+			"item": [
+				{
+					"name": "Crono0Start",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 1741370711140\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/urn:ngsi-ld:Crono:000/attrs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Crono:000",
+								"attrs"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "keyValues",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crono0Stop",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stop\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 1741370806027\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/urn:ngsi-ld:Crono:000/attrs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Crono:000",
+								"attrs"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "keyValues",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crono0Reset",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    },\r\n    \"stop\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/entities/urn:ngsi-ld:Crono:000/attrs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Crono:000",
+								"attrs"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "keyValues",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Universidades",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"actionType\":\"update\",\r\n    \"entities\": [\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UPV\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UPC\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UVigo\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UCA\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:US\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UCLM\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:UC3M\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:ECL\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": \"urn:ngsi-ld:Universidad:TUD\",\r\n        \"type\": \"Universidad\",\r\n        \"logo\": {\r\n            \"type\": \"Text\",\r\n            \"value\": \"test.png\"\r\n        }\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1026/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1026",
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
