@@ -1,0 +1,582 @@
+[
+  {
+    "id": "urn:ngsi-ld:Staff:01",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 1
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Facundo Pérez"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "FP"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Organizador principal"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:02",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 2
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Jaume Piqueras"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "JP"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Puntuaciones"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:03",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 3
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Carles Roselló"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "CR"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Logística"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:04",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 4
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Hugo Pamies"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "HP"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Comentarista 1/Jurado Técnico"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:05",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 5
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "David Silla"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Comentarista 2/Jurado Técnico"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:06",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 6
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Alberto Ribera"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "AR"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Narrador/Jurado Técnico"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:07",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 7
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Alejando Richman"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "AHR"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Jurado Técnico"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:08",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 8
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Marc Aragó"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "MAC"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Juez de pista/Jurado Técnico"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:09",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 9
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Pasqual"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "PASQ"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Juez de pista/Jurado Técnico"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:10",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 10
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Adrián Ortega"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "AO"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Inspector 1"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:11",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 11
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Adrián Montoya"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "AM"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Inspector 2"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:12",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 12
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Carlos Sanz"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "CS"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Inspector 3"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:13",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 13
+    },
+    "nombre": {
+      "type": "Text",
+      "value": ""
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": ""
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Inspector 4"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:14",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 14
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Alex Radita"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Responsable de Taller/Catering"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:15",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 15
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Joan González"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "JG"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "RRPP/Catering"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:16",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 16
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Nuria Pons"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "NP"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Catering/Soporte"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:17",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 17
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Luciyu Cámara"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "LC"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Carga"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:18",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 18
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Ariadna Morente"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "AM"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Descrga"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:19",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 19
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Antonio Eff-Darwich"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "AE"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Carga/Descarga"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:20",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 20
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Pablo Extremera"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "PE"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Fotografia"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:21",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 21
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Miebro TOMA UNO"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": ""
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Fotografia"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:22",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 22
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Paula Ochando"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "PO"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Mástil Principal"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:23",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 23
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Ángel Rodríguez"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "ARO"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Mástil Principal"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:24",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 24
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Pablo Magariños"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "PM"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Mástil Principal"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:25",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 25
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Mayte Cardenas"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "MY"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Mástil Secundario/Banderas/Fotografia"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:26",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 26
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Lucia López"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "LL"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Mástil Secundario/Banderas"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:27",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 27
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Saveta Letitia Suci"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "LS"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "Mástil Secundario/Banderas/RRPP"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:28",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 28
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Pablo García"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "PG"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "RRSS"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Staff:29",
+    "type": "Staff",
+    "num": {
+      "type": "Number",
+      "value": 29
+    },
+    "nombre": {
+      "type": "Text",
+      "value": "Vega Tomás"
+    },
+    "abreviacion": {
+      "type": "Text",
+      "value": "VT"
+    },
+    "puesto": {
+      "type": "Text",
+      "value": "RRSS"
+    }
+  }
+]

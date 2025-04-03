@@ -1,0 +1,50 @@
+[
+    {
+        "id": "urn:ngsi-ld:Universidad:XALOC",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "CLUB DE AEROMODELISMO XALOC"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "XALOC"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "xaloc.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": false
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:Alzira",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Club de aeromodelismo Alzira"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "Alzira"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "alzira.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": false
+        }
+    }
+]

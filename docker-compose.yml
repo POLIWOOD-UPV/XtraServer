@@ -52,9 +52,12 @@ services:
         read_only: false
 
   xtraserver:
-    image: avr24/xtraserver:v1.0
+    image: avr24/xtraserver:v2.0
     hostname: xtraserver
     container_name: xtraserver
+    depends_on:
+      - orion
+      - mariadb
     ports:
       - "80:80"
     restart: always

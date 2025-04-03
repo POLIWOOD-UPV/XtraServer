@@ -1,0 +1,44 @@
+{
+    "id": "urn:ngsi-ld:Equipo:00",
+    "type": "Equipo",
+    "dorsal": {
+        "type": "Number",
+        "value": 0
+    },
+    "nombre": {
+        "type": "Text",
+        "value": "POLIWOOD"
+    },
+    "acr": {
+        "type": "Text",
+        "value": "WOOD"
+    },
+    "acad": {
+        "type": "Boolean",
+        "value": false
+    },
+    "uni": {
+        "type": "Text",
+        "value": "UPV"
+    },
+    "miembros": {
+        "type": "Number",
+        "value": 10
+    },
+    "lider": {
+        "type": "Text",
+        "value": "Abel Vidal Ripoll"
+    },
+    "piloto": {
+        "type": "Text",
+        "value": "Ricardo Roman Martinez"
+    },
+    "foto": {
+        "type": "Text",
+        "value": "WOOD.jpg"
+    },
+    "logo": {
+        "type": "Text",
+        "value": "WOOD.png"
+    }
+}

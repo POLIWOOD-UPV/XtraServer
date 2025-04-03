@@ -1,0 +1,218 @@
+[
+    {
+        "id": "urn:ngsi-ld:Universidad:UPV",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Universitat Poliècnica de Valencia"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "UPV"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "upv.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:UPC",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Universitat Poliècnica de Catalunya"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "UPC"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "upc.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:UVigo",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Universidad de Vigo"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "UVigo"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "uvigo.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:UCA",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Universidad de Cádiz"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "UCA"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "uca.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:US",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Universidad de Sevilla"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "US"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "us.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:UCLM",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Universidad de Castilla la Mancha"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "UCLM"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "uclm.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:UC3M",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Universidad Carlos III de Madrid"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "UC3M"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "ES"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "uc3m.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:ECL",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Ecole Centrale de Lyon"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "ECL"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "FR"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "ecl.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Universidad:TUD",
+        "type": "Universidad",
+        "name": {
+            "type": "Text",
+            "value": "Technische Universität Darmstadt"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "TUD"
+        },
+        "pais": {
+            "type": "Text",
+            "value": "DE"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "tud.png"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        }
+    }
+]
