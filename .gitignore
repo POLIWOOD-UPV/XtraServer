@@ -7,3 +7,5 @@ mongodb/*
 # Logs
 !**/logs/
 **/logs/*
+
+**/node_modules/*
