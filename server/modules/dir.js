@@ -2,10 +2,12 @@ const fs = require('fs')
 const path = require("path")
 const URL = require("url")
 
+const DIR = "public";
+
 exports.http_listdir = (res, url) => {
   try {
     url = url.replace(/\\/g, '/');
-    const dir = fs.readdirSync(path.join("http", url));
+    const dir = fs.readdirSync(path.join(DIR, url));
     const parts = url.split("/");
     let parent = parts.slice(0, -2).join("/") || "/";
 
@@ -116,9 +118,9 @@ exports.http_file = (res, url) => {
       return;
     }
     try {
-      var data = fs.readFileSync("./http" + url);
+      var data = fs.readFileSync("./" + DIR + url);
     } catch (error) {
-      console.error(`readFileSync(./http${url})`, error.message);
+      console.error(`readFileSync(./${DIR}${url})`, error.message);
       res.writeHead(404, {"Content-Type": "text/plain"});
       res.write("Error 404: File Not Found");
       res.end();
@@ -126,10 +128,7 @@ exports.http_file = (res, url) => {
     }
     var c_type = content_types[end];
     if (c_type == null) {
-      res.writeHead(302, {
-        'Location': "./download.html?file="+String(url).replace("/", "\\")
-      });
-      res.end();
+      // TODO: DOWLOAD FILE #################################################################
       return;
     }
     res.writeHead(200, {"Content-Type": c_type});
