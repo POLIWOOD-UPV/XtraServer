@@ -3,6 +3,7 @@ const path = require("path")
 const URL = require("url")
 
 const DIR = "public";
+exports.DIR = DIR;
 
 exports.http_listdir = (res, url) => {
   try {

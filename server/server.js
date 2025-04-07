@@ -16,7 +16,6 @@ const fs = require("fs");
 const multer  = require('multer');
 
 // Inicializar servidor y app
-const DIR = "public";
 const PORT = 80;
 const app = express();
 const httpServer = http.createServer(app);
@@ -38,7 +37,7 @@ io.on("connection", (socket) => {
 // Subir archivos
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, DIR+'/uploads/');  // donde se guardan los archivos
+    cb(null, dir.DIR+'/uploads/');  // donde se guardan los archivos
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname + path.extname(file.originalname));
@@ -61,10 +60,10 @@ app.post('/upload', upload.single('file'), (req, res) => {
 app.use((req, res) => {
   try {
     const urlPath = path.normalize(req.path); // para trabajar los archivos
-    const fullPath = path.join(__dirname, DIR, urlPath); // para hacer comprobaciones
+    const fullPath = path.join(__dirname, dir.DIR, urlPath); // para hacer comprobaciones
 
     // ¿Nos está pidiendo algo de http/?
-    if (!fullPath.startsWith(path.join(__dirname, DIR))) {
+    if (!fullPath.startsWith(path.join(__dirname, dir.DIR))) {
       return res.status(403).send("Fuera de la carpeta http!");
     }
     
