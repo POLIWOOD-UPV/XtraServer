@@ -92,5 +92,5 @@ app.use((req, res) => {
 // Servidor HTTP
 httpServer.listen(PORT, () => {
   console.log("Servidor disponible la siguiente dirección:");
-  console.log(`http://localhost:${port}/`);
+  console.log(`http://localhost:${PORT}/`);
 });
