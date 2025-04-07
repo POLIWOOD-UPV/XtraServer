@@ -1,5 +1,4 @@
 const http = require("http");
-const ip = require('ip');
 const fs = require("fs");
 const {Server, Namespace, Socket} = require("socket.io");
 const URLSearchParams = require("url");
@@ -79,9 +78,7 @@ exports.createServer = (port, commands) => {
 
     server.listen(port, function () {
         fs.writeFileSync("./logs/http_server.csv", "Method;URL;Header\n");
-        console.log("Servidor disponible la siguiente dirección:");
-        console.log(`http://${ip.address()}:${port}/`);
-        console.log("Si no funciona o esta trabajando en local:");
+        console.log("Servidor disponible la siguiente dirección local:");
         console.log(`http://127.0.0.1:${port}/`);
         console.log("Servidor en marcha...\n");
     });
