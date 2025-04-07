@@ -22,7 +22,7 @@ exports.http_listdir = (res, url) => {
 
     // Iniciamos el archivo
     res.writeHead(200, {"Content-Type": "text/html"});
-    res.write('<html><head><title>listdir</title></head><body style="flex-direction:column;display:flex;">');
+    res.write('<html><head><title>Menu</title></head><body style="flex-direction:column;display:flex;">');
 
     // Solo mostrar padre si no estamos en /
     if (url !== "/") {

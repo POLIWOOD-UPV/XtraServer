@@ -9,6 +9,7 @@ const { Server } = require("socket.io");
 // Modulos
 const dir = require('./modules/dir');
 const socket_events = require("./modules/socket_events");
+const { http_logger } = require('./modules/log');
 
 // Archivos
 const path = require("path");
@@ -51,6 +52,7 @@ app.use(express.static(__dirname));
 
 // Ruta para subir archivos
 app.post('/upload', upload.single('file'), (req, res) => {
+  http_logger.log(req);
   // req.file contiene la información del archivo subido
   console.log(req.file);
   res.send("<p>Archivo subido correctamente</p><br><a href='/subir.html'>Subir otro archivo </a><br><a href='/'>Volver al inicio </a>");
@@ -58,13 +60,14 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
 // Servir directorios y archivos
 app.use((req, res) => {
+  http_logger.log(req);
   try {
     const urlPath = path.normalize(req.path); // para trabajar los archivos
     const fullPath = path.join(__dirname, dir.DIR, urlPath); // para hacer comprobaciones
 
     // ¿Nos está pidiendo algo de http/?
     if (!fullPath.startsWith(path.join(__dirname, dir.DIR))) {
-      return res.status(403).send("Fuera de la carpeta http!");
+      return res.status(403).send(`Fuera de la carpeta ${dir.DIR}!`);
     }
     
     // Existe?
@@ -88,5 +91,6 @@ app.use((req, res) => {
 
 // Servidor HTTP
 httpServer.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log("Servidor disponible la siguiente dirección:");
+  console.log(`http://localhost:${port}/`);
 });

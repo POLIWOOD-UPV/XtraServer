@@ -68,7 +68,12 @@ exports.create = () => {
 
 }
 exports.append = (type, datalist) => {
-    let query = connection.query(parseInsert(tablas[type], datalist), CallBack);
+    if (type in tablas) {
+        let prompt = parseInsert(tablas[type], datalist);
+        return query = connection.query(prompt, CallBack);
+    } else {
+        console.error(`SQL.append(${type}): type not implemented`)
+    }
 }
 exports.change = () => {
 
