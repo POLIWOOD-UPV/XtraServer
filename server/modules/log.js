@@ -39,14 +39,24 @@ exports.Logger = Logger;
 
 class HTTPlogger extends Logger {
     log = (request) => {
-        this._log([
+        let args = [
             request.method, 
             request.url,
             JSON.stringify(request.headers)
-        ]);
+        ];
+        let line = args.join(";")+"\n";
+        fs.appendFileSync(this.file, line);
+        if (this.cmd) {
+            console.log(
+                this.to_string(),
+                request.headers.host,
+                request.method, 
+                request.url
+            );
+        }
     }
 }
-exports.http_logger = HTTPlogger(
+exports.http_logger = new HTTPlogger(
     "http_server",
     ["Method","URL","Header"],
     true
@@ -79,7 +89,7 @@ class IOlogger extends Logger {
         this._log([id,"disconnection",stringfySocket(socketlist)]);
     }
 }
-exports.io_logger = IOlogger(
+exports.io_logger = new IOlogger(
     "IO_server",
     ["Socket","Event","Data"],
     false

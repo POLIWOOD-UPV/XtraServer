@@ -1,0 +1,81 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "XtraServer",
+    "collectionId": "13fb7185-76a2-4029-a6c5-dcb121d31f62",
+    "dateExported": "2025-04-08T07:58:05.980Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "c0461e7c-df5b-4b3f-864e-6a79c3e261c3",
+            "name": "Subs",
+            "containerId": "",
+            "created": "2025-04-08T07:55:40.026Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "19e4ae07-e70e-4b38-bc22-3545f9a85321",
+            "name": "Tests",
+            "containerId": "",
+            "created": "2025-04-08T07:56:39.261Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "58221925-ff53-4b22-bfc9-d037d639462c",
+            "colId": "13fb7185-76a2-4029-a6c5-dcb121d31f62",
+            "containerId": "19e4ae07-e70e-4b38-bc22-3545f9a85321",
+            "name": "Create Crono:0",
+            "url": "http://localhost:1026/v2/entities",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2025-04-08T07:57:01.622Z",
+            "modified": "2025-04-08T07:57:01.622Z",
+            "headers": [
+                {
+                    "name": "options",
+                    "value": "keyValues"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n    \"id\": \"urn:ngsi-ld:Crono:0000\",\r\n    \"type\": \"Crono\",\r\n    \"ronda\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    },\r\n    \"equipo\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    },\r\n    \"tipo\": {\r\n        \"type\": \"Text\",\r\n        \"value\": \"AUXI\"\r\n    },\r\n    \"start\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    },\r\n    \"stop\": {\r\n        \"type\": \"Number\",\r\n        \"value\": 0\r\n    }\r\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "168ae3a7-184e-4577-b681-00a4307a69cc",
+            "colId": "13fb7185-76a2-4029-a6c5-dcb121d31f62",
+            "containerId": "c0461e7c-df5b-4b3f-864e-6a79c3e261c3",
+            "name": "View Subscriptions",
+            "url": "http://localhost:1026/v2/subscriptions",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2025-04-08T07:57:24.780Z",
+            "modified": "2025-04-08T07:57:24.780Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ]
+        }
+    ],
+    "ref": "MqPruWYQFgpapDMi7ctP0pW3yJE1UvJWwufofMrpxDaYCTa49iRbKPLk8DLcgka11BUWOt7KgHnEbYjk6Qdlbw"
+}

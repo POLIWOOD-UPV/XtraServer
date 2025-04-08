@@ -1,10 +1,12 @@
 // use strict;
 const fs = require("fs");
 
-const NGSI = "http://localhost:1026/v2/subscription"
-const URL = "http://host.docker.internal:80/"
+const NGSI = "http://orion:1026/v2/subscriptions"
+const URL = "http://host.docker.internal:80/ngsi"
 
-const subscribe = () => {
+// ACTIONTYPE: https://github.com/telefonicaid/fiware-orion/issues/1494#issuecomment-252624469
+
+exports.subscribe = async () => {
     let res = await (fetch(NGSI, {
         method: 'POST',
         headers: {
@@ -15,16 +17,10 @@ const subscribe = () => {
             description: "NGSI_2_SQL",
             type: "Subscription",
             subject: { 
-                actionType: ["update"],  /* ("delete", "append", "create", "change") */
-                // https://github.com/telefonicaid/fiware-orion/issues/1494#issuecomment-252624469
+                actionType: ["update","delete", "append", "create", "change"],
                 entities:[
-                    {type: "Vuelo"},
                     {idPattern: ".*"} 
-                ], 
-                condition: { 
-                    attrs: []
-                },
-                q: "numberOfItems<10;..."
+                ]
             },
             format: "keyValues",
             notification: {

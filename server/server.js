@@ -10,6 +10,7 @@ const { Server } = require("socket.io");
 const dir = require('./modules/dir');
 const socket_events = require("./modules/socket_events");
 const { http_logger } = require('./modules/log');
+const ngsi = require('./modules/ngsi');
 
 // Archivos
 const path = require("path");
@@ -58,6 +59,12 @@ app.post('/upload', upload.single('file'), (req, res) => {
   res.send("<p>Archivo subido correctamente</p><br><a href='/subir.html'>Subir otro archivo </a><br><a href='/'>Volver al inicio </a>");
 });
 
+app.post('/ngsi', (req, res) => {
+  http_logger.log(req);
+  console.log("NGSI RECIVED");
+  res.status(202).send("No Data");
+});
+
 // Servir directorios y archivos
 app.use((req, res) => {
   http_logger.log(req);
@@ -93,4 +100,5 @@ app.use((req, res) => {
 httpServer.listen(PORT, () => {
   console.log("Servidor disponible la siguiente dirección:");
   console.log(`http://localhost:${PORT}/`);
+  ngsi.subscribe();
 });

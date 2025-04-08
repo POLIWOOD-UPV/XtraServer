@@ -1,0 +1,22 @@
+{
+    "description": "NGSI_2_SQL",
+    "type": "Subscription",
+    "subject": { 
+        "actionType": ["update","delete", "append", "create", "change"],
+        "entities":[
+            {"type": "Vuelo"},
+            {"idPattern": ".*"} 
+        ], 
+        "condition": { 
+            "attrs": []
+        },
+        "q": "numberOfItems<10;..."
+    },
+    "format": "keyValues",
+    "notification": {
+        "http": {
+            "url": "http://localhost:80/",
+            "accept": "application/json"
+        }
+    }
+}
