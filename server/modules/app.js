@@ -50,7 +50,6 @@ app.use((req, res) => {
     const fullPath = path.join(__dirname, '..', dir.DIR, urlPath);
     // Es algo de public?
     if (!fullPath.startsWith(path.join(__dirname, '..', dir.DIR))) {
-      console.log("2")
       return res.status(403).send(`Fuera de la carpeta ${dir.DIR}!`);
     }
     
@@ -68,7 +67,6 @@ app.use((req, res) => {
       res.status(404).send("404 Not Found");
     }
   } catch (err) {
-    console.log("7")
     console.error("Error en middleware:", err);
     res.status(500).send("Internal Server Error");
   }
