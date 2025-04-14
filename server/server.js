@@ -33,5 +33,5 @@ io.on("connection", (socket) => {
 httpServer.listen(PORT, () => {
   console.log("Servidor disponible la siguiente dirección:");
   console.log(`http://localhost:${PORT}/`);
-  ngsi.subscribe();
+  ngsi.start();
 });

@@ -9,6 +9,7 @@ const multer = require("multer");
 // Modulos
 const dir = require("./dir");
 const { http_logger } = require("./log");
+const ngsi = require("./ngsi.js")
 
 const app = express()
 
@@ -30,17 +31,14 @@ app.post('/upload', upload.single('file'), (req, res) => {
     res.send("<p>Archivo subido correctamente</p><br><a href='/subir.html'>Subir otro archivo</a><br><a href='/'>Volver al inicio</a>");
   });
 
+// Para leer jsons de los request (ngsi)
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.post(ngsi.URL+":action", (req, res) => {ngsi.recv(req, res, req.params.action)});
 
 // APLICACION
 // Servir ficheros estaticos
 app.use(express.static(__dirname));
-
-// Ruta NGSI
-app.post('/ngsi', (req, res) => {
-  http_logger.log(req);
-  console.log("NGSI RECIVED");
-  res.status(202).send("No Data");
-});
 
 // Ruta general -> listdir
 app.use((req, res) => {

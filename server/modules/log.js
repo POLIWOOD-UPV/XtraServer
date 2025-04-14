@@ -11,6 +11,7 @@ class Logger {
 
         this.file = this.folder+this.filename;
         let header = Array(structure).join(";")+"\n";
+        header = header.replaceAll(",", ";");
 
         fs.writeFileSync(this.file, header);
     }
@@ -37,7 +38,7 @@ exports.Logger = Logger;
 
 // #####################################################################################
 
-class HTTPlogger extends Logger {
+exports.http_logger = new class extends Logger{
     log = (request) => {
         let args = [
             request.method, 
@@ -55,8 +56,7 @@ class HTTPlogger extends Logger {
             );
         }
     }
-}
-exports.http_logger = new HTTPlogger(
+}(
     "http_server",
     ["Method","URL","Header"],
     true
@@ -78,7 +78,7 @@ const stringfySocket = (list) => {
     }
   }
 
-class IOlogger extends Logger {
+exports.io_logger = new class extends Logger {
     log = (id, event, msg) => {
         this._log([id,event,msg]);
     }
@@ -88,11 +88,47 @@ class IOlogger extends Logger {
     disconnection = (id, socketlist) => {
         this._log([id,"disconnection",stringfySocket(socketlist)]);
     }
-}
-exports.io_logger = new IOlogger(
+}(
     "IO_server",
     ["Socket","Event","Data"],
     false
+);
+
+// #####################################################################################
+
+const stringfyEntities = (entities) => {
+    try {
+        var aux = []
+        entities.forEach(entity => {
+            aux.push(entity.id)
+        });
+        return `[${aux.join(", ")}]`
+    } catch (error) {
+        console.error("stringfyEntities():", error.message);
+        process.exit(1);
+    }
+}
+
+exports.ngsi_logger = new class extends Logger {
+    log = (id, action, entities) => {
+        let args = [
+            id, action,
+            JSON.stringify(entities)
+        ];
+        let line = args.join(";")+"\n";
+        fs.appendFileSync(this.file, line);
+        if (this.cmd) {
+            console.log(
+                this.to_string(),
+                `${action.toUpperCase()} =>`,
+                stringfyEntities(entities)
+            );
+        }
+    }
+}(
+    "NGSI",
+    ["ID","Action","Data"],
+    true
 );
 
 // #####################################################################################

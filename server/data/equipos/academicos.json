@@ -32,7 +32,7 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Cevher Yusuf Inan"
+            "value": "Fatih Bilgin"
         },
         "foto": {
             "type": "Text",
@@ -76,7 +76,7 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Samuel García Díaz"
+            "value": "Marcos Quiroga Rodríguez"
         },
         "foto": {
             "type": "Text",
@@ -252,7 +252,7 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Felipe Campos Arpigio"
+            "value": "Juan Carlos Juan Serrano"
         },
         "foto": {
             "type": "Text",
@@ -292,11 +292,11 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Sara Oligar"
+            "value": "Samuel Laguna Kalínina"
         },
         "piloto": {
             "type": "Text",
-            "value": "Sara Oligar"
+            "value": "Samuel Laguna Kalínina"
         },
         "foto": {
             "type": "Text",
@@ -384,7 +384,7 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Martí Coma Company"
+            "value": "Martí Badia Codina"
         },
         "foto": {
             "type": "Text",
@@ -600,7 +600,7 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Sergio Palacio Mazuran"
+            "value": "Sergio Palacio Mažuran"
         },
         "piloto": {
             "type": "Text",
