@@ -10,7 +10,8 @@ const update = NGSI+"op/update"
 exports.URL = "/ngsi/"
 
 // ACTIONTYPE: https://github.com/telefonicaid/fiware-orion/issues/1494#issuecomment-252624469
-const actions = ["append", "appendStric", "delete", "replace", "update"]
+const actions = ["append", "appendStric", "delete", "replace", "update"];
+const types = JSON.parse(fs.readFileSync("../data/tablas.json"));
 
 // recibe la subscripcion
 // req: Request, res: Response
@@ -122,7 +123,12 @@ exports.crear_universidades = async () => {
 exports.start = async () => {
     try {
         console.log("NGSI Starting...")
-        try {await this.subscribe();}
+        try {
+            await this.subscribe("delete");
+            await this.subscribe("update");
+            await this.subscribe("change");
+            await this.subscribe();
+        }
         catch {
             console.log("NGSI NOT AVAILABLE");
             return;

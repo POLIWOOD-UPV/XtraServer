@@ -6,31 +6,36 @@ class Logger {
     constructor(name , structure, cmd) {
         this.name = name;
         this.filename = name + ".csv";
-        this.structure = structure;
+        this.structure = ["Time"] + structure;
         this.cmd = cmd;
 
         this.file = this.folder+this.filename;
-        let header = Array(structure).join(";")+"\n";
+        let header = Array(this.structure).join(";")+"\n";
         header = header.replaceAll(",", ";");
 
         fs.writeFileSync(this.file, header);
     }
     // args: Array := structure
     _log = (args) => {
+        args = [(new Date()).toLocaleTimeString()] + args;
         let line = args.join(";")+"\n";
         fs.appendFileSync(this.file, line);
-        if (this.cmd) {
-            console.log(this.to_string(),...args);
-        }
     }
 
     // args: Array := structure
     log = (...args) => {
         this._log(args);
+        this.console(args);
+    }
+
+    console = (args) => {
+        if (this.cmd) {
+            console.log(`[${(new Date()).toLocaleTimeString()}]`,this.to_string(),...args);
+        }
     }
 
     to_string = () => {
-        return `[Logger](${this.name})`
+        return `<Logger>(${this.name})`
     }
 }
 
@@ -40,21 +45,16 @@ exports.Logger = Logger;
 
 exports.http_logger = new class extends Logger{
     log = (request) => {
-        let args = [
+        this._log([
             request.method, 
             request.url,
             JSON.stringify(request.headers)
-        ];
-        let line = args.join(";")+"\n";
-        fs.appendFileSync(this.file, line);
-        if (this.cmd) {
-            console.log(
-                this.to_string(),
-                request.headers.host,
-                request.method, 
-                request.url
-            );
-        }
+        ]);
+        this.console([
+            request.headers.host,
+            request.method, 
+            request.url
+        ]);
     }
 }(
     "http_server",
@@ -80,13 +80,23 @@ const stringfySocket = (list) => {
 
 exports.io_logger = new class extends Logger {
     log = (id, event, msg) => {
-        this._log([id,event,msg]);
+        let args = [
+            id,
+            event,
+            msg
+        ];
+        this._log(args);
+        this.console(args);
     }
     connection = (id, socketlist) => {
-        this._log([id,"connection",stringfySocket(socketlist)]);
+        let args = [id,"connection",stringfySocket(socketlist)]
+        this._log(args);
+        this.console(args);
     }
     disconnection = (id, socketlist) => {
-        this._log([id,"disconnection",stringfySocket(socketlist)]);
+        let args = [id,"disconnection",stringfySocket(socketlist)]
+        this._log(args);
+        this.console(args);
     }
 }(
     "IO_server",
@@ -111,19 +121,14 @@ const stringfyEntities = (entities) => {
 
 exports.ngsi_logger = new class extends Logger {
     log = (id, action, entities) => {
-        let args = [
+        this._log([
             id, action,
             JSON.stringify(entities)
-        ];
-        let line = args.join(";")+"\n";
-        fs.appendFileSync(this.file, line);
-        if (this.cmd) {
-            console.log(
-                this.to_string(),
-                `${action.toUpperCase()} =>`,
-                stringfyEntities(entities)
-            );
-        }
+        ]);
+        this.console([
+            `${action.toUpperCase()} =>`,
+            stringfyEntities(entities)
+        ]);
     }
 }(
     "NGSI",

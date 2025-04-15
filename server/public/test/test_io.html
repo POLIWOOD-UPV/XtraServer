@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    const socket = io();
+
+    socket.on("message", (msj) => {
+        console.log("Socket: ", msj)
+    });
+
+    // socket.send("Hola Mundo")
+    </script>
+</head>
+<body>
+    <h1>Socket Testing</h1>
+</body>
+</html>
