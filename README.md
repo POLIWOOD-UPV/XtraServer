@@ -1,8 +1,24 @@
 # XtraServer
 
-Este código es para una Raspberry que funcione como un servidor para una Interfaz de video
+Este código es para usar en la red local montada en el evento **XtraChallenge**. Consta de varios servidores montados en **Docker**, el principal de estos (`/server`) siendo un servicio web montado con **node.js** ampliado con un servicio de **IoSockets**.
+Contenedores:
+- XtraServer (node.js)
+- Orion (NGSI fiware)
+- MongoDB (fiware)
+- MariaDB (SQL server)
+
+Hay varias areas de trabajo:
+- Backend (NodeJS): en la carpeta `./server` y `./server/modules`.
+- Frontend (HTML, CSS, JS): en la carpeta `./server/public`.
+- Data (JSON, SQL): en la carpeta `./server/data`.
+- Docker: en la carpeta `./docker`.
+- Test (Postman): en la carpeta `./test`.
 
 ## Como ejecutar
+
+### Para ejecutar varias veces (o en produccion)
+- Arrancar: `docker-compose up`
+- Parar: `docker-compose down`
 
 ### Arrancar
 Windows: `start.bat`
