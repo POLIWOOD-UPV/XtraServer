@@ -6,7 +6,7 @@ class Logger {
     constructor(name , structure, cmd) {
         this.name = name;
         this.filename = name + ".csv";
-        this.structure = ["Time"] + structure;
+        this.structure = new Array(["Time"]).concat(structure);
         this.cmd = cmd;
 
         this.file = this.folder+this.filename;
@@ -17,9 +17,13 @@ class Logger {
     }
     // args: Array := structure
     _log = (args) => {
-        args = [(new Date()).toLocaleTimeString()] + args;
-        let line = args.join(";")+"\n";
-        fs.appendFileSync(this.file, line);
+        try {
+            args = new Array([(new Date()).toLocaleTimeString()]).concat(args);
+            let line = args.join(";")+"\n";
+            fs.appendFileSync(this.file, line);
+        } catch (error) {
+            console.error(`${this.name}.log(${args}):`, error.message);
+        }
     }
 
     // args: Array := structure
@@ -29,8 +33,12 @@ class Logger {
     }
 
     console = (args) => {
-        if (this.cmd) {
-            console.log(`[${(new Date()).toLocaleTimeString()}]`,this.to_string(),...args);
+        try {
+            if (this.cmd) {
+                console.log(`[${(new Date()).toLocaleTimeString()}]`,this.to_string(),...args);
+            }
+        } catch (error) {
+            console.error(`${this.name}.console(${args}):`, error.message);
         }
     }
 
