@@ -31,9 +31,15 @@ app.post('/upload', upload.single('file'), (req, res) => {
     res.send("<p>Archivo subido correctamente</p><br><a href='/subir.html'>Subir otro archivo</a><br><a href='/'>Volver al inicio</a>");
   });
 
+// ## PROXY ## => localhost = [xtraserver, orion, mariadb, mongodb]
+// all("xtraserver:80/v2/entities*") => "orion:1026/v2/entities*"
+// all("xtraserver:80/v2/subscriptions*") => "orion:1026/v2/subscriptions*"
+// all("xtraserver:80/op/update/?") => "orion:1026/op/update/?"
+app.all(["/v2/entities*", "/v2/subscriptions*", "/v2/op/update/?"], (req, res) => {ngsi.proxy(req, res)});
 // Para leer jsons de los request (ngsi)
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+// Recibe las notificaciones subscripcion de NGSI classificadas por accion
 app.post(ngsi.URL+":action", (req, res) => {ngsi.recv(req, res, req.params.action)});
 
 // APLICACION

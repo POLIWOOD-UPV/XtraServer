@@ -1,13 +1,15 @@
 // use strict;
+const http = require("http");
 const fs = require("fs");
 const {ngsi_logger} = require("./log");
 
+const DOCKER = "host.docker.internal"
 const HTTP = "http://xtraserver:80"
-const NGSI = "http://orion:1026/v2/"
-const entities = NGSI+"entities/"
-const subscriptions = NGSI+"subscriptions/"
-const update = NGSI+"op/update"
-exports.URL = "/ngsi/"
+const NGSI = "http://orion:1026/"
+const entities = NGSI+"v2/entities/"
+const subscriptions = NGSI+"v2/subscriptions/"
+const update = NGSI+"v2/op/update"
+exports.URL = "/subscriptions/"
 
 // ACTIONTYPE: https://github.com/telefonicaid/fiware-orion/issues/1494#issuecomment-252624469
 const actions = ["append", "appendStric", "delete", "replace", "update"];
@@ -36,6 +38,37 @@ exports.recv = async (req, res, action = "append") => {
         console.error("ngsi.recv():", error.message);
     }
 }
+
+// ## PROXY ##
+exports.proxy = async (client_req, client_res) => {
+    console.log(`[${(new Date()).toLocaleTimeString()
+    }] <proxy>(${client_req.headers.host
+    }) => ${client_req.method}: ${client_req.url}`);
+    try {
+        let options = {
+            hostname: "orion",
+            port: 1026,
+            path: client_req.url,
+            method: client_req.method,
+            headers: client_req.headers
+        }
+        const proxy = http.request(NGSI, options, (res) => {
+            client_res.writeHead(res.statusCode, res.headers);
+            //res.on('data',(chunk)=>{client_res.write(chunk);});
+            //res.on('close',()=>{client_res.end();});
+            //res.on('end',()=>{client_res.end();});
+            res.pipe(client_res, {end: true});
+        }).on("error", error => {
+            console.error(`ngsi.proxy.req(${client_req.method},${client_req.url}):`, error.message);
+            client_res.status(500).send("Proxy Error");
+        });
+        client_req.pipe(proxy, {end: true});
+    } catch (error) {
+        console.error(`ngsi.proxy(${client_req.method},${client_req.url}):`, error.name, error.message);
+        client_req.status(500).send("Proxy Error");
+        return;
+    }
+  }
 
 // crea la subscripcion para todo tipo de eventos
 // action: append | appendStric | delete | replace | update
