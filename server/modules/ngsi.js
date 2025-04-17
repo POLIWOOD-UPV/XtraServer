@@ -33,7 +33,6 @@ exports.recv = async (req, res, action = "append") => {
         res.status(202);
         // TODO 
         // fs.writeFileSync("./ngsi.json", JSON.stringify(req.body, null, 2));
-        res.status(202);
     } catch (error) {
         console.error("ngsi.recv():", error.message);
     }
@@ -51,14 +50,28 @@ exports.proxy = async (client_req, client_res) => {
             path: client_req.url,
             method: client_req.method,
             headers: client_req.headers
-        }
-        const proxy = http.request(NGSI, options, (res) => {
-            client_res.writeHead(res.statusCode, res.headers);
-            //res.on('data',(chunk)=>{client_res.write(chunk);});
-            //res.on('close',()=>{client_res.end();});
-            //res.on('end',()=>{client_res.end();});
-            res.pipe(client_res, {end: true});
-        }).on("error", error => {
+          };
+
+        const proxy = http.request(options, (res) => {
+            console.log("OPTIONS\n",options)
+
+            // vamos guardando lo que nos manda orion
+            let responseBody = "";
+            res.on("data", chunk => {
+              responseBody += chunk;
+            });
+        
+            res.on("end", () => {
+              console.log("[Orion] Body recibido:");
+              console.log(responseBody); // esto es el JSON de datos que recibimos de ORION
+              
+              // Mandamos de vuelta lo que hemos recibido de orion
+              client_res.writeHead(res.statusCode, res.headers);
+              client_res.end(responseBody);
+            });
+        });
+
+        proxy.on("error", error => {
             console.error(`ngsi.proxy.req(${client_req.method},${client_req.url}):`, error.message);
             client_res.status(500).send("Proxy Error");
         });
@@ -68,7 +81,7 @@ exports.proxy = async (client_req, client_res) => {
         client_req.status(500).send("Proxy Error");
         return;
     }
-  }
+}
 
 // crea la subscripcion para todo tipo de eventos
 // action: append | appendStric | delete | replace | update
@@ -134,7 +147,7 @@ exports.crear_equipos = async () => {
     let clubes = JSON.parse(fs.readFileSync(
         "./data/equipos/clubes.json"
     ));
-    let entities = academicos+clubes;
+    let entities = academicos.concat(clubes);
     console.log(JSON.stringify(entities));
     let res = await this.update("append", entities);
     return res;
