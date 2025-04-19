@@ -62,8 +62,8 @@ exports.proxy = async (client_req, client_res) => {
             });
         
             res.on("end", () => {
-              console.log("[Orion] Body recibido:");
-              console.log(responseBody); // esto es el JSON de datos que recibimos de ORION
+            //   console.log("[Orion] Body recibido:");
+            //   console.log(responseBody); // esto es el JSON de datos que recibimos de ORION
               
               // Mandamos de vuelta lo que hemos recibido de orion
               client_res.writeHead(res.statusCode, res.headers);
