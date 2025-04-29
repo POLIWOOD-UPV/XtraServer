@@ -134,7 +134,7 @@ exports.ngsi_logger = new class extends Logger {
             JSON.stringify(entities)
         ]);
         this.console([
-            `${action.toUpperCase()} =>`,
+            `${String(action).slice(6).toUpperCase()} =>`,
             stringfyEntities(entities)
         ]);
     }

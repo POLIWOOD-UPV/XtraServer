@@ -14,6 +14,12 @@ const ngsi = require("./ngsi.js")
 
 const app = express()
 
+// ## PROXY ## => localhost = [xtraserver, orion, mariadb, mongodb]
+// ENVIAR xtraserver -> Orion  por el proxy
+app.all(["/v2/entities*", "/v2/subscriptions*", "/v2/op/update/*"], (req, res) => {
+  ngsi.proxy(req, res)
+}); // Esto no debe tener el middleware del bodyparser
+
 // Leer JSONS de los request (ngsi)
 app.use(bodyParser.json());
 
@@ -35,28 +41,12 @@ app.post('/upload', upload.single('file'), (req, res) => {
     res.send("<p>Archivo subido correctamente</p><br><a href='/subir.html'>Subir otro archivo</a><br><a href='/'>Volver al inicio</a>");
   });
 
-
-
-/*
-
-NGSI
-## PROXY ## => localhost = [xtraserver, orion, mariadb, mongodb]
-all("xtraserver:80/v2/entities*") => "orion:1026/v2/entities*"
-all("xtraserver:80/v2/subscriptions*") => "orion:1026/v2/subscriptions*"
-all("xtraserver:80/op/update/?") => "orion:1026/op/update/?" R: he cambiado el ? por *
-*/
-
-
-// ENVIAR xtraserver -> Orion  por el proxy
-app.all(["/v2/entities*", "/v2/subscriptions*", "/v2/op/update/*"], (req, res) => {
-  ngsi.proxy(req, res)
-});
-
+// NGSI
 
 // RECIBIR Orion -> xtraserver
 // Recibe las notificaciones subscripcion de NGSI classificadas por accion
 app.post(ngsi.URL+":action", (req, res) => {
-  ngsi.recv(req, res, req.params.action)
+  ngsi.recv(req, res, req.params.action);
 });
 
 // APLICACION

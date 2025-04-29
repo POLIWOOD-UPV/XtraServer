@@ -11,17 +11,18 @@ const subscriptions = NGSI+"v2/subscriptions/"
 const update = NGSI+"v2/op/update"
 exports.URL = "/subscriptions/"
 
-// ACTIONTYPE: https://github.com/telefonicaid/fiware-orion/issues/1494#issuecomment-252624469
+// https://github.com/telefonicaid/fiware-orion/blob/master/doc/manuals/orion-api.md
 const actions = ["append", "appendStric", "delete", "replace", "update"];
+const notifications = ["entityCreate", "entityDelete", "entityChange", "entityUpdate"];
 const types = JSON.parse(fs.readFileSync("./data/tablas.json"));
 
 // recibe la subscripcion
 // req: Request, res: Response
 // action: append | appendStric | delete | replace | update
 exports.recv = async (req, res, action = "append") => {
-    if (!actions.includes(action)) {
+    if (!notifications.includes(action)) {
         res.status(404);
-        res.send("ActionType doesn't exist\nuse: "+actions);
+        res.send("ActionType doesn't exist\nuse: "+notifications);
         return; // el tipo de accion no existe
     }
     try {
@@ -53,8 +54,9 @@ exports.proxy = async (client_req, client_res) => {
           };
 
         const proxy = http.request(options, (res) => {
-            console.log("OPTIONS\n",options)
-
+            client_res.writeHead(res.statusCode, res.headers);
+            res.pipe(client_res, {end: true}); // con esto basta
+            /*
             // vamos guardando lo que nos manda orion
             let responseBody = "";
             res.on("data", chunk => {
@@ -69,6 +71,7 @@ exports.proxy = async (client_req, client_res) => {
               client_res.writeHead(res.statusCode, res.headers);
               client_res.end(responseBody);
             });
+            */
         });
 
         proxy.on("error", error => {
@@ -85,38 +88,81 @@ exports.proxy = async (client_req, client_res) => {
 
 // crea la subscripcion para todo tipo de eventos
 // action: append | appendStric | delete | replace | update
-exports.subscribe = async (action = "append") => {
+exports.subscribe = async () => {
+    const subscription = {
+        description: `Subscription for action`,
+        type: "NGSI_2_SQL",
+        subject: {
+            entities:[
+                {idPattern: ".*"} 
+            ],
+            condition: {
+                alterationTypes: ["entityCreate", "entityDelete", "entityChange", "entityUpdate"]
+            }
+        },
+        format: "keyValues",
+        notification: {
+            http: {
+                url: HTTP+this.URL,
+                accept: "application/json"
+            }
+        }
+    };
     let res = await (fetch(subscriptions, {
         method: 'POST',
         headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            description: `Subscription for action: ${action}`,
-            type: "NGSI_2_SQL",
-            subject: { 
-                actionType: action,
-                entities:[
-                    {idPattern: ".*"} 
-                ]
-            },
-            format: "keyValues",
-            notification: {
-                http: {
-                    url: HTTP+this.URL+action,
-                    accept: "application/json"
-                }
-            }
-        })
+        body: JSON.stringify(subscription)
     }));
     return res;
 }
 
 // crea una subscripcion para cada acción
 exports.subscribeALL = async () => {
-    actions.forEach(async action => {
-        await this.subscribe(action);
+    const subs = [
+        {
+            description: `Subscription for action: Create`,
+            type: "NGSI_2_SQL",
+            subject: {entities:[{idPattern: ".*"}],condition:{alterationTypes:["entityCreate"]}},
+            format: "keyValues",
+            notification: { http:{url: HTTP+this.URL+"entityCreate", accept:"application/json"}}
+        },
+        {
+            description: `Subscription for action: Delete`,
+            type: "NGSI_2_SQL",
+            subject: {entities:[{idPattern: ".*"}],condition:{alterationTypes:["entityDelete"]}},
+            format: "keyValues",
+            notification: { http:{url: HTTP+this.URL+"entityDelete", accept:"application/json"}}
+        },
+        {
+            description: `Subscription for action: Change`,
+            type: "NGSI_2_SQL",
+            subject: {entities:[{idPattern: ".*"}],condition:{alterationTypes:["entityChange"]}},
+            format: "keyValues",
+            notification: { http:{url: HTTP+this.URL+"entityChange", accept:"application/json"}}
+        },
+        {
+            description: `Subscription for action: Update`,
+            type: "NGSI_2_SQL",
+            subject: {entities:[{idPattern: ".*"}],condition:{alterationTypes:["entityUpdate"]}},
+            format: "keyValues",
+            notification: { http:{url: HTTP+this.URL+"entityUpdate", accept:"application/json"}}
+        }
+    ]
+    subs.forEach(async sub => {
+        let res = await (fetch(subscriptions, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sub)
+        }));
+        if (!res.ok) {
+            console.error(`ngsi.subsctibeALL(${res.status}):`, await res.text(), sub);
+        }
     });
 }
 
@@ -148,7 +194,7 @@ exports.crear_equipos = async () => {
         "./data/equipos/clubes.json"
     ));
     let entities = academicos.concat(clubes);
-    console.log(JSON.stringify(entities));
+    // console.log(JSON.stringify(entities));
     let res = await this.update("append", entities);
     return res;
 }
@@ -170,7 +216,7 @@ exports.start = async () => {
     try {
         console.log("NGSI Starting...")
         try {
-            await this.subscribe();
+            await this.subscribeALL();
         }
         catch {
             console.log("NGSI NOT AVAILABLE");
