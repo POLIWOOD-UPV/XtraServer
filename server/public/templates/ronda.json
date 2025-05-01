@@ -7,11 +7,11 @@
     },
     "pres": {
       "type": "Float",
-      "value": null
+      "value": 0.0
     },
     "velv": {
       "type": "Float",
-      "value": null
+      "value": 0.0
     },
     "actv": {
       "type": "Bit",
@@ -19,6 +19,6 @@
     },
     "time": {
         "type": "DateTime",
-        "value": null
+        "value": 0
     }
 }

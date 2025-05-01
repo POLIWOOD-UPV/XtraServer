@@ -5,7 +5,7 @@
         "type": "Number",
         "value": 0
     },
-    "nombre": {
+    "name": {
         "type": "Text",
         "value": "POLIWOOD"
     },
@@ -23,7 +23,7 @@
     },
     "miembros": {
         "type": "Number",
-        "value": 10
+        "value": 8
     },
     "lider": {
         "type": "Text",

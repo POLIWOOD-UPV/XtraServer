@@ -6,7 +6,7 @@
             "type": "Number",
             "value": 1
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "Saka TUDa"
         },
@@ -50,7 +50,7 @@
             "type": "Number",
             "value": 2
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "UVigo Aerotech: ÁINE"
         },
@@ -94,7 +94,7 @@
             "type": "Number",
             "value": 3
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "UCA&AIR"
         },
@@ -138,7 +138,7 @@
             "type": "Number",
             "value": 4
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "EOLO"
         },
@@ -182,7 +182,7 @@
             "type": "Number",
             "value": 5
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "Diana"
         },
@@ -226,7 +226,7 @@
             "type": "Number",
             "value": 6
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "ARTEMIS"
         },
@@ -270,7 +270,7 @@
             "type": "Number",
             "value": 7
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "S7EAM"
         },
@@ -314,7 +314,7 @@
             "type": "Number",
             "value": 8
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "Navy Hawks"
         },
@@ -358,7 +358,7 @@
             "type": "Number",
             "value": 9
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "Trencalòs"
         },
@@ -402,7 +402,7 @@
             "type": "Number",
             "value": 10
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "Kondor Aero"
         },
@@ -446,7 +446,7 @@
             "type": "Number",
             "value": 11
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "VANTUS #1"
         },
@@ -490,7 +490,7 @@
             "type": "Number",
             "value": 12
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "ECLift"
         },
@@ -534,7 +534,7 @@
             "type": "Number",
             "value": 13
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "VANTUS #2"
         },
@@ -578,7 +578,7 @@
             "type": "Number",
             "value": 14
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "SAETA T1"
         },
@@ -622,7 +622,7 @@
             "type": "Number",
             "value": 15
         },
-        "nombre": {
+        "name": {
             "type": "Text",
             "value": "SAETA T2"
         },

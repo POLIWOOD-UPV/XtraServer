@@ -1,5 +1,5 @@
 {
-    "id": "urn:ngsi-ld:Puntos:000",
+    "id": "urn:ngsi-ld:Puntos:0-00",
     "type": "Puntos",
     "Round": {
         "type": "TinyInt",

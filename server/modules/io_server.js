@@ -36,11 +36,11 @@ exports.message = (socket, msg) => {
   }
 }
 
-exports.notify = (msg) => {
+exports.notify = (event, id) => {
   try {
-    io_logger.log("<server>", "!", msg);
-    socketsList.forEach(sock => {sock.send(`!${msg}`)});
+    io_logger.log("<server>", "!"+event , id);
+    socketsList.forEach(sock => {sock.send(`!${event} ${msg}`)});
   } catch {
-    console.error(`io_server.notify(${socket.id},${msg}):`, error.message);
+    console.error(`io_server.notify(${socket.id},${event},${id}):`, error.message);
   }
 }

@@ -1,5 +1,5 @@
 {
-    "id": "urn:ngsi-ld:Vuelo:000",
+    "id": "urn:ngsi-ld:Vuelo:0-00",
     "type": "Vuelo",
     "ronda": {
         "type": "TinyInt",

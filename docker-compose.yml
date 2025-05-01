@@ -35,7 +35,7 @@ services:
     hostname: mariadb
     container_name: mariadb
     ports:
-      - "5432:5432"
+      - "3306:3306"
     restart: always
     environment:
       MARIADB_DATABASE: xtrachallenge25

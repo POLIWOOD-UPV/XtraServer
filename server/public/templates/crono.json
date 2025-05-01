@@ -1,5 +1,5 @@
 {
-    "id": "urn:ngsi-ld:Crono:0000",
+    "id": "urn:ngsi-ld:Crono:0-00-AUXI",
     "type": "Crono",
     "ronda": {
         "type": "Number",

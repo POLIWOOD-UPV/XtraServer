@@ -2,36 +2,36 @@
     "Universidad": {
         "table": "universidades",
         "keys": ["acr"],
-        "idLen": 0
+        "idLen": [0]
     },
     "Equipo": {
         "table": "equipos",
         "keys": ["dorsal"],
-        "idLen": 2
+        "idLen": [2]
     },
     "Ronda": {
         "table": "rondas",
         "keys": ["num"],
-        "idLen": 1
+        "idLen": [1]
     },
     "Puntos": {
         "table": "puntos",
         "keys": ["ronda", "equipo"],
-        "idLen": 3
+        "idLen": [1, 2]
     },
     "Crono": {
         "table": "cronos",
         "keys": ["ronda", "equipo", "tipo"],
-        "idLen": 4
+        "idLen": [1, 2, 0]
     },
     "Ficha": {
         "table": "fichas",
         "keys": ["ronda", "equipo"],
-        "idLen": 3
+        "idLen": [1, 2]
     },
     "Vuelo": {
         "table": "vuelos",
         "keys": ["ronda", "equipo"],
-        "idLen": 3
+        "idLen": [1, 2]
     }
 }

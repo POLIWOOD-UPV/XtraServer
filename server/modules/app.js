@@ -16,7 +16,7 @@ const app = express()
 
 // ## PROXY ## => localhost = [xtraserver, orion, mariadb, mongodb]
 // ENVIAR xtraserver -> Orion  por el proxy
-app.all(["/v2/entities*", "/v2/subscriptions*", "/v2/op/update/*"], (req, res) => {
+app.all("/v2/*", (req, res) => {
   ngsi.proxy(req, res)
 }); // Esto no debe tener el middleware del bodyparser
 
@@ -52,6 +52,19 @@ app.post(ngsi.URL+":action", (req, res) => {
 // APLICACION
 // Servir ficheros estaticos
 app.use(express.static(__dirname));
+
+// para acceder al sistema de tablas
+app.get("/tablas/?", (req, res) => {
+  http_logger.log(req);
+  try {
+    const urlPath = path.normalize("./data/tablas.json"); // para trabajar los archivos
+    const fullPath = path.join(__dirname, "..", urlPath);
+    res.sendFile(fullPath);
+  } catch (err) {
+    console.error("Error en middleware:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 // Ruta general -> listdir
 app.use((req, res) => {

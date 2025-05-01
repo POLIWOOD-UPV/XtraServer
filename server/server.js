@@ -28,8 +28,9 @@ io.on("connection", (socket) => {
 httpServer.listen(PORT, () => {
   console.log("Servidor disponible la siguiente dirección:");
   console.log(`http://localhost:${PORT}/`);
-  // sql.setup();  // Connectar con el servidor SQL
-  ngsi.start(); // Arrancar todos los procesos entre servidores
+  sql.setup(ngsi.start);  // Connectar con el servidor SQL
+  // IMPORTANTE: ngsi se iniciará al acabar sql.setup
+  // ngsi.start(); // Arrancar todos los procesos entre servidores
 });
 
 // Para cerrar el docker en 0.3s en vez de 10.3

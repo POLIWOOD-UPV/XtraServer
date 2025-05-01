@@ -21,7 +21,7 @@ const types = JSON.parse(fs.readFileSync("./data/tablas.json"));
 // recibe la subscripcion
 // req: Request, res: Response
 // action: append | appendStric | delete | replace | update
-exports.recv = async (req, res, action = "append") => {
+exports.recv = async (req, res, action = "entityUpdate") => {
     if (!notifications.includes(action)) {
         res.status(404);
         res.send("ActionType doesn't exist\nuse: "+notifications);
@@ -35,8 +35,8 @@ exports.recv = async (req, res, action = "append") => {
         ngsi_logger.log(id, action, entities);
         res.status(202);
         entities.forEach((entity) => {
-            notify(entity.id);
-            // syncronize(action, entity);
+            notify(action, entity.id);
+            syncronize(action, entity);
         });
         // TODO 
         // fs.writeFileSync("./ngsi.json", JSON.stringify(req.body, null, 2));
@@ -205,7 +205,7 @@ exports.crear_equipos = async () => {
     return res;
 }
 
-// crea las entidades de los equipos
+// crea las entidades de las universidades
 exports.crear_universidades = async () => {
     let universidades = JSON.parse(fs.readFileSync(
         "./data/uni/universidades.json"
@@ -214,6 +214,82 @@ exports.crear_universidades = async () => {
         "./data/uni/clubs.json"
     ));
     let entities = universidades.concat(clubes);
+    let res = await this.update("append", entities);
+    return res;
+}
+
+// crea las entidades de las universidades
+exports.crear_ceros = async () => {
+    let entities = [
+        {
+            "id": "urn:ngsi-ld:Equipo:00",
+            "type": "Equipo",
+            "dorsal": {
+                "type": "Number",
+                "value": 0
+            },
+            "name": {
+                "type": "Text",
+                "value": "POLIWOOD"
+            },
+            "acr": {
+                "type": "Text",
+                "value": "WOOD"
+            },
+            "acad": {
+                "type": "Boolean",
+                "value": false
+            },
+            "uni": {
+                "type": "Text",
+                "value": "UPV"
+            },
+            "miembros": {
+                "type": "Number",
+                "value": 8
+            },
+            "lider": {
+                "type": "Text",
+                "value": "Abel Vidal Ripoll"
+            },
+            "piloto": {
+                "type": "Text",
+                "value": "Ricardo Roman Martinez"
+            },
+            "foto": {
+                "type": "Text",
+                "value": "WOOD.jpg"
+            },
+            "logo": {
+                "type": "Text",
+                "value": "WOOD.png"
+            }
+        },
+        {
+            "id": "urn:ngsi-ld:Ronda:0",
+            "type": "Ronda",
+            "num": {
+              "type": "Number",
+              "value": 0
+            },
+            "pres": {
+              "type": "Float",
+              "value": 0.0
+            },
+            "velv": {
+              "type": "Float",
+              "value": 0.0
+            },
+            "actv": {
+              "type": "Bit",
+              "value": 0
+            },
+            "time": {
+                "type": "DateTime",
+                "value": "2025-01-01T00:00:00"
+            }
+        }
+    ]; // DATETIME => ISO8601
     let res = await this.update("append", entities);
     return res;
 }
@@ -229,11 +305,14 @@ exports.start = async () => {
             console.log("NGSI NOT AVAILABLE");
             return;
         }
-        console.log("NGSI Ready!")
-        let res = await this.crear_equipos();
-        console.log("Equipos Creados:", res.status);
+        console.log("NGSI Ready!");
+        let res = await fetch(HTTP+"/");
         res = await this.crear_universidades();
         console.log("Universidades Creadas:", res.status);
+        res = await this.crear_equipos();
+        console.log("Equipos Creados:", res.status);
+        res = await this.crear_ceros();
+        console.log("Ronda y Equipo 0 Creados:", res.status);
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
