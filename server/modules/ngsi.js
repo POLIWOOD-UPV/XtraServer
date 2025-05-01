@@ -2,6 +2,8 @@
 const http = require("http");
 const fs = require("fs");
 const {ngsi_logger} = require("./log");
+const {notify} = require("./io_server");
+const {syncronize} = require("./sql");
 
 const DOCKER = "host.docker.internal"
 const HTTP = "http://xtraserver:80"
@@ -32,6 +34,10 @@ exports.recv = async (req, res, action = "append") => {
         let entities = req.body.data;
         ngsi_logger.log(id, action, entities);
         res.status(202);
+        entities.forEach((entity) => {
+            notify(entity.id);
+            // syncronize(action, entity);
+        });
         // TODO 
         // fs.writeFileSync("./ngsi.json", JSON.stringify(req.body, null, 2));
     } catch (error) {
@@ -207,7 +213,8 @@ exports.crear_universidades = async () => {
     let clubes = JSON.parse(fs.readFileSync(
         "./data/uni/clubs.json"
     ));
-    let res = await this.update("append", universidades+clubes);
+    let entities = universidades.concat(clubes);
+    let res = await this.update("append", entities);
     return res;
 }
 
@@ -223,7 +230,10 @@ exports.start = async () => {
             return;
         }
         console.log("NGSI Ready!")
-        await this.crear_equipos();
+        let res = await this.crear_equipos();
+        console.log("Equipos Creados:", res.status);
+        res = await this.crear_universidades();
+        console.log("Universidades Creadas:", res.status);
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

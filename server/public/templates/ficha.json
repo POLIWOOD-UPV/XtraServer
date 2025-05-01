@@ -1,0 +1,24 @@
+{
+    "id": "urn:ngsi-ld:Vuelo:000",
+    "type": "Vuelo",
+    "ronda": {
+        "type": "TinyInt",
+        "value": 0
+    },
+    "equipo": {
+        "type": "TinyInt",
+        "value": 0
+    },
+    "piloto": {
+        "type": "Boolean",
+        "value": false
+    },
+    "respuestos": {
+        "type": "Boolean",
+        "value": false
+    },
+    "despegue": {
+        "type": "Integer",
+        "value": 0
+    }
+}

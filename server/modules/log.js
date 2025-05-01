@@ -99,12 +99,16 @@ exports.io_logger = new class extends Logger {
     connection = (id, socketlist) => {
         let args = [id,"connection",stringfySocket(socketlist)]
         this._log(args);
+        this.cmd = true;
         this.console(args);
+        this.cmd = false;
     }
     disconnection = (id, socketlist) => {
         let args = [id,"disconnection",stringfySocket(socketlist)]
         this._log(args);
+        this.cmd = true;
         this.console(args);
+        this.cmd = false;
     }
 }(
     "IO_server",

@@ -1,0 +1,16 @@
+{
+    "id": "urn:ngsi-ld:Puntos:000",
+    "type": "Puntos",
+    "Round": {
+        "type": "TinyInt",
+        "value": 0
+    },
+    "Team": {
+        "type": "TinyInt",
+        "value": 0
+    },
+    "valor": {
+        "type": "Integer",
+        "value": 0
+    }
+}

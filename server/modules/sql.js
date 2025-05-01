@@ -2,19 +2,15 @@
 const fs = require("fs");
 const mysql = require("mysql");
 
-const tablas = JSON.parse(fs.readFileSync("../data/tablas.json"));
+const tablas = JSON.parse(fs.readFileSync("./data/tablas.json"));
 
-let connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'mariabb',
-    password : 'password',
-    database : 'example'
-});
+let connection;
 
 const parseInsert = (table, objects) => {
-    let objects = Array<Object> objects;
     let keys = Object.keys(objects[0]);
-    let prompt = `INSERT INTO ${table} (${keys}) VALUES `;
+    keys.shift(); // id
+    keys.shift(); // type
+    let prompt = `INSERT INTO ${table.table} (${keys}) VALUES `;
     let values = [];
     let strings = [];
     objects.forEach((object) => {
@@ -25,12 +21,11 @@ const parseInsert = (table, objects) => {
         values = [];
     });
     return prompt + strings + ";";
-}
+};
 
 const parseUpdate = (table, objects) => {
-    let objects = Array<Object> objects;
     let keys = Object.keys(objects[0]);
-    let prompt = `INSERT INTO ${table} (${keys}) VALUES `;
+    let prompt = `INSERT INTO ${table.table} (${keys}) VALUES `;
     let values = [];
     let strings = [];
     objects.forEach((object) => {
@@ -41,12 +36,11 @@ const parseUpdate = (table, objects) => {
         values = [];
     });
     return prompt + strings + ";";
-}
+};
 
 const parseDelete = (table, objects) => {
-    let objects = Array<Object> objects;
     let keys = Object.keys(objects[0]);
-    let prompt = `INSERT INTO ${table} (${keys}) VALUES `;
+    let prompt = `INSERT INTO ${table.table} (${keys}) VALUES `;
     let values = [];
     let strings = [];
     objects.forEach((object) => {
@@ -57,29 +51,83 @@ const parseDelete = (table, objects) => {
         values = [];
     });
     return prompt + strings + ";";
-}
+};
 
 const CallBack = (error, results, fields) => {
-    if (error) throw error;
-    console.log('The solution is: ', results[0].solution);
-}
-exports.update = () => {
-
-}
-exports.create = () => {
-
-}
-exports.append = (type, datalist) => {
-    if (type in tablas) {
-        let prompt = parseInsert(tablas[type], datalist);
-        return query = connection.query(prompt, CallBack);
+    if (error) {
+        console.error(`SQL.CallBack(): ${error}`);
+        throw error;
     } else {
-        console.error(`SQL.append(${type}): type not implemented`)
+        console.log('The solution is: ', results[0].solution);
     }
-}
-exports.change = () => {
+};
 
-}
-exports.delete = () => {
+exports.syncronize = (action, entity) => {
+    try {
+        const type = entity.type;
+        if (type in tablas) {
+            let prompt;
+            switch (action) {
+                case "entityCreate":
+                    prompt = parseInsert(tablas[type], [entity]);
+                    break;
+                case "entityDelete":
+                    prompt = parseDelete(tablas[type], [entity]);
+                    break;
+                case "entityChange":
+                    prompt = parseUpdate(tablas[type], [entity]);
+                    break;
+                case "entityUpdate":
+                    prompt = parseUpdate(tablas[type], [entity]);
+                    break;
+                default:
+                    console.error(`SQL.syncronize(${action}): action not implemented`);
+                    return;
+            }
+            try {
+                return query = connection.query(prompt, CallBack);
+            } catch (error) {
+                console.error(`SQL.syncronize(): ${query}\n${error}`);
+            }
+        } else {
+            console.error(`SQL.syncronize(${type}): type not implemented`);
+        }
+    } catch (error) {
+        console.error(`SQL.syncronize(${action}, ${entity.id}): ${error}`);
+    }
+};
 
-}
+exports.setup = () => {
+    try {
+        connection = mysql.createConnection({
+            host     : 'mariadb',
+            user     : 'root',
+            password : 'password',
+            // database : 'xtrachallenge25'
+        });
+        let query;
+        let db = fs.readFileSync("./data/db.sql"); 
+        let tables = fs.readFileSync("./data/test.sql"); // fs.readFileSync("./data/tablas.sql");
+
+        query = connection.query(String(db), (error, results, fields) => {
+            if (error) {
+                console.error(`SQL.setup(callback): ${error}`);
+                throw error;
+            } else {
+                console.log("SQL database created");
+            }
+        }); // "CREATE DATABASE IF NOT EXISTS `xtrachallenge25`;"
+
+        query = connection.query(String(tables), (error, results, fields) => {
+            if (error) {
+                console.error(`SQL.setup(callback): ${error}`);
+                throw error;
+            } else {
+                console.log("SQL ready!");
+            }
+        });
+
+    } catch (error) {
+        console.error(`SQL.setup(): ${error}`);
+    }
+};

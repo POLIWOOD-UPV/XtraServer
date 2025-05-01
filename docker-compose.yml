@@ -38,10 +38,10 @@ services:
       - "5432:5432"
     restart: always
     environment:
-      MYSQL_DATABASE: mysql
-      MYSQL_USER: mysql
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MARIADB_DATABASE: xtrachallenge25
+      MARIADB_USER: mysql
+      MARIADB_PASSWORD: password
+      MARIADB_ROOT_PASSWORD: password
     volumes:
       - type: volume
         source: mysql-db

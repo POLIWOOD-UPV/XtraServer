@@ -6,6 +6,94 @@
     <title>NGSI</title>
 </head>
 <body>
-    
+    <h1>NGSI TESTER</h1>
+    <h3>REQUEST:</h3>
+    <h4>method:</h4>
+    <select name="method" id="method">
+        <option value="GET" selected>GET</option>
+        <option value="POST"        >POST</option>
+        <option value="PATCH"       >PATCH</option>
+        <option value="PUT"         >PUT</option>
+        <option value="DELETE"      >DELETE</option>
+    </select>
+    <h4>URL:</h4>
+    <input type="text" name="url" id="url" value="v2/" style="width: 100%;">
+    <h4>body:</h4>
+    <label for="Type">Plantilla:</label>
+    <select name="Type" id="type" onchange="template()">
+        <option value="uni.json"   >Universidad</option>
+        <option value="equipo.json">Equipo</option>
+        <option value="ronda.json" >Ronda </option>
+        <option value="puntos.json">Puntos</option>
+        <option value="crono.json" >Crono </option>
+        <option value="ficha.json" >Ficha </option>
+        <option value="vuelo.json" >Vuelo </option>
+        <!--  tener tambien Subscripciones y Operaciones NGSI  -->
+        <option value="Subscripcion">Subscripcion</option>
+        <option value="Operacion"   >Operacion</option>
+    </select>
+    <div id="body" contenteditable="plaintext-only" style="height: 6em; border: 1px solid;"></div>
+    <br>
+    <button onclick="send()">Send</button>
+    <h3>RESPONSE:</h3>
+    <h4>Code:</h4>
+    <span id="code"></span>
+    <h4>body:</h4>
+    <p id="res"></p>
+    <script>
+        const method = document.getElementById("method");
+        const url = document.getElementById("url");
+        const body = document.getElementById("body");
+        const code = document.getElementById("code");
+        const res = document.getElementById("res");
+        const type = document.getElementById("type");
+
+        const send = async () => {
+            let bodyContent;
+            let response;
+            try {
+                bodyContent = JSON.parse(body.innerText);
+            } catch (error) {
+                alert(error.message);
+                return;
+            }
+            try {
+                response = await fetch("../"+url.value, {
+                    headers: {"Content-Type": "application/json"},
+                    method: method.value,
+                    body: JSON.stringify(bodyContent)
+                });
+                code.innerText = response.status;
+            } catch (error) {
+                alert(error.message);
+                return;
+            }
+
+            if (response.ok) {
+                try {
+                    let data = await response.json();
+                    console.log(data);
+                    res.innerText = JSON.stringify(data, null, 2);
+                } catch (error) {
+                    alert(error.message);
+                }
+            } else {
+                res.innerHTML = await response.text();
+            }
+        }
+
+        const template = async () => {
+            try {
+                let filename = type.value;
+                let plantilla = JSON.stringify(
+                    await (await fetch(`../templates/${filename}`)).json(),
+                    null, 2
+                );
+                body.innerText = plantilla;
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -6,6 +6,7 @@ const { Server } = require("socket.io");
 // Modulos
 const io_server = require("./modules/io_server");
 const ngsi = require('./modules/ngsi');
+const sql = require('./modules/sql');
 const app = require("./modules/app")
 
 // Inicializar servidor y app
@@ -27,6 +28,7 @@ io.on("connection", (socket) => {
 httpServer.listen(PORT, () => {
   console.log("Servidor disponible la siguiente dirección:");
   console.log(`http://localhost:${PORT}/`);
+  // sql.setup();  // Connectar con el servidor SQL
   ngsi.start(); // Arrancar todos los procesos entre servidores
 });
 
