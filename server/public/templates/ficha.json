@@ -1,24 +1,28 @@
 {
-    "id": "urn:ngsi-ld:Vuelo:0-00",
-    "type": "Vuelo",
+    "id": "urn:ngsi-ld:Ficha:0-00",
+    "type": "Ficha",
     "ronda": {
-        "type": "TinyInt",
+        "type": "Number",
         "value": 0
     },
     "equipo": {
-        "type": "TinyInt",
+        "type": "Number",
+        "value": 0
+    },
+    "carga": {
+        "type": "Number",
         "value": 0
     },
     "piloto": {
         "type": "Boolean",
         "value": false
     },
-    "respuestos": {
+    "repuestos": {
         "type": "Boolean",
         "value": false
     },
     "despegue": {
-        "type": "Integer",
+        "type": "Number",
         "value": 0
     }
 }

@@ -14,7 +14,7 @@ const parseInsert = (table, object) => {
     attr.forEach(key => {
         values.push(object[key].value);
     });
-    let prompt = `INSERT IGNORE INTO ${table.table} (${attr}) VALUES (${JSON.stringify(values).slice(1,-1)});`;
+    let prompt = `REPLACE INTO ${table.table} (${attr}) VALUES (${JSON.stringify(values).slice(1,-1)});`;
     return prompt;
 };
 

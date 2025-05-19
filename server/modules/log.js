@@ -65,7 +65,7 @@ exports.http_logger = new class extends Logger{
         ]);
     }
 }(
-    "http_server",
+    "http",
     ["Method","URL","Header"],
     true
 );
@@ -111,7 +111,7 @@ exports.io_logger = new class extends Logger {
         this.cmd = false;
     }
 }(
-    "IO_server",
+    "sockets",
     ["Socket","Event","Data"],
     false
 );
@@ -149,3 +149,25 @@ exports.ngsi_logger = new class extends Logger {
 );
 
 // #####################################################################################
+
+
+exports.proxy_logger = new class extends Logger{
+    log = (request) => {
+        this._log([
+            request.method, 
+            request.url,
+            JSON.stringify(request.headers)
+        ]);
+        this.console([
+            request.headers.host,
+            ":",
+            request.method,
+            "=>", 
+            request.url
+        ]);
+    }
+}(
+    "proxy",
+    ["Method","URL","Header"],
+    true
+);

@@ -1,7 +1,7 @@
 // use strict;
 const http = require("http");
 const fs = require("fs");
-const {ngsi_logger} = require("./log");
+const {ngsi_logger, proxy_logger} = require("./log");
 const {notify} = require("./io_server");
 const {syncronize} = require("./sql");
 
@@ -47,9 +47,12 @@ exports.recv = async (req, res, action = "entityUpdate") => {
 
 // ## PROXY ##
 exports.proxy = async (client_req, client_res) => {
+    proxy_logger.log(client_req);
+    /*
     console.log(`[${(new Date()).toLocaleTimeString()
     }] <proxy>(${client_req.headers.host
     }) => ${client_req.method}: ${client_req.url}`);
+    */
     try {
         let options = {
             hostname: "orion",
@@ -57,7 +60,7 @@ exports.proxy = async (client_req, client_res) => {
             path: client_req.url,
             method: client_req.method,
             headers: client_req.headers
-          };
+        };
 
         const proxy = http.request(options, (res) => {
             client_res.writeHead(res.statusCode, res.headers);

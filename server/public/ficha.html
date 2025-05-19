@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha</title>
+    <script type="module" src="/js/form.js"></script>
+</head>
+<body>
+    <h1>Ficha de Carga</h1>
+    <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
+    <form method="post" enctype="application/json" formenctype="application/json" id="form">
+        <!-- https://www.w3.org/TR/html-json-forms/ -->
+        <p style="display: none;">
+            <input type="text" name="type" value="Ficha" readonly>
+        </p> <!-- Esto permite a form.js saber que tipo esta trabajando -->
+        <p>
+            <label for="id">ID: </label><input name="id" id="id" type="text" value="urn:ngsi-ld:Ficha:0-00" readonly>
+        </p> <!-- Esto permite al usuario saber que entidad va a crear/modificar -->
+        <p>
+            <label for="ronda">Ronda: </label><select name="ronda" id="ronda" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <p>
+            <label for="equipo">Equipo: </label><select name="equipo" id="equipo" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <hr>
+        <h3>Carga</h3>
+        <p>
+            <!-- el "name" del input debe de ser igual al atributo que enviar -->
+            <label for="carga">Carga: </label>
+            <input type="number" name="carga" id="carga">
+            <span>ml</span>
+            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
+        </p>
+        <hr>
+        <h3>Despegue:</h3>
+        <p>
+            <!-- form.js también trabaja con los select (recordar hacer el tipo correcto) -->
+            <label for="despegue">Despegue en menos de </label>
+            <select name="despegue" id="despegue">
+                <option value=0>60</option>
+                <option value=1>40</option>
+                <option value=2>20</option>
+                <option value=3>15</option>
+            </select>
+            <span>metros</span>
+        </p>
+        <hr>
+        <h3>Piloto Externo:</h3>
+        <p>
+            <!-- para los booleanos es recomendable trabajar con select por la legibilidad -->
+            <label for="piloto"></label>
+            <select name="piloto" id="piloto">
+                <option value=false>Externo</option>
+                <option value=true>Propio</option>
+            </select>
+            <span></span>
+        </p>
+        <hr>
+        <h3>Repuestos:</h3>
+        <p>
+            <label for="repuestos"></label>
+            <select name="repuestos" id="repuestos">
+                <option value=true>Declarados</option>
+                <option value=false>No declarados</option>
+            </select>
+            <span></span>
+        </p>
+        <input type="submit" value="Subir">
+    </form>
+</body>
+</html>

@@ -51,25 +51,40 @@
         const send = async () => {
             let bodyContent;
             let response;
-            try {
+            if (method.value == "GET" || method.value == "DELETE") {
+                try {
+                    response = await fetch("../"+url.value, {
+                        method: method.value
+                    });
+                    code.innerText = response.status;
+                } catch (error) {
+                    alert(error.message);
+                    return;
+                }
+            } else {
+                try {
                 bodyContent = JSON.parse(body.innerText);
-            } catch (error) {
-                alert(error.message);
-                return;
-            }
-            try {
-                response = await fetch("../"+url.value, {
-                    headers: {"Content-Type": "application/json"},
-                    method: method.value,
-                    body: JSON.stringify(bodyContent)
-                });
-                code.innerText = response.status;
-            } catch (error) {
-                alert(error.message);
-                return;
+                } catch (error) {
+                    alert(error.message);
+                    return;
+                }
+                try {
+                    response = await fetch("../"+url.value, {
+                        headers: {"Content-Type": "application/json"},
+                        method: method.value,
+                        body: JSON.stringify(bodyContent)
+                    });
+                    code.innerText = response.status;
+                } catch (error) {
+                    alert(error.message);
+                    return;
+                }
             }
 
             if (response.ok) {
+                if (response.status > 200) {
+                    return;
+                }
                 try {
                     let data = await response.json();
                     console.log(data);
