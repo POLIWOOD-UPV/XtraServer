@@ -67,6 +67,7 @@ services:
         source: ./server
         target: /home/app
         read_only: false
+
   nginx-rtmp:
     image: tiangolo/nginx-rtmp
     container_name: nginx-rtmp

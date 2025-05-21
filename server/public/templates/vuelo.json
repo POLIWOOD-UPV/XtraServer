@@ -2,11 +2,11 @@
     "id": "urn:ngsi-ld:Vuelo:0-00",
     "type": "Vuelo",
     "ronda": {
-        "type": "TinyInt",
+        "type": "Number",
         "value": 0
     },
     "equipo": {
-        "type": "TinyInt",
+        "type": "Number",
         "value": 0
     },
     "nulo": {
@@ -18,11 +18,11 @@
         "value": false
     },
     "carga": {
-        "type": "Float",
+        "type": "Number",
         "value": 0.0
     },
     "altura": {
-        "type": "Float",
+        "type": "Number",
         "value": 0.0
     }
 }

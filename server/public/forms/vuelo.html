@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuelo</title>
+    <script type="module" src="/js/form.js"></script>
+</head>
+<body>
+    <h1>Registro de Vuelo</h1>
+    <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
+    <form method="post" enctype="application/json" formenctype="application/json">
+        <!-- https://www.w3.org/TR/html-json-forms/ -->
+        <p style="display: none;">
+            <input type="text" name="type" value="Vuelo" readonly>
+        </p> <!-- Esto permite a form.js saber que tipo esta trabajando -->
+        <p>
+            <label for="id">ID: </label><input name="id" type="text" value="urn:ngsi-ld:Vuelo:0-00" readonly>
+        </p> <!-- Esto permite al usuario saber que entidad va a crear/modificar -->
+        <p>
+            <label for="ronda">Ronda: </label><select name="ronda" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <p>
+            <label for="equipo">Equipo: </label><select name="equipo" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <hr>
+        <h3>Altura:</h3>
+        <p>
+            <!-- el "name" del input debe de ser igual al atributo que enviar -->
+            <label for="altura">Altura: </label>
+            <input type="number" name="altura" min="0" pattern="[0-9]*[.]?[0-9]*">
+            <span>m</span>
+            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
+        </p>
+        <hr>
+        <h3>Carga:</h3>
+        <p>
+            <!-- el "name" del input debe de ser igual al atributo que enviar -->
+            <label for="carga">Carga: </label>
+            <input type="number" name="carga" pattern="[0-9]*[.]?[0-9]*">
+            <span>ml</span>
+            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
+        </p>
+        <hr>
+        <h3>Nulo:</h3>
+        <p>
+            <!-- form.js también trabaja con los select (recordar hacer el tipo correcto) -->
+            <label for="nulo">Vuelo </label>
+            <select name="nulo">
+                <option value=false>NO nulo</option>
+                <option value=true>nulo</option>
+            </select>
+        </p>
+        <hr>
+        <h3>Aterrizaje:</h3>
+        <p>
+            <!-- para los booleanos es recomendable trabajar con select por la legibilidad -->
+            <label for="aterrizaje"></label>
+            <select name="aterrizaje">
+                <option value=false>Fuera de pista</option>
+                <option value=true>Dentro de pista</option>
+            </select>
+            <span></span>
+        </p>
+        <input type="submit" value="Subir">
+    </form>
+</body>
+</html>

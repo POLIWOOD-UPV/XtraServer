@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crono</title>
+    <script type="module" src="/js/crono.js"></script>
+</head>
+<body>
+    <h1>Formulario Cronometro</h1>
+    <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
+    <form method="post" enctype="application/json" formenctype="application/json">
+        <!-- https://www.w3.org/TR/html-json-forms/ -->
+        <p style="display: none;">
+            <input type="text" name="type" value="Crono" readonly>
+        </p> <!-- Esto permite a form.js saber que tipo esta trabajando -->
+        <p>
+            <label for="id">ID: </label><input name="id" type="text" value="urn:ngsi-ld:Crono:0-00-AUXI" readonly>
+        </p> <!-- Esto permite al usuario saber que entidad va a crear/modificar -->
+        <p>
+            <label for="ronda">Ronda: </label><select name="ronda" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <p>
+            <label for="equipo">Equipo: </label><select name="equipo" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <p>
+            <label for="tipo">Tipo: </label><select name="tipo" required></select>
+        </p> <!-- crono.js actualizara automaticamente este select -->
+        <hr>
+        <h3>Temporización:</h3>
+        <p>
+            <!-- el "name" del input debe de ser igual al atributo que enviar -->
+            <label for="start">Inicio: </label>
+            <input type="number" name="start" step=1 pattern="[0-9]*">
+            <span>microsegundos</span>
+            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
+        </p>
+        <p>
+            <!-- el "name" del input debe de ser igual al atributo que enviar -->
+            <label for="stop">Final:  </label>
+            <input type="number" name="stop" step=1 pattern="[0-9]*">
+            <span>microsegundos</span>
+            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
+        </p>
+        <input type="submit" value="Subir">
+    </form>
+</body>
+</html>
