@@ -88,12 +88,14 @@ exports.syncronize = (action, entity) => {
             }
             try {
                 fs.appendFileSync("./logs/mariadb.sql", prompt+"\n");
+                /*
                 connection = mysql.createConnection({
                     host     : 'mariadb',
                     user     : 'root',
                     password : 'password',
                     database : 'xtrachallenge25'
                 });
+                */
                 return query = connection.query(prompt, CallBack);
             } catch (error) {
                 console.error(`SQL.syncronize(): ${query}\n${error}`);
@@ -150,10 +152,6 @@ exports.setup = (callback) => {
 
 process.on("SIGTERM", () => {
     connection.end(() => {
-        if (error) {
-            console.error(`SQL.end(): ${error}`);
-        } else {
-            console.log("SQL CLOSING...")
-        }
+        console.log("SQL CLOSED")
     });
 });
