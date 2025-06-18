@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro de Competición</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .control-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .timer-container {
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .timer-display {
+            font-size: 4rem;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .start-btn {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .stop-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .reset-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .data-display {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cronómetro XtraChallenge 2025</h1>
+    
+    <div class="control-panel">
+        <div class="form-group">
+            <label for="ronda">Ronda:</label>
+            <select id="ronda" required>
+                <option value="" disabled selected>Selecciona una ronda</option>
+                <option value="1">Ronda 1</option>
+                <option value="2">Ronda 2</option>
+                <option value="3">Ronda 3</option>
+                <option value="4">Ronda 4</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="equipo">Equipo (1-100):</label>
+            <input type="number" id="equipo" min="1" max="100" required placeholder="Ingresa el número de equipo (1-100)">
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo de prueba:</label>
+            <select id="tipo" required>
+                <option value="AUXI">AUXI</option>
+                <option value="CARG">CARG</option>
+                <option value="MISN">MISN</option>
+                <option value="CIRC">CIRC</option>
+                <option value="PLAN">PLAN</option>
+                <option value="DESC">DESC</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="timer-container">
+        <div class="timer-display">
+            <span id="minutos">00</span>:
+            <span id="segundos">00</span>:
+            <span id="milisegundos">00</span>
+        </div>
+        
+        <div class="button-group">
+            <button id="startBtn" class="start-btn">Iniciar</button>
+            <button id="stopBtn" class="stop-btn" disabled>Detener</button>
+            <button id="resetBtn" class="reset-btn">Reiniciar</button>
+        </div>
+    </div>
+    
+    <div class="data-display">
+        <h2>Datos para enviar</h2>
+        <pre id="jsonData">Complete los campos y use el cronómetro para generar datos</pre>
+        <button id="copyBtn" class="hidden">Copiar JSON</button>
+    </div>
+    
+    <script>
+        // Variables del cronómetro
+        let minutos = 0;
+        let segundos = 0;
+        let milisegundos = 0;
+        let intervalo;
+        let running = false;
+        let startTime = 0;
+        let stopTime = 0;
+        
+        // Elementos del DOM
+        const minutosElement = document.getElementById('minutos');
+        const segundosElement = document.getElementById('segundos');
+        const milisegundosElement = document.getElementById('milisegundos');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const jsonDataElement = document.getElementById('jsonData');
+        const copyBtn = document.getElementById('copyBtn');
+        
+        // Elementos del formulario
+        const rondaSelect = document.getElementById('ronda');
+        const equipoInput = document.getElementById('equipo');
+        const tipoSelect = document.getElementById('tipo');
+        
+        // Función para actualizar el display del cronómetro
+        function updateDisplay() {
+            minutosElement.textContent = String(minutos).padStart(2, '0');
+            segundosElement.textContent = String(segundos).padStart(2, '0');
+            milisegundosElement.textContent = String(milisegundos).padStart(2, '0').substring(0, 2);
+        }
+        
+        // Función para actualizar el tiempo
+        function updateTime() {
+            milisegundos++;
+            
+            if (milisegundos >= 100) {
+                milisegundos = 0;
+                segundos++;
+            }
+            
+            if (segundos >= 60) {
+                segundos = 0;
+                minutos++;
+            }
+            
+            updateDisplay();
+            updateJsonData();
+        }
+        
+        // Función para iniciar el cronómetro
+        function startTimer() {
+            if (!running) {
+                // Solo registrar startTime si es la primera vez que se inicia
+                if (startTime === 0) {
+                    startTime = Date.now();
+                }
+                
+                intervalo = setInterval(updateTime, 10);
+                running = true;
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                updateJsonData();
+            }
+        }
+        
+        // Función para detener el cronómetro
+        function stopTimer() {
+            if (running) {
+                clearInterval(intervalo);
+                running = false;
+                stopTime = Date.now();
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                updateJsonData();
+                copyBtn.classList.remove('hidden');
+            }
+        }
+        
+        // Función para reiniciar el cronómetro
+        function resetTimer() {
+            clearInterval(intervalo);
+            minutos = 0;
+            segundos = 0;
+            milisegundos = 0;
+            running = false;
+            startTime = 0;
+            stopTime = 0;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            updateDisplay();
+            updateJsonData();
+            copyBtn.classList.add('hidden');
+        }
+        
+        // Función para generar el JSON con los datos
+        function updateJsonData() {
+            const ronda = rondaSelect.value || 0;
+            const equipo = equipoInput.value || 0;
+            const tipo = tipoSelect.value || 'AUXI';
+            
+            const jsonData = {
+                "id": "urn:ngsi-ld:Crono:0000",
+                "type": "Crono",
+                "ronda": {
+                    "type": "Number",
+                    "value": parseInt(ronda)
+                },
+                "equipo": {
+                    "type": "Number",
+                    "value": parseInt(equipo)
+                },
+                "tipo": {
+                    "type": "Text",
+                    "value": tipo
+                },
+                "start": {
+                    "type": "Number",
+                    "value": startTime
+                },
+                "stop": {
+                    "type": "Number",
+                    "value": stopTime
+                },
+                "tiempoTranscurrido": {
+                    "type": "Text",
+                    "value": String(minutos).padStart(2, '0') + ':' + String(segundos).padStart(2, '0') + ':' + String(milisegundos).padStart(2, '0')
+                }
+            };
+            
+            jsonDataElement.textContent = JSON.stringify(jsonData, null, 2);
+        }
+        
+        // Función para copiar el JSON al portapapeles
+        function copyToClipboard() {
+            const jsonText = jsonDataElement.textContent;
+            navigator.clipboard.writeText(jsonText).then(() => {
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = '¡Copiado!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        // Event listeners
+        startBtn.addEventListener('click', startTimer);
+        stopBtn.addEventListener('click', stopTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        copyBtn.addEventListener('click', copyToClipboard);
+        
+        // Actualizar JSON cuando cambian los selectores
+        rondaSelect.addEventListener('change', updateJsonData);
+        equipoInput.addEventListener('input', updateJsonData);
+        tipoSelect.addEventListener('change', updateJsonData);
+        
+        // Inicializar el display
+        updateDisplay();
+    </script>
+</body>
+</html>

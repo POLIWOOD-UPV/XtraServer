@@ -1,0 +1,126 @@
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: clamp(16px, 3vw, 20px);
+  background-color: rgb(255, 255, 255);
+  margin: 0;
+  min-height: 100vh;
+  padding: clamp(0.5rem, 1vh, 1rem);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  padding: clamp(1rem, 3vh, 4rem);
+  box-sizing: border-box;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px; /* Fijo para evitar estrechamiento prematuro */
+  height: 100%;
+  max-height: clamp(300px, 90vh, 900px);
+  padding: clamp(1rem, 2vw, 2.5rem);
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+  gap: clamp(1rem, 2.5vh, 3rem);
+  margin: 0 auto;
+}
+
+.boton {
+  all: unset;
+  background-color: rgb(157, 15, 15);
+  color: white;
+  border: none;
+  padding: clamp(1rem, 2vh, 2.5rem);
+  border-radius: 0.25rem;
+  width: 100%;
+  max-width: 600px;
+  margin: clamp(0.5rem, 1.5vh, 2rem) auto 0;
+  text-align: center;
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vh, 3rem);
+  width: 100%;
+  max-width: 600px;
+}
+
+.inicio {
+  display: block;
+  width: 50%;
+  max-width: 600px;
+  margin: clamp(1rem, 3vh, 2.5rem) auto;
+  background-color: rgb(157, 15, 15);
+  color: white;
+  border: none;
+  padding: clamp(0.75rem, 1.5vh, 1.5rem);
+  border-radius: 0.25rem;
+  text-align: center;
+  transition: background-color 0.3s;
+  box-sizing: border-box;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:hover, .inicio:hover {
+  text-decoration: none;
+  background-color: rgb(218, 75, 75);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#etiquetaArchivo {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: clamp(0.5rem, 1vh, 1rem) auto;
+  color: #333;
+  text-align: center;
+  padding: clamp(0.5rem, 1vh, 1rem);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+#volver,
+#etiquetaArchivo {
+  margin-bottom: clamp(0.5rem, 1vh, 1rem);
+  margin-top: clamp(0.5rem, 1vh, 1rem);
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: clamp(1rem, 3vh, 2rem);
+}
+
+.boton:disabled {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+
+@media (orientation: portrait) {
+  .contenido {
+    box-shadow: none;
+  }
+}
