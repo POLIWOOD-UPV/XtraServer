@@ -1,0 +1,22 @@
+[
+  {
+    "id": "urn:ngsi-ld:Recurso:001",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 1
+    },
+    "staff": {
+      "type": "Text",
+      "value": "FP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 1
+    }
+  }
+]

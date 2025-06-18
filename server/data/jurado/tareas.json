@@ -1,0 +1,362 @@
+[
+  {
+    "id": "urn:ngsi-ld:Tarea:01",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 1 },
+    "tarea": { "type": "Text", "value": "Recibir Participantes" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T15:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "100000" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:02",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 2 },
+    "tarea": { "type": "Text", "value": "Despedir Participantes" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T11:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T13:00:00" },
+    "horario":{ "type": "Text", "value": "000001" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:03",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 3 },
+    "tarea": { "type": "Text", "value": "Recoger Furgoneta" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "horario":{ "type": "Text", "value": "100000" },
+    "tipo": { "type": "Text", "value": "Logistica"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:04",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 4 },
+    "tarea": { "type": "Text", "value": "Recoger material" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "horario":{ "type": "Text", "value": "100000" },
+    "tipo": { "type": "Text", "value": "Logistica"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:05",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 5 },
+    "tarea": { "type": "Text", "value": "Dejar Furgoneta" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "horario":{ "type": "Text", "value": "000001" },
+    "tipo": { "type": "Text", "value": "Logistica"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:06",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 6 },
+    "tarea": { "type": "Text", "value": "Buses ida" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T07:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:07",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 7 },
+    "tarea": { "type": "Text", "value": "Buses vuelta" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T19:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:08",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 8 },
+    "tarea": { "type": "Text", "value": "Comprar desayuno" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Comida"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:09",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 9 },
+    "tarea": { "type": "Text", "value": "Preparar zona desayuno" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Comida"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:10",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 10 },
+    "tarea": { "type": "Text", "value": "Catering" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Comida"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:11",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 11 },
+    "tarea": { "type": "Text", "value": "Montar carpas y mesas ETSIADI" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T16:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "100000" },
+    "tipo": { "type": "Text", "value": "Montajes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:12",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 12 },
+    "tarea": { "type": "Text", "value": "Recoger carpas y mesas ETSIADI" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "010000" },
+    "tipo": { "type": "Text", "value": "Montajes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:13",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 13 },
+    "tarea": { "type": "Text", "value": "Preparar merch" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "110000" },
+    "tipo": { "type": "Text", "value": "Montaje"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:14",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 14 },
+    "tarea": { "type": "Text", "value": "Fotografia y RRSS" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "111111" },
+    "tipo": { "type": "Text", "value": "RRSS"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:15",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 15 },
+    "tarea": { "type": "Text", "value": "Atender empresas" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:16",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 16 },
+    "tarea": { "type": "Text", "value": "Atender cargos" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:17",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 17 },
+    "tarea": { "type": "Text", "value": "Atender servicios" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Logistica"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:18",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 18 },
+    "tarea": { "type": "Text", "value": "Recoger generador" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "horario":{ "type": "Text", "value": "010000" },
+    "tipo": { "type": "Text", "value": "Logistica"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:19",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 19 },
+    "tarea": { "type": "Text", "value": "Dejar generador" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "horario":{ "type": "Text", "value": "000001" },
+    "tipo": { "type": "Text", "value": "Logistica"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:20",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 20 },
+    "tarea": { "type": "Text", "value": "Montar carpas y mesas campo" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "010000" },
+    "tipo": { "type": "Text", "value": "Montaje"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:21",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 21 },
+    "tarea": { "type": "Text", "value": "Recoger carpas y mesas campo" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T16:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T19:00:00" },
+    "horario":{ "type": "Text", "value": "000010" },
+    "tipo": { "type": "Text", "value": "Montaje"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:22",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 22 },
+    "tarea": { "type": "Text", "value": "Montar Cena de gala CALUMN" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T15:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "000010" },
+    "tipo": { "type": "Text", "value": "Montaje"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:23",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 23 },
+    "tarea": { "type": "Text", "value": "Recoger Cena de gala CALUMN" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T01:00:00" },
+    "horario":{ "type": "Text", "value": "000010" },
+    "tipo": { "type": "Text", "value": "Montaje"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:24",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 24 },
+    "tarea": { "type": "Text", "value": "Atender Taller UPV" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T22:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:25",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 25 },
+    "tarea": { "type": "Text", "value": "Discursos" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T00:00:00" },
+    "horario":{ "type": "Text", "value": "010010" },
+    "tipo": { "type": "Text", "value": "Participantes"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:26",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 26 },
+    "tarea": { "type": "Text", "value": "Controlar Planning" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T08:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T20:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Logistica"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:27",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 27 },
+    "tarea": { "type": "Text", "value": "Comentarista" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Vuelos"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:28",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 28 },
+    "tarea": { "type": "Text", "value": "Narrador" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Vuelos"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:29",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 29 },
+    "tarea": { "type": "Text", "value": "Inspecciones tecnicas (UPV)" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "010000" },
+    "tipo": { "type": "Text", "value": "Tecnico"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:30",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 30 },
+    "tarea": { "type": "Text", "value": "Inspecciones tecnicas (Campo)" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Tecnico"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:31",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 31 },
+    "tarea": { "type": "Text", "value": "Jurado tecnico (UPV)" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "010000" },
+    "tipo": { "type": "Text", "value": "Tecnico"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:32",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 32 },
+    "tarea": { "type": "Text", "value": "Juez de pista" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Tecnico"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:33",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 33 },
+    "tarea": { "type": "Text", "value": "Mastil principal" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Vuelos"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:34",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 34 },
+    "tarea": { "type": "Text", "value": "Mastil secundario/Banderas" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Vuelos"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:35",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 35 },
+    "tarea": { "type": "Text", "value": "Puntuaciones" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "011110" },
+    "tipo": { "type": "Text", "value": "Tecnico"}
+  },
+  {
+    "id": "urn:ngsi-ld:Tarea:36",
+    "type": "Tarea",
+    "num": { "type": "Number", "value": 36 },
+    "tarea": { "type": "Text", "value": "Carga/Descarga" },
+    "inicio": { "type": "DateTime", "value": "2025-01-01T09:00:00" },
+    "final":  { "type": "DateTime", "value": "2025-01-01T18:00:00" },
+    "horario":{ "type": "Text", "value": "001110" },
+    "tipo": { "type": "Text", "value": "Vuelos"}
+  }
+]
