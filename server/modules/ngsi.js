@@ -36,6 +36,7 @@ exports.recv = async (req, res, action = "entityUpdate") => {
         res.status(202);
         entities.forEach((entity) => {
             notify(action, entity.id);
+            if (entity.type == "Anuncio") { return } // Para que no salte error ya que no hay SQL para anuncios
             syncronize(action, entity);
         });
         // TODO 
@@ -295,7 +296,19 @@ exports.crear_ceros = async () => {
     ]; // DATETIME => ISO8601
     let res = await this.update("append", entities);
     return res;
+}    
+
+
+// crear la entidad de los anuncios
+exports.crear_anuncio = async ()=> {
+    let anuncio = {
+        id: "urn:ngsi-ld:Anuncio:001",
+        type: "Anuncio",                 
+        texto: { type: "Text", value: "XC2025" },
+    };
+    return await exports.update("append", [anuncio]);
 }
+
 
 // espieza todo el sistema NGSI
 exports.start = async () => {
@@ -316,6 +329,8 @@ exports.start = async () => {
         console.log("Equipos Creados:", res.status);
         res = await this.crear_ceros();
         console.log("Ronda y Equipo 0 Creados:", res.status);
+        res = await this.crear_anuncio();
+        console.log("Anuncio montados:", res.status);
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

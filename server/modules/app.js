@@ -66,6 +66,18 @@ app.get("/tablas/?", (req, res) => {
   }
 });
 
+// Anuncios
+app.post("/anuncio",async(req,res)=>{
+  texto = req.body.texto || "texto_vacio" // Si no hay texto, ponemos un string vacio
+  entidad = {
+    id: "urn:ngsi-ld:Anuncio:001",
+    type: "Anuncio",
+    texto: {type: "Text", value: texto},
+    }
+  respuestaNGSI = await ngsi.update("update",[entidad])
+  res.status(respuestaNGSI.status).send(`Anuncio ${texto} puesto`);
+})
+
 // Ruta general -> listdir
 app.use((req, res) => {
   http_logger.log(req);

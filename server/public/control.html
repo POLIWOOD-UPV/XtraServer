@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Control de Anuncios - XC25</title>
+  <style>
+    textarea { 
+        width: 100%; 
+        height: 20px; 
+    }
+    button { 
+        margin-top: 10px; 
+        padding: 1px; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Anuncios para XC25</h1>
+
+  <label for="texto">Texto del anuncio:</label><br>
+  <textarea id="texto"></textarea><br>
+
+  <button onclick="publicar()">Publicar anuncio</button>
+
+  <div id="estado"></div>
+
+  <script>
+    async function publicar() {
+        // DOM 
+        texto = document.getElementById("texto").value;
+        estado = document.getElementById("estado");
+
+        // Comprobar que el texto no esta vacío 
+        if (!texto.trim()) {
+        estado.textContent = "El texto no puede estar vacío.";
+        return;
+        }
+
+        // Mandar el texto a la BBDD
+        res = await fetch("/anuncio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ texto })
+        });
+
+        // Comprobar la respuesta
+        if (res.ok) {
+        estado.textContent = `Anuncio publicado: "${texto}"`;
+        } else {
+        const msg = await res.text();
+        estado.textContent = `Error ->(${res.status}): ${msg}`;
+        }
+    }
+  </script>
+</body>
+</html>
