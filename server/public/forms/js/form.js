@@ -1,4 +1,4 @@
-import upload from "/js/upload.js";
+import upload from "/forms/js/upload.js";
 import equipos from "/v2/entities/?type=Equipo&options=keyValues" with {type: "json"};
 import rondas from "/v2/entities/?type=Ronda&options=keyValues" with {type: "json"};
 

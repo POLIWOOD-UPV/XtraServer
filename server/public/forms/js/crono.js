@@ -1,6 +1,6 @@
 "use strict";
 
-import form from "/js/form.js";
+import form from "/forms/js/form.js";
 import tipos from "/templates/cronoType.json" with {type: "json"};
 
 let select_tipo;
