@@ -25,8 +25,6 @@ CREATE TABLE IF NOT EXISTS `equipos` (
   PRIMARY KEY (`dorsal`),
   CONSTRAINT `FK_uni_equipos` FOREIGN KEY (`uni`) 
     REFERENCES `universidades` (`acr`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS `rondas` (
@@ -44,13 +42,9 @@ CREATE TABLE IF NOT EXISTS `puntos` (
   `valor` integer DEFAULT 0,
   PRIMARY KEY (`ronda`, `equipo`),
   CONSTRAINT `FK_ronda_puntos` FOREIGN KEY (`ronda`)
-    REFERENCES `rondas` (`num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `rondas` (`num`),
   CONSTRAINT `FK_equipo_puntos` FOREIGN KEY (`equipo`)
     REFERENCES `equipos` (`dorsal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS `cronos` (
@@ -61,13 +55,9 @@ CREATE TABLE IF NOT EXISTS `cronos` (
   `stop` integer DEFAULT 0,
   PRIMARY KEY (`ronda`, `equipo`, `tipo`),
   CONSTRAINT `FK_ronda_cronos` FOREIGN KEY (`ronda`)
-    REFERENCES `rondas` (`num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `rondas` (`num`),
   CONSTRAINT `FK_equipo_cronos` FOREIGN KEY (`equipo`)
     REFERENCES `equipos` (`dorsal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS `fichas` (
@@ -79,13 +69,9 @@ CREATE TABLE IF NOT EXISTS `fichas` (
   `despegue` BIT(2) DEFAULT NULL,
   PRIMARY KEY (`ronda`, `equipo`),
   CONSTRAINT `FK_ronda_fichas` FOREIGN KEY (`ronda`)
-    REFERENCES `rondas` (`num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `rondas` (`num`),
   CONSTRAINT `FK_equipo_fichas` FOREIGN KEY (`equipo`)
     REFERENCES `equipos` (`dorsal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS `vuelos` (
@@ -97,11 +83,7 @@ CREATE TABLE IF NOT EXISTS `vuelos` (
   `altura` float unsigned DEFAULT NULL,
   PRIMARY KEY (`ronda`, `equipo`),
   CONSTRAINT `FK_ronda_vuelos` FOREIGN KEY (`ronda`)
-    REFERENCES `rondas` (`num`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    REFERENCES `rondas` (`num`),
   CONSTRAINT `FK_equipo_vuelos` FOREIGN KEY (`equipo`)
     REFERENCES `equipos` (`dorsal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
 );

@@ -42,6 +42,7 @@ const parseUpdate = (table, object) => {
         }
         return `${key}=${JSON.stringify(val)}`;
     });
+    const conditions = [];
     for (let i = 0; i < keys.length; i++) {
         if (tablas[type].idLen[i] == 0) {
             conditions.push(`${keys[i]}=${JSON.stringify(ids[i])}`);
