@@ -16,16 +16,17 @@ Hay varias areas de trabajo:
 
 ## Como ejecutar
 
+### Installar
+Windows: `install.bat`
+Linux: `source install.sh`
+
 ### Para ejecutar varias veces (o en produccion)
 - Arrancar: `docker-compose up`
 - Parar: `docker-compose down`
 
-### Arrancar
-Windows: `start.bat`
-Linux: `source start.sh`
-### Parar
-Windows: `stop.bat`
-Linux: `source stop.sh`
+### Installar
+Windows: `remove.bat`
+Linux: `source remove.sh`
 
 # Uso del Repositorio
 
