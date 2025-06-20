@@ -306,9 +306,25 @@ exports.crear_anuncio = async ()=> {
         type: "Anuncio",                 
         texto: { type: "Text", value: "XC2025" },
     };
-    return await exports.update("append", [anuncio]);
+    return await this.update("append", anuncio);
 }
 
+
+// crear entidad de los recursos (staff, recursos, tareas)
+
+exports.crear_staff = async () => {
+    // Coger los datos del staff
+    let staff = JSON.parse(fs.readFileSync("./data/jurado/staff.json"))
+    let res = await this.update("append", staff)
+    return res;
+
+}
+
+exports.crear_recursos = async () => {
+    let recursos = JSON.parse(fs.readFileSync("./data/jurado/recursos.json"))
+    let res = await this.update("append", recursos)
+    return res
+}
 
 // espieza todo el sistema NGSI
 exports.start = async () => {
@@ -331,6 +347,15 @@ exports.start = async () => {
         console.log("Ronda y Equipo 0 Creados:", res.status);
         res = await this.crear_anuncio();
         console.log("Anuncio montados:", res.status);
+
+        // Recursos
+        // Staff
+        res = await this.crear_staff();
+        console.log("Staff montados:", res.status);
+
+
+        // res = await this.crear_recursos();
+        // console.log("Recursos montados:", res.status);
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

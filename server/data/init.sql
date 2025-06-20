@@ -87,3 +87,33 @@ CREATE TABLE IF NOT EXISTS `vuelos` (
   CONSTRAINT `FK_equipo_vuelos` FOREIGN KEY (`equipo`)
     REFERENCES `equipos` (`dorsal`)
 );
+
+CREATE TABLE IF NOT EXISTS `staff` (
+  `num` TINYINT UNSIGNED NOT NULL,
+  `nombre` VARCHAR(50) NOT NULL,
+  `abreviacion` VARCHAR(10) NOT NULL,
+  `puesto` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`abreviacion`)
+);
+
+-- CREATE TABLE IF NOT EXISTS `tareas` (
+--   `num` TINYINT UNSIGNED NOT NULL,
+--   `tarea` VARCHAR(100) NOT NULL,
+--   `inicio` DATETIME,
+--   `final` DATETIME,
+--   `horario` VARCHAR(10),
+--   `tipo` VARCHAR(50),
+--   PRIMARY KEY (`num`)
+-- );
+
+-- CREATE TABLE IF NOT EXISTS `recursos` (
+--   `num` TINYINT UNSIGNED NOT NULL,
+--   `staff` VARCHAR(10) DEFAULT NULL,
+--   `prioridad` TINYINT UNSIGNED DEFAULT NULL,
+--   `tarea` TINYINT UNSIGNED DEFAULT NULL,
+--   PRIMARY KEY (`num`),
+--   CONSTRAINT `FK_staff_recursos` FOREIGN KEY (`staff`)
+--     REFERENCES `staff` (`abreviacion`),
+--   CONSTRAINT `FK_tarea_recursos` FOREIGN KEY (`tarea`)
+--     REFERENCES `tareas` (`num`)
+-- );

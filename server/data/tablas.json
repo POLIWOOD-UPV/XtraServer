@@ -40,5 +40,11 @@
         "keys": ["ronda", "equipo"],
         "idLen": [1, 2],
         "dateTime": []
+    },
+    "Staff": {
+        "table": "staff",
+        "keys": ["abreviacion"],
+        "idLen": [0],
+        "dateTime": []
     }
 }
