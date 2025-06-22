@@ -320,9 +320,9 @@ exports.crear_staff = async () => {
 
 }
 
-exports.crear_recursos = async () => {
-    let recursos = JSON.parse(fs.readFileSync("./data/jurado/recursos.json"))
-    let res = await this.update("append", recursos)
+exports.crear_tareas = async () => {
+    let tareas = JSON.parse(fs.readFileSync("./data/jurado/tareas.json"))
+    let res = await this.update("append",tareas)
     return res
 }
 
@@ -354,8 +354,8 @@ exports.start = async () => {
         console.log("Staff montados:", res.status);
 
 
-        // res = await this.crear_recursos();
-        // console.log("Recursos montados:", res.status);
+        res = await this.crear_tareas();
+        console.log("Tareas montados:", res);
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

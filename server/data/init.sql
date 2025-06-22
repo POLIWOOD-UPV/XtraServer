@@ -96,24 +96,12 @@ CREATE TABLE IF NOT EXISTS `staff` (
   PRIMARY KEY (`abreviacion`)
 );
 
--- CREATE TABLE IF NOT EXISTS `tareas` (
---   `num` TINYINT UNSIGNED NOT NULL,
---   `tarea` VARCHAR(100) NOT NULL,
---   `inicio` DATETIME,
---   `final` DATETIME,
---   `horario` VARCHAR(10),
---   `tipo` VARCHAR(50),
---   PRIMARY KEY (`num`)
--- );
-
--- CREATE TABLE IF NOT EXISTS `recursos` (
---   `num` TINYINT UNSIGNED NOT NULL,
---   `staff` VARCHAR(10) DEFAULT NULL,
---   `prioridad` TINYINT UNSIGNED DEFAULT NULL,
---   `tarea` TINYINT UNSIGNED DEFAULT NULL,
---   PRIMARY KEY (`num`),
---   CONSTRAINT `FK_staff_recursos` FOREIGN KEY (`staff`)
---     REFERENCES `staff` (`abreviacion`),
---   CONSTRAINT `FK_tarea_recursos` FOREIGN KEY (`tarea`)
---     REFERENCES `tareas` (`num`)
--- );
+CREATE TABLE IF NOT EXISTS `tareas` (
+  `num` TINYINT UNSIGNED NOT NULL,
+  `tarea` VARCHAR(100) NOT NULL,
+  `inicio` DATETIME,
+  `final` DATETIME,
+  `horario` VARCHAR(10),
+  `tipo` VARCHAR(50),
+  PRIMARY KEY (`num`)
+);

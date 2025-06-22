@@ -7,7 +7,8 @@ const tablas = JSON.parse(fs.readFileSync("./data/tablas.json"));
 let connection;
 
 const isoToSqlDatetime = (isoString) => {
-    return isoString.replace("T", " ").replace("Z", "").split(".")[0];
+    if (!isoString) return null;
+    return isoString.replace("Z", "").split(".")[0].replace("T", " ");
 };
 
 const parseInsert = (table, object) => {

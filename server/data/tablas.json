@@ -46,5 +46,12 @@
         "keys": ["abreviacion"],
         "idLen": [0],
         "dateTime": []
+    },
+    "Tarea": {
+        "table": "tareas",
+        "keys": ["num"],
+        "idLen": [1],
+        "dateTime": ["inicio", "final"]
     }
+
 }
