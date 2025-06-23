@@ -1,0 +1,186 @@
+// HTML
+select = document.getElementById("selector");
+select_dia = document.getElementById("selector_dia")
+form = document.getElementById("tareas-form");
+resultado = document.getElementById("resultado");
+checkbox = document.getElementById("abrir");
+horas = []
+let tareas_global = [];
+let recursos_global = [];
+
+dias_competicion = [
+        "2025-07-07",
+        "2025-07-08",
+        "2025-07-09",
+        "2025-07-10",
+        "2025-07-11",
+        "2025-07-12"
+    ];
+
+
+// Coger los recursos
+
+fetch("http://localhost:80/v2/entities?type=Recurso&limit=200")
+.then(response => response.json())
+.then(data => {
+    recursos_global = data;
+    console.log("Recursos cargados:", recursos_global.length);
+})
+.catch(err => {
+    console.error("Error al cargar recursos:", err);
+});
+// Coger los staff para poner en el dropdown
+fetch("http://localhost:80/v2/entities?type=Staff&limit=100")
+.then(response => response.json())  // pasamos a un JSON
+.then(data => {
+    select.innerHTML = "";
+    cont = 0;
+    data.forEach(staff => {
+        //  Coger los valores del JSON
+        nombre = staff.nombre?.value || "Staff sin nombre";
+        id = staff.id
+        abr = staff.abreviacion.value || " "
+        // Crear las opciones del dropdown
+        option = document.createElement("option");
+        option.value = id;
+        option.textContent = `${++cont} ${abr} - ${nombre}`;
+        select.appendChild(option); // Meterlos en el select
+    });
+})
+// Por si el servidor se caga encima
+.catch(error => {
+    console.error("Error al obtener staff:", error);
+    select.innerHTML = "<option>Error al cargar</option>";
+});
+
+//Coger las tareas
+fetch("http://localhost:80/v2/entities?type=Tarea&limit=100")
+.then(response => response.json())  // pasamos a un JSON
+.then(data => {
+    select_dia.innerHTML = "";
+    dias = [];
+    horas = []; 
+    tareas_global = data; 
+
+    data.forEach(tarea => {
+        completo_inicio = tarea.inicio?.value;
+        completo_final = tarea.final?.value;
+
+        // Sacar la hora del string
+        hora_inicio = completo_inicio?.split("T")[1]?.substring(0, 5);  // "09:00"
+        hora_final  = completo_final?.split("T")[1]?.substring(0, 5);
+
+        // Guardar la hora en el array de horas
+        if (hora_inicio && !horas.includes(hora_inicio)) horas.push(hora_inicio);
+        if (hora_final && !horas.includes(hora_final)) horas.push(hora_final);
+
+        // Coger la fecha del string
+        inicio = completo_inicio?.split("T")[0];  // "2025-01-01"
+        final  = completo_final?.split("T")[0];
+
+
+        // Obtener las fechas reales a partir del binario de horario
+        const binario = tarea.horario?.value || "000000";
+        const fechas_horario = [];
+        for (let i = 0; i < binario.length; i++) {
+            if (binario[i] === "1") {
+                fechas_horario.push(dias_competicion[i]);
+            }
+        }
+
+        fechas_horario.forEach(fecha => {
+            if (!dias.includes(fecha)) dias.push(fecha);
+        });
+    });
+
+    // Ordenar listas
+    dias.sort();
+    horas.sort();
+
+    // Meter dias únicos en el select
+    dias.forEach(dia => {
+        const option = document.createElement("option");
+        option.value = dia;
+        option.textContent = dia;
+        select_dia.appendChild(option);
+    });
+})
+
+.catch(err => {
+    console.error("Error al cargar tareas:", err)
+})
+
+// FORMS
+// Evento de envío del formulario
+form.addEventListener("submit", function(evento) {
+    evento.preventDefault();
+
+    // Datoss del input
+    staff_id = select.value?.split(":").pop();  // "FP"
+    dia = select_dia.value;
+    if (!staff_id || !dia) return;
+
+    // IDs de tareas asignadas a este staff
+    const tareas_ids = recursos_global
+        .filter(r => r.staff?.value === staff_id) // Cogemos el ID
+        .map(r => r.tarea?.value?.toString()); // Lo pasamos a string
+
+    // Tareas activas ese día y asignadas al staff
+    const tareas_del_dia = tareas_global.filter(t => {
+        binario = t.horario?.value || "000000"; // Cogemoss el binario
+        fechas_activas = [...binario]           // Lo convertimos en un array de caracteres
+            .map((bit, i) => bit === "1" ? dias_competicion[i] : null) // Cogemos las fechas o NULL
+            .filter(Boolean);                     // Nos quedamos con las verdaderas
+
+        // Cogemos la ID de la tarea actual para ver si cumple con ser del staff y del dia
+        tarea_id = t.num?.value?.toString();
+        activa = tareas_ids.includes(tarea_id) && fechas_activas.includes(dia);
+        return activa;
+    });
+
+    // Limpiar contenido previo
+    resultado.innerHTML = "";
+
+    // Crear tabla
+    tabla = document.createElement("table");
+    tabla.className = "tabla-tareas";
+
+    // Cabecera
+    cabecera = document.createElement("tr");
+    th = document.createElement("th");
+
+    th.textContent = dia;
+    th.className = "cabecera-dia";
+    cabecera.appendChild(th);
+    tabla.appendChild(cabecera);
+
+    // Filas por hora
+    horas.forEach(hora => {
+        fila = document.createElement("tr");
+        fila.className = "fila-hora";
+        fila.id = `hora-${hora.replace(":", "")}`;
+
+        // Celdas
+        celda = document.createElement("td");
+        celda.className = "celda-tarea";
+
+        // Metemos las horas
+        const tareas_en_hora = tareas_del_dia.filter(t => {
+            const ini = t.inicio?.value.split("T")[1]?.substring(0,5);
+            const fin = t.final?.value.split("T")[1]?.substring(0,5);
+            return hora >= ini && hora < fin;
+        });
+
+        // Si hay tarea, lo metemos
+        contenido = tareas_en_hora.length > 0
+            ? tareas_en_hora.map(t => t.tarea?.value).join(" / ")
+            : "-";
+
+        // Juntamos el contenido
+        celda.innerHTML = `<b>${hora}</b> → ${contenido}`;
+        fila.appendChild(celda);
+        tabla.appendChild(fila);
+    });
+
+    resultado.appendChild(tabla);
+});
