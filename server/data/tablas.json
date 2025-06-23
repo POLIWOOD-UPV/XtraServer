@@ -52,6 +52,13 @@
         "keys": ["num"],
         "idLen": [1],
         "dateTime": ["inicio", "final"]
+    },
+    "Recurso": {
+        "table": "recursos",
+        "keys": ["num"],
+        "idLen": [3],
+        "dateTime": []
     }
+
 
 }

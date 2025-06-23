@@ -8,7 +8,7 @@
     },
     "staff": {
       "type": "Text",
-      "value": "FP"
+      "value": "CR"
     },
     "prioridad": {
       "type": "Number",
@@ -17,6 +17,1826 @@
     "tarea": {
       "type": "Number",
       "value": 1
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:002",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 2
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 1
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:003",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 3
+    },
+    "staff": {
+      "type": "Text",
+      "value": "FP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 1
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:004",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 4
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 3
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:005",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 5
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 3
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:006",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 6
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 4
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:007",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 7
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 4
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:008",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 8
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 5
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:009",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 9
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 5
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:010",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 10
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 8
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:011",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 11
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 8
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:012",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 12
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JG"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 9
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:013",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 13
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 9
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:014",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 14
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JG"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 10
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:015",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 15
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 10
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:016",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 16
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARIM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 10
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:017",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 17
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AE"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 10
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:018",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 18
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 11
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:019",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 19
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 11
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:020",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 20
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 11
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:021",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 21
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 11
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:022",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 22
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 5
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 11
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:023",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 23
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 12
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:024",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 24
+    },
+    "staff": {
+      "type": "Text",
+      "value": "VT"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 12
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:025",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 25
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PO"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 12
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:026",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 26
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 12
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:027",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 27
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARIM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 5
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 12
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:028",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 28
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 13
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:029",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 29
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PG"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 13
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:030",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 30
+    },
+    "staff": {
+      "type": "Text",
+      "value": "VT"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 13
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:031",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 31
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LL"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 13
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:032",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 32
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 5
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 13
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:033",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 33
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PG"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 14
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:034",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 34
+    },
+    "staff": {
+      "type": "Text",
+      "value": "VT"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 14
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:035",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 35
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PE"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 14
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:036",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 36
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 14
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:037",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 37
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JG"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 15
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:038",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 38
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 15
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:039",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 39
+    },
+    "staff": {
+      "type": "Text",
+      "value": "FP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 16
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:040",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 40
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 16
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:041",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 41
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 17
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:042",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 42
+    },
+    "staff": {
+      "type": "Text",
+      "value": "FP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 17
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:043",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 43
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 18
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:044",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 44
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 19
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:045",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 45
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 20
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:046",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 46
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 20
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:047",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 47
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 20
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:048",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 48
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 20
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:049",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 49
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 5
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 20
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:050",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 50
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 21
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:051",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 51
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 21
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:052",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 52
+    },
+    "staff": {
+      "type": "Text",
+      "value": "VT"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 21
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:053",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 53
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AO"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 21
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:054",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 54
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 5
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 21
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:055",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 55
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 22
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:056",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 56
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LL"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 22
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:057",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 57
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 22
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:058",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 58
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARIM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 22
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:059",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 59
+    },
+    "staff": {
+      "type": "Text",
+      "value": "TODOS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 23
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:060",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 60
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARD"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 24
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:061",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 61
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AE"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 24
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:062",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 62
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AHR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 24
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:063",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 63
+    },
+    "staff": {
+      "type": "Text",
+      "value": "FP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 25
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:064",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 64
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 25
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:065",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 65
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 26
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:066",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 66
+    },
+    "staff": {
+      "type": "Text",
+      "value": "HP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 27
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:067",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 67
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 27
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:068",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 68
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 28
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:069",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 69
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AO"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 29
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:070",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 70
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 29
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:071",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 71
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 29
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:072",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 72
+    },
+    "staff": {
+      "type": "Text",
+      "value": "EM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 29
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:073",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 73
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AO"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 30
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:074",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 74
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 30
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:075",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 75
+    },
+    "staff": {
+      "type": "Text",
+      "value": "CS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 30
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:076",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 76
+    },
+    "staff": {
+      "type": "Text",
+      "value": "EM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 30
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:077",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 77
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AR"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 31
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:078",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 78
+    },
+    "staff": {
+      "type": "Text",
+      "value": "DS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 31
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:079",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 79
+    },
+    "staff": {
+      "type": "Text",
+      "value": "HP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 31
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:080",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 80
+    },
+    "staff": {
+      "type": "Text",
+      "value": "MAC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 4
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 31
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:081",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 81
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PEDRO Q."
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 5
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 31
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:082",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 82
+    },
+    "staff": {
+      "type": "Text",
+      "value": "MAC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 32
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:083",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 83
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PASQ"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 32
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:084",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 84
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PO"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 33
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:085",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 85
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARO"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 33
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:086",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 86
+    },
+    "staff": {
+      "type": "Text",
+      "value": "PM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 33
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:087",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 87
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LL"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 34
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:088",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 88
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LS"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 34
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:089",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 89
+    },
+    "staff": {
+      "type": "Text",
+      "value": "JP"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 35
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:090",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 90
+    },
+    "staff": {
+      "type": "Text",
+      "value": "LC"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 1
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 36
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:091",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 91
+    },
+    "staff": {
+      "type": "Text",
+      "value": "ARIM"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 2
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 36
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:Recurso:092",
+    "type": "Recurso",
+    "num": {
+      "type": "Number",
+      "value": 92
+    },
+    "staff": {
+      "type": "Text",
+      "value": "AE"
+    },
+    "prioridad": {
+      "type": "Number",
+      "value": 3
+    },
+    "tarea": {
+      "type": "Number",
+      "value": 36
     }
   }
 ]

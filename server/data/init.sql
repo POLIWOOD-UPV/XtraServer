@@ -105,3 +105,11 @@ CREATE TABLE IF NOT EXISTS `tareas` (
   `tipo` VARCHAR(50),
   PRIMARY KEY (`num`)
 );
+
+CREATE TABLE IF NOT EXISTS `recursos` (
+  `num` TINYINT UNSIGNED NOT NULL,
+  `staff` VARCHAR(10) NOT NULL,
+  `prioridad` TINYINT UNSIGNED NOT NULL,
+  `tarea` TINYINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`num`)
+);
