@@ -41,8 +41,11 @@
         // Cogemos el  anuncio inicial
         cogerAnuncio()
 
-        socket.addEventListener("message", cogerAnuncio )
+        socket.addEventListener("message", (event)=>{
+            if (event === "!entityUpdate urn:ngsi-ld:Anuncio:001"){cogerAnuncio() }
+            
         });
+    });
 </script>
 
 </body>

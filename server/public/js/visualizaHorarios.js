@@ -21,31 +21,31 @@ dias_competicion = [
 // Coger los recursos
 
 fetch("http://localhost:80/v2/entities?type=Recurso&limit=200")
-.then(response => response.json())
-.then(data => {
-    recursos_global = data;
-    console.log("Recursos cargados:", recursos_global.length);
-})
-.catch(err => {
-    console.error("Error al cargar recursos:", err);
+    .then(response => response.json())
+    .then(data => {
+        recursos_global = data;
+        console.log("Recursos cargados:", recursos_global.length);
+    })
+    .catch(err => {
+        console.error("Error al cargar recursos:", err);
 });
 // Coger los staff para poner en el dropdown
 fetch("http://localhost:80/v2/entities?type=Staff&limit=100")
-.then(response => response.json())  // pasamos a un JSON
-.then(data => {
-    select.innerHTML = "";
-    cont = 0;
-    data.forEach(staff => {
-        //  Coger los valores del JSON
-        nombre = staff.nombre?.value || "Staff sin nombre";
-        id = staff.id
-        abr = staff.abreviacion.value || " "
-        // Crear las opciones del dropdown
-        option = document.createElement("option");
-        option.value = id;
-        option.textContent = `${++cont} ${abr} - ${nombre}`;
-        select.appendChild(option); // Meterlos en el select
-    });
+    .then(response => response.json())  // pasamos a un JSON
+    .then(data => {
+        select.innerHTML = "";
+        cont = 0;
+        data.forEach(staff => {
+            //  Coger los valores del JSON
+            nombre = staff.nombre?.value || "Staff sin nombre";
+            id = staff.id
+            abr = staff.abreviacion.value || " "
+            // Crear las opciones del dropdown
+            option = document.createElement("option");
+            option.value = id;
+            option.textContent = `${++cont} ${abr} - ${nombre}`;
+            select.appendChild(option); // Meterlos en el select
+        });
 })
 // Por si el servidor se caga encima
 .catch(error => {

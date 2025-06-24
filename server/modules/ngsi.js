@@ -298,7 +298,6 @@ exports.crear_ceros = async () => {
     return res;
 }    
 
-
 // crear la entidad de los anuncios
 exports.crear_anuncio = async ()=> {
     let anuncio = {
@@ -309,9 +308,7 @@ exports.crear_anuncio = async ()=> {
     return await this.update("append", [anuncio]);
 }
 
-
 // crear entidad de los recursos (staff, recursos, tareas)
-
 exports.crear_staff = async () => {
     // Coger los datos del staff
     let staff = JSON.parse(fs.readFileSync("./data/jurado/staff.json"))
@@ -332,7 +329,15 @@ exports.crear_recursos = async () => {
     return res;
 };
 
-
+// crear las entidades de la imagen mosta
+exports.crear_logoMostrado = async () => {
+    let logoMostrado = {
+        id:"urn:ngsi-ld:Logo:001",
+        type: "Logo",
+        path: {type: "Text", value: "../favicon.ico"}
+    }
+    return await this.update("append", [logoMostrado])
+}
 // espieza todo el sistema NGSI
 exports.start = async () => {
     try {
@@ -362,6 +367,8 @@ exports.start = async () => {
         res = await this.crear_recursos();
         console.log("Recursos montados:", res.status);
 
+        res = await this.crear_logoMostrado();
+        console.log("Logos mostrados montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
