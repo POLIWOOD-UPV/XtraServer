@@ -18,7 +18,7 @@ const parseInsert = (table, object) => {
 
     const values = attr.map(key => {
         let val = object[key].value;
-        if ((table.dateTime.includes(key))) {
+        if (table.dateTime.includes(key) && typeof val === "string") {
             // if (typeof val === "string" && val.endsWith("Z") && val.includes("T"))
             val = isoToSqlDatetime(val);
         }
@@ -37,7 +37,7 @@ const parseUpdate = (table, object) => {
 
     const values = attr.map(key => {
         let val = object[key].value;
-        if ((key in table.dateTime)) {
+        if (table.dateTime.includes(key) && typeof val === "string") {
             // if (typeof val === "string" && val.endsWith("Z") && val.includes("T"))
             val = isoToSqlDatetime(val);
         }
