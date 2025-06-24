@@ -15,42 +15,26 @@
   </style>
 </head>
 <body>
-  <h1>Anuncios para XC25</h1>
+  <h1>Panel de control</h1>
+  <div>
+    <h2>Anuncios para XC25</h1>
+    
+    <label for="texto">Texto del anuncio:</label><br>
+    <textarea id="texto" placeholder="XC2025"></textarea><br>
+    
+    <button onclick="publicarAnuncio()">Publicar anuncio</button>
+    
+    <div id="estado"></div>
+  </div>
+  <div>
+    <h2>Imágenes equipo</h2>
+    <select id="selector_equipo_img">
+      <option value = "">Cargando equipos</option>
+    </select>
+    <img id="imagen_equipo" src="" alt="Imagen del equipo" style="max-width: 400px; display: none;">
 
-  <label for="texto">Texto del anuncio:</label><br>
-  <textarea id="texto" placeholder="XC2025"></textarea><br>
-
-  <button onclick="publicar()">Publicar anuncio</button>
-
-  <div id="estado"></div>
-
-  <script>
-    async function publicar() {
-        // DOM 
-        texto = document.getElementById("texto").value;
-        estado = document.getElementById("estado");
-
-        // Comprobar que el texto no esta vacío 
-        if (!texto.trim()) {
-          texto =  "XC2025"
-          estado.textContent = "El texto no puede estar vacío. XC2025 puesto";
-        }
-
-        // Mandar el texto a la BBDD
-        res = await fetch("/anuncio", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ texto })
-        });
-
-        // Comprobar la respuesta
-        if (res.ok) {
-        estado.textContent = `Anuncio publicado: "${texto}"`;
-        } else {
-        const msg = await res.text();
-        estado.textContent = `Error ->(${res.status}): ${msg}\n ${res}`;
-        }
-    }
-  </script>
+  </div>
+    
+  <script src =  "../js/control.js"></script>
 </body>
 </html>
