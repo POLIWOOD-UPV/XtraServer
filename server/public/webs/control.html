@@ -18,7 +18,7 @@
   <h1>Anuncios para XC25</h1>
 
   <label for="texto">Texto del anuncio:</label><br>
-  <textarea id="texto"></textarea><br>
+  <textarea id="texto" placeholder="XC2025"></textarea><br>
 
   <button onclick="publicar()">Publicar anuncio</button>
 
@@ -32,15 +32,15 @@
 
         // Comprobar que el texto no esta vacío 
         if (!texto.trim()) {
-        estado.textContent = "El texto no puede estar vacío.";
-        return;
+          texto =  "XC2025"
+          estado.textContent = "El texto no puede estar vacío. XC2025 puesto";
         }
 
         // Mandar el texto a la BBDD
         res = await fetch("/anuncio", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ texto })
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ texto })
         });
 
         // Comprobar la respuesta
@@ -48,7 +48,7 @@
         estado.textContent = `Anuncio publicado: "${texto}"`;
         } else {
         const msg = await res.text();
-        estado.textContent = `Error ->(${res.status}): ${msg}`;
+        estado.textContent = `Error ->(${res.status}): ${msg}\n ${res}`;
         }
     }
   </script>

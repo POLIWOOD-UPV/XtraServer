@@ -306,7 +306,7 @@ exports.crear_anuncio = async ()=> {
         type: "Anuncio",                 
         texto: { type: "Text", value: "XC2025" },
     };
-    return await this.update("append", anuncio);
+    return await this.update("append", [anuncio]);
 }
 
 
@@ -328,7 +328,6 @@ exports.crear_tareas = async () => {
 
 exports.crear_recursos = async () => {
     const recursos = JSON.parse(fs.readFileSync("./data/jurado/recursos.json"));
-    console.log("Ejemplo recurso:", recursos[0]);
     const res = await exports.update("append", recursos);
     return res;
 };
@@ -359,7 +358,7 @@ exports.start = async () => {
         res = await this.crear_staff();
         console.log("Staff montados:", res.status);
         res = await this.crear_tareas();
-        console.log("Tareas montados:", res);
+        console.log("Tareas montados:", res.status);
         res = await this.crear_recursos();
         console.log("Recursos montados:", res.status);
 

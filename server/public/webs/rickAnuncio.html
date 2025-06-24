@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../css/anuncios.css" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div id="contenedor_anuncios">
+        <div id="anunciero">
+            XTRACHALLENGE 2025
+        </div>
+    </div>
+
+<script>
+    const socket = io();
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const contenedor_anuncio = document.querySelector("#contenedor_anuncios");
+        const anuncio = document.querySelector("#anunciero");
+
+        socket.addEventListener("message", async (event) => {
+            // Ha habido una actualizacion de anuncio?
+            if (event === "!entityUpdate urn:ngsi-ld:Anuncio:001"){
+                fetch("http://localhost/v2/entities?type=Anuncio")
+                .then(res => {
+                    if (!res.ok) throw new Error("No se pudo obtener");
+                    return res.json();
+                })
+                .then(json => {
+                    mostrarAnuncio(json[0].texto.value);
+                })
+                .catch(err => {
+                    console.error("Error al recibir anuncio:", err);
+                });
+            }
+        });
+
+        function mostrarAnuncio(texto) {
+            anuncio.textContent = texto;
+            contenedor_anuncio.style.display = "block";
+        }
+    });
+</script>
+
+</body>
+</html>
