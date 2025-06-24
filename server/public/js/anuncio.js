@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="es" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link href="../css/anuncios.css" rel="stylesheet">
-    <script src="/socket.io/socket.io.js"></script>
-</head>
-<body>
-    <div id="contenedor_anuncios">
-        <div id="anunciero">
-            XTRACHALLENGE 2025 - SIN CONEXION AL SERVER
-        </div>
-    </div>
-
-<script>
-    const socket = io();
+ const socket = io();
     // DOM - HTML
     contenedor_anuncio = document.querySelector("#contenedor_anuncios");
     anuncio = document.querySelector("#anunciero");
@@ -46,7 +30,3 @@
             
         });
     });
-</script>
-
-</body>
-</html>
