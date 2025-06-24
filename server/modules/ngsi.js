@@ -330,14 +330,15 @@ exports.crear_recursos = async () => {
 };
 
 // crear las entidades de la imagen mosta
-exports.crear_logoMostrado = async () => {
-    let logoMostrado = {
-        id:"urn:ngsi-ld:Logo:001",
-        type: "Logo",
-        path: {type: "Text", value: "../favicon.ico"}
-    }
-    return await this.update("append", [logoMostrado])
-}
+exports.crear_equipoMostrado = async () => {
+    let equipoMostrado = {
+        id:"urn:ngsi-ld:equipoMostrado:001",
+        type: "EquipoMostrado",
+        acr: {type: "Text", value: "WOOD"}
+    };
+    return await this.update("append", [equipoMostrado]);
+};
+
 // espieza todo el sistema NGSI
 exports.start = async () => {
     try {
@@ -357,18 +358,24 @@ exports.start = async () => {
         console.log("Equipos Creados:", res.status);
         res = await this.crear_ceros();
         console.log("Ronda y Equipo 0 Creados:", res.status);
-        res = await this.crear_anuncio();
-        console.log("Anuncio montados:", res.status);
-
+        
+        
+        
+        // Staff y tareas
         res = await this.crear_staff();
         console.log("Staff montados:", res.status);
         res = await this.crear_tareas();
         console.log("Tareas montados:", res.status);
         res = await this.crear_recursos();
         console.log("Recursos montados:", res.status);
+        
+        
+        // Contenido mostado en pantalla
+        res = await this.crear_anuncio();
+        console.log("Anuncio montados:", res.status);
 
-        res = await this.crear_logoMostrado();
-        console.log("Logos mostrados montados:", res.status)
+        res = await this.crear_equipoMostrado();
+        console.log("Equipos mostrados montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
