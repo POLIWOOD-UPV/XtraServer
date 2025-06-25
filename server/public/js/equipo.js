@@ -69,7 +69,8 @@ async function actualizarEquipoMostrado() {
         // Bloque logo
         logoDiv = document.createElement("div");
         img = document.createElement("img");
-        img.src = `${logo}`;
+        // img.src = `${logo}`;
+        img.src = `../favicon.ico`;
         img.alt = `Logo de ${nombre}`;
         img.className = "logo-equipo";
         logoDiv.appendChild(img);
@@ -91,7 +92,8 @@ async function actualizarEquipoMostrado() {
         <div class="dato-equipo"><strong>Piloto:</strong> <span class="valor">${piloto}</span></div>
         <div class="dato-equipo"><strong>Miembros:</strong> <span class="valor">${miembros}</span></div>
         `;
-
+        
+        console.log("Hola4")
         // Rotacion de contenido
         contenido = [logoDiv, bloque1, bloque2];
         index = 0;
@@ -99,6 +101,7 @@ async function actualizarEquipoMostrado() {
         rotador = setInterval(mostrarContenido, intervaloRotacion);
     } catch (err) {
         contenedor.innerHTML = "<p>Error al cargar el equipo activo.</p>";
+        console.log(err)
     } finally {
         actualizando = false;
     }
@@ -106,6 +109,16 @@ async function actualizarEquipoMostrado() {
 
 
 function mostrarContenido() {
-    contenedor.replaceChildren(contenido[index]);
+    const nuevo = contenido[index].cloneNode(true); // evitar manipular el original
+    nuevo.classList.add("fade-out");
+
+    contenedor.replaceChildren(nuevo);
+
+    // Forzar reflow para que el fade-in se aplique correctamente
+    void nuevo.offsetWidth;
+
+    nuevo.classList.remove("fade-out");
+    nuevo.classList.add("fade-in");
+
     index = (index + 1) % contenido.length;
 }

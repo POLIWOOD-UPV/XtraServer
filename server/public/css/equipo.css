@@ -35,3 +35,15 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* Estado inicial del contenido (oculto) */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Estado final (visible) */
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
