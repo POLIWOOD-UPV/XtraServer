@@ -91,7 +91,7 @@ async function actualizarEquipoMostrado() {
         <div class="dato-equipo"><strong>Piloto:</strong> <span class="valor">${piloto}</span></div>
         <div class="dato-equipo"><strong>Miembros:</strong> <span class="valor">${miembros}</span></div>
         `;
-        
+
         // Rotacion de contenido
         contenido = [logoDiv, bloque1, bloque2];
         index = 0;
