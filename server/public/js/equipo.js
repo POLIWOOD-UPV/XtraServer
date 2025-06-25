@@ -1,14 +1,15 @@
 // Este codigo se basa en rickEquipos.js
 
 // DOM
-const contenedor = document.getElementById("equipo");
+const contenedor = document.getElementById("contenedor_equipo");
 const socket = io();
-
 
 let rotador = null
 let contenido = []
 let index = 0
+let actualizando = false; // para evitar llamadas simultáneas
 const intervaloRotacion = 4000 // ms
+
 
 // Eventos
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,9 +24,15 @@ socket.addEventListener("message", (event) => {
 
 // Funciones para mostrar datos
 async function actualizarEquipoMostrado() {
+    if (actualizando) {
+        logConHora("[DEBUG] Se ignoró una llamada duplicada a actualizarEquipoMostrado");
+        return;
+    }
+
+    actualizando = true;
+
     try {
-        // Limpiar rotador previo si existe
-        if (rotador) {
+        if (rotador !== null) {
             clearInterval(rotador);
             rotador = null;
         }
@@ -46,14 +53,11 @@ async function actualizarEquipoMostrado() {
         const equipos = await resEquipos.json();
         equipo = equipos.find(e => e.acr?.value === acronimo);
 
-        // Comprobamos el equipo
         if (!equipo) {
             contenedor.innerHTML = `<p>Equipo con acrónimo <b>${acronimo}</b> no encontrado.</p>`;
             return;
         }
 
-
-        // Construimos los bloques de contenido
         nombre = equipo.name?.value || "Equipo sin nombre";
         logo = equipo.logo?.value || "";
         dorsal = equipo.dorsal?.value || "?";
@@ -65,7 +69,7 @@ async function actualizarEquipoMostrado() {
         // Bloque logo
         logoDiv = document.createElement("div");
         img = document.createElement("img");
-        img.src = `./public/favicon.ico`///${logo}`;
+        img.src = `${logo}`;
         img.alt = `Logo de ${nombre}`;
         img.className = "logo-equipo";
         logoDiv.appendChild(img);
@@ -93,15 +97,15 @@ async function actualizarEquipoMostrado() {
         index = 0;
         mostrarContenido();
         rotador = setInterval(mostrarContenido, intervaloRotacion);
-
     } catch (err) {
-        console.error("Error al actualizar equipo mostrado:", err);
         contenedor.innerHTML = "<p>Error al cargar el equipo activo.</p>";
+    } finally {
+        actualizando = false;
     }
 }
 
+
 function mostrarContenido() {
-    contenedor.innerHTML = "";
-    contenedor.appendChild(contenido[index]);
+    contenedor.replaceChildren(contenido[index]);
     index = (index + 1) % contenido.length;
 }

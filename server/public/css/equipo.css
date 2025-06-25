@@ -10,7 +10,7 @@ html, body {
   align-items: center;
 }
 
-#equipo {
+#contenedor_equipo {
   display: flex;
   flex-direction: column;
   align-items: center;
