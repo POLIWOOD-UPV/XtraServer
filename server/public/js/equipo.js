@@ -74,26 +74,17 @@ async function actualizarEquipoMostrado() {
         img.className = "logo-equipo";
         logoDiv.appendChild(img);
         
-        // Bloque info basica
-        const bloque1 = document.createElement("div");
-        bloque1.className = "equipo"
-        bloque1.innerHTML = `
-        <div class="dato-equipo"><strong>${dorsal} - ${nombre}</strong></div>
-        <div class="dato-equipo"><strong>Universidad:</strong> <span class="valor">${universidad}</span></div>
-        `;
-        
-        
-        // Bloque info avanzada
-        const bloque2 = document.createElement("div");
-        bloque2.className = "equipo";
-        bloque2.innerHTML = `
-        <div class="dato-equipo"><strong>Líder:</strong> <span class="valor">${lider}</span></div>
-        <div class="dato-equipo"><strong>Piloto:</strong> <span class="valor">${piloto}</span></div>
-        <div class="dato-equipo"><strong>Miembros:</strong> <span class="valor">${miembros}</span></div>
-        `;
-
+        const bloques = [
+            logoDiv,
+            crearBloque(`Dorsal`, `${dorsal}`),
+            crearBloque(`Name`, `${nombre}`),
+            crearBloque(`University`, universidad),
+            crearBloque(`Leader`, lider),
+            crearBloque(`Pilot`, piloto),
+            crearBloque(`Members`, miembros)
+        ];
         // Rotacion de contenido
-        contenido = [logoDiv, bloque1, bloque2];
+        contenido = bloques
         index = 0;
         mostrarContenido();
         rotador = setInterval(mostrarContenido, intervaloRotacion);
@@ -105,6 +96,13 @@ async function actualizarEquipoMostrado() {
     }
 }
 
+
+function crearBloque(titulo, valor) {
+    div = document.createElement("div");
+    div.className = "bloque-dato";
+    div.innerHTML = `<div class="titulo">${titulo}</div><div class="valor">${valor}</div>`;
+    return div;
+}
 
 function mostrarContenido() {
     const nuevo = contenido[index].cloneNode(true); // evitar manipular el original

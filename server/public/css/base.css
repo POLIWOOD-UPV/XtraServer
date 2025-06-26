@@ -9,6 +9,10 @@
       width: 1920px;
       height: 1080px;
       font-family: sans-serif;
+      background-image: url("../img/fondo.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .grid {
@@ -45,7 +49,6 @@
     }
 
     .anuncios {
-      background: rgba(0, 0, 0,0.6);
       grid-column: 2;
       grid-row: 1;
       width: 755px;
@@ -55,9 +58,9 @@
     }
 
     .equipo {
-      background: rgba(0, 0, 0,0.6);
       grid-column: 3;
       grid-row: 1;
+      border-radius: 10px;
       
     }
 
@@ -69,15 +72,16 @@
     }
 
     .data {
-      background: rgba(0, 0, 0,0.6);
       grid-column: 3;
       grid-row: 3;
       height: 225px;
       margin-top: 15px;
+      border-radius: 10px;
     }
 
     iframe {
       width: 100%;
       height: 100%;
       border: none;
-     }
+      overflow: hidden;
+      }
