@@ -99,24 +99,58 @@ const getForm = async () => {
     content = parseForm(data);
 }
 
+//  Version antigua
+// const parseForm = (obj) => {
+//     for (const key in template) {
+//         if (key == "id" || key == "type") {
+//             continue // ignoramos datos generales
+//         }
+//         switch (template[key].type) {
+//             case "Number":
+//                 obj[key] = Number(obj[key]);
+//                 break;
+//             case "Boolean":
+//                 obj[key] = Boolean(obj[key]);
+//                 break;
+//             default:
+//                 break;
+//         }
+//     }
+//     return obj;
+// }
+
 const parseForm = (obj) => {
+    // creamos el objeto base con id y tipo
+    let entity = {
+        id: obj.id,
+        type: obj.type
+    };
+
+    // recorremos cada campo del formulario
     for (const key in template) {
-        if (key == "id" || key == "type") {
-            continue // ignoramos datos generales
+        if (key === "id" || key === "type") continue; // ignoramos id y type
+
+        let value = obj[key]; // cogemos el valor plano del form
+
+        // si es numero, lo convertimos
+        if (template[key].type === "Number") {
+            value = Number(value);
         }
-        switch (template[key].type) {
-            case "Number":
-                obj[key] = Number(obj[key]);
-                break;
-            case "Boolean":
-                obj[key] = Boolean(obj[key]);
-                break;
-            default:
-                break;
+        // si es booleano, lo convertimos a true/false
+        else if (template[key].type === "Boolean") {
+            value = value === "true" || value === true;
         }
+
+        // guardamos el valor con estructura NGSI
+        entity[key] = {
+            type: template[key].type,
+            value: value
+        };
     }
-    return obj;
-}
+
+    return entity;
+};
+
 
 const uploadForm = async () => {
     // actualizamos el contenido con los datos del form
@@ -127,26 +161,27 @@ const uploadForm = async () => {
         alert(error.message);
     }
     let res;
-    try { // segun la creacion o mofidicacion se cambia la petición
-        if (form.method == "post") { // accedemos al form para ver el metodo
-            console.log("post", content);
-            res = await fetch("/v2/entities?options=keyValues", {
-                headers: {"Content-Type": "application/json"},
-                method: "post",
-                body: JSON.stringify(content)
-            });
-        } else {
-            console.log("patch", content);
-            res = await fetch(`/v2/entities/${content.id}?options=keyValues`, {
-                headers: {"Content-Type": "application/json"},
-                method: "patch",
-                body: JSON.stringify(content)
-            });
-        }
+    try {
+        // hacemos la peticion a /v2/op/update para actualizar o crear la entidad
+        console.log("update (op/update)", content);
+        res = await fetch("/v2/op/update", {
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+            body: JSON.stringify({
+                actionType: "update",     // modo update, si existe la pisa
+                entities: [content]       // mandamos la entidad dentro de un array
+            })
+        });
     } catch (error) {
-        console.error(error.message); // si algo sale mal, se notifica al usuario
+        // si falla algo, lo mostramos por consola y avisamos al usuario
+        console.error("uploadForm error:", error.message);
+        alert("Error al enviar los datos");
+        return;
     }
-    alert(`Sended: ${res.status}`); // avisamos de la recepción de los datos.
+
+    // si todo va bien, mostramos el codigo de estado
+    alert(`Sended: ${res.status}`);
+
 }
 
 const updateForm = () => {
