@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizador Genérico</title>
+  <style>
+    pre {
+      background: #afaaaa;
+      color: rgb(0, 0, 0);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Visualizador NGSI</h1>
+
+  <form id="formulario">
+    <p>
+      <label for="tipo">Tipo de entidad:</label>
+      <select id="tipo">
+        <option value="">Todos</option>
+        <option value="Equipo">Equipo</option>
+        <option value="Tarea">Tarea</option>
+        <option value="Vuelo">Vuelo</option>
+        <option value="Ronda">Ronda</option>
+        <option value="Universidad">Universidad</option>
+        <option value="Staff">Staff</option>
+        <!-- TODO: Meter futuros tipos por aqui -->
+      </select>
+    </p>
+
+    <p>
+      <label for="selector">Selecciona una entidad:</label>
+      <select id="selector">
+        <option value="">Cargando...</option>
+      </select>
+    </p>
+
+    <p>
+      <label>
+        <input type="checkbox" id="abrir"> Abrir en nueva pestaña
+      </label>
+    </p>
+
+    <button type="submit">Ver entidad</button>
+  </form>
+  <div id="staffeo" style="display: none;">
+    <label for="selector_dia">Selecciona un dia:</label>
+    <select id="selector_dia"></select>
+    <button id="verHorarioStaff" type="button">Ver horario del staff</button>
+    <div id="horarioStaffResultado" style="margin-top: 1rem;"></div>
+  </div>
+  <h2>Resultado:</h2>
+  <pre id="resultado">Selecciona una entidad para ver sus datos...</pre>
+
+  <div id="tabla-tareas" style="margin-top: 5px;"></div>
+
+  <script type="module" src="./js/visualizador.js"></script>
+
+</body>
+</html>
