@@ -3,6 +3,7 @@ let rondaSel = document.querySelector("#ronda");
 let equipoSel = document.querySelector("#equipo");
 let resultado = document.getElementById("resultado");
 
+const socket = io();
 
 // Arrays de datos
 let fichas = [] 
@@ -38,7 +39,7 @@ function mostrarDatos(){
     resultado.innerHTML = `
     <h2>Resultados de ${dorsal} - ${nombre} en Ronda ${ronda}</h2>
     <p><strong>external pilot / team pilot:</strong> ${decide(ficha?.piloto, "external pilot", "team pilot")}</p>
-    <p><strong>legal / not legal:</strong> ${decide(vuelo?.nulo === false, "legal", "not legal")}</p>
+    <p><strong>legal / not legal:</strong> ${decide(vuelo?.nulo === false, "not legal", "legal")}</p>
     <p><strong>good landing / crash landing:</strong> ${decide(vuelo?.aterrizaje, "crash landing", "good landing")}</p>
     <p><strong>replacements used / replacements not used:</strong> ${decide(ficha?.repuestos, "replacements not used", "replacements used")}</p>
     <p><strong>takeoff distance (20/40/60m):</strong> ${["60m", "40m", "20m", "15m"][ficha?.despegue ?? 0]}</p>
@@ -74,5 +75,15 @@ async function cargarDatos(){
     rondaSel.onchange = mostrarDatos;
     equipoSel.onchange = mostrarDatos;
 };
+
+// cada vez que llegue una actualizacion, recargamos los datos
+socket.on("message", async (msg) => {
+    console.log("socket:", msg);
+    if (msg.includes("Ficha") || msg.includes("Vuelo")) {
+        await cargarDatos();     // recargamos todos los datos
+        mostrarDatos();          // refrescamos la vista activa
+    }
+});
+
 
 window.addEventListener("DOMContentLoaded", cargarDatos);
