@@ -137,14 +137,17 @@ const uploadForm = async () => {
             });
         } else {
             console.log("patch", content);
-            res = await fetch(`/v2/entities/${content.id}?options=keyValues`, {
+            let id = content.id;
+            await delete content.id;
+            await delete content.type;
+            res = await fetch(`/v2/entities/${id}/attrs?options=keyValues`, {
                 headers: {"Content-Type": "application/json"},
                 method: "patch",
                 body: JSON.stringify(content)
             });
         }
     } catch (error) {
-        console.error(error.message); // si algo sale mal, se notifica al usuario
+        console.error(error.message, res); // si algo sale mal, se notifica al usuario
     }
     alert(`Sended: ${res.status}`); // avisamos de la recepción de los datos.
 }
