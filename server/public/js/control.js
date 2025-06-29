@@ -112,7 +112,7 @@ async function publicarEquipoMostrado() {
 function mostrarDatosEquipo() {
     acronimo = selector_equipo_img.value;
     if (acronimo) {
-        ImgLogoEquipo.src = `/data/equipos/${acronimo}.jpg`;
+        ImgLogoEquipo.src = `/img/LogosPNG/${acronimo}.png`;
         ImgLogoEquipo.style.display = "block";
 
         // Si el equipo existe
