@@ -17,7 +17,7 @@ body {
     border-radius: 10px;
 }
 #universitarios{
-    background-color:rgba(250, 180, 40, 0.5);
+    background-color:rgba(250, 180, 40, 0.5) ;
 }
 #clubes{
     background-color: rgba(138, 75, 148, 0.5);
@@ -29,13 +29,6 @@ body {
     height: 100%;
     border-radius: 10px;
 }
-
-
-
-
-
-/* Ranking */
-
 /*No filas */
 #cabeza, #contenedor {
     position: relative;
@@ -46,23 +39,9 @@ body {
     display: flex;
     flex-direction: column;
 }
-/* Logo Xtra2 */
-#imagen_xtra2 {
-    height: 150px;
-    width: 450px;
-}
-#imagen_xtra2 img {
-    height: 100%;
-    width: 100%;
-}
-#imagen_xtra2 {
-    display: flex;
-    flex-direction: row;
-}
 /* Rondas */
 #rondero {
     display: flex;
-    flex-direction: column;
     align-items: flex-end;
 }
 #rondero div {
@@ -94,7 +73,7 @@ body {
     border-top: 2px solid black;
     border-left: 2px solid black;
     align-items: center;
-    font-size: 22px;
+    font-size: 20px;
     padding: 5px;
     justify-content: center;
     border-radius: 10px;
@@ -108,18 +87,16 @@ body {
 #cab_pos, #cab_log {
     flex: 1; /* Ajustamos el flex de los elementos de la cabecera para que coincida con los de la fila */
 }
-#cab_log{
-    min-width: 60px;
-}
+
 #cab_pos {
     min-width: 46px;
-}
+}/*posicion */
 #cab_nom {
     flex:2
-}
+} /* nombre */
 #cab_tie {
     flex : 3
-}
+} /* tiempo */
 
 
 /* Filas */
@@ -130,7 +107,7 @@ body {
     flex-direction: row;
     flex: 11;
     border: 2px solid black;
-    height: 70px;
+    height: 18.3px;
     padding: 5px;
     position: relative;
     left: 0;
@@ -141,27 +118,31 @@ body {
 }
 
 .numero {
-    min-width: 36px;
-    min-height: 40px;
+    min-width: 10px;
+    min-height: 24px;
     background: white;
     border: 2px solid black;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 23px;
+    font-size: 18px;
 
     flex: 1;
-    max-width: 43px;
+    max-width: 23px;
     margin-right: 6px;
+    margin-left: 16px;
     
 }
 
 .logo{
     flex: 1;
-    height: 45px;
-    width: 45px;
-    max-width: 60px;
+    height: 18px;
+    width: 18px;
+    max-width: 20px;    
+    margin-left: 26px;
+    margin-right: 6px;
+
 }
 
 .fila_control_borrar, .fila_control_sumar {
@@ -174,7 +155,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
     color: white;
