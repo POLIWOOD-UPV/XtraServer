@@ -70,6 +70,7 @@ async function actualizarEquipoMostrado() {
         img = document.createElement("img");
         // img.src = `${logo}`;
         img.src = `../favicon.ico`;
+        img.src = `../img/LogosPNG/${acronimo}.png`;
         img.alt = `Logo de ${nombre}`;
         img.className = "logo-equipo";
         logoDiv.appendChild(img);
