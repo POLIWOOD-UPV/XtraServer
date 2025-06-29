@@ -41,7 +41,6 @@
     }
 
     .tabla {
-      background: rgba(0, 0, 0,0.6);
       grid-column: 1;
       grid-row: 3;
       position: relative;
@@ -65,7 +64,6 @@
     }
 
     .timer {
-      background: rgba(0, 0, 0,0.6);
       grid-column: 3;
       grid-row: 2;
       margin-top: 15px;
