@@ -298,7 +298,6 @@ exports.crear_ceros = async () => {
     return res;
 }    
 
-
 // crear la entidad de los anuncios
 exports.crear_anuncio = async ()=> {
     let anuncio = {
@@ -309,9 +308,7 @@ exports.crear_anuncio = async ()=> {
     return await this.update("append", [anuncio]);
 }
 
-
 // crear entidad de los recursos (staff, recursos, tareas)
-
 exports.crear_staff = async () => {
     // Coger los datos del staff
     let staff = JSON.parse(fs.readFileSync("./data/jurado/staff.json"))
@@ -332,6 +329,15 @@ exports.crear_recursos = async () => {
     return res;
 };
 
+// crear las entidades de la imagen mosta
+exports.crear_equipoMostrado = async () => {
+    let equipoMostrado = {
+        id:"urn:ngsi-ld:equipoMostrado:001",
+        type: "EquipoMostrado",
+        acr: {type: "Text", value: "WOOD"}
+    };
+    return await this.update("append", [equipoMostrado]);
+};
 
 // espieza todo el sistema NGSI
 exports.start = async () => {
@@ -352,16 +358,24 @@ exports.start = async () => {
         console.log("Equipos Creados:", res.status);
         res = await this.crear_ceros();
         console.log("Ronda y Equipo 0 Creados:", res.status);
-        res = await this.crear_anuncio();
-        console.log("Anuncio montados:", res.status);
-
+        
+        
+        
+        // Staff y tareas
         res = await this.crear_staff();
         console.log("Staff montados:", res.status);
         res = await this.crear_tareas();
         console.log("Tareas montados:", res.status);
         res = await this.crear_recursos();
         console.log("Recursos montados:", res.status);
+        
+        
+        // Contenido mostado en pantalla
+        res = await this.crear_anuncio();
+        console.log("Anuncio montados:", res.status);
 
+        res = await this.crear_equipoMostrado();
+        console.log("Equipos mostrados montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

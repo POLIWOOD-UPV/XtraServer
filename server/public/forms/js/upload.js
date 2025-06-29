@@ -99,24 +99,58 @@ const getForm = async () => {
     content = parseForm(data);
 }
 
+//  Version antigua
+// const parseForm = (obj) => {
+//     for (const key in template) {
+//         if (key == "id" || key == "type") {
+//             continue // ignoramos datos generales
+//         }
+//         switch (template[key].type) {
+//             case "Number":
+//                 obj[key] = Number(obj[key]);
+//                 break;
+//             case "Boolean":
+//                 obj[key] = Boolean(obj[key]);
+//                 break;
+//             default:
+//                 break;
+//         }
+//     }
+//     return obj;
+// }
+
 const parseForm = (obj) => {
+    // creamos el objeto base con id y tipo
+    let entity = {
+        id: obj.id,
+        type: obj.type
+    };
+
+    // recorremos cada campo del formulario
     for (const key in template) {
-        if (key == "id" || key == "type") {
-            continue // ignoramos datos generales
+        if (key === "id" || key === "type") continue; // ignoramos id y type
+
+        let value = obj[key]; // cogemos el valor plano del form
+
+        // si es numero, lo convertimos
+        if (template[key].type === "Number") {
+            value = Number(value);
         }
-        switch (template[key].type) {
-            case "Number":
-                obj[key] = Number(obj[key]);
-                break;
-            case "Boolean":
-                obj[key] = Boolean(obj[key]);
-                break;
-            default:
-                break;
+        // si es booleano, lo convertimos a true/false
+        else if (template[key].type === "Boolean") {
+            value = value === "true" || value === true;
         }
+
+        // guardamos el valor con estructura NGSI
+        entity[key] = {
+            type: template[key].type,
+            value: value
+        };
     }
-    return obj;
-}
+
+    return entity;
+};
+
 
 const uploadForm = async () => {
     // actualizamos el contenido con los datos del form
@@ -146,10 +180,12 @@ const uploadForm = async () => {
                 body: JSON.stringify(content)
             });
         }
+        // si todo va bien, mostramos el codigo de estado
+        alert(`Sended: ${res.status}`);
     } catch (error) {
         console.error(error.message, res); // si algo sale mal, se notifica al usuario
+        alert(`ERROR WHILE SENDING MESSAGE\n${error.message}`);
     }
-    alert(`Sended: ${res.status}`); // avisamos de la recepción de los datos.
 }
 
 const updateForm = () => {

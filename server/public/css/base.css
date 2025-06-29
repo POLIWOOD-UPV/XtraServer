@@ -1,0 +1,87 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: none;
+      width: 1920px;
+      height: 1080px;
+      font-family: sans-serif;
+      background-image: url("../img/fondo.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .grid {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template-columns: 450px 1fr 325px;
+      grid-template-rows: 130px 120px 1fr;
+      gap: 0;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 25px;
+      position: relative; 
+      overflow: hidden;   
+    }
+
+    .presentadores {
+      background: rgba(0, 0, 0,0.6);
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    .tabla {
+      background: rgba(0, 0, 0,0.6);
+      grid-column: 1;
+      grid-row: 3;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .anuncios {
+      grid-column: 2;
+      grid-row: 1;
+      width: 755px;
+      height: 75px;
+      justify-self: center;
+      
+    }
+
+    .equipo {
+      grid-column: 3;
+      grid-row: 1;
+      border-radius: 10px;
+      
+    }
+
+    .timer {
+      background: rgba(0, 0, 0,0.6);
+      grid-column: 3;
+      grid-row: 2;
+      margin-top: 15px;
+    }
+
+    .data {
+      grid-column: 3;
+      grid-row: 3;
+      height: 225px;
+      margin-top: 15px;
+      border-radius: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      overflow: hidden;
+      }

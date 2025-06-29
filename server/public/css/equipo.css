@@ -1,0 +1,68 @@
+html {
+  background: rgba(138, 75, 148, 0.65);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#contenedor_equipo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%; 
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.logo-equipo {
+  height: 80px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+}
+
+
+.dato-equipo {
+  font-size: 18px;
+  padding: 6px;;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Estado inicial del contenido (oculto) */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Estado final (visible) */
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+
+
+.bloque-dato {
+  text-align: center;
+  max-width: 500px;
+}
+
+.titulo {
+  font-size: 25px;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.valor {
+  font-size: 26px;
+  font-weight: normal;
+}
