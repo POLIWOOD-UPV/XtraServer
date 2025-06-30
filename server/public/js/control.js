@@ -6,11 +6,29 @@ estadoLogo = document.getElementById("estadoLogo")
 datos = document.getElementById("datosEquipo")
 
 equipos = []
+const atributosAnimaciones = ["rankings", "anuncios", "equipos", "cronos", "datos"];
+const panel = document.getElementById("panelVisibilidad");
 
 // Eventos
-document.addEventListener("DOMContentLoaded",cogerEquipos)    
+document.addEventListener("DOMContentLoaded", () => {
+  // Crear los botones primero
+  atributosAnimaciones.forEach(attr => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <label for="${attr}">${attr}:</label>
+      <button id="${attr}" onclick="alternar('${attr}')">Cargando...</button>
+    `;
+    panel.appendChild(div);
+  });
+
+  // Luego carga datos
+  cogerEquipos();
+  cogerAnimaciones();
+});
+
 selector_equipo_img.addEventListener("change",mostrarDatosEquipo)
 
+// Coger datos
 
 function cogerEquipos() {
     // Cogemos los equipos del servidor
@@ -37,6 +55,18 @@ function cogerEquipos() {
     })
 }
 
+async function cogerAnimaciones() {
+  try {
+    const res = await fetch("/v2/entities/urn:ngsi-ld:Animaciones:001");
+    const json = await res.json();
+    atributosAnimaciones.forEach(attr => {
+      const boton = document.getElementById(attr);
+      boton.textContent = json[attr]?.value || "oculto";
+    });
+  } catch (err) {
+    console.error("Error al obtener Animaciones:", err);
+  }
+}
 
 // Anuncios
 async function publicarAnuncio() {
@@ -137,6 +167,38 @@ function mostrarDatosEquipo() {
         ImgLogoEquipo.style.display = "none";
         datos.innerHTML = "";
     }
+}
+
+
+async function alternar(attr) {
+  const boton = document.getElementById(attr);
+  const nuevoValor = (boton.textContent === "visible") ? "oculto" : "visible";
+  boton.textContent = "Actualizando...";
+
+  const entidad = {
+    id: "urn:ngsi-ld:Animaciones:001",
+    type: "Animaciones",
+    [attr]: { type: "Text", value: nuevoValor }
+  };
+
+  try {
+    const res = await fetch("/v2/op/update", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ actionType: "update", entities: [entidad] })
+    });
+
+    if (res.ok) {
+      boton.textContent = nuevoValor;
+    } else {
+      const msg = await res.text();
+      boton.textContent = `Error`;
+      console.error(`Error ->(${res.status}):`, msg);
+    }
+  } catch (err) {
+    boton.textContent = "Error";
+    console.error("Error al alternar visibilidad:", err);
+  }
 }
 
 

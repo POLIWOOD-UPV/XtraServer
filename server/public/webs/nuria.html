@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Pantalla OBS con Grid</title>
+  <link href="../css/base.css" rel="stylesheet">
+  <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <link href = "../css/base.css" rel="stylesheet">
-
   <div class="grid">
-    <div class="item presentadores">
+    <div class="item presentadores"></div>
+
+    <div class="item tabla" id="rankings">
+      <iframe src="ranking.html" frameborder="0"></iframe>
     </div>
-    <div class="item tabla">
-      <iframe src="ranking.html" frameborder="0"></ranking></iframe>
-    </div>
-    <div class="item anuncios">
+
+    <div class="item anuncios" id="anuncios">
       <iframe src="anuncios.html" frameborder="0"></iframe>
     </div>
-    <div class="item equipo">
+
+    <div class="item equipo" id="equipos">
       <iframe src="equipo.html" frameborder="0" scrolling="no"></iframe>
     </div>
-    <div class="item timer">
+
+    <div class="item timer" id="cronos">
       <iframe src="timer.html" frameborder="0"></iframe>
     </div>
-    <div class="item data">
+
+    <div class="item data" id="datos">
       <iframe src="data.html" frameborder="0"></iframe>
     </div>
   </div>
+
+  <script src="../js/dinamicas.js"></script>
 </body>
 </html>

@@ -36,7 +36,10 @@ exports.recv = async (req, res, action = "entityUpdate") => {
         res.status(202);
         entities.forEach((entity) => {
             notify(action, entity.id);
-            if (entity.type == "Anuncio") { return } // Para que no salte error ya que no hay SQL para anuncios
+            if (entity.type == "Anuncio" || 
+                entity.type === "EquipoMostrado" || 
+                entity.type === "Animaciones") 
+                { return } // Para que no salte error ya que no hay SQL para anuncios
             syncronize(action, entity);
         });
         // TODO 
@@ -339,6 +342,23 @@ exports.crear_equipoMostrado = async () => {
     return await this.update("append", [equipoMostrado]);
 };
 
+// crear la entidad de control de animaciones
+
+// crear la entidad de las animaciones
+exports.crear_animaciones = async () => {
+    let animaciones = {
+        id: "urn:ngsi-ld:Animaciones:001",
+        type: "Animaciones",
+        rankings: { type: "Text", value: "visible" },
+        anuncios: { type: "Text", value: "visible" },
+        equipos: { type: "Text", value: "visible" },
+        cronos: { type: "Text", value: "visible" },
+        datos: { type: "Text", value: "visible" }
+    };
+    return await this.update("append", [animaciones]);
+};
+
+
 // espieza todo el sistema NGSI
 exports.start = async () => {
     try {
@@ -376,6 +396,10 @@ exports.start = async () => {
 
         res = await this.crear_equipoMostrado();
         console.log("Equipos mostrados montados:", res.status)
+        
+        // Animaciones
+        res = await this.crear_animaciones();
+        console.log("Animaciones montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
