@@ -46,10 +46,13 @@ async function actualizarEstado() {
             const divRanking = doc.getElementById("contenedor"); 
 
             if (divRanking) {
-              animarDIV(divRanking, estado); // aplicar animacion al div del ranking
-              divRanking.style.display = (estado === "visible") ? "block" : "none"; // mostrar u ocultar (quitar cuando animarDIV este hecha)
-              // Una vez quitadas las filas, podemos coger el iframe de arriba y pasarlo a animarDIVs
+              if (estado === "visible") {
+                iframe.contentWindow?.aparicionDinamica?.();
+              } else {
+                iframe.contentWindow?.desaparicionDinamica?.();
+              }
             }
+
           }
         }
       }
