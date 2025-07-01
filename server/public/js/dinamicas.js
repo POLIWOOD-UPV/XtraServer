@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 socket.addEventListener("message", (event) => {
-  // console.log("Actualización recibida:", event);ss
   if (event === "!entityChange urn:ngsi-ld:Animaciones:001") {
     actualizarEstado();
   }
@@ -36,10 +35,8 @@ async function actualizarEstado() {
 
       if (contenedor) {
         if (id !== "rankings") {
-          console.log("No es el ranking")
           contenedor.style.display = (estado === "visible") ? "block" : "none"; // mostrar u ocultar 
         } else {
-          console.log("Es el ranking")
           const iframe = contenedor.querySelector("iframe"); // coger el iframe que esta dentro del contenedor "rankings"
           
           if (iframe && iframe.contentWindow) { // asegurarse de que el iframe esta cargado y tiene contenido
