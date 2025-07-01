@@ -9,7 +9,8 @@ const socket = io();
 let fichas = [] 
 let vuelos = []
 let equipos = []
-let rondas = [];
+let rondas = []
+let cronos = []
 
 function decide(val, a, b){
     return val === true ? b :
@@ -38,21 +39,29 @@ function mostrarDatos(){
     // Metemos como innerHTML el resultado
     resultado.innerHTML = `
     <h2>Resultados de ${dorsal} - ${nombre} en Ronda ${ronda}</h2>
-    <p><strong>external pilot / team pilot:</strong> ${decide(ficha?.piloto, "external pilot", "team pilot")}</p>
-    <p><strong>legal / not legal:</strong> ${decide(vuelo?.nulo === false, "not legal", "legal")}</p>
-    <p><strong>good landing / crash landing:</strong> ${decide(vuelo?.aterrizaje, "crash landing", "good landing")}</p>
-    <p><strong>replacements used / replacements not used:</strong> ${decide(ficha?.repuestos, "replacements not used", "replacements used")}</p>
-    <p><strong>takeoff distance (20/40/60m):</strong> ${["60m", "40m", "20m", "15m"][ficha?.despegue ?? 0]}</p>
+    <p><strong>Requested Payload:</strong> ${ficha?.carga ?? "?"} kg</p>
+    <p><strong>Unloaded Payload:</strong> ${vuelo?.carga ?? "?"} kg</p>
+    <p><strong>Time Circuit:</strong> ${getTiempo("Circuito")}</p>
+    <p><strong>Time Glide:</strong> ${getTiempo("Planeo")}</p>
+    <p><strong>Altitude:</strong> ${vuelo?.altura ?? "?"} m</p>
+    <p><strong>Loading Time:</strong> ?</p>
+    <p><strong>Pilot:</strong> ${decide(ficha?.piloto, "external pilot", "team pilot")}</p>
+    <p><strong>Legal Flight:</strong> ${decide(vuelo?.nulo === false, "legal", "not legal")}</p>
+    <p><strong>Good Landing:</strong> ${decide(vuelo?.aterrizaje, "good landing", "crash landing")}</p>
+    <p><strong>Replacement Parts:</strong> ${decide(ficha?.repuestos, "replacements used", "replacements not used")}</p>
+    <p><strong>Takeoff Distance:</strong> ${["60m", "40m", "20m", "15m"][ficha?.despegue ?? 0]}</p>
     `;
+
 };
 
 async function cargarDatos(){
     // el promise all lo que hace es que espera muchas promesas a la vez
-    [fichas, vuelos, equipos, rondas] = await Promise.all([
+    [fichas, vuelos, equipos, rondas, cronos] = await Promise.all([
         fetch("/v2/entities/?type=Ficha&options=keyValues").then(res => res.json()),
         fetch("/v2/entities/?type=Vuelo&options=keyValues").then(res => res.json()),
         fetch("/v2/entities/?type=Equipo&options=keyValues").then(res => res.json()),
         fetch("/v2/entities/?type=Ronda&options=keyValues").then(res => res.json()),
+        fetch("/v2/entities/?type=Crono&options=keyValues").then(res => res.json()),
     ]);
 
     // Creamos las rondas
@@ -84,6 +93,15 @@ socket.on("message", async (msg) => {
         mostrarDatos();          // refrescamos la vista activa
     }
 });
+
+// Buscar cronos por ronda y equipo
+const getTiempo = (tipo) => {
+    let crono = cronos.find(c => c.ronda === ronda && c.equipo === equipo && c.tipo === tipo);
+    return crono ? ((crono.stop - crono.start) / 1000000).toFixed(2) + " s" : "?";
+};
+
+let tiempoCircuito = getTiempo("Circuito");
+let tiempoPlaneo = getTiempo("Planeo");
 
 
 window.addEventListener("DOMContentLoaded", cargarDatos);
