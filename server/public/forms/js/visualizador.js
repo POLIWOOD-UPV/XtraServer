@@ -43,11 +43,14 @@ async function cargarOpciones(tipoEntidad, selectElement) {
         option.value = entidad.id;
         const label = entidad.dorsal ? `${entidad.dorsal} - ${entidad.name}` :
                       entidad.name ? entidad.name :
+                      entidad.acr ? "":
                       entidad.tarea ? entidad.tarea :
                       entidad.id;
+
+        console.log(entidad)
         // Lo que se lee
         let label_limpio = entidad.id.replace("urn:ngsi-ld:", "");
-        option.textContent = `${entidad.type || ""} -> ${label_limpio}`;
+        option.textContent = `${entidad.type || ""} -> ${label_limpio} (${entidad.acr})`;
         selectElement.appendChild(option);
       });
     } catch (err) {
