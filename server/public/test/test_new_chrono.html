@@ -123,17 +123,15 @@
         <div class="form-group">
             <label for="ronda">Ronda:</label>
             <select id="ronda" required>
-                <option value="" disabled selected>Selecciona una ronda</option>
-                <option value="1">Ronda 1</option>
-                <option value="2">Ronda 2</option>
-                <option value="3">Ronda 3</option>
-                <option value="4">Ronda 4</option>
+                <option value="" disabled selected>Cargando rondas...</option>
             </select>
         </div>
         
         <div class="form-group">
-            <label for="equipo">Equipo (1-100):</label>
-            <input type="number" id="equipo" min="1" max="100" required placeholder="Ingresa el número de equipo (1-100)">
+            <label for="equipo">Equipo:</label>
+            <select id="equipo" required>
+                <option value="" disabled selected>Cargando equipos...</option>
+            </select>
         </div>
         
         <div class="form-group">
@@ -169,7 +167,11 @@
         <button id="copyBtn" class="hidden">Copiar JSON</button>
     </div>
     
-    <script>
+    <script type="module">
+        // Importar los módulos necesarios
+        import equipos from "/v2/entities/?type=Equipo&options=keyValues" with {type: "json"};
+        import rondas from "/v2/entities/?type=Ronda&options=keyValues" with {type: "json"};
+
         // Variables del cronómetro
         let minutos = 0;
         let segundos = 0;
@@ -191,8 +193,57 @@
         
         // Elementos del formulario
         const rondaSelect = document.getElementById('ronda');
-        const equipoInput = document.getElementById('equipo');
+        const equipoSelect = document.getElementById('equipo');
         const tipoSelect = document.getElementById('tipo');
+        
+        // Función para cargar las opciones de rondas y equipos
+        async function loadOptions() {
+            try {
+                // Limpiar selects
+                rondaSelect.innerHTML = '';
+                equipoSelect.innerHTML = '';
+                
+                // Agregar opción por defecto
+                const defaultRondaOption = document.createElement('option');
+                defaultRondaOption.value = '';
+                defaultRondaOption.disabled = true;
+                defaultRondaOption.selected = true;
+                defaultRondaOption.textContent = 'Selecciona una ronda';
+                rondaSelect.appendChild(defaultRondaOption);
+                
+                const defaultEquipoOption = document.createElement('option');
+                defaultEquipoOption.value = '';
+                defaultEquipoOption.disabled = true;
+                defaultEquipoOption.selected = true;
+                defaultEquipoOption.textContent = 'Selecciona un equipo';
+                equipoSelect.appendChild(defaultEquipoOption);
+                
+                // Cargar rondas
+                rondas.forEach(element => {
+                    let option = document.createElement('option');
+                    option.textContent = `Ronda ${element.num}`;
+                    option.value = element.num;
+                    rondaSelect.appendChild(option);
+                });
+                
+                // Cargar equipos
+                equipos.forEach(element => {
+                    let option = document.createElement('option');
+                    option.textContent = `${element.dorsal} - ${element.name}`;
+                    option.value = element.dorsal;
+                    equipoSelect.appendChild(option);
+                });
+                
+                // Configurar event listeners para los selects
+                rondaSelect.oninput = upload.changeID;
+                equipoSelect.oninput = upload.changeID;
+                
+            } catch (error) {
+                console.error('Error al cargar las opciones:', error);
+                rondaSelect.innerHTML = '<option value="" disabled selected>Error al cargar rondas</option>';
+                equipoSelect.innerHTML = '<option value="" disabled selected>Error al cargar equipos</option>';
+            }
+        }
         
         // Función para actualizar el display del cronómetro
         function updateDisplay() {
@@ -267,7 +318,7 @@
         // Función para generar el JSON con los datos
         function updateJsonData() {
             const ronda = rondaSelect.value || 0;
-            const equipo = equipoInput.value || 0;
+            const equipo = equipoSelect.value || 0;
             const tipo = tipoSelect.value || 'AUXI';
             
             const jsonData = {
@@ -322,11 +373,14 @@
         
         // Actualizar JSON cuando cambian los selectores
         rondaSelect.addEventListener('change', updateJsonData);
-        equipoInput.addEventListener('input', updateJsonData);
+        equipoSelect.addEventListener('change', updateJsonData);
         tipoSelect.addEventListener('change', updateJsonData);
         
-        // Inicializar el display
-        updateDisplay();
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDisplay();
+            loadOptions();
+        });
     </script>
 </body>
 </html>
