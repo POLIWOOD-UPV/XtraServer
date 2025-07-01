@@ -28,15 +28,18 @@ async function actualizarEstado() {
     const json = await res.json();
 
     for (let id in json) {
+      // para no iterar sobre todos, podriamos guardar el ultimo estado y solo editar los cambiados
+
       if (id === "id" || id === "type") continue; // ignorar campos fijos
       const estado = json[id]?.value || "oculto"; // estado por defecto: oculto
-      const contenedor = document.getElementById(id === "ranking" ? "rankings" : id); // corregir id si es ranking
+      const contenedor = document.getElementById(id === "ranking" ? "rankings" : id); // corregir id si es ranking (GUARRADA GUARRA POR NO CAMBIAR EL NGSI)
 
       if (contenedor) {
-        if (id !== "ranking") {
-          animarDIV(contenedor, estado); // animar contenedor si no es ranking
-          contenedor.style.display = (estado === "visible") ? "block" : "none"; // mostrar u ocultar (quitar cuando animarDIV este hecha)
+        if (id !== "rankings") {
+          console.log("No es el ranking")
+          contenedor.style.display = (estado === "visible") ? "block" : "none"; // mostrar u ocultar 
         } else {
+          console.log("Es el ranking")
           const iframe = contenedor.querySelector("iframe"); // coger el iframe que esta dentro del contenedor "rankings"
           
           if (iframe && iframe.contentWindow) { // asegurarse de que el iframe esta cargado y tiene contenido
