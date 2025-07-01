@@ -3,9 +3,7 @@ let socketsList = new Array();
 
 const broadcast = (socket, msg) => {
   socketsList.forEach(sock => {
-    if (sock != socket) {
-      sock.send(msg);
-    }
+    sock.send(msg);
   });
 };
 

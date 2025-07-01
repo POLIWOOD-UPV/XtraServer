@@ -3,15 +3,6 @@
 import "/socket.io/socket.io.js";
 import tables from "/tablas" with {type: "json"};
 import template from "/templates/crono.json" with {type: "json"};
-/*
-let performance;
-
-window.onload = () => {
-    performance = window.PerformanceNavigationTiming.startTime
-    // performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
-    // tsp.setTime(tsp.getTime() + performance.timing.loadEventStart - performance.timing.navigationStart
-}
-*/
 
 class Cronometro {
     empty() {
@@ -263,6 +254,36 @@ class Cronometro {
             } catch (error) {
                 console.error(error.message, res); // si algo sale mal, se notifica al usuario
             }
+        }
+    }
+
+    async add(value) {
+        if (this.stepper) {
+            this.entity.start -= value;
+        } else {
+            this.entity.stop += value;
+        }
+        this.interface();
+        while (true) {
+            let res;
+            try {
+                res = await fetch(`/v2/entities/${this.id}/attrs?options=keyValues`, {
+                    headers: {"Content-Type": "application/json"},
+                    method: "PATCH",
+                    body: JSON.stringify(this.entity)
+                });
+                break;
+            } catch (error) {
+                console.error(error.message, res); // si algo sale mal, se notifica al usuario
+            }
+        }
+    }
+
+    button() {
+        if (this.stepper) {
+            this.stop();
+        } else {
+            this.start();
         }
     }
 };

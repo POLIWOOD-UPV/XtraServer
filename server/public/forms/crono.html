@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crono</title>
     <script type="module" src="/forms/js/crono.js"></script>
+    <link rel="stylesheet" href="./css/form.css">
 </head>
 <body>
     <h1>Cronometro</h1>
@@ -27,7 +28,7 @@
             <label for="tipo">Tipo: </label><select name="tipo" required></select>
         </p> <!-- crono.js actualizara automaticamente este select -->
         <hr>
-        <h3>Visualización:</h3>
+        <h3>Datos:</h3>
         <p>
             <!-- el "name" del input debe de ser igual al atributo que enviar -->
             <label for="start">Inicio: </label>
@@ -36,21 +37,9 @@
             <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
         </p>
         <p>
-            
-        </p>
-        <hr>
-        <h3>Datos:</h3>
-        <p>
-            <!-- el "name" del input debe de ser igual al atributo que enviar -->
-            <label for="start">Inicio: </label>
-            <input type="number" name="start" step=1 pattern="[0-9]*" readonly>
-            <span>ms</span>
-            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
-        </p>
-        <p>
             <!-- el "name" del input debe de ser igual al atributo que enviar -->
             <label for="stop">Final:  </label>
-            <input type="number" name="stop" step=1 pattern="[0-9]*" readonly>
+            <input type="number" name="stop" step=1 pattern="[0-9]*">
             <span>ms</span>
             <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
         </p>

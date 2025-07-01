@@ -39,15 +39,15 @@ function mostrarDatos(){
     // Metemos como innerHTML el resultado
     resultado.innerHTML = `
     <h2>Resultados de ${dorsal} - ${nombre} en Ronda ${ronda}</h2>
-    <p><strong>Requested Payload:</strong> ${ficha?.carga ?? "?"} kg</p>
-    <p><strong>Unloaded Payload:</strong> ${vuelo?.carga ?? "?"} kg</p>
+    <p><strong>Requested Payload:</strong> ${ficha?.carga ?? "?"} ml</p>
+    <p><strong>Unloaded Payload:</strong> ${vuelo?.carga ?? "?"} ml</p>
     <p><strong>Time Circuit:</strong> ${getTiempo("Circuito")}</p>
     <p><strong>Time Glide:</strong> ${getTiempo("Planeo")}</p>
     <p><strong>Altitude:</strong> ${vuelo?.altura ?? "?"} m</p>
-    <p><strong>Loading Time:</strong> ?</p>
+    <p><strong>Time Load:</strong> ? en segundos a futuro</p>
     <p><strong>Pilot:</strong> ${decide(ficha?.piloto, "external pilot", "team pilot")}</p>
     <p><strong>Legal Flight:</strong> ${decide(vuelo?.nulo === false, "legal", "not legal")}</p>
-    <p><strong>Good Landing:</strong> ${decide(vuelo?.aterrizaje, "good landing", "crash landing")}</p>
+    <p><strong>Good Landing:</strong> ${decide(vuelo?.aterrizaje, "crash landing", "good landing")}</p>
     <p><strong>Replacement Parts:</strong> ${decide(ficha?.repuestos, "replacements used", "replacements not used")}</p>
     <p><strong>Takeoff Distance:</strong> ${["60m", "40m", "20m", "15m"][ficha?.despegue ?? 0]}</p>
     `;
@@ -97,7 +97,7 @@ socket.on("message", async (msg) => {
 // Buscar cronos por ronda y equipo
 const getTiempo = (tipo) => {
     let crono = cronos.find(c => c.ronda === ronda && c.equipo === equipo && c.tipo === tipo);
-    return crono ? ((crono.stop - crono.start) / 1000000).toFixed(2) + " s" : "?";
+    return crono ? ((crono.stop - crono.start) / 1000).toFixed(2) + " s" : "?";
 };
 
 let tiempoCircuito = getTiempo("Circuito");

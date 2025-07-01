@@ -34,7 +34,7 @@ exports.http_listdir = (res, url) => {
     const urlFixed = url.endsWith("/") ? url : url + "/";
 
     dir.forEach(element => {
-      if (!element.startsWith(".")) {
+      if (!element.startsWith(".") && element != "css" && element != "js") {
         // Si el elemento no contiene un punto, se asume directorio y se le agrega "/"
         if (element.search("\\.") === -1) {
           element += "/";
