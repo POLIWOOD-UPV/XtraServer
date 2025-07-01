@@ -4,6 +4,7 @@ const entidadSelect = document.getElementById("selector")
 const resultado = document.getElementById("resultado")
 const form = document.getElementById("formulario")
 const checkbox = document.getElementById("abrir")
+const verTablaCheckbox = document.getElementById("verTabla")
 const contenedorTabla = document.getElementById("tabla-tareas")
 const staffeo = document.getElementById("staffeo")
 const selectorDia = document.getElementById("selector_dia");
@@ -22,7 +23,7 @@ const dias_competicion = [
 let tareas_global = [];
 let recursos_global = [];
 let horas = [];
-
+let id = ""
 // Entidades
 async function cargarOpciones(tipoEntidad, selectElement) {
     try {
@@ -39,20 +40,34 @@ async function cargarOpciones(tipoEntidad, selectElement) {
       // Lo que nos devuelva lo metemos en el dropdown
       data.forEach(entidad => {
         const option = document.createElement("option");
-        // Valor real
         option.value = entidad.id;
-        const label = entidad.dorsal ? `${entidad.dorsal} - ${entidad.name}` :
-                      entidad.name ? entidad.name :
-                      entidad.acr ? "":
-                      entidad.tarea ? entidad.tarea :
-                      entidad.id;
 
-        console.log(entidad)
-        // Lo que se lee
-        let label_limpio = entidad.id.replace("urn:ngsi-ld:", "");
-        option.textContent = `${entidad.type || ""} -> ${label_limpio} (${entidad.acr})`;
+        // abel no mires esta guarrada
+        // Sacar el VALUE del atributo correcto:
+        const displayValue = 
+          // Si existe `dorsal.value`, lo usamos junto con `name.value`
+          entidad.dorsal?.value !== undefined
+            ? `${entidad.dorsal.value} - ${entidad.name?.value ?? ''}`
+          // Si no, pero existe `name.value`, lo usamos
+            : entidad.name?.value !== undefined
+              ? entidad.name.value
+          // Si tampoco, pero existe `acr.value`, lo usamos
+              : entidad.acr?.value !== undefined
+                ? entidad.acr.value
+          // Si tampoco, pero existe `tarea.value`, lo usamos
+                : entidad.tarea?.value !== undefined
+                  ? entidad.tarea.value
+          // Si no hay ninguno de los anteriores, caemos al `id` limpio
+                  : entidad.id.replace('urn:ngsi-ld:', '');
+
+        // Limpiar el urn para el label por si acaso
+        const labelClean = entidad.id.replace('urn:ngsi-ld:', '');
+
+        // Poner el textcontent de la opción
+        option.textContent = `${entidad.type} → ${labelClean} (${displayValue})`;
         selectElement.appendChild(option);
       });
+
     } catch (err) {
       console.error(`[ERROR] Cargando ${tipoEntidad || "todos"}:`, err);
       selectElement.innerHTML = `<option>Error al cargar</option>`;
@@ -60,10 +75,52 @@ async function cargarOpciones(tipoEntidad, selectElement) {
 }
 
 async function mostrarEntidad(id, destino) {
-  // Mete la identidad en el <pre> para leerla
-  const res = await fetch(`/v2/entities/${encodeURIComponent(id)}`);
+  // Llamada a la API
+  const res  = await fetch(`/v2/entities/${encodeURIComponent(id)}`);
   const data = await res.json();
-  destino.textContent = JSON.stringify(data, null, 2);
+
+  // Ocultar/preparar contenedores
+  resultado.style.display      = verTablaCheckbox.checked ? "none" : "block";
+  contenedorTabla.style.display = verTablaCheckbox.checked ? "block" : "none";
+  contenedorTabla.innerHTML     = "";
+
+  if (verTablaCheckbox.checked) {
+    // *** Generar tabla ***
+    const table = document.createElement("table");
+    table.style.borderCollapse = "collapse";
+    table.style.width          = "100%";
+    table.border               = "1";
+
+    // Cabecera
+    const header = document.createElement("tr");
+    header.innerHTML = "<th>Propiedad</th><th>Valor</th>";
+    table.appendChild(header);
+
+    // Recorremos cada campo del objeto JSON
+    Object.keys(data).forEach(key => {
+      const row = document.createElement("tr");
+      const cellKey = document.createElement("td");
+      cellKey.textContent = key;
+      const cellVal = document.createElement("td");
+
+      // Si es atributo NGSI con .value, lo mostramos; si no, el propio valor
+      if (data[key] && typeof data[key] === "object" && "value" in data[key]) {
+        cellVal.textContent = data[key].value;
+      } else {
+        cellVal.textContent = data[key];
+      }
+
+      row.appendChild(cellKey);
+      row.appendChild(cellVal);
+      table.appendChild(row);
+    });
+
+    contenedorTabla.appendChild(table);
+
+  } else {
+    // *** Mostrar JSON raw ***
+    destino.textContent = JSON.stringify(data, null, 2);
+  }
 }
 
 // Tabla de horarios de tareas (general de todas las tareas)
@@ -216,15 +273,18 @@ tipoSelect.addEventListener("change", () => {
 });
 
 // Seleccionar una entidad
+// Seleccionar una entidad
 entidadSelect.addEventListener("change", () => {
-  id = entidadSelect.value;
-  // Si es staff, que se vea el selector de dia tal tal
+  const id = entidadSelect.value;   // ← declaramos la variable localmente
+
+  // Si es Staff, mostramos el selector; en cualquier otro caso, lo ocultamos
   if (id.includes(":Staff:")) {
     staffeo.style.display = "block";
-  } else if (tipoSelect.value !== "Staff") {
+  } else {
     staffeo.style.display = "none";
   }
 });
+
 
 // Cuando se pulsa el botón "Ver entidad"
 form.addEventListener("submit", e => {
