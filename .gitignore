@@ -1,8 +1,10 @@
 # Volumes
-!mysql/
-!mongodb/
-mysql/*
-mongodb/*
+# !mysql/
+# !mongodb/
+# !mona-rtmp/
+# mysql/*
+# mongodb/*
+# mona-rtmp/*
 
 # Logs
 !**/logs/

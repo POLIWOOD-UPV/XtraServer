@@ -1,0 +1,4 @@
+Input Altura
+Crono Auxiliar (pra mostrar en pantalla)
+Input Vuelo Nulo
+Input Aterrizage

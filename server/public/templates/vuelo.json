@@ -24,5 +24,9 @@
     "altura": {
         "type": "Number",
         "value": 0.0
+    },
+    "observaciones": {
+        "type": "Text",
+        "value": ""
     }
 }

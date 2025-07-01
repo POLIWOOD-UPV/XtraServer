@@ -176,6 +176,25 @@ exports.subscribeALL = async () => {
     });
 }
 
+// crea una subscripcion para cada acción
+exports.cleanSubsctiptions = async () => {
+    // TODO //
+    
+    subs.forEach(async sub => {
+        let res = await (fetch(subscriptions, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sub)
+        }));
+        if (!res.ok) {
+            console.error(`ngsi.cleanSubsctiptions(${res.status}):`, await res.text(), sub);
+        }
+    });
+}
+
 // Para actualizar varias entidades a la vez
 // action: append | appendStric | delete | replace | update
 // entities: Array<NGSI_Object>
