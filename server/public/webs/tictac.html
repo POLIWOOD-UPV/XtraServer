@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador 1 minuto</title>
+  <style>
+    /* https://developer.mozilla.org/en-US/docs/Web/CSS/height */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      height: 100vh;
+      margin: 0;
+
+      background: #ffffff;
+      color: #121212;
+    }
+    #timer {
+      font-size: 15vw;
+
+      font-weight: bold;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+    }
+    .botones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      
+      margin-top: 20px;
+    }
+    button {
+        padding: 15px;
+        margin: 5px;
+
+        font-size: 5vw;
+        min-width: 100px;
+        
+        border-radius: 10px;
+        border: none;
+        
+        cursor: pointer;
+        background-color: #000000;
+        color: #ffffff;
+    }
+    button:hover {
+      background-color: #e41414; 
+      /* color poliwood a futuro? */
+    }
+
+  </style>
+</head>
+<body>
+    <div class="botones">
+        <button onclick="iniciar()">Iniciar</button>
+        <button onclick="pausar()">Pausar</button>
+        <button onclick="reiniciar()">Reiniciar</button>
+    </div>
+    <div id="timer">01:00</div>
+
+  <script>
+    let segundos = 60;
+    let intervalo = null;
+    const timerDOM = document.getElementById('timer');
+
+    function formato(seg) {
+        // Minutos y segundos que vamos a poner por pantalla
+        // Minutos
+        let m = Math.floor(seg / 60).toString().padStart(2, '0'); // que tenga formato 01,02...
+        // Segundos
+        let s = (seg % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    function actualizarTexto() {
+        // Actualizarr el texto en pantalla
+        timerDOM.textContent = formato(segundos);
+    }
+
+    function iniciar() {
+        if (intervalo === null) {
+        intervalo = setInterval(() => {
+            // Si hay segundos
+            if (segundos > 0) {
+                // Bajamos uno y lo actualizamos
+                segundos--;
+                actualizarTexto();
+            // Cuando acabe ( no hay mas segundos)
+            } else {
+                clearInterval(intervalo);
+                intervalo = null;
+                timerDOM.textContent = 'Tiempo acabado';
+            }
+        }, 1000); 
+        }
+    }
+
+    function pausar() {
+        // Paramos el intervalo de un segundo
+        clearInterval(intervalo); 
+        intervalo = null;
+    }
+
+    function reiniciar() {
+        pausar();
+        segundos = 60;
+        actualizarTexto();
+    }
+
+    // Llamada inicial para poner el primer tiempo
+    actualizarTexto();
+  </script>
+</body>
+</html>
