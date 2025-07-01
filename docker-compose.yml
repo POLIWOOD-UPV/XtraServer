@@ -68,12 +68,19 @@ services:
         target: /home/app
         read_only: false
 
-  nginx-rtmp:
-    image: tiangolo/nginx-rtmp
-    container_name: nginx-rtmp
-    ports:
-      - "1935:1935"
+  mona-rtmp:
+    image: monaserver/monaserver
+    container_name: mona-rtmp
     restart: unless-stopped
+    ports:
+      - "554:554"
+      - "1935:1935"
+      - "1935:1935/udp"
+    volumes:
+      - type: bind
+        source: ./mona-rtmp
+        target: /usr/local/bin/www/
+        read_only: false
 
 volumes:
   mongo-db: ~

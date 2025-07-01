@@ -5,4 +5,4 @@ ffmpeg ^
 -r 30 ^
 -b 2000 ^
 -f flv ^
-rtmp://localhost/live/test
+rtmp://localhost/
