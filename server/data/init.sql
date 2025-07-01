@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `vuelos` (
   `aterrizaje` boolean DEFAULT NULL,
   `carga` float unsigned DEFAULT NULL,
   `altura` float unsigned DEFAULT NULL,
+  `observaciones` text DEFAULT NULL,
   PRIMARY KEY (`ronda`, `equipo`),
   CONSTRAINT `FK_ronda_vuelos` FOREIGN KEY (`ronda`)
     REFERENCES `rondas` (`num`),

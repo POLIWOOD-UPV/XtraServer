@@ -100,25 +100,27 @@ const getForm = async () => {
 }
 
 //  Version antigua
-// const parseForm = (obj) => {
-//     for (const key in template) {
-//         if (key == "id" || key == "type") {
-//             continue // ignoramos datos generales
-//         }
-//         switch (template[key].type) {
-//             case "Number":
-//                 obj[key] = Number(obj[key]);
-//                 break;
-//             case "Boolean":
-//                 obj[key] = Boolean(obj[key]);
-//                 break;
-//             default:
-//                 break;
-//         }
-//     }
-//     return obj;
-// }
+const parseForm = (obj) => {
+    for (const key in template) {
+        if (key == "id" || key == "type") {
+            continue // ignoramos datos generales
+        }
+        switch (template[key].type) {
+            case "Number":
+                obj[key] = Number(obj[key]);
+                break;
+            case "Boolean":
+                obj[key] = Boolean(obj[key]);
+                break;
+            default:
+                break;
+        }
+    }
+    return obj;
+}
 
+// LA FORMA NUEVA NO LO CODIFICA EN "options=keyValues" RICARDO, cambia solo el link no el objeto etero (la vida puede ser sencilla, aprovechala)
+/*
 const parseForm = (obj) => {
     // creamos el objeto base con id y tipo
     let entity = {
@@ -150,7 +152,7 @@ const parseForm = (obj) => {
 
     return entity;
 };
-
+*/
 
 const uploadForm = async () => {
     // actualizamos el contenido con los datos del form
@@ -190,9 +192,9 @@ const uploadForm = async () => {
 
 const updateForm = () => {
     // cojemos todos los imputs (escepto los de subida)
-    let inputs = document.querySelectorAll("input:not([type=submit]),select");
+    let inputs = document.querySelectorAll("input:not([type=submit]),select,textarea");
     inputs.forEach(input => {
-        input.value = content[input.name];
+        input.value = content[input.name]; //.value;
     }); // Actualizamos el valor de todos los inputs por los datos guardados
 }
 
