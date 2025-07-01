@@ -181,21 +181,24 @@ exports.subscribeALL = async () => {
 
 // crea una subscripcion para cada acción
 exports.cleanSubsctiptions = async () => {
-    // TODO //
-    
-    subs.forEach(async sub => {
-        let res = await (fetch(subscriptions, {
-            method: 'DELETE',
+    let res;
+    try {
+        res = await fetch(subscriptions, {
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(sub)
-        }));
+            }
+        })
         if (!res.ok) {
-            console.error(`ngsi.cleanSubsctiptions(${res.status}):`, await res.text(), sub);
+            console.error(`ngsi.cleanSubsctiptions(${res.status}):`, await res.text());
+            return;
         }
-    });
+        let subs = await res.json();
+        this.update("delete", subs.map((obj) => {obj.id}));
+    } catch (error) {
+        console.error(`ngsi.cleanSubsctiptions():`, error);
+    }
 }
 
 // Para actualizar varias entidades a la vez
@@ -383,6 +386,7 @@ exports.start = async () => {
     try {
         console.log("NGSI Starting...")
         try {
+            await this.cleanSubsctiptions();
             await this.subscribeALL();
         }
         catch {

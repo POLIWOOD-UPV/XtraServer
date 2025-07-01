@@ -7,7 +7,7 @@
     <script type="module" src="/forms/js/crono.js"></script>
 </head>
 <body>
-    <h1>Formulario Cronometro</h1>
+    <h1>Cronometro</h1>
     <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
     <form method="post" enctype="application/json" formenctype="application/json">
         <!-- https://www.w3.org/TR/html-json-forms/ -->
@@ -27,22 +27,34 @@
             <label for="tipo">Tipo: </label><select name="tipo" required></select>
         </p> <!-- crono.js actualizara automaticamente este select -->
         <hr>
-        <h3>Temporización:</h3>
+        <h3>Visualización:</h3>
         <p>
             <!-- el "name" del input debe de ser igual al atributo que enviar -->
             <label for="start">Inicio: </label>
             <input type="number" name="start" step=1 pattern="[0-9]*">
-            <span>microsegundos</span>
+            <span>ms</span>
+            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
+        </p>
+        <p>
+            
+        </p>
+        <hr>
+        <h3>Datos:</h3>
+        <p>
+            <!-- el "name" del input debe de ser igual al atributo que enviar -->
+            <label for="start">Inicio: </label>
+            <input type="number" name="start" step=1 pattern="[0-9]*" readonly>
+            <span>ms</span>
             <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
         </p>
         <p>
             <!-- el "name" del input debe de ser igual al atributo que enviar -->
             <label for="stop">Final:  </label>
-            <input type="number" name="stop" step=1 pattern="[0-9]*">
-            <span>microsegundos</span>
+            <input type="number" name="stop" step=1 pattern="[0-9]*" readonly>
+            <span>ms</span>
             <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
         </p>
         <input type="submit" value="Subir">
-    </form>
+    </form>    
 </body>
 </html>
