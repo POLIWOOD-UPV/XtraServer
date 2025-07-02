@@ -9,10 +9,11 @@ let contenido = []
 let index = 0
 let actualizando = false; // para evitar llamadas simultáneas
 const intervaloRotacion = 4000 // ms
-
+let equipos;
 
 // Eventos
 document.addEventListener("DOMContentLoaded", () => {
+    pedirEquipos()
     actualizarEquipoMostrado();
 });
 
@@ -21,6 +22,11 @@ socket.addEventListener("message", (event) => {
         actualizarEquipoMostrado();
     }
 });
+
+async function pedirEquipos(){
+    const resEquipos = await fetch("http://localhost:80/v2/entities?type=Equipo&limit=100");
+    equipos = await resEquipos.json();
+}
 
 // Funciones para mostrar datos
 async function actualizarEquipoMostrado() {
@@ -65,8 +71,6 @@ async function actualizarEquipoMostrado() {
 
 async function mostrarEquipo(acronimo){
     // Cogemos el dato de ese equipo
-    const resEquipos = await fetch("http://localhost:80/v2/entities?type=Equipo&limit=100");
-    const equipos = await resEquipos.json();
     let equipo = equipos.find(e => e.acr?.value === acronimo);
 
     if (!equipo) {
