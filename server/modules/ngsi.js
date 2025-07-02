@@ -359,7 +359,7 @@ exports.crear_equipoMostrado = async () => {
     let equipoMostrado = {
         id:"urn:ngsi-ld:equipoMostrado:001",
         type: "EquipoMostrado",
-        acr: {type: "Text", value: "WOOD"}
+        acr: {type: "Text", value: "SPONSORS"}
     };
     return await this.update("append", [equipoMostrado]);
 };

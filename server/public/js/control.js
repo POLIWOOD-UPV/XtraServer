@@ -107,8 +107,8 @@ async function publicarAnuncio() {
 }
 
 // Datos
-async function publicarEquipoMostrado() {
-    let acronimo = selector_equipo_img.value || "WOOD";
+async function publicarEquipoMostrado(sponsors) {
+    let acronimo = sponsors ? "SPONSORS" : selector_equipo_img.value
 
     let entidad = {
         id: "urn:ngsi-ld:equipoMostrado:001",

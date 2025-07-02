@@ -42,48 +42,14 @@ async function actualizarEquipoMostrado() {
         // Cogemos el ultimo equipo
         const res = await fetch("http://localhost:80/v2/entities/urn:ngsi-ld:equipoMostrado:001");
         const mostrado = await res.json();
-        
+
+        console.log(mostrado)
         // Comprobamos el acronimo
         acronimo = mostrado.acr?.value;
         if (!acronimo) throw new Error("acronimo no definido");
 
-        // Cogemos el dato de ese equipo
-        const resEquipos = await fetch("http://localhost:80/v2/entities?type=Equipo&limit=100");
-        const equipos = await resEquipos.json();
-        equipo = equipos.find(e => e.acr?.value === acronimo);
+        bloques = acronimo === "SPONSORS" ? mostrarSponsor() : await mostrarEquipo(acronimo)
 
-        if (!equipo) {
-            contenedor.innerHTML = `<p>Equipo con acrónimo <b>${acronimo}</b> no encontrado.</p>`;
-            return;
-        }
-
-        nombre = equipo.name?.value || "Equipo sin nombre";
-        logo = equipo.logo?.value || "";
-        dorsal = equipo.dorsal?.value || "?";
-        piloto = equipo.piloto?.value || "Desconocido";
-        lider = equipo.lider?.value || "Desconocido";
-        miembros = equipo.miembros?.value || "?";
-        universidad = equipo.uni?.value || "Universidad desconocida";
-
-        // Bloque logo
-        logoDiv = document.createElement("div");
-        img = document.createElement("img");
-        // img.src = `${logo}`;
-        img.src = `../favicon.ico`;
-        img.src = `../img/LogosPNG/${acronimo}.png`;
-        img.alt = `Logo de ${nombre}`;
-        img.className = "logo-equipo";
-        logoDiv.appendChild(img);
-        
-        const bloques = [
-            logoDiv,
-            crearBloque(`Dorsal`, `${dorsal}`),
-            crearBloque(`Name`, `${nombre}`),
-            crearBloque(`University`, universidad),
-            crearBloque(`Leader`, lider),
-            crearBloque(`Pilot`, piloto),
-            crearBloque(`Members`, miembros)
-        ];
         // Rotacion de contenido
         contenido = bloques
         index = 0;
@@ -95,6 +61,70 @@ async function actualizarEquipoMostrado() {
     } finally {
         actualizando = false;
     }
+}
+
+
+async function mostrarEquipo(acronimo){
+    // Cogemos el dato de ese equipo
+    const resEquipos = await fetch("http://localhost:80/v2/entities?type=Equipo&limit=100");
+    const equipos = await resEquipos.json();
+    let equipo = equipos.find(e => e.acr?.value === acronimo);
+
+    if (!equipo) {
+        contenedor.innerHTML = `<p>Equipo con acrónimo <b>${acronimo}</b> no encontrado.</p>`;
+        return;
+    }
+
+    nombre = equipo.name?.value || "Equipo sin nombre";
+    logo = equipo.logo?.value || "";
+    dorsal = equipo.dorsal?.value || "?";
+    piloto = equipo.piloto?.value || "Desconocido";
+    lider = equipo.lider?.value || "Desconocido";
+    miembros = equipo.miembros?.value || "?";
+    universidad = equipo.uni?.value || "Universidad desconocida";
+
+    // Bloque logo
+    logoDiv = document.createElement("div");
+    img = document.createElement("img");
+    // img.src = `${logo}`;
+    img.src = `../favicon.ico`;
+    img.src = `../img/LogosPNG/${acronimo}.png`;
+    img.alt = `Logo de ${nombre}`;
+    img.className = "logo-equipo";
+    logoDiv.appendChild(img);
+    
+    const bloques = [
+        logoDiv,
+        crearBloque(`Dorsal`, `${dorsal}`),
+        crearBloque(`Name`, `${nombre}`),
+        crearBloque(`University`, universidad),
+        crearBloque(`Leader`, lider),
+        crearBloque(`Pilot`, piloto),
+        crearBloque(`Members`, miembros)
+    ];
+
+    return bloques
+
+}
+
+function mostrarSponsor() {
+  const sponsors = [
+    "ABELLA", "AYTOALCUDIA", "COIAE", "EMBENTION", "ETSIADI", "FDACV",
+    "GENERALITAT", "GENESP", "HP", "IBERDROLA", "PARANOID", "UPV"
+  ];
+
+  const bloques = [];
+
+  for (let sponsor of sponsors) {
+    const sponsorDiv = document.createElement("div");
+    const img = document.createElement("img");
+    img.src = `../img/Sponsors/LogosPNG/${sponsor}.png`;
+    img.alt = `Logo de ${sponsor}`;
+    img.className = "logo-equipo";
+    sponsorDiv.appendChild(img);
+    bloques.push(sponsorDiv);
+  }
+  return bloques
 }
 
 
