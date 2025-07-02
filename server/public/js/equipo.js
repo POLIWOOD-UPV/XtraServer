@@ -43,7 +43,6 @@ async function actualizarEquipoMostrado() {
         const res = await fetch("http://localhost:80/v2/entities/urn:ngsi-ld:equipoMostrado:001");
         const mostrado = await res.json();
 
-        console.log(mostrado)
         // Comprobamos el acronimo
         acronimo = mostrado.acr?.value;
         if (!acronimo) throw new Error("acronimo no definido");

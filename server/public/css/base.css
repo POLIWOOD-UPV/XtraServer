@@ -22,6 +22,7 @@
       grid-template-columns: 450px 1fr 325px;
       grid-template-rows: 130px 120px 1fr;
       gap: 0;
+      overflow: hidden;
     }
 
     .item {
@@ -53,28 +54,32 @@
       width: 755px;
       height: 75px;
       justify-self: center;
+      transition: top .5s ease;
       
     }
-
+    
     .equipo {
       grid-column: 3;
       grid-row: 1;
       border-radius: 10px;
+      transition: right .5s ease;
       
     }
-
+    
     .timer {
       grid-column: 3;
       grid-row: 2;
       margin-top: 15px;
+      transition: right .5s ease;
     }
-
+    
     .data {
       grid-column: 3;
       grid-row: 3;
       height: 225px;
       margin-top: 15px;
       border-radius: 10px;
+      transition: right .5s ease;
     }
 
     iframe {
@@ -82,4 +87,5 @@
       height: 100%;
       border: none;
       overflow: hidden;
+      position: relative;
       }

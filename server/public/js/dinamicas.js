@@ -1,4 +1,12 @@
 const socket = io();
+// DOM
+const anuncios = document.getElementById("anuncios")
+const cronos = document.getElementById("cronos")
+const datos = document.getElementById("datos")
+const equipos = document.getElementById("equipos")
+const rankings = document.getElementById("rankings")
+
+
 
 // EVITAR SOLAPES 
 let actualizando = false;
@@ -27,35 +35,36 @@ async function actualizarEstado() {
     const json = await res.json();
 
     for (let id in json) {
-      // para no iterar sobre todos, podriamos guardar el ultimo estado y solo editar los cambiados
+      // ignorar campos fijos
+      if (id === "id" || id === "type") continue; 
+      let estado = json[id]?.value || "oculto"; // estado por defecto: oculto
 
-      if (id === "id" || id === "type") continue; // ignorar campos fijos
-      const estado = json[id]?.value || "oculto"; // estado por defecto: oculto
-      const contenedor = document.getElementById(id === "ranking" ? "rankings" : id); // corregir id si es ranking (GUARRADA GUARRA POR NO CAMBIAR EL NGSI)
-
-      if (contenedor) {
-        if (id !== "rankings") {
-          contenedor.style.display = (estado === "visible") ? "block" : "none"; // mostrar u ocultar 
-        } else {
-          const iframe = contenedor.querySelector("iframe"); // coger el iframe que esta dentro del contenedor "rankings"
-          
-          if (iframe && iframe.contentWindow) { // asegurarse de que el iframe esta cargado y tiene contenido
-            const doc = iframe.contentDocument || iframe.contentWindow.document; // coger el documento interno del iframe (ranking.html)
-
-            // Cogemos el contenedor principal de ranking.html
-            const divRanking = doc.getElementById("contenedor"); 
-
-            if (divRanking) {
-              if (estado === "visible") {
-                iframe.contentWindow?.aparicionDinamica?.();
-              } else {
-                iframe.contentWindow?.desaparicionDinamica?.();
-              }
-            }
-
+      switch (id) {
+        case "anuncios":
+          anuncios.style.top =  estado === "visible" ? "0px" : "-600px"
+          break;
+        case "cronos":
+          cronos.style.right =  estado === "visible" ? "0px" : "-600px"
+          break;
+        case "datos":
+          datos.style.right =  estado === "visible" ? "0px" : "-600px"
+          break;
+        case "equipos":
+          equipos.style.right =  estado === "visible" ? "0px" : "-600px"
+          break;
+        case "rankings":
+          const iframe = rankings.querySelector("iframe");
+          if (iframe?.contentWindow) {
+            estado === "visible"
+              ? iframe.contentWindow?.aparicionDinamica?.()
+              : iframe.contentWindow?.desaparicionDinamica?.();
           }
-        }
+          break;
+        default:
+          console.warn(`Elemento desconocido: ${id}`);
       }
+
+      
     }
   } catch (err) {
     console.error("Error al obtener el estado de Animaciones:", err); // log de error
@@ -64,3 +73,5 @@ async function actualizarEstado() {
   }
 }
 
+
+// animarDIV(div)
