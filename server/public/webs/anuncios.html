@@ -14,21 +14,6 @@
     </div>
 
 <script src="../js/anuncio.js"></script>
-<script>
-    window.addEventListener("message", (event) => {
-    const contenedor = document.getElementById("contenedor_anuncios");
-    if (!contenedor) return;
-
-    if (event.data === "ocultarAnuncios") {
-        contenedor.style.top = "-200px";
-    }
-
-    if (event.data === "mostrarAnuncios") {
-        contenedor.style.top = "0px";
-    }
-    });
-</script>
-
 
 </body>
 </html>
