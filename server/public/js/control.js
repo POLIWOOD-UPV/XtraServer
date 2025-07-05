@@ -16,6 +16,8 @@ const socket = io();
 socket.on("message", (entityId) => {
   if (entityId.includes("urn:ngsi-ld:Ronda:")) {
     cogerRondas();
+  } else if ((entityId.includes("urn:ngsi-ld:Animaciones:"))){
+    cogerAnimaciones()
   }
 });
 
