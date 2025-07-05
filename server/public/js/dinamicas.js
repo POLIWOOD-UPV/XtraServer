@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-socket.addEventListener("message", (event) => {
-  if (event === "!entityChange urn:ngsi-ld:Animaciones:001") {
+socket.on("message", (entityId) => {
+  if (entityId === "!entityUpdate urn:ngsi-ld:Animaciones:001") {
     actualizarEstado();
   }
 });

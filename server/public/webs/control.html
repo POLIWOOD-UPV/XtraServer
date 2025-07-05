@@ -42,9 +42,38 @@
   <div>
     <h2>Control de animaciones</h2>
     <div id="panelVisibilidad">
+      <div>
+        <label for="rankings">rankings:</label>
+        <button id="rankings" onclick="alternar('rankings')">Cargando...</button>
+      </div>
+      <div>
+        <label for="anuncios">anuncios:</label>
+        <button id="anuncios" onclick="alternar('anuncios')">Cargando...</button>
+      </div>
+      <div>
+        <label for="equipos">equipos:</label>
+        <button id="equipos" onclick="alternar('equipos')">Cargando...</button>
+      </div>
+      <div>
+        <label for="cronos">cronos:</label>
+        <button id="cronos" onclick="alternar('cronos')">Cargando...</button>
+      </div>
+      <div>
+        <label for="datos">datos:</label>
+        <button id="datos" onclick="alternar('datos')">Cargando...</button>
+      </div>
+    </div>
   </div>
+
+  <div>
+      <h2>Control de rondas</h2>
+      <select id="selector_ronda">
+        <option value = "">Cargando Rondas</option>
+      </select>
+      <button onclick="publicarRonda()">Publicar Ronda</button>
+    </div>
 </div>
-    
+  <script src="/socket.io/socket.io.js"></script>
   <script src =  "../js/control.js"></script>
 </body>
 </html>

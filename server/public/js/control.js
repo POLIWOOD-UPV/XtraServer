@@ -1,29 +1,32 @@
 // DOM 
-textoDOM = document.getElementById("texto");
-selector_equipo_img = document.getElementById("selector_equipo_img")
-ImgLogoEquipo = document.getElementById("imagen_equipo");
-estadoLogo = document.getElementById("estadoLogo")
-datos = document.getElementById("datosEquipo")
+const textoDOM = document.getElementById("texto");
+const selector_equipo_img = document.getElementById("selector_equipo_img")
+const selector_rondas = document.getElementById("selector_ronda")
+const ImgLogoEquipo = document.getElementById("imagen_equipo");
+const estadoLogo = document.getElementById("estadoLogo")
+const datos = document.getElementById("datosEquipo")
 
 equipos = []
+rondas = []
 const atributosAnimaciones = ["rankings", "anuncios", "equipos", "cronos", "datos"];
 const panel = document.getElementById("panelVisibilidad");
 
+const socket = io();
+
+socket.on("message", (entityId) => {
+  if (entityId.includes("urn:ngsi-ld:Ronda:")) {
+    cogerRondas();
+  }
+});
+
+
+
 // Eventos
 document.addEventListener("DOMContentLoaded", () => {
-  // Crear los botones primero
-  atributosAnimaciones.forEach(attr => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <label for="${attr}">${attr}:</label>
-      <button id="${attr}" onclick="alternar('${attr}')">Cargando...</button>
-    `;
-    panel.appendChild(div);
-  });
-
-  // Luego carga datos
+  // Cargar datos
   cogerEquipos();
   cogerAnimaciones();
+  cogerRondas();
 });
 
 selector_equipo_img.addEventListener("change",mostrarDatosEquipo)
@@ -66,6 +69,32 @@ async function cogerAnimaciones() {
   } catch (err) {
     console.error("Error al obtener Animaciones:", err);
   }
+}
+
+function cogerRondas() {
+    // Cogemos los equipos del servidor
+    fetch("http://localhost/v2/entities?type=Ronda&limit=40")
+    .then(res =>{
+        if (!res.ok)  throw new Error("No se pudo coger las rondas del servidor")
+            return res.json()
+    })
+    .then(json =>{
+        rondas = json
+        selector_rondas.innerHTML = ""
+        // Guardamos las rondas individuales
+        json.forEach(ronda => {
+            numero = ronda.num.value
+            activa = ronda.actv?.value == 1
+            
+            
+            // Lo metemos en el select
+            option = document.createElement("option")
+            option.value = numero
+            option.textContent = activa ? `ACTIVA Ronda ${numero}` : `Ronda ${numero}`;
+            
+            selector_rondas.appendChild(option)
+        })
+    })
 }
 
 // Anuncios
@@ -168,6 +197,80 @@ function mostrarDatosEquipo() {
         datos.innerHTML = "";
     }
 }
+
+// Publicar la ronda seleccionada como activa
+function publicarRonda() {
+  const numSeleccionado = selector_rondas.value;
+  if (!numSeleccionado) {
+    alert("Selecciona una ronda valida");
+    return;
+  }
+
+  // Creamos la entidad NGSI para marcarla como activa
+  const entidad = {
+    id: `urn:ngsi-ld:Ronda:${numSeleccionado}`,
+    type: "Ronda",
+    actv: { type: "Bit", value: 1 }
+  };
+
+  // Mandamos la entidad al broker
+  fetch("/v2/op/update", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      actionType: "update",
+      entities: [entidad]
+    })
+  })
+    .then(async res => {
+      if (res.ok) {
+        console.log(`Ronda ${numSeleccionado} marcada como activa`);
+        // Desactivamos las demas rondas
+        await desactivarOtrasRondas(parseInt(numSeleccionado));
+      } else {
+        const msg = await res.text();
+        console.error(`Error (${res.status}): ${msg}`);
+      }
+    })
+    .catch(err => {
+      console.error("Error al publicar ronda:", err.message);
+    });
+}
+
+// Desactiva todas las rondas excepto la indicada
+async function desactivarOtrasRondas(numActivo) {
+  try {
+    // Cogemos todas las rondas del servidor
+    const res = await fetch("/v2/entities?type=Ronda&limit=40");
+    const rondas = await res.json();
+
+    // Filtramos solo las que estan activas y no son la actual
+    const aDesactivar = rondas
+      .filter(r => r.num?.value != numActivo && r.actv?.value == 1)
+      .map(r => ({
+        id: r.id,
+        type: "Ronda",
+        actv: { type: "Bit", value: 0 }
+      }));
+
+    // Si hay rondas que desactivar, mandamos la peticion
+    if (aDesactivar.length > 0) {
+      await fetch("/v2/op/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          actionType: "update",
+          entities: aDesactivar
+        })
+      });
+      console.log(`Desactivadas ${aDesactivar.length} otras rondas`);
+    }
+  } catch (err) {
+    console.error("Error al desactivar otras rondas:", err);
+  }
+}
+
+
 
 
 async function alternar(attr) {
