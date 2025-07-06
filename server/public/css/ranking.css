@@ -116,16 +116,15 @@ aside {
 .fila {
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
-    height: 36px;
-    padding: 2px;
+    /* border: 1px solid black; */
+    height: 37px;
     position: relative;
     left: 0;
     transition: left 0.2s ease;
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    margin: 2px 5px;
+    /* margin: 2px 5px; */
 }
 
 .numero {

@@ -7,7 +7,7 @@ let despegues_visibles = true;
 let dorsal_visible   = false;
 let peso_visible     = false;
 let tiempo_visible   = true;
-
+let equiposJSON;
 // Mapeo dinámico de dorsales y categoría académica
 const valores_dorsal = {};
 const equiposAcademicos = new Set();
@@ -33,7 +33,23 @@ let filas_visible   = true;
 document.addEventListener("DOMContentLoaded", async () => {
     await actualizarRondaActiva(); // Mostramos la ronda al arrancar
     await sacaDorsales(); // Cargamos los dorsales
+    await cogerEquipos();
 });
+
+
+function cogerEquipos() {
+  // Cogemos los equipos del servidor
+  fetch("http://localhost/v2/entities?type=Equipo&limit=40")
+  .then(res =>{
+      if (!res.ok)  throw new Error("No se pudo coger los equipos del servidor")
+          return res.json()
+  })
+  .then(json =>{
+      equiposJSON = json
+      console.log(json)
+  })
+}
+
 
 // — Funciones de animación y dinámica —
 function toggleRanking() {
@@ -205,13 +221,15 @@ function applyAnimVisibility(state) {
 
 // Listener principal de socket
 socket.on("message", async (msg) => {
+  console.log(msg)
   // Procesar objetos de prueba rankingTest
   if (typeof msg !== "string") {
+    console.log(msg.tipo)
     if (msg?.tipo === "rankingTest") {
       const [ acr, pos, tiempo, peso, despegue ] = parseRanking(msg);
       // Mantén tu llamada a sumaPiloto con animado
       sumaPiloto(acr, pos, tiempo, peso, "animado", despegue);
-    }
+    } 
     return;
   }
 
@@ -264,23 +282,47 @@ function meter_en_ranking(nueva_fila) {
 }
 
 
-//  sumaPiloto
-function sumaPiloto(piloto,pos,tiempo,peso,estado,despegue) {
-    console.log("SumaPiloto");
-    let nueva_fila = creaFila(piloto,pos, tiempo,peso,despegue);
-    ++controla_pilotos;
-    //   meter_en_ranking(nueva_fila);
-    const ranking = document.getElementById("contenedor");
-    ranking.appendChild(nueva_fila)
+// equiposJSON debe estar disponible en este ámbito
+// const equiposJSON = [ … tu array … ];
 
-    switch (estado){
-    case "animado":
+function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
+    console.log("SumaPiloto");
+    if (piloto === "WOOD") {return}
+    // 1) Creamos la fila
+    let nueva_fila = creaFila(piloto, pos, tiempo, peso, despegue);
+    ++controla_pilotos;
+
+    // 2) Buscamos en el JSON el equipo cuyo acrónimo coincide con 'piloto'
+    const equipoData = equiposJSON.find(e => e.acr.value === piloto);
+
+    // 3) Seleccionamos el contenedor según acad.value
+    const uniCont = document.getElementById("filasUni");
+    const clubCont = document.getElementById("filasClub");
+    let destino;
+    if (equipoData && equipoData.acad.value === true) {
+      destino = uniCont;
+    } else if (equipoData && equipoData.acad.value === false) {
+      destino = clubCont;
+    } else {
+      // fallback: si no lo encuentra, lo metemos en el contenedor genérico
+      destino = document.getElementById("contenedor");
+    }
+
+    // 4) Lo insertamos
+    destino.appendChild(nueva_fila);
+
+    // 5) Animaciones según 'estado'
+    switch (estado) {
+      case "animado":
         nueva_fila.style.left = "-500px";
         setTimeout(() => { nueva_fila.style.left = "0px"; }, 50);
         break;
-    case "seco":
+      case "seco":
         nueva_fila.style.left = "0px";
         break;
+      default:
+        nueva_fila.style.left = "-500px";
+        setTimeout(() => { nueva_fila.style.left = "0px"; }, 50);
     }
 }
 
@@ -375,11 +417,8 @@ function meterLogos(nom) {
   const div = document.createElement("div");
   div.className = "logo";
   div.style.display = logos_visibles ? "flex" : "none";
-  let key = nom.startsWith("SAET") ? "SAETA"
-          : nom.startsWith("EAFT") ? "FlyEagle"
-          : nom;
   const img = document.createElement("img");
-  img.src = `./img/LogosPNG/${key}.png`;
+  img.src = `../../img/LogosPNG/${nom}.png`;
   div.append(img);
   return div;
 }

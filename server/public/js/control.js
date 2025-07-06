@@ -16,8 +16,6 @@ const panel = document.getElementById("panelVisibilidad");
 const socket = io();
 
 socket.on("message", (msg) => {
-  console.log("POR SOCKET HA ENTRADO:",msg)
-
   if (typeof msg !== "string") {return}
   if (msg.includes("urn:ngsi-ld:Ronda:")) {
     cogerRondas();
@@ -345,4 +343,39 @@ function enviarRanking() {
         pos
     });
 }
+
+
+function enviarTodosCeros() {
+  const select = document.getElementById('selector_equipo_ranking');
+  // Preparamos el tiempo a 0 y el string formateado
+  const min = 0, seg = 0, mil = 0;
+  const tiempoMs = 0;
+  const tiempoStr = `${min}:${String(seg).padStart(2, '0')}:${String(mil).padStart(1, '0')}`;
+
+  // Calculamos la posición de 0ms en el ranking actual
+  const tiemposActuales = Array.from(document.getElementsByClassName("tiempo"))
+    .map(t => {
+      const [m, s, ms] = t.textContent.split(":").map(Number);
+      return m * 60000 + s * 1000 + ms;
+    });
+  // Insertamos un cero para ver dónde caería
+  tiemposActuales.push(tiempoMs);
+  tiemposActuales.sort((a, b) => a - b);
+  const posCero = tiemposActuales.lastIndexOf(tiempoMs) + 1;
+
+  // Recorremos todos los equipos y emitimos el mismo evento que enviarRanking()
+  for (let i = 0; i < select.options.length; i++) {
+    const acr = select.options[i].value;
+    if (!acr) continue;
+    socket.emit("message", {
+      tipo: "rankingTest",
+      acr,
+      tiempo: tiempoStr,
+      peso: 0,
+      despegue: "Pendiente",
+      pos: posCero
+    });
+  }
+}
+
 

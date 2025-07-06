@@ -1,91 +1,108 @@
+/* Reset y estilos base */
 * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      background: none;
-      width: 1920px;
-      height: 1080px;
-      font-family: sans-serif;
-      background-image: url("../img/fondo.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+/* 1) Forzar html y body a ocupar todo el viewport */
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
-    .grid {
-      display: grid;
-      width: 100%;
-      height: 100%;
-      grid-template-columns: 450px 1fr 325px;
-      grid-template-rows: 130px 120px 1fr;
-      gap: 0;
-      overflow: hidden;
-    }
+/* 2) Estilos del body */
+body {
+  background: none;
+  font-family: sans-serif;
+  background-image: url("../img/fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-    .item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 25px;
-      position: relative; 
-      overflow: hidden;   
-    }
+/* 3) Grid principal ocupa 100% de alto */
+.grid {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 450px 1fr 325px;
+  grid-template-rows: 130px 120px 1fr;
+  gap: 0;
+  overflow: hidden;
+}
 
-    .presentadores {
-      background: rgba(0, 0, 0,0.6);
-      grid-column: 1;
-      grid-row: 1 / span 2;
-    }
+/* 4) Estilos comunes de los items */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 25px;
+  position: relative;
+  overflow: hidden;
+}
 
-    .tabla {
-      grid-column: 1;
-      grid-row: 3;
-      position: relative;
-      overflow: hidden;
-    }
+/* Presentadores (columna izquierda, filas 1–2) */
+.presentadores {
+  background: rgba(0, 0, 0, 0.6);
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
 
-    .anuncios {
-      grid-column: 2;
-      grid-row: 1;
-      width: 755px;
-      height: 75px;
-      justify-self: center;
-      transition: top .5s ease;
-      
-    }
-    
-    .equipo {
-      grid-column: 3;
-      grid-row: 1;
-      border-radius: 10px;
-      transition: right .5s ease;
-      
-    }
-    
-    .timer {
-      grid-column: 3;
-      grid-row: 2;
-      margin-top: 15px;
-      transition: right .5s ease;
-    }
-    
-    .data {
-      grid-column: 3;
-      grid-row: 3;
-      height: 225px;
-      margin-top: 15px;
-      border-radius: 10px;
-      transition: right .5s ease;
-    }
+/* Tabla de ranking: ahora abarca TODAS las filas y llega al fondo */
+.tabla {
+  grid-column: 1;
+  grid-row: 3 / -1;    /* antes era 1 / -1 */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;          /* opcional, para que no quede debajo de otros elementos */
+}
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      overflow: hidden;
-      position: relative;
-      }
+/* Anuncios (fila 1, columna 2) */
+.anuncios {
+  grid-column: 2;
+  grid-row: 1;
+  width: 755px;
+  height: 75px;
+  justify-self: center;
+  transition: top 0.5s ease;
+}
+
+/* Equipo mostrado (fila 1, columna 3) */
+.equipo {
+  grid-column: 3;
+  grid-row: 1;
+  border-radius: 10px;
+  transition: right 0.5s ease;
+}
+
+/* Timer (fila 2, columna 3) */
+.timer {
+  grid-column: 3;
+  grid-row: 2;
+  margin-top: 15px;
+  transition: right 0.5s ease;
+}
+
+/* Datos (fila 3, columna 3) */
+.data {
+  grid-column: 3;
+  grid-row: 3;
+  height: 225px;
+  margin-top: 15px;
+  border-radius: 10px;
+  transition: right 0.5s ease;
+}
+
+/* Asegurarse de que cualquier iframe interno llene su contenedor */
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  overflow: hidden;
+  position: relative;
+}
