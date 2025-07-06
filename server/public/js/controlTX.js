@@ -179,9 +179,8 @@ function enviarRanking() {
         acr,
         tiempo: tiempoStr,
         peso,
-        despegue,
-        pos
-    });
+        despegue
+      });
 }
 
 function enviarTodosCeros() {
@@ -197,6 +196,7 @@ function enviarTodosCeros() {
       const [m, s, ms] = t.textContent.split(":").map(Number);
       return m * 60000 + s * 1000 + ms;
     });
+
   // Insertamos un cero para ver dónde caería
   tiemposActuales.push(tiempoMs);
   tiemposActuales.sort((a, b) => a - b);
@@ -212,7 +212,6 @@ function enviarTodosCeros() {
       tiempo: tiempoStr,
       peso: 0,
       despegue: "Pendiente",
-      pos: posCero
     });
   }
 }

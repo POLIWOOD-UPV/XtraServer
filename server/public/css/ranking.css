@@ -113,7 +113,7 @@ aside {
     border-radius: 10px;
 }
 
-.fila {
+.fila, .filaUni, .filaClub {
     display: flex;
     flex-direction: row;
     /* border: 1px solid black; */

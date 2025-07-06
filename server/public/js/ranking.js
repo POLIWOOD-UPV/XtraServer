@@ -43,7 +43,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     await cogerEquipos();
 });
 
-// Coger datos
+// COGER DATOS
+
+// Equipos
 function cogerEquipos() {
   // Cogemos los equipos del servidor
   fetch("http://localhost/v2/entities?type=Equipo&limit=40")
@@ -57,7 +59,7 @@ function cogerEquipos() {
 }
 
 
-// Conseguir dorsales del server
+// Dorsales
 async function cogerDorsales() {
   try {
     const res = await fetch("/v2/entities?type=Equipo&limit=100");
@@ -96,12 +98,29 @@ async function actualizarRondaActiva() {
   }
 }
 
+// Funciones utiles
 // Parser para mensajes de rankingTest
 function parseRanking(msg) {
   const { acr, pos, tiempo, peso, despegue } = msg;
-  return [ acr, pos, tiempo, peso, despegue ];
+  return [ acr, tiempo, peso, despegue ];
 }
 
+// Convierte un string de tiempo (MM:SS:ms o HH:MM:SS) a milisegundos
+function convertirTiempoAMilisegundos(t) {
+  const partes = t.split(':').map(Number);
+  if (partes.length === 3) {
+    // Formato MM:SS:ms → minutos, segundos y milisegundos
+    return (partes[0] * 60 + partes[1]) * 1000 + partes[2];
+  }
+  if (partes.length === 2) {
+    // Formato SS:ms → segundos y milisegundos
+    return partes[0] * 1000 + partes[1];
+  }
+  // Si llega ya en ms como número puro
+  return Number(t);
+}
+
+// FILAS ENTRYPOINT
 function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
     console.log("SumaPiloto");
     if (piloto === "WOOD") {return} // Evitamos el de POLIWOOD
@@ -125,8 +144,7 @@ function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
       destino = document.getElementById("contenedor");
     }
 
-    // 4) Lo insertamos
-    destino.appendChild(nueva_fila);
+    meter_en_ranking(nueva_fila);
 
     // 5) Animaciones según 'estado'
     switch (estado) {
@@ -144,15 +162,27 @@ function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
 }
 
 // Listener principal de socket
+// Listener principal de socket
 socket.on("message", async (msg) => {
   // Test de ranking
-  if (typeof msg !== "string") {
-    if (msg?.tipo === "rankingTest") {
-      const [ acr, pos, tiempo, peso, despegue ] = parseRanking(msg);
-      // Mantén tu llamada a sumaPiloto con animado
-      sumaPiloto(acr, pos, tiempo, peso, "animado", despegue);
-    } 
-    return;
+  if (typeof msg !== "string" && msg?.tipo === "rankingTest") {
+    // 1) Parsear datos
+    const [acr, tiempo, peso, despegue] = parseRanking(msg);
+
+    // 2) Determinar contenedor y tipo
+    const equipoData = equiposJSON.find(e => e.acr.value === acr);
+    const esUni = equipoData && equipoData.acad.value === true;
+    const cont = document.getElementById(esUni ? "filasUni" : "filasClub");
+
+    // 3) Construir selector dinámico y extraer filas
+    const selector = esUni ? ".filaUni" : ".filaClub";
+    const filasExistentes = Array.from(cont.querySelectorAll(selector));
+    
+    // 4) Calcular posición según tiempo
+    const pos = sacar_pos_piloto(tiempo, filasExistentes);
+    // 5) Llamar a sumaPiloto con 'pos' ya calculado
+    sumaPiloto(acr, pos, tiempo, peso, "animado", despegue);
+    return
   }
 
   // Ronda -> pedimos la activa
@@ -160,7 +190,7 @@ socket.on("message", async (msg) => {
     await actualizarRondaActiva();
   }
 
-  // Animaciones -> Pedimos las animacioness
+  // Animaciones -> Pedimos las animaciones
   if (msg.includes("urn:ngsi-ld:Animaciones:001")) {
     try {
       const state = await fetch("/v2/entities/urn:ngsi-ld:Animaciones:001")
@@ -172,6 +202,4 @@ socket.on("message", async (msg) => {
     return;
   }
 });
-
-
 

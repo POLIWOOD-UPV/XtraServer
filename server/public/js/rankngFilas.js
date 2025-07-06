@@ -6,17 +6,20 @@ Javascript para la creación e inserción de filas en el ranking
 function creaFila(nom, pos, tiemp, pes, despegue) {
     // Creamos la fila con sus partes
     const fila = document.createElement("div");
-    fila.className = "fila";
+  
+    // Primero hay que determinar a cual de los dos va (clubes / unis)
+    let clase;
+    if (equiposAcademicos.has(nom)) {
+      clase = "filaUni"
+    }else {
+      clase = "filaClub"
+    }
+    fila.className = clase
     
     // Número
     const numero = document.createElement("div");
     numero.className = "numero";
     numero.textContent = pos;
-    // Si es un club, que el número sea de otro color
-    if (nom === "XALOC" || nom.startsWith("EAFT")) {
-        numero.style.backgroundColor = "rgb(70 157 243)";
-        numero.style.color = "white";
-    }
 
     // Zona de contenido (logo, nombre, tiempo, peso, despegue)
     const resto = document.createElement("div");
@@ -88,33 +91,72 @@ function meterDorsal(nom) {
   return div;
 }
 
+// Calcula la posición (1-based) de un nuevo piloto comparando su tiempo con los existentes
+function sacar_pos_piloto(tiempoStr, filasControl) {
+  // 1) Convertir el tiempo nuevo a ms
+  const tiempoNuevo = convertirTiempoAMilisegundos(tiempoStr);
+
+  // 2) Extraer y convertir todos los tiempos actuales a ms
+  const tiempos = filasControl.map((f, idx) => {
+    const tText = f.querySelector('.tiempo').textContent;
+    const tMs = convertirTiempoAMilisegundos(tText);
+    return tMs;
+  });
+
+  // 3) Insertar el tiempo nuevo en el array y ordenar de menor a mayor
+  const ordenados = [...tiempos, tiempoNuevo].sort((a, b) => a - b);
+
+  // 4) Determinar posición (lastIndexOf +1)
+  const pos = ordenados.lastIndexOf(tiempoNuevo) + 1;
+  return pos;
+}
 
 
 // Inserta la fila 
 function meter_en_ranking(nueva_fila) {
-  const ranking = document.getElementById("contenedor");
-  const filas = Array.from(ranking.querySelectorAll(".fila"));
-  const pos   = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
-  const ocupa = filas.some(f => parseInt(f.id,10)===pos);
-  if (ocupa) {
-    // Inserta y reindexa
-    const antes   = filas.slice(0, pos-1),
-          despues = filas.slice(pos-1),
-          todas   = [...antes, nueva_fila, ...despues];
-    todas.forEach((f,i)=>{
-      f.id = `${i+1}`;
-      f.querySelector(".numero").textContent = i+1;
-    });
-    const frag = document.createDocumentFragment();
-    frag.append(document.getElementById("cabeza"));
-    todas.forEach(f => frag.append(f));
-    ranking.innerHTML = "";
-    ranking.append(frag);
+  // 1) Declarar fuera los dos valores
+  let ranking, filas;
+
+  // 2) Rellenar según si es Uni o Club
+  if (nueva_fila.className === "filaUni") {
+    ranking = document.getElementById("filasUni");
+    filas   = Array.from(ranking.querySelectorAll(".filaUni"));
   } else {
-    // Al final\    ranking.appendChild(nueva_fila);
-    Array.from(ranking.querySelectorAll(".fila")).forEach((f,i)=>{
-      f.id = `${i+1}`;
-      f.querySelector(".numero").textContent = i+1;
+    ranking = document.getElementById("filasClub");
+    filas   = Array.from(ranking.querySelectorAll(".filaClub"));
+  }
+
+  // 3) Leer la posición y saber si está ocupada
+  const pos   = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
+  const ocupa = filas.some(f => parseInt(f.id, 10) === pos);
+
+  if (ocupa) {
+    // 4a) Insertar en medio y desplazar
+    const antes   = filas.slice(0, pos - 1);
+    const despues = filas.slice(pos - 1);
+    const todas   = [...antes, nueva_fila, ...despues];
+
+    // 5a) Reindexar IDs y números
+    todas.forEach((f, i) => {
+      f.id = `${i + 1}`;
+      f.querySelector(".numero").textContent = i + 1;
+    });
+
+    // 6a) Volcar de nuevo en el contenedor
+    const frag = document.createDocumentFragment();
+    todas.forEach(f => frag.appendChild(f));
+    ranking.innerHTML = "";
+    ranking.appendChild(frag);
+  } else {
+    // 4b) Añadir al final
+    ranking.appendChild(nueva_fila);
+
+    // 5b) Reindexar usando el mismo selector de filas del contenedor
+    const selector = nueva_fila.className === "filaUni" ? ".filaUni" : ".filaClub";
+    Array.from(ranking.querySelectorAll(selector)).forEach((f, i) => {
+      f.id = `${i + 1}`;
+      f.querySelector(".numero").textContent = i + 1;
     });
   }
 }
+

@@ -10,7 +10,7 @@ const datos = document.getElementById("datos")
 const equipos = document.getElementById("equipos")
 const rankings = document.getElementById("rankings")
 
-
+let ranking_visible = true
 
 // EVITAR SOLAPES 
 let actualizando = false;
