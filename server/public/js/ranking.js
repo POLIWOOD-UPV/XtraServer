@@ -7,6 +7,8 @@ let despegues_visibles = true;
 let dorsal_visible   = false;
 let peso_visible     = false;
 let tiempo_visible   = true;
+let dot_visible   = true;
+
 let equiposJSON;
 // Mapeo dinámico de dorsales y categoría académica
 const valores_dorsal = {};
@@ -46,7 +48,6 @@ function cogerEquipos() {
   })
   .then(json =>{
       equiposJSON = json
-      console.log(json)
   })
 }
 
@@ -185,46 +186,59 @@ function parseRanking(msg) {
 
 // aplica la visibilidad según  NGSI
 function applyAnimVisibility(state) {
+  // —— Filas ——  
+  const tiempoEls    = [...document.querySelectorAll(".tiempo")];
+  const logoEls      = [...document.querySelectorAll(".logo")];
+  const dorsalEls    = [...document.querySelectorAll(".dorsal")];
+  const pesoEls      = [...document.querySelectorAll(".peso")];
+  const dotEls       = [...document.querySelectorAll(".dot")];
+  const numeroEls    = [...document.querySelectorAll(".numero")];
+  const nombreEls    = [...document.querySelectorAll(".nombre")];
 
-  const tiempoEls = Array.from(document.querySelectorAll(".tiempo"));
-  const logoEls   = Array.from(document.querySelectorAll(".logo"));
-  const dorsalEls = Array.from(document.querySelectorAll(".dorsal"));
-  const pesoEls   = Array.from(document.querySelectorAll(".peso"));
-  const dotEls    = Array.from(document.querySelectorAll(".dot"));
+  // —— Cabeceras ——  
+  const cabTieElems  = [...document.querySelectorAll(".cab_tie")];
+  const cabLogElems  = [...document.querySelectorAll(".cab_log")];
+  const cabDorElems  = [...document.querySelectorAll(".cab_dor")];
+  const cabPesElems  = [...document.querySelectorAll(".cab_pes")];
+  const cabPosElems  = [...document.querySelectorAll(".cab_pos")];
+  const cabNomElems  = [...document.querySelectorAll(".cab_nom")];
 
-  // Cabeceras (clases abarcan tanto bloque Universitarios como Clubes)
-  const cabTieElems  = Array.from(document.querySelectorAll(".cab_tie"));
-  const cabLogElems  = Array.from(document.querySelectorAll(".cab_log"));
-  const cabDorElems  = Array.from(document.querySelectorAll(".cab_dor"));
-  const cabPesElems  = Array.from(document.querySelectorAll(".cab_pes"));
+  // —— Estados desde la entidad Animaciones ——  
+  const tiempoVisible = state.tiempos?.value   === "visible";
+  const logosVisible  = state.logos?.value     === "visible";
+  const dorsalVisible = state.dorsales?.value  === "visible";
+  const pesoVisible   = state.pesos?.value     === "visible";
+  const despeguesVis  = state.cronos?.value    === "visible";
+  const posVisible    = state.pos?.value       === "visible";
+  const nombreVisible = state.nombre?.value    === "visible";
+  const dotVisible    = state.dot?.value       === "visible";
 
-  const tiempo_visible      = state.tiempos?.value   === "visible";
-  const logos_visibles      = state.logos?.value     === "visible";
-  const dorsal_visible      = state.dorsales?.value  === "visible";
-  const peso_visible        = state.pesos?.value     === "visible";
-  const despegues_visible   = state.cronos?.value    === "visible";
+  // —— Mostrar/ocultar cabeceras ——  
+  cabTieElems.forEach(el => el.style.display = tiempoVisible ? "" : "none");
+  cabLogElems.forEach(el => el.style.display = logosVisible  ? "" : "none");
+  cabDorElems.forEach(el => el.style.display = dorsalVisible ? "" : "none");
+  cabPesElems.forEach(el => el.style.display = pesoVisible   ? "" : "none");
+  cabPosElems.forEach(el => el.style.display = posVisible    ? "" : "none");
+  cabNomElems.forEach(el => el.style.display = nombreVisible ? "" : "none");
+  // Si tuvieras header para dot:
+  // cabDotElems.forEach(el => el.style.display = dotVisible ? "" : "none");
 
-  // —— Cabeceras ——
-  cabTieElems.forEach(el => el.style.display = tiempo_visible    ? "block" : "none");
-  cabLogElems.forEach(el => el.style.display = logos_visibles    ? "flex"  : "none");
-  cabDorElems.forEach(el => el.style.display = dorsal_visible    ? "flex"  : "none");
-  cabPesElems.forEach(el => el.style.display = peso_visible      ? "flex"  : "none");
-
-  // —— Celdas ——
-  tiempoEls.forEach(el => el.style.display = tiempo_visible     ? "block" : "none");
-  logoEls.forEach(el   => el.style.display = logos_visibles     ? "flex"  : "none");
-  dorsalEls.forEach(el => el.style.display = dorsal_visible     ? "flex"  : "none");
-  pesoEls.forEach(el   => el.style.display = peso_visible       ? "flex"  : "none");
-  dotEls.forEach(el    => el.style.display = despegues_visible  ? "flex"  : "none");
+  // —— Mostrar/ocultar filas ——  
+  tiempoEls.forEach(el => el.style.display = tiempoVisible ? "" : "none");
+  logoEls.forEach(el   => el.style.display = logosVisible  ? "" : "none");
+  dorsalEls.forEach(el => el.style.display = dorsalVisible ? "" : "none");
+  pesoEls.forEach(el   => el.style.display = pesoVisible   ? "" : "none");
+  dotEls.forEach(el    => el.style.display = dotVisible    ? "" : "none");
+  numeroEls.forEach(el => el.style.display = posVisible    ? "" : "none");
+  nombreEls.forEach(el => el.style.display = nombreVisible ? "" : "none");
 }
+
 
 
 // Listener principal de socket
 socket.on("message", async (msg) => {
-  console.log(msg)
   // Procesar objetos de prueba rankingTest
   if (typeof msg !== "string") {
-    console.log(msg.tipo)
     if (msg?.tipo === "rankingTest") {
       const [ acr, pos, tiempo, peso, despegue ] = parseRanking(msg);
       // Mantén tu llamada a sumaPiloto con animado
@@ -281,10 +295,6 @@ function meter_en_ranking(nueva_fila) {
   }
 }
 
-
-// equiposJSON debe estar disponible en este ámbito
-// const equiposJSON = [ … tu array … ];
-
 function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
     console.log("SumaPiloto");
     if (piloto === "WOOD") {return}
@@ -325,7 +335,6 @@ function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
         setTimeout(() => { nueva_fila.style.left = "0px"; }, 50);
     }
 }
-
 
 async function sacaDorsales() {
   try {

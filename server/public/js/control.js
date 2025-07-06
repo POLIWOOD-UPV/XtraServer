@@ -10,7 +10,7 @@ const datos = document.getElementById("datosEquipo")
 equipos = []
 rondas = []
 const atributosAnimaciones = ["rankings","anuncios","equipos","cronos","datos",
-                             "tiempos","logos","dorsales","pesos"];
+                             "tiempos","logos","dorsales","pesos","nombre","pos","dot"];
 const panel = document.getElementById("panelVisibilidad");
 
 const socket = io();
@@ -316,7 +316,6 @@ function enviarRanking() {
     const mil = parseInt(document.getElementById("milisegundos_input_id").value) || 0;
     const peso = parseFloat(document.getElementById("peso_input_id").value) || 0;
     const despegue = document.getElementById("tipos_despegue_id").value;
-    console.log("1MIL:",mil)
     if (!acr) return alert("Selecciona un equipo");
 
     const tiempoMs = min * 60000 + seg * 1000 + mil;
