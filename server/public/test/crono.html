@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro</title>
+    <script type="module">
+        import equipos from "/v2/entities/?type=Equipo&options=keyValues" with {type: "json"};
+        import rondas from "/v2/entities/?type=Ronda&options=keyValues" with {type: "json"};
+        import tipos from "/templates/cronoType.json" with {type: "json"};
+
+        import Cronometro from "/js/cronometro.js";
+        let crono; // Cronometro
+        const update = () => {
+            const form = document.querySelector("form#id");
+            const data = new FormData(form);
+            crono.bind(
+                data.get("ronda"),
+                data.get("equipo"),
+                data.get("tipo")
+            );
+
+        }
+
+        const setOptions = () => {
+            let select_ronda = document.querySelector("form select[name=ronda]");
+            let select_equipo = document.querySelector("form select[name=equipo]");
+            let select_tipo = document.querySelector("form select[name=tipo]");
+
+            select_ronda.oninput = update;
+            select_equipo.oninput = update;
+            select_tipo.oninput = update;
+
+            rondas.forEach(element => {
+                let option = document.createElement("option");
+                option.innerText = `${element.type} ${element.num}`;
+                option.value = element.num;
+                if (element.dorsal == 0) {
+                    option.selected = true;
+                }
+                select_ronda.appendChild(option);
+            });
+
+            equipos.forEach(element => {
+                let option = document.createElement("option");
+                option.innerText = `${element.dorsal} ${element.name}`;
+                option.value = element.dorsal;
+                if (element.dorsal == 0) {
+                    option.selected = true;
+                }
+                select_equipo.appendChild(option);
+            });
+
+            for (const key in tipos) {
+                let option = document.createElement("option");
+                option.innerText = `${key}`;
+                option.value = tipos[key];
+                if (key == "AUXI") {
+                    option.selected = true;
+                }
+                select_tipo.appendChild(option);
+            }
+        }
+
+        addEventListener("DOMContentLoaded", () => {
+            setOptions();
+            crono = new Cronometro("minutos", "segundos", "milisegundos");
+            // update()
+            document.getElementById("play").onclick = () => {crono.play()};
+            document.getElementById("stop").onclick = () => {crono.stop()};
+            document.getElementById("reset").onclick = () => {crono.reset()};
+
+            document.getElementById("b_set").onclick = () => {
+                const inp_min = document.querySelector("div#set input[name=min]")
+                const inp_sec = document.querySelector("div#set input[name=sec]")
+                const inp_mil = document.querySelector("div#set input[name=mil]")
+                let value = parseInt(inp_min.value)*60000 + parseInt(inp_sec)*1000 + parseInt(inp_mil);
+                value = value? value : 0;
+                crono.set(value);
+            };
+        });
+    </script>
+    <style>
+        div#crono span {
+            font-size: 2cm;
+        }
+        div#set input {
+            width: 1cm;
+        }
+        button {
+            height: 1cm;
+            width: 2cm;
+        }
+    </style>
+</head>
+<body>
+    <form id="id">
+        <p>
+            <label for="ronda">Ronda: </label><select name="ronda" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <p>
+            <label for="equipo">Equipo: </label><select name="equipo" required></select>
+        </p> <!-- form.js actualizara automaticamente este select -->
+        <p>
+            <label for="tipo">Tipo: </label><select name="tipo" required></select>
+        </p> <!-- crono.js actualizara automaticamente este select -->
+    </form>
+    <hr>
+    <br>
+    <div id="crono">
+        <span id="minutos">00</span>
+        <span>:</span>
+        <span id="segundos">00</span>
+        <span>:</span>
+        <span id="milisegundos">000</span>
+    </div>
+    <br>
+    <div>
+        <button id="play" onclick="start()">Start</button>
+        <b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b>
+        <button id="stop" onclick="stop()">Stop</button>
+        <b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b>
+        <button id="reset" onclick="reset()">Reset</button>
+    </div>
+    <br>
+    <div id="set">
+        <input type="number" name="min" value="0"><b> : </b>
+        <input type="number" name="sec" value="0"><b> : </b>
+        <input type="number" name="mil" value="0"><b> : </b>
+        <br>
+        <br>
+        <button id="b_set" onclick="set()">SET</button>
+    </div>
+</body>
+</html>
