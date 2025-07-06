@@ -1,4 +1,8 @@
+/*
+Javascript para las animaciones de los bloques del HUD
+*/
 const socket = io();
+
 // DOM
 const anuncios = document.getElementById("anuncios")
 const cronos = document.getElementById("cronos")
@@ -60,8 +64,6 @@ async function actualizarEstado() {
               : iframe.contentWindow?.desaparicionDinamica?.();
           }
           break;
-        default:
-          console.warn(`Elemento desconocido: ${id}`);
       }
 
       
@@ -73,5 +75,3 @@ async function actualizarEstado() {
   }
 }
 
-
-// animarDIV(div)
