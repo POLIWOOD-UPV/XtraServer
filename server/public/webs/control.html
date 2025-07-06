@@ -32,6 +32,7 @@
       <option value = "">Cargando equipos</option>
     </select>
     <button onclick="publicarEquipoMostrado()">Publicar equipo mostrado</button>
+    <button onclick="publicarEquipoMostrado('SPONSORS')">Publicar SPONSORS</button>
     <div id="estadoLogo"></div>
     <div id="datosEquipo"></div>
     <div style="background-color: rgba(0,0,0,0.6);">
@@ -41,9 +42,89 @@
   <div>
     <h2>Control de animaciones</h2>
     <div id="panelVisibilidad">
+      <div>
+        <label for="rankings">rankings:</label>
+        <button id="rankings" onclick="toggleAnim('rankings')">Cargando...</button>
+      </div>
+      <div>
+        <label for="anuncios">anuncios:</label>
+        <button id="anuncios" onclick="toggleAnim('anuncios')">Cargando...</button>
+      </div>
+      <div>
+        <label for="equipos">equipos:</label>
+        <button id="equipos" onclick="toggleAnim('equipos')">Cargando...</button>
+      </div>
+      <div>
+        <label for="cronos">cronos:</label>
+        <button id="cronos" onclick="toggleAnim('cronos')">Cargando...</button>
+      </div>
+      <div>
+        <label for="datos">datos:</label>
+        <button id="datos" onclick="toggleAnim('datos')">Cargando...</button>
+      </div>
+      <div>
+        <label for="tiempos">Tiempos:</label>
+        <button id="tiempos" onclick="toggleAnim('tiempos')">Cargando...</button>
+      </div>
+      <div>
+        <label for="logos">Logos:</label>
+        <button id="logos" onclick="toggleAnim('logos')">Cargando...</button>
+      </div>
+      <div>
+        <label for="dorsales">Dorsales:</label>
+        <button id="dorsales" onclick="toggleAnim('dorsales')">Cargando...</button>
+      </div>
+      <div>
+        <label for="pesos">Pesos:</label>
+        <button id="pesos" onclick="toggleAnim('pesos')">Cargando...</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+      <h2>Control de rondas</h2>
+      <select id="selector_ronda">
+        <option value = "">Cargando Rondas</option>
+      </select>
+      <button onclick="publicarRonda()">Publicar Ronda</button>
+  </div>
+
+  <div>
+    <h2>Control de Cronos para Ranking</h2>
+    <table>
+      <tr>
+        <th>Equipo</th><th>Min</th><th>Seg</th><th>Milis</th><th>Peso</th><th>Despegue</th><th>Acciones</th>
+      </tr>
+      <tr>
+        <td>
+          <select id="selector_equipo_ranking">
+            <option value="">Cargando...</option>
+          </select>
+        </td>
+        <td><input id="minutos_input_id" type="number" placeholder="Min"></td>
+        <td><input id="segundos_input_id" type="number" placeholder="Seg"></td>
+        <td><input id="milisegundos_input_id" type="number" placeholder="Milis"></td>
+        <td><input id="peso_input_id" type="number" placeholder="Peso"></td>
+        <td>
+          <select id="tipos_despegue_id">
+            <option value="Corto">15m</option>
+            <option value="Correcto">60m</option>
+            <option value="Fallido">Fallido</option>
+            <option value="Ilegal">Ilegal</option>
+          </select>
+        </td>
+        <td>
+          <button onclick="enviarRanking()">Enviar</button>
+          <button onclick = "enviarTodosCeros()">Enviar ceros</button>
+
+        </td>
+      </tr>
+    </table>
+
   </div>
 </div>
-    
+  <script src="/socket.io/socket.io.js"></script>
   <script src =  "../js/control.js"></script>
 </body>
 </html>

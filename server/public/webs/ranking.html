@@ -1,207 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title></title>
-
+    <meta charset="UTF-8">
+    <title>Ranking XC25</title>
+    <link href="../css/ranking.css" rel="stylesheet">
 </head>
 <body>
-    <link href = "../css/ranking.css" rel="stylesheet">
-    <main>
-        <!--Ranking-->
-        <div id = "contenedor">
-            <div id = "cabeza">
-                <div id = "rondero">
-                    <div id="ronda_rondero">ROUND: </div>
-                    <div id = "num_ronda"> - </div>
-                </div>
-                <div class="grupos" id="universitarios">UNIVERSITARIOS</div>
-                <div id="cabecera">
-                    <div class="cabecera-item" id="cab_pos">POS</div>
-                    <div class="cabecera-item" id="cab_log">LOG</div>
-                    <div class="cabecera-item" id="cab_nom">NAM</div>
-                    <div class="cabecera-item" id="cab_tie">TIM</div>
+<main>
+    <!-- Ranking -->
+    <div id="contenedor"
+         style="">
+        <!-- Cabeza: sólo nº de Ronda -->
+        <div id="cabeza">
+        <div id="rondero">
+            <div id="ronda_rondero">ROUND:</div>
+            <div id="num_ronda"> - </div>
+        </div>
+
+            <!-- Bloque Universitarios -->
+            <div class="grupos" id="universitarios">ACADEMIC</div>
+            <div id="cabecera">
+                <div class="cabecera-item cab_pos" id="cab_pos">POS</div>
+                <div class="cabecera-item cab_log" id="cab_log">LOG</div>
+                <div class="cabecera-item cab_dor" id="cab_dor">DOR</div>
+                <div id="cabecera_resto">
+                    <div class="cabecera-item cab_nom" id="cab_nom">NAM</div>
+                    <div class="cabecera-item cab_tie" id="cab_tie">TIM</div>
+                    <div class="cabecera-item cab_pes" id="cab_pes">Ml</div>
                 </div>
             </div>
-            <div class = "fila" id = "1">
-                <div class = "numero">
-                    1
-                </div>
-                <div class = "logo" style = "display: flex;">
-                    <img src = "../favicon.ico">
-                </div>
-
-                    <div class = "nombre">
-                        wood
+            <div id = "filasUni">
+                <!-- <div class="fila" id="1">
+                    <div class="numero">1</div>
+                    <div class="logo" style="display: flex;">
+                        <img src="../favicon.ico" alt="Logo">
                     </div>
-                    <div class = "tiempo">
-                        33:33:3
-                    </div>
+                    <div class="dorsal" style="display: none;">0</div>
+                    <div class="resto">
+                        <div class="nombre">WOOD</div>
+                        <div class="tiempo">33:33:3</div>
+                        <div class="peso" style="display: none;">1</div>
                         <span class="dot"></span>
-
+                    </div> -->
+                </div>
             </div>
 
-            <div class="grupos" id="clubes">CLUBES</div>
-                <div id="cabecera">
-                    <div class="cabecera-item" id="cab_pos">POS</div>
-                    <div class="cabecera-item" id="cab_log">LOG</div>
-                    <div class="cabecera-item" id="cab_nom">NAM</div>
-                    <div class="cabecera-item" id="cab_tie">TIM</div>
+            <!-- Bloque Clubes -->
+            <div class="grupos" id="clubes">CLUBS</div>
+            <!-- <div id="cabecera2">
+                <div class="cabecera-item cab_pos" id="cab_pos2">POS</div>
+                <div class="cabecera-item cab_log" id="cab_log2">LOG</div>
+                <div class="cabecera-item cab_dor" id="cab_dor2">DOR</div>
+                <div id="cabecera_resto2">
+                    <div class="cabecera-item cab_nom" id="cab_nom2">NAM</div>
+                    <div class="cabecera-item cab_tie" id="cab_tie2">TIM</div>
+                    <div class="cabecera-item cab_pes" id="cab_pes2">Ml</div>
                 </div>
-            
-            <div class = "fila" id = "1">
-                <div class = "numero">
-                    1
-                </div>
-                <div class = "logo" style = "display: flex;">
-                    <img src = "../favicon.ico">
-                </div>
+            </div> -->
 
-                <div class = "nombre">
-                    wood
+            <!-- Ejemplo de fila en Clubes -->
+            <div id = "filasClub">
+                <!-- <div class="fila" id="1">
+                    <div class="numero">1</div>
+                    <div class="logo" style="display: flex;">
+                        <img src="../favicon.ico" alt="Logo">
+                    </div>
+                    <div class="dorsal" style="display: none;">0</div>
+                    <div class="resto">
+                        <div class="nombre">WOOD</div>
+                        <div class="tiempo">33:33:3</div>
+                        <div class="peso" style="display: none;">1</div>
+                        <span class="dot"></span>
+                    </div> -->
                 </div>
-                <div class = "tiempo">
-                    33:33:3
-                </div>
-                    <span class="dot"></span>
-
-            </div>
             </div>
         </div>
-    </main>
-    
 
     </div>
-    <!-- <script src="js/filas_base.js"></script>
-    <script src="js/filas_ranking.js"></script>
-    <script src="js/dinamicas.js"></script>
-    <script src="js/pilotos_base.js"></script>
-    <script src="js/pilotos_ranking.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src = "js/socket_ranking.js"></script> -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="../js/dinamicas.js"></script>
-    <script>
-        let ranking_visible = true;
-        let filas_visible = true;
-
-        const contenedor = document.getElementById("contenedor");
-        const filas = Array.from(document.querySelectorAll(".fila"));
-
-        function toggleRanking() {
-        if (ranking_visible) {
-            contenedor.style.left = "-600px";
-            ranking_visible = false;
-        } else {
-            contenedor.style.left = "0px";
-            ranking_visible = true;
-            if (!filas_visible) toggleFilas();
-        }
-        }
-
-        function toggleFilas() {
-        const cantidad = filas.length;
-        if (filas_visible) {
-            let i = 1;
-            const salir = setInterval(() => {
-            if (i <= cantidad) {
-                filas[cantidad - i].style.left = "-1200px";
-                i++;
-            } else {
-                clearInterval(salir);
-                toggleRanking();
-            }
-            }, 150);
-            filas_visible = false;
-        } else {
-            if (!ranking_visible) toggleRanking();
-            let i = 0;
-            const entrar = setInterval(() => {
-            if (i < cantidad) {
-                filas[i].style.left = "0px";
-                i++;
-            } else {
-                clearInterval(entrar);
-            }
-            }, 150);
-            filas_visible = true;
-        }
-        }
-
-        // NUEVA función: mover solo las filas, sin afectar al contenedor
-        function toggleSoloFilas() {
-        const cantidad = filas.length;
-        if (filas_visible) {
-            let i = 1;
-            const salir = setInterval(() => {
-            if (i <= cantidad) {
-                filas[cantidad - i].style.left = "-1200px";
-                i++;
-            } else {
-                clearInterval(salir);
-            }
-            }, 150);
-            filas_visible = false;
-        } else {
-            let i = 0;
-            const entrar = setInterval(() => {
-            if (i < cantidad) {
-                filas[i].style.left = "0px";
-                i++;
-            } else {
-                clearInterval(entrar);
-            }
-            }, 150);
-            filas_visible = true;
-        }
-        }
-
-        function mostrarSoloFilas() {
-            const cantidad = filas.length;
-            let i = 0;
-            const entrar = setInterval(() => {
-                if (i < cantidad) {
-                filas[i].style.left = "0px";
-                i++;
-                } else {
-                clearInterval(entrar);
-                }
-            }, 150);
-            filas_visible = true;
-        }
-
-
-        function aparicionDinamica() {
-        if (!ranking_visible) {
-            filas_visible = false;
-            ranking_visible = false;
-            toggleRanking();
-        }
-        }
-
-        function desaparicionDinamica() {
-        if (ranking_visible) {
-            filas_visible = true;
-            toggleFilas();
-        }
-        }
-        
-
-        window.toggleRanking = toggleRanking;
-        window.toggleFilas = toggleFilas;
-        window.toggleSoloFilas = toggleSoloFilas;
-        window.mostrarSoloFilas = mostrarSoloFilas;
-        window.aparicionDinamica = aparicionDinamica;
-        window.desaparicionDinamica = desaparicionDinamica;
-
-        window.addEventListener("message", (event) => {
-        if (event.data === "ocultarRanking") desaparicionDinamica();
-        if (event.data === "mostrarRanking") aparicionDinamica();
-        });
-        </script>
-
-
-
-
+</main>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/ranking.js"></script>
 </body>
 </html>

@@ -1,34 +1,20 @@
 body {
     font-family: 'Lucida Sans', 'Lucida Grande', 'Geneva', Verdana, sans-serif;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+    display: flex;
+    margin: 0px !important;
+    padding: 0px;
 }
 
-.grupos{
-    text-align: center;
-    font-size: 25px;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    -webkit-text-stroke: 1px black;
-    border-radius: 10px;
+main {
+    width: 100%;
 }
-#universitarios{
-    background-color:rgba(250, 180, 40, 0.5) ;
-}
-#clubes{
-    background-color: rgba(138, 75, 148, 0.5);
+aside {
+    position: absolute;
+    right: 50px;
 }
 
-#contenedor {
-    background-image: linear-gradient(to top, rgba(250, 180, 40, 0.65), rgba(199, 138, 207, 0.65),rgba(138, 75, 148, 0.65));
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-}
+/* Ranking */
+
 /*No filas */
 #cabeza, #contenedor {
     position: relative;
@@ -39,118 +25,163 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 /* Rondas */
 #rondero {
     display: flex;
-    align-items: flex-end;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;     /* espacio entre etiqueta y número */
+    padding: 0.25rem 5px;
 }
 #rondero div {
-    padding: 3px;
+    margin: 0;
+    padding: 0;
+    font-size: 18px; /* más pequeño y ajustado */
     color: white;
     font-weight: bold;
     text-transform: uppercase;
-    -webkit-text-stroke: 1px black;
-    font-size: 23px;
-    align-items: center;
-    justify-content: center;
 }
 #num_ronda {
-    height: 100%;
-    width: 100%;
-    align-content: center;
-    text-align: center;
-    font-size: 40px !important; /* Que maravilla lo de !important!*/
+    text-align: left;
+    font-size: 20px !important; /* Que maravilla lo de !important!*/
 }
+
+/* Grupos (Universitarios / Clubes) */
+.grupos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;           /* coincide con tamaño de #cabecera */
+    color: white;
+    text-transform: uppercase;
+    padding: 4px 0;
+    border-radius: 8px;
+}
+
+
 /* Cabecera */
-#cabecera {
+#cabecera, #cabecera2 {
     display: flex;
     flex-direction: row;
-    flex: 11;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
     -webkit-text-stroke: 1px black;
-    border-top:1px solid black;
-    border-left:1px solid black;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
     align-items: center;
-    font-size: 20px;
-    padding: 5px;
+    font-size: 22px;
     justify-content: center;
     border-radius: 10px;
 }
 /* Elementos cabecera */
 .cabecera-item {
     text-align: center;
-    border-right:1px solid black;
+    border-right: 2px solid black;
+    padding: 0 8px;
+}
+#cabecera .cabecera-item:last-child,
+#cabecera2 .cabecera-item:last-child {
+    border-right: none; 
+}
+#cabecera_resto, #cabecera_resto2 {
+    display: flex;
+    flex: 8; 
 }
 
-#cab_pos, #cab_log {
-    flex: 1; /* Ajustamos el flex de los elementos de la cabecera para que coincida con los de la fila */
-}
-
-#cab_pos {
-    min-width: 46px;
-}/*posicion */
-#cab_nom {
-    flex:2
-} /* nombre */
-#cab_tie {
-    flex : 3
-} /* tiempo */
-
+/* Flex individual para cada columna */
+#cab_pos, #cab_pos2 { flex: 1; min-width: 46px; }
+#cab_log, #cab_log2 { flex: 1; min-width: 60px; }
+#cab_dor, #cab_dor2 { flex: 1; display: none; }
+#cab_nom, #cab_nom2 { flex: 2; }
+#cab_tie, #cab_tie2 { flex: 3; }
+#cab_pes, #cab_pes2 { flex: 1; display: none; }
 
 /* Filas */
-
+#contenedor {
+    background-image: linear-gradient(
+        to top,
+        rgba(250,180,40,0.65),
+        rgba(199,138,207,0.65),
+        rgba(138,75,148,0.65)
+    );
+    margin: 0 0 0 5px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
 
 .fila {
     display: flex;
     flex-direction: row;
-    flex: 11;
-    border:1px solid black;
-    height: 18.3px;
-    padding: 5px;
+    /* border: 1px solid black; */
+    height: 37px;
     position: relative;
     left: 0;
     transition: left 0.2s ease;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 4px;
+    /* margin: 2px 5px; */
 }
 
 .numero {
-    min-width: 10px;
-    min-height: 24px;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    min-height: 26px;
+    margin-left: 12px;
     background: white;
     border: 1px solid black;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-
-    flex: 1;
-    max-width: 23px;
-    margin-right: 6px;
-    margin-left: 16px;
-    
+    font-size: 15px;
+    padding: 0;
 }
 
-.logo{
-    flex: 1;
-    height: 18px;
-    width: 18px;
-    max-width: 20px;    
-    margin-left: 26px;
-    margin-right: 6px;
-
+.logo {
+    width: 28px;
+    height: 28px;
+    margin-left: 40px;
+    margin-right: 25px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
-.fila_control_borrar, .fila_control_sumar {
+.dorsal {
+    flex: 1;
+    height: 25px;
+    width: 25px;
+    max-width: 32px;
+    margin-left: 20px;
+    margin-right: 10px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.resto, .fila_control_borrar, .fila_control_sumar {
     display: flex;
     flex-direction: row;
 }
 
-.nombre, .tiempo, .puntos{
+.resto {
+    flex: 8; 
+}
+
+.nombre, .tiempo, .peso, .puntos, .dorsal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,7 +190,7 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     color: white;
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 0.5px black;
 }
 
 .tiempo {
@@ -168,16 +199,28 @@ body {
 .puntos {
     flex: 4;
 }
-.nombre{
+.peso, .dorsal {
+    display: none;
+}
+
+.nombre, .dorsal {
     flex: 4;
 }
 
+.peso {
+    flex: 1;
+}
 .nombre {
     padding-left: 5px;
 }
 .dot {
-    height: 15px;
-    width: 15px;
+    height: 8px;
+    width: 8px;
     background: #00c8ff;
     border-radius: 50%;
+}
+
+/* Animaciones */
+.tiempo, .peso {
+    transition: opacity 0.5s ease;
 }
