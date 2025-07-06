@@ -104,7 +104,7 @@ function parseRanking(msg) {
 
 function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
     console.log("SumaPiloto");
-    if (piloto === "WOOD") {return}
+    if (piloto === "WOOD") {return} // Evitamos el de POLIWOOD
     // 1) Creamos la fila
     let nueva_fila = creaFila(piloto, pos, tiempo, peso, despegue);
     ++controla_pilotos;
@@ -145,7 +145,7 @@ function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
 
 // Listener principal de socket
 socket.on("message", async (msg) => {
-  // Procesar objetos de prueba rankingTest
+  // Test de ranking
   if (typeof msg !== "string") {
     if (msg?.tipo === "rankingTest") {
       const [ acr, pos, tiempo, peso, despegue ] = parseRanking(msg);
@@ -155,12 +155,12 @@ socket.on("message", async (msg) => {
     return;
   }
 
-  // Si el mensaje es de tipo Ronda, pedimos la activa
+  // Ronda -> pedimos la activa
   if (msg.includes("urn:ngsi-ld:Ronda:")) {
     await actualizarRondaActiva();
   }
 
-    // 3) Actualizaciones de visibilidad (Animaciones)
+  // Animaciones -> Pedimos las animacioness
   if (msg.includes("urn:ngsi-ld:Animaciones:001")) {
     try {
       const state = await fetch("/v2/entities/urn:ngsi-ld:Animaciones:001")
