@@ -215,9 +215,9 @@ function applyAnimVisibility(state) {
 
   // —— Mostrar/ocultar cabeceras ——  
   cabTieElems.forEach(el => el.style.display = tiempoVisible ? "" : "none");
-  cabLogElems.forEach(el => el.style.display = logosVisible  ? "" : "none");
-  cabDorElems.forEach(el => el.style.display = dorsalVisible ? "" : "none");
-  cabPesElems.forEach(el => el.style.display = pesoVisible   ? "" : "none");
+  cabLogElems.forEach(el => el.style.display = logosVisible  ? "flex" : "none");
+  cabDorElems.forEach(el => el.style.display = dorsalVisible ? "flex" : "none");
+  cabPesElems.forEach(el => el.style.display = pesoVisible   ? "flex" : "none");
   cabPosElems.forEach(el => el.style.display = posVisible    ? "" : "none");
   cabNomElems.forEach(el => el.style.display = nombreVisible ? "" : "none");
   // Si tuvieras header para dot:
@@ -225,9 +225,9 @@ function applyAnimVisibility(state) {
 
   // —— Mostrar/ocultar filas ——  
   tiempoEls.forEach(el => el.style.display = tiempoVisible ? "" : "none");
-  logoEls.forEach(el   => el.style.display = logosVisible  ? "" : "none");
-  dorsalEls.forEach(el => el.style.display = dorsalVisible ? "" : "none");
-  pesoEls.forEach(el   => el.style.display = pesoVisible   ? "" : "none");
+  logoEls.forEach(el   => el.style.display = logosVisible  ? "flex" : "none");
+  dorsalEls.forEach(el => el.style.display = dorsalVisible ? "flex" : "none");
+  pesoEls.forEach(el   => el.style.display = pesoVisible   ? "flex" : "none");
   dotEls.forEach(el    => el.style.display = dotVisible    ? "" : "none");
   numeroEls.forEach(el => el.style.display = posVisible    ? "" : "none");
   nombreEls.forEach(el => el.style.display = nombreVisible ? "" : "none");
