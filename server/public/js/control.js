@@ -2,21 +2,26 @@
 const textoDOM = document.getElementById("texto");
 const selector_equipo_img = document.getElementById("selector_equipo_img")
 const selector_rondas = document.getElementById("selector_ronda")
+const selector_ranking = document.getElementById("selector_equipo_ranking");
 const ImgLogoEquipo = document.getElementById("imagen_equipo");
 const estadoLogo = document.getElementById("estadoLogo")
 const datos = document.getElementById("datosEquipo")
 
 equipos = []
 rondas = []
-const atributosAnimaciones = ["rankings", "anuncios", "equipos", "cronos", "datos"];
+const atributosAnimaciones = ["rankings","anuncios","equipos","cronos","datos",
+                             "tiempos","logos","dorsales","pesos"];
 const panel = document.getElementById("panelVisibilidad");
 
 const socket = io();
 
-socket.on("message", (entityId) => {
-  if (entityId.includes("urn:ngsi-ld:Ronda:")) {
+socket.on("message", (msg) => {
+  console.log("POR SOCKET HA ENTRADO:",msg)
+
+  if (typeof msg !== "string") {return}
+  if (msg.includes("urn:ngsi-ld:Ronda:")) {
     cogerRondas();
-  } else if ((entityId.includes("urn:ngsi-ld:Animaciones:"))){
+  } else if ((msg.includes("urn:ngsi-ld:Animaciones:"))){
     cogerAnimaciones()
   }
 });
@@ -45,6 +50,7 @@ function cogerEquipos() {
     .then(json =>{
         equipos = json
         selector_equipo_img.innerHTML = ""
+        selector_ranking.innerHTML = ""
         // Guardamos los equipos individuales
         json.forEach(equipo => {
             acronimo = equipo.acr?.value || "Sin acrónimo"
@@ -54,8 +60,13 @@ function cogerEquipos() {
             option = document.createElement("option")
             option.value = acronimo
             option.textContent = `${dorsal} - ${acronimo}`
-            
             selector_equipo_img.appendChild(option)
+
+            // Metemos los acros en el OTRO select
+            option2 = document.createElement("option")
+            option2.value = acronimo
+            option2.textContent = `${dorsal} - ${acronimo}`
+            selector_ranking.appendChild(option2)
         })
     })
 }
@@ -275,15 +286,15 @@ async function desactivarOtrasRondas(numActivo) {
 
 
 
-async function alternar(attr) {
-  const boton = document.getElementById(attr);
-  const nuevoValor = (boton.textContent === "visible") ? "oculto" : "visible";
-  boton.textContent = "Actualizando...";
+async function toggleAnim(attr) {
+  const btn = document.getElementById(attr);
+  const nuevo = btn.textContent === "visible" ? "oculto" : "visible";
+  btn.textContent = "Actualizando…";
 
   const entidad = {
     id: "urn:ngsi-ld:Animaciones:001",
     type: "Animaciones",
-    [attr]: { type: "Text", value: nuevoValor }
+    [attr]: { type: "Text", value: nuevo }
   };
 
   try {
@@ -292,19 +303,46 @@ async function alternar(attr) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ actionType: "update", entities: [entidad] })
     });
-
-    if (res.ok) {
-      boton.textContent = nuevoValor;
-    } else {
-      const msg = await res.text();
-      boton.textContent = `Error`;
-      console.error(`Error ->(${res.status}):`, msg);
-    }
+    btn.textContent = res.ok ? nuevo : "Error";
   } catch (err) {
-    boton.textContent = "Error";
-    console.error("Error al alternar visibilidad:", err);
+    btn.textContent = "Error";
+    console.error("Error toggleAnim:", err);
   }
 }
 
 
+function enviarRanking() {
+    const acr = selector_ranking.value;
+    const min = parseInt(document.getElementById("minutos_input_id").value) || 0;
+    const seg = parseInt(document.getElementById("segundos_input_id").value) || 0;
+    const mil = parseInt(document.getElementById("milisegundos_input_id").value) || 0;
+    const peso = parseFloat(document.getElementById("peso_input_id").value) || 0;
+    const despegue = document.getElementById("tipos_despegue_id").value;
+    console.log("1MIL:",mil)
+    if (!acr) return alert("Selecciona un equipo");
+
+    const tiempoMs = min * 60000 + seg * 1000 + mil;
+    const tiempoStr = `${min}:${String(seg).padStart(2, '0')}:${String(mil).padStart(1, '0')}`;
+
+    // Calcular posición
+    const tiemposActuales = Array.from(document.getElementsByClassName("tiempo"))
+        .map(t => {
+            const [m, s, ms] = t.textContent.split(":").map(Number);
+            return m * 60000 + s * 1000 + ms;
+        });
+
+    tiemposActuales.push(tiempoMs);
+    tiemposActuales.sort((a, b) => a - b);
+    const pos = tiemposActuales.lastIndexOf(tiempoMs) + 1;
+
+    // Emitir al socket global
+    socket.emit("message", {
+        tipo: "rankingTest",
+        acr,
+        tiempo: tiempoStr,
+        peso,
+        despegue,
+        pos
+    });
+}
 
