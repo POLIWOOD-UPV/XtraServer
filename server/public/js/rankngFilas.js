@@ -114,10 +114,10 @@ function sacar_pos_piloto(tiempoStr, filasControl) {
 
 // Inserta la fila 
 function meter_en_ranking(nueva_fila) {
-  // 1) Declarar fuera los dos valores
+  // 1) Declaramos fuera los dos valores
   let ranking, filas;
 
-  // 2) Rellenar según si es Uni o Club
+  // 2) Elegimos contenedor y filas según clase
   if (nueva_fila.className === "filaUni") {
     ranking = document.getElementById("filasUni");
     filas   = Array.from(ranking.querySelectorAll(".filaUni"));
@@ -126,32 +126,31 @@ function meter_en_ranking(nueva_fila) {
     filas   = Array.from(ranking.querySelectorAll(".filaClub"));
   }
 
-  // 3) Leer la posición y saber si está ocupada
+  // 3) Sacamos pos y comprobamos si ocupa
   const pos   = parseInt(nueva_fila.querySelector(".numero").textContent, 10);
   const ocupa = filas.some(f => parseInt(f.id, 10) === pos);
 
   if (ocupa) {
-    // 4a) Insertar en medio y desplazar
+    // 4a) Insertar en medio y reindexar
     const antes   = filas.slice(0, pos - 1);
     const despues = filas.slice(pos - 1);
     const todas   = [...antes, nueva_fila, ...despues];
 
-    // 5a) Reindexar IDs y números
     todas.forEach((f, i) => {
       f.id = `${i + 1}`;
       f.querySelector(".numero").textContent = i + 1;
     });
 
-    // 6a) Volcar de nuevo en el contenedor
+    // 5a) Volcar al DOM
     const frag = document.createDocumentFragment();
     todas.forEach(f => frag.appendChild(f));
     ranking.innerHTML = "";
     ranking.appendChild(frag);
   } else {
-    // 4b) Añadir al final
+    // 4b) Añadir al final y reindexar
     ranking.appendChild(nueva_fila);
 
-    // 5b) Reindexar usando el mismo selector de filas del contenedor
+    // Ojo: usamos el mismo selector que arriba
     const selector = nueva_fila.className === "filaUni" ? ".filaUni" : ".filaClub";
     Array.from(ranking.querySelectorAll(selector)).forEach((f, i) => {
       f.id = `${i + 1}`;

@@ -1,7 +1,7 @@
 /*
 Javascript para mostrar / ocultar elementos
 */
-
+let ranking_visible = true
 // Funciones de Nuria para mover las filas del ranking
 
 function toggleSoloFilas() {

@@ -32,7 +32,7 @@ const cabPes  = document.getElementById("cab_pes");
 const filas = Array.from(document.querySelectorAll(".fila"));
 
 // Flags de interfaz
-let ranking_visible = true;
+// let ranking_visible = true; en rankingDinamicas para evitar problemas de cache bla bla bla
 let filas_visible   = true;
 
 // Pedimos la ronda activa al cargar
@@ -122,7 +122,6 @@ function convertirTiempoAMilisegundos(t) {
 
 // FILAS ENTRYPOINT
 function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
-    console.log("SumaPiloto");
     if (piloto === "WOOD") {return} // Evitamos el de POLIWOOD
     // 1) Creamos la fila
     let nueva_fila = creaFila(piloto, pos, tiempo, peso, despegue);
@@ -161,37 +160,52 @@ function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
     }
 }
 
-// Listener principal de socket
+
+function procesarRanking(msg) {
+  // 1) Parsear datos
+  const [acr, tiempo, peso, despegue] = parseRanking(msg);
+
+  // 2) Determinar contenedor y selector
+  const equipoData = equiposJSON.find(e => e.acr.value === acr);
+  const esUni      = equipoData?.acad.value === true;
+  const cont       = document.getElementById(esUni ? "filasUni" : "filasClub");
+  const selector   = esUni ? ".filaUni" : ".filaClub";
+
+  // 3) Eliminar fila previa del mismo equipo
+  const previa = Array.from(cont.querySelectorAll(selector))
+                      .find(f => f.querySelector(".nombre").textContent === acr);
+  if (previa) {
+    previa.remove();
+  }
+
+  // 4) Re-extraer filas limpias
+  const filasExistentes = Array.from(cont.querySelectorAll(selector));
+
+  // 5) Calcular posición según tiempo
+  const pos = sacar_pos_piloto(tiempo, filasExistentes);
+
+  // 6) Insertar/animar
+  sumaPiloto(acr, pos, tiempo, peso, "animado", despegue);
+}
+
+
 // Listener principal de socket
 socket.on("message", async (msg) => {
-  // Test de ranking
-  if (typeof msg !== "string" && msg?.tipo === "rankingTest") {
-    // 1) Parsear datos
-    const [acr, tiempo, peso, despegue] = parseRanking(msg);
 
-    // 2) Determinar contenedor y tipo
-    const equipoData = equiposJSON.find(e => e.acr.value === acr);
-    const esUni = equipoData && equipoData.acad.value === true;
-    const cont = document.getElementById(esUni ? "filasUni" : "filasClub");
-
-    // 3) Construir selector dinámico y extraer filas
-    const selector = esUni ? ".filaUni" : ".filaClub";
-    const filasExistentes = Array.from(cont.querySelectorAll(selector));
-    
-    // 4) Calcular posición según tiempo
-    const pos = sacar_pos_piloto(tiempo, filasExistentes);
-    // 5) Llamar a sumaPiloto con 'pos' ya calculado
-    sumaPiloto(acr, pos, tiempo, peso, "animado", despegue);
-    return
+  // ——— rankingTest (objeto) ———
+  if (typeof msg === "object" && msg?.tipo === "rankingTest") {
+    procesarRanking(msg);   // elimina previa, calcula pos, llama sumaPiloto
+    return;                 // IMPORTANTE: salimos aquí
   }
 
-  // Ronda -> pedimos la activa
-  if (msg.includes("urn:ngsi-ld:Ronda:")) {
+  // ——— Ronda (string) ———
+  if (typeof msg === "string" && msg.includes("urn:ngsi-ld:Ronda:")) {
     await actualizarRondaActiva();
+    return;
   }
 
-  // Animaciones -> Pedimos las animaciones
-  if (msg.includes("urn:ngsi-ld:Animaciones:001")) {
+  // ——— Animaciones (string) ———
+  if (typeof msg === "string" && msg.includes("urn:ngsi-ld:Animaciones:001")) {
     try {
       const state = await fetch("/v2/entities/urn:ngsi-ld:Animaciones:001")
                           .then(r => r.json());
@@ -201,5 +215,7 @@ socket.on("message", async (msg) => {
     }
     return;
   }
-});
 
+  // ——— Otros mensajes ———
+  console.warn("   → Mensaje no reconocido:", msg);
+});
