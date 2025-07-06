@@ -1,4 +1,8 @@
 /* control.css */
+#selector_equipo_ranking {
+  width: 100%;
+  min-width: 120px;
+}
 
 /* Global */
 body {
