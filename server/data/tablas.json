@@ -58,7 +58,12 @@
         "keys": ["num"],
         "idLen": [3],
         "dateTime": []
+    },
+    "Fact": {
+        "table": "facts",
+        "keys": ["team"],
+        "idLen": [2],
+        "dateTime": []
     }
-
 
 }

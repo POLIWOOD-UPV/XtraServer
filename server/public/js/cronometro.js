@@ -16,7 +16,7 @@ class Cronometro {
         this.html_milsec.textContent = "---";
     }
     create(ronda, equipo, tipo) {
-        this.id = createID(ronda, equipo, tipo)
+        this.id = this.createID(ronda, equipo, tipo);
         this.entity = {
             id: this.id,
             type: "Crono",
@@ -25,7 +25,8 @@ class Cronometro {
             tipo,
             start: 0,
             stop: 0,
-        }
+        };
+        console.log(`Crono created: ${this.id}`);
     }
     // IMPORTANTE hacer BIND para conectar con el servidor!!!!!!!!!!!!!!!!!!!!!
     constructor(idMinutos, idSegundos, idMilisegundos) {
@@ -68,7 +69,7 @@ class Cronometro {
             }
         }// juntamos los atributos clave por guiones
         let id = id_arr.join("-");
-        return `urn:ngsi-ld:${type}:${id}`; // rellenamos la ID final
+        return `urn:ngsi-ld:Crono:${id}`; // rellenamos la ID final
     }
 
     unbind() {
@@ -76,16 +77,15 @@ class Cronometro {
     }
 
     bind(ronda, equipo, tipo) {
+        this.unbind();
         this.create(ronda, equipo, tipo);
-
         this.socket.on("message", this.listener);
-
         this.listener(`!${this.id}`); // update the entity;
     }
 
     check(msg){
         if (!String(msg).startsWith("!")) {return false;}
-        data = msg.split(" ");
+        const data = msg.split(" ");
         if (data[1] != this.id) {return false;}
         switch (data[0]) {
             case `!entityCreate`:
@@ -119,16 +119,16 @@ class Cronometro {
         } else {
             this.entity = await res.json();
         }
-        if (this.entity.start > 0) {
-            if (this.entity.stop > 0) {
-                this.value = this.entity.stop - this.entity.start;
-            } else {
+        if (this.entity.stop > 0) {
+            this.value = this.entity.stop - this.entity.start;
+        } else {
+            if (this.entity.start > 0) {
                 this.stepper = setInterval(this.step, 10);
                 let tiempo_actual = Date.now();
                 this.value = tiempo_actual - this.entity.start;
+            } else {
+                this.value = 0;
             }
-        } else {
-            this.value = 0;
         }
         this.interface()
     }
@@ -157,58 +157,51 @@ class Cronometro {
         this.html_milsec.textContent = String(milisegundos).padStart(3, "0");
     }
 
-    async start() {
+    async #send() {
+        while (true) {
+            let res;
+            try { // si la entidad existe... se modifica.
+                if (this.value) {
+                    res = await fetch(`/v2/entities/${this.id}/attrs?options=keyValues`, {
+                        headers: {"Content-Type": "application/json"},
+                        method: "PATCH",
+                        body: JSON.stringify({
+                            start: this.entity.start,
+                            stop: this.entity.stop
+                        })
+                    }); // si no existe... se crea.
+                } else {
+                    res = await fetch("/v2/entities?options=keyValues", {
+                        headers: {"Content-Type": "application/json"},
+                        method: "POST",
+                        body: JSON.stringify(this.entity)
+                    });
+                } // una vez enviado, se para.
+                break;
+            } catch (error) {
+                console.error(error.message, res); // si algo sale mal, se notifica al usuario
+            }
+        }
+    }
+
+    start() {
         if (!this.stepper) {
-            const exists = Boolean(this.value);
             this.entity.start = Date.now();
             this.entity.stop = 0;
             this.stepper = setInterval(() => {
                 this.step();
             }, 10);
-            // Intentarlo hasta que se suba
-            while (true) {
-                let res;
-                try {
-                    if (exists) {
-                        res = await fetch(`/v2/entities/${this.id}/attrs?options=keyValues`, {
-                            headers: {"Content-Type": "application/json"},
-                            method: "PATCH",
-                            body: JSON.stringify(this.entity)
-                        });
-                    } else {
-                        res = await fetch("/v2/entities?options=keyValues", {
-                            headers: {"Content-Type": "application/json"},
-                            method: "POST",
-                            body: JSON.stringify(this.entity)
-                        });
-                    }
-                    break;
-                } catch (error) {
-                    console.error(error.message, res); // si algo sale mal, se notifica al usuario
-                }
-            }
+            this.#send();
         }
     }
 
-    async stop() {
+    stop() {
         if (this.stepper) {
             this.entity.stop = Date.now();
             clearInterval(this.stepper);
             this.stepper = null;
             // Intentarlo hasta que se suba
-            while (true) {
-                let res;
-                try {
-                    res = await fetch(`/v2/entities/${this.id}/attrs?options=keyValues`, {
-                        headers: {"Content-Type": "application/json"},
-                        method: "PATCH",
-                        body: JSON.stringify(this.entity)
-                    });
-                    break;
-                } catch (error) {
-                    console.error(error.message, res); // si algo sale mal, se notifica al usuario
-                }
-            }
+            this.#send();
         }
     }
 
@@ -218,22 +211,10 @@ class Cronometro {
             this.stepper = null;
         }
         create(this.entity.ronda, this.entity.equipo, this.entity.tipo);
-        while (true) {
-            let res;
-            try {
-                res = await fetch(`/v2/entities/${this.id}/attrs?options=keyValues`, {
-                    headers: {"Content-Type": "application/json"},
-                    method: "PATCH",
-                    body: JSON.stringify(this.entity)
-                });
-                break;
-            } catch (error) {
-                console.error(error.message, res); // si algo sale mal, se notifica al usuario
-            }
-        }
+        this.#send();
     }
 
-    async set(value){
+    set(value){
         if (this.stepper) {
             clearInterval(this.stepper);    // Detenemos los incrementos¡
             this.stepper = null;            // Volver a poner a null para que la otra lógica funcione
@@ -242,41 +223,17 @@ class Cronometro {
         this.entity.start = Date.now();
         this.entity.stop = this.entity.start + value;
         this.interface();
-        while (true) {
-            let res;
-            try {
-                res = await fetch(`/v2/entities/${this.id}/attrs?options=keyValues`, {
-                    headers: {"Content-Type": "application/json"},
-                    method: "PATCH",
-                    body: JSON.stringify(this.entity)
-                });
-                break;
-            } catch (error) {
-                console.error(error.message, res); // si algo sale mal, se notifica al usuario
-            }
-        }
+        this.#send();
     }
 
-    async add(value) {
+    add(value) {
         if (this.stepper) {
             this.entity.start -= value;
         } else {
             this.entity.stop += value;
         }
         this.interface();
-        while (true) {
-            let res;
-            try {
-                res = await fetch(`/v2/entities/${this.id}/attrs?options=keyValues`, {
-                    headers: {"Content-Type": "application/json"},
-                    method: "PATCH",
-                    body: JSON.stringify(this.entity)
-                });
-                break;
-            } catch (error) {
-                console.error(error.message, res); // si algo sale mal, se notifica al usuario
-            }
-        }
+        this.#send();
     }
 
     button() {
@@ -288,4 +245,4 @@ class Cronometro {
     }
 };
 
-exports = Cronometro;
+export default Cronometro;
