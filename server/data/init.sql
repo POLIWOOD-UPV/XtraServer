@@ -114,3 +114,13 @@ CREATE TABLE IF NOT EXISTS `recursos` (
   `tarea` TINYINT UNSIGNED NOT NULL,
   PRIMARY KEY (`num`)
 );
+
+CREATE TABLE IF NOT EXISTS `facts` (
+  `team` tinyint unsigned NOT NULL,
+  `weight` float unsigned DEFAULT NULL,
+  `span` float unsigned DEFAULT NULL,
+  `fact` text DEFAULT NULL,
+  PRIMARY KEY (`team`),
+  CONSTRAINT `FK_equipo_facts` FOREIGN KEY (`team`)
+    REFERENCES `equipos` (`dorsal`)
+);

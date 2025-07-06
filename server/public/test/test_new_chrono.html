@@ -171,6 +171,7 @@
         // Importar los módulos necesarios
         import equipos from "/v2/entities/?type=Equipo&options=keyValues" with {type: "json"};
         import rondas from "/v2/entities/?type=Ronda&options=keyValues" with {type: "json"};
+        import tipos from "/templates/cronoType.json" with {type: "json"};
 
         // Variables del cronómetro
         let minutos = 0;
@@ -205,14 +206,14 @@
                 
                 // Agregar opción por defecto
                 const defaultRondaOption = document.createElement('option');
-                defaultRondaOption.value = '';
+                defaultRondaOption.value = 0;
                 defaultRondaOption.disabled = true;
                 defaultRondaOption.selected = true;
                 defaultRondaOption.textContent = 'Selecciona una ronda';
                 rondaSelect.appendChild(defaultRondaOption);
                 
                 const defaultEquipoOption = document.createElement('option');
-                defaultEquipoOption.value = '';
+                defaultEquipoOption.value = 0;
                 defaultEquipoOption.disabled = true;
                 defaultEquipoOption.selected = true;
                 defaultEquipoOption.textContent = 'Selecciona un equipo';
@@ -235,8 +236,8 @@
                 });
                 
                 // Configurar event listeners para los selects
-                rondaSelect.oninput = upload.changeID;
-                equipoSelect.oninput = upload.changeID;
+                // rondaSelect.oninput = upload.changeID;
+                // equipoSelect.oninput = upload.changeID;
                 
             } catch (error) {
                 console.error('Error al cargar las opciones:', error);
