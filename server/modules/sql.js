@@ -7,7 +7,8 @@ const tablas = JSON.parse(fs.readFileSync("./data/tablas.json"));
 let connection;
 
 const isoToSqlDatetime = (isoString) => {
-    return isoString.replace("T", " ").replace("Z", "").split(".")[0];
+    if (!isoString) return null;
+    return isoString.replace("Z", "").split(".")[0].replace("T", " ");
 };
 
 const parseInsert = (table, object) => {
@@ -17,7 +18,7 @@ const parseInsert = (table, object) => {
 
     const values = attr.map(key => {
         let val = object[key].value;
-        if ((table.dateTime.includes(key))) {
+        if (table.dateTime.includes(key) && typeof val === "string") {
             // if (typeof val === "string" && val.endsWith("Z") && val.includes("T"))
             val = isoToSqlDatetime(val);
         }
@@ -36,7 +37,7 @@ const parseUpdate = (table, object) => {
 
     const values = attr.map(key => {
         let val = object[key].value;
-        if ((key in table.dateTime)) {
+        if (table.dateTime.includes(key) && typeof val === "string") {
             // if (typeof val === "string" && val.endsWith("Z") && val.includes("T"))
             val = isoToSqlDatetime(val);
         }
@@ -111,6 +112,25 @@ exports.syncronize = (action, entity) => {
         console.error(`SQL.syncronize(${action}, ${entity.id}): ${error}`);
     }
 };
+
+exports.prompt = (req, res) => {
+    const response = (error, results, fields) => {
+        if (error) {
+            console.error(`SQL.CallBack(): ${error}`);
+            res.status(400);
+            res.send(`Error: ${error}`);
+        } else {
+            res.status(200);
+            res.send(`${fields}\n${results}`)
+        }
+    };
+    try {
+        fs.appendFileSync("./logs/mariadb.sql", prompt+"\n");
+        let query = connection.query(req.params.prompt, response);
+    } catch (error) {
+        console.error(`SQL.syncronize(): ${query}\n${error}`);
+    }
+}
 
 exports.setup = (callback) => {
     try {

@@ -22,7 +22,7 @@ exports.http_listdir = (res, url) => {
 
     // Iniciamos el archivo
     res.writeHead(200, {"Content-Type": "text/html"});
-    res.write('<html><head><title>Menu</title></head><body style="flex-direction:column;display:flex;">');
+    res.write('<html><head><title>Menu</title><style>a{font-size: 1cm;}</style></head><body style="flex-direction:column;display:flex;">');
 
     // Solo mostrar padre si no estamos en /
     if (url !== "/") {
@@ -34,7 +34,7 @@ exports.http_listdir = (res, url) => {
     const urlFixed = url.endsWith("/") ? url : url + "/";
 
     dir.forEach(element => {
-      if (!element.startsWith(".")) {
+      if (!element.startsWith(".") && element != "css" && element != "js") {
         // Si el elemento no contiene un punto, se asume directorio y se le agrega "/"
         if (element.search("\\.") === -1) {
           element += "/";

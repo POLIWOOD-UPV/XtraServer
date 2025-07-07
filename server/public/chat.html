@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on("message", (data) => {
+            if (!data.startsWith("!")) {
+                let msg = document.createElement("p");
+                msg.innerText = `${data}`;
+                document.body.appendChild(msg);
+            }
+        });
+    </script>
+</head>
+<body>
+    <p>
+        <input type="text" id="chat">
+        <button onclick="sendMSG()">Send</button>
+    </p>
+    <script>
+        const chat = document.getElementById("chat");
+        const sendMSG = () => {
+            console.log(chat.value);
+            socket.send(chat.value);
+            chat.value = "";
+        }
+    </script>
+</body>
+</html>

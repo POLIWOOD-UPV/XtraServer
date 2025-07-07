@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ronda</title>
-    <link rel="stylesheet" href="../estilos/subir.css">
     <script type="module">
         import upload from "/forms/js/upload.js";
 
@@ -13,62 +13,65 @@
             ronda.oninput = upload.changeID;
         });
     </script>
+    <link rel="stylesheet" href="./css/form.css">
 </head>
+
 <body>
     <div class="wrapper">
-    <div class="contenido">
-    <h1>Entrega de Puntos</h1>
-    <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
-    <form method="post" enctype="application/json" formenctype="application/json">
-        <!-- https://www.w3.org/TR/html-json-forms/ -->
-        <p style="display: none;">
-            <input type="text" name="type" value="Ronda" readonly>
-        </p> <!-- Esto permite a form.js saber que tipo esta trabajando -->
-        <p>
-            <label for="id">ID: </label><input name="id" type="text" value="urn:ngsi-ld:Ronda:0" readonly>
-        </p> <!-- Esto permite al usuario saber que entidad va a crear/modificar -->
-        <hr>
-        <h3>Número:</h3>
-        <p>
-            <!-- el "name" del input debe de ser igual al atributo que enviar -->
-            <label for="num">Nº de Ronda: </label>
-            <input type="number" name="num" step=1 min="0" max="9" pattern="[0-9]?">
-            <span></span>
-        </p>
-        <hr>
-        <h3>Presión atmosferica:</h3>
-        <p>
-            <!-- el "name" del input debe de ser igual al atributo que enviar -->
-            <label for="pres">Presión en pista: </label>
-            <input type="number" name="pres" pattern="[0-9]*[.]?[0-9]*">
-            <span>bar</span>
-        </p>
-        <h3>Velocidad del viento:</h3>
-        <p>
-            <!-- el "name" del input debe de ser igual al atributo que enviar -->
-            <label for="velv">Velocidad medida: </label>
-            <input type="number" name="velv" pattern="[0-9]*[.]?[0-9]*">
-            <span>m/s</span>
-        </p>
-        <h3>Pista activa:</h3>
-        <p >
-            <label for="actv">Pista en dirección </label>
-            <select name="actv">
-                <option value=0>Este</option>
-                <option value=1>Oeste</option>
-            </select>
-            <span>activa</span>
-        </p>
-        <h3>Inicio de ronda:</h3>
-        <p>
-            <!-- el "name" del input debe de ser igual al atributo que enviar -->
-            <label for="time">Hora de inicio: </label>
-            <input type="datetime-local" name="time">
-            <span> mas o menos</span>
-        </p>
-        <input type="submit" value="Subir" class="boton">
-    </form>
+        <div class="contenido">
+            <h1>Nueva Ronda</h1>
+            <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
+            <form method="post" enctype="application/json" formenctype="application/json">
+                <!-- https://www.w3.org/TR/html-json-forms/ -->
+                <p style="display: none;">
+                    <input type="text" name="type" value="Ronda" readonly>
+                </p> <!-- Esto permite a form.js saber que tipo esta trabajando -->
+                <p>
+                    <label for="id">ID: </label><input name="id" type="text" value="urn:ngsi-ld:Ronda:0" readonly>
+                </p> <!-- Esto permite al usuario saber que entidad va a crear/modificar -->
+                <hr>
+                <h3>Número:</h3>
+                <p>
+                    <!-- el "name" del input debe de ser igual al atributo que enviar -->
+                    <label for="num">Nº de Ronda: </label>
+                    <input type="number" name="num" step=1 min="0" max="9" pattern="[0-9]?">
+                    <span></span>
+                </p>
+                <hr>
+                <h3>Presión atmosferica:</h3>
+                <p>
+                    <!-- el "name" del input debe de ser igual al atributo que enviar -->
+                    <label for="pres">Presión en pista: </label>
+                    <input type="number" name="pres" pattern="[0-9]*[.]?[0-9]*">
+                    <span>bar</span>
+                </p>
+                <h3>Velocidad del viento:</h3>
+                <p>
+                    <!-- el "name" del input debe de ser igual al atributo que enviar -->
+                    <label for="velv">Velocidad medida: </label>
+                    <input type="number" name="velv" pattern="[0-9]*[.]?[0-9]*">
+                    <span>m/s</span>
+                </p>
+                <h3>Pista activa:</h3>
+                <p>
+                    <label for="actv">Pista en dirección </label>
+                    <select name="actv">
+                        <option value=0>Este</option>
+                        <option value=1>Oeste</option>
+                    </select>
+                    <span>activa</span>
+                </p>
+                <h3>Inicio de ronda:</h3>
+                <p>
+                    <!-- el "name" del input debe de ser igual al atributo que enviar -->
+                    <label for="time">Hora de inicio: </label>
+                    <input type="datetime-local" name="time">
+                    <span> mas o menos</span>
+                </p>
+                <input type="submit" value="Subir" class="boton">
+            </form>
+        </div>
     </div>
-</div>
 </body>
+
 </html>

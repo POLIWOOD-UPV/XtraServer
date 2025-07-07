@@ -99,6 +99,7 @@ const getForm = async () => {
     content = parseForm(data);
 }
 
+//  Version antigua
 const parseForm = (obj) => {
     for (const key in template) {
         if (key == "id" || key == "type") {
@@ -118,6 +119,41 @@ const parseForm = (obj) => {
     return obj;
 }
 
+// LA FORMA NUEVA NO LO CODIFICA EN "options=keyValues" RICARDO, cambia solo el link no el objeto etero (la vida puede ser sencilla, aprovechala)
+/*
+const parseForm = (obj) => {
+    // creamos el objeto base con id y tipo
+    let entity = {
+        id: obj.id,
+        type: obj.type
+    };
+
+    // recorremos cada campo del formulario
+    for (const key in template) {
+        if (key === "id" || key === "type") continue; // ignoramos id y type
+
+        let value = obj[key]; // cogemos el valor plano del form
+
+        // si es numero, lo convertimos
+        if (template[key].type === "Number") {
+            value = Number(value);
+        }
+        // si es booleano, lo convertimos a true/false
+        else if (template[key].type === "Boolean") {
+            value = value === "true" || value === true;
+        }
+
+        // guardamos el valor con estructura NGSI
+        entity[key] = {
+            type: template[key].type,
+            value: value
+        };
+    }
+
+    return entity;
+};
+*/
+
 const uploadForm = async () => {
     // actualizamos el contenido con los datos del form
     try {
@@ -136,24 +172,30 @@ const uploadForm = async () => {
                 body: JSON.stringify(content)
             });
         } else {
+            let id = content.id;
+            delete content.id;
+            delete content.type;
             console.log("patch", content);
-            res = await fetch(`/v2/entities/${content.id}?options=keyValues`, {
+            res = await fetch(`/v2/entities/${id}/attrs?options=keyValues`, {
                 headers: {"Content-Type": "application/json"},
                 method: "patch",
                 body: JSON.stringify(content)
             });
         }
+        let msg = res.ok? "SUCCES!" : "FAIL!"
+        // si todo va bien, mostramos el codigo de estado
+        alert(`Sent (${res.status}): ${msg}`);
     } catch (error) {
-        console.error(error.message); // si algo sale mal, se notifica al usuario
+        console.error(error.message, res); // si algo sale mal, se notifica al usuario
+        alert(`ERROR WHILE SENDING MESSAGE\n${error.message}`);
     }
-    alert(`Sended: ${res.status}`); // avisamos de la recepción de los datos.
 }
 
 const updateForm = () => {
     // cojemos todos los imputs (escepto los de subida)
-    let inputs = document.querySelectorAll("input:not([type=submit]),select");
+    let inputs = document.querySelectorAll("input:not([type=submit]),select,textarea");
     inputs.forEach(input => {
-        input.value = content[input.name];
+        input.value = content[input.name]; //.value;
     }); // Actualizamos el valor de todos los inputs por los datos guardados
 }
 

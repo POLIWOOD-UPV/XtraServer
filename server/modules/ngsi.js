@@ -36,6 +36,10 @@ exports.recv = async (req, res, action = "entityUpdate") => {
         res.status(202);
         entities.forEach((entity) => {
             notify(action, entity.id);
+            if (entity.type == "Anuncio" || 
+                entity.type === "EquipoMostrado" || 
+                entity.type === "Animaciones") 
+                { return } // Para que no salte error ya que no hay SQL para anuncios
             syncronize(action, entity);
         });
         // TODO 
@@ -175,6 +179,28 @@ exports.subscribeALL = async () => {
     });
 }
 
+// crea una subscripcion para cada acción
+exports.cleanSubsctiptions = async () => {
+    let res;
+    try {
+        res = await fetch(subscriptions, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!res.ok) {
+            console.error(`ngsi.cleanSubsctiptions(${res.status}):`, await res.text());
+            return;
+        }
+        let subs = await res.json();
+        this.update("delete", subs.map((obj) => {obj.id}));
+    } catch (error) {
+        console.error(`ngsi.cleanSubsctiptions():`, error);
+    }
+}
+
 // Para actualizar varias entidades a la vez
 // action: append | appendStric | delete | replace | update
 // entities: Array<NGSI_Object>
@@ -295,13 +321,79 @@ exports.crear_ceros = async () => {
     ]; // DATETIME => ISO8601
     let res = await this.update("append", entities);
     return res;
+}    
+
+// crear la entidad de los anuncios
+exports.crear_anuncio = async ()=> {
+    let anuncio = {
+        id: "urn:ngsi-ld:Anuncio:001",
+        type: "Anuncio",                 
+        texto: { type: "Text", value: "XC2025" },
+    };
+    return await this.update("append", [anuncio]);
 }
+
+// crear entidad de los recursos (staff, recursos, tareas)
+exports.crear_staff = async () => {
+    // Coger los datos del staff
+    let staff = JSON.parse(fs.readFileSync("./data/jurado/staff.json"))
+    let res = await this.update("append", staff)
+    return res;
+
+}
+
+exports.crear_tareas = async () => {
+    let tareas = JSON.parse(fs.readFileSync("./data/jurado/tareas.json"))
+    let res = await this.update("append",tareas)
+    return res
+}
+
+exports.crear_recursos = async () => {
+    const recursos = JSON.parse(fs.readFileSync("./data/jurado/recursos.json"));
+    const res = await exports.update("append", recursos);
+    return res;
+};
+
+// crear las entidades de la imagen mosta
+exports.crear_equipoMostrado = async () => {
+    let equipoMostrado = {
+        id:"urn:ngsi-ld:equipoMostrado:001",
+        type: "EquipoMostrado",
+        acr: {type: "Text", value: "SPONSORS"}
+    };
+    return await this.update("append", [equipoMostrado]);
+};
+
+// crear la entidad de control de animaciones
+
+// crear la entidad de las animaciones
+exports.crear_animaciones = async () => {
+    let animaciones = {
+        id: "urn:ngsi-ld:Animaciones:001",
+        type: "Animaciones",
+        rankings:  { type:"Text", value:"visible" },
+        anuncios:  { type:"Text", value:"visible" },
+        equipos:   { type:"Text", value:"visible" },
+        cronos:    { type:"Text", value:"visible" },
+        datos:     { type:"Text", value:"visible" },
+        dot:       { type:"Text", value:"visible" },
+        pos:       { type:"Text", value:"visible" },
+        nombre:       { type:"Text", value:"visible" },
+        tiempos:   { type:"Text", value:"visible" },
+        logos:     { type:"Text", value:"visible" },
+        dorsales:  { type:"Text", value:"oculto" },
+        pesos:     { type:"Text", value:"oculto" }
+    };
+    return await this.update("append", [animaciones]);
+};
+
 
 // espieza todo el sistema NGSI
 exports.start = async () => {
     try {
         console.log("NGSI Starting...")
         try {
+            await this.cleanSubsctiptions();
             await this.subscribeALL();
         }
         catch {
@@ -316,6 +408,28 @@ exports.start = async () => {
         console.log("Equipos Creados:", res.status);
         res = await this.crear_ceros();
         console.log("Ronda y Equipo 0 Creados:", res.status);
+        
+        
+        
+        // Staff y tareas
+        res = await this.crear_staff();
+        console.log("Staff montados:", res.status);
+        res = await this.crear_tareas();
+        console.log("Tareas montados:", res.status);
+        res = await this.crear_recursos();
+        console.log("Recursos montados:", res.status);
+        
+        
+        // Contenido mostado en pantalla
+        res = await this.crear_anuncio();
+        console.log("Anuncio montados:", res.status);
+
+        res = await this.crear_equipoMostrado();
+        console.log("Equipos mostrados montados:", res.status)
+        
+        // Animaciones
+        res = await this.crear_animaciones();
+        console.log("Animaciones montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

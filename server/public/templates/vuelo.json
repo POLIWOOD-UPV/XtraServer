@@ -11,18 +11,22 @@
     },
     "nulo": {
         "type": "Boolean",
-        "value": false
+        "value": null
     },
     "aterrizaje": {
         "type": "Boolean",
-        "value": false
+        "value": null
     },
     "carga": {
         "type": "Number",
-        "value": 0.0
+        "value": -1.0
     },
     "altura": {
         "type": "Number",
         "value": 0.0
+    },
+    "observaciones": {
+        "type": "Text",
+        "value": ""
     }
 }

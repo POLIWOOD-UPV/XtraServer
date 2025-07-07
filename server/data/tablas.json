@@ -40,5 +40,30 @@
         "keys": ["ronda", "equipo"],
         "idLen": [1, 2],
         "dateTime": []
+    },
+    "Staff": {
+        "table": "staff",
+        "keys": ["abreviacion"],
+        "idLen": [0],
+        "dateTime": []
+    },
+    "Tarea": {
+        "table": "tareas",
+        "keys": ["num"],
+        "idLen": [1],
+        "dateTime": ["inicio", "final"]
+    },
+    "Recurso": {
+        "table": "recursos",
+        "keys": ["num"],
+        "idLen": [3],
+        "dateTime": []
+    },
+    "Fact": {
+        "table": "facts",
+        "keys": ["team"],
+        "idLen": [2],
+        "dateTime": []
     }
+
 }

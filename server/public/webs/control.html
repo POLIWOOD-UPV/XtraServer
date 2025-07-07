@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Control de Anuncios - XC25</title>
+  <link rel="stylesheet" href="../css/control.css">
+</head>
+<body>
+  <h1>Panel de control</h1>
+
+  <!-- ANUNCIOS -->
+  <div>
+    <h2>Anuncios para XC25</h2>
+    <label for="texto">Texto del anuncio:</label><br>
+    <textarea id="texto" placeholder="XC2025"></textarea><br>
+    <button onclick="publicarAnuncio()">Publicar anuncio</button>
+    <div id="estado"></div>
+  </div>
+
+  <!-- EQUIPO MOSTRADO -->
+  <div>
+    <h2>Equipo mostrado</h2>
+    <select id="selector_equipo_img">
+      <option value="">Cargando equipos</option>
+    </select>
+    <button onclick="publicarEquipoMostrado()">Publicar equipo mostrado</button>
+    <button onclick="publicarEquipoMostrado('SPONSORS')">Publicar SPONSORS</button>
+    <div id="estadoLogo"></div>
+    <div id="datosEquipo"></div>
+    <div style="background-color: rgba(0,0,0,0.6);">
+      <img id="imagen_equipo" src="" alt="Imagen del equipo" style="max-width: 400px; display: none;">
+    </div>
+  </div>
+
+  <!-- ANIMACIONES / VISIBILIDAD -->
+  <div>
+    <h2>Control de animaciones</h2>
+    <div id="panelVisibilidad">
+      <div class="column hud">
+        <h3>Animaciones elementos HUD</h3>
+        <div>
+          <label for="rankings">Rankings:</label>
+          <button id="rankings" onclick="toggleAnim('rankings')">visible</button>
+        </div>
+        <div>
+          <label for="anuncios">Anuncios:</label>
+          <button id="anuncios" onclick="toggleAnim('anuncios')">visible</button>
+        </div>
+        <div>
+          <label for="equipos">Equipos:</label>
+          <button id="equipos" onclick="toggleAnim('equipos')">visible</button>
+        </div>
+        <div>
+          <label for="cronos">Cronos:</label>
+          <button id="cronos" onclick="toggleAnim('cronos')">visible</button>
+        </div>
+        <div>
+          <label for="datos">Datos:</label>
+          <button id="datos" onclick="toggleAnim('datos')">visible</button>
+        </div>
+        <div>
+          <label for="tiempos">Tiempos:</label>
+          <button id="tiempos" onclick="toggleAnim('tiempos')">visible</button>
+        </div>
+        <div>
+          <label for="logos">Logos:</label>
+          <button id="logos" onclick="toggleAnim('logos')">visible</button>
+        </div>
+      </div>
+      <div class="column ranking">
+        <h3>Animaciones elementos Ranking</h3>
+        <div>
+          <label for="dorsales">Dorsales:</label>
+          <button id="dorsales" onclick="toggleAnim('dorsales')">oculto</button>
+        </div>
+        <div>
+          <label for="pesos">Pesos:</label>
+          <button id="pesos" onclick="toggleAnim('pesos')">oculto</button>
+        </div>
+        <div>
+          <label for="pos">Posición:</label>
+          <button id="pos" onclick="toggleAnim('pos')">visible</button>
+        </div>
+        <div>
+          <label for="nombre">Nombre:</label>
+          <button id="nombre" onclick="toggleAnim('nombre')">visible</button>
+        </div>
+        <div>
+          <label for="dot">Despegue:</label>
+          <button id="dot" onclick="toggleAnim('dot')">visible</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RONDAS  -->
+  <div>
+    <h2>Control de rondas</h2>
+    <select id="selector_ronda">
+      <option value="">Cargando Rondas</option>
+    </select>
+    <button onclick="publicarRonda()">Publicar Ronda</button>
+  </div>
+
+  <!-- RANKING -->
+  <div>
+    <h2>Control de Cronos para Ranking</h2>
+    <table>
+      <tr>
+        <th>Equipo</th><th>Min</th><th>Seg</th><th>Milis</th><th>Peso</th><th>Despegue</th><th>Acciones</th>
+      </tr>
+      <tr>
+        <td>
+          <select id="selector_equipo_ranking">
+            <option value="">Cargando...</option>
+          </select>
+        </td>
+        <td><input id="minutos_input_id" type="number" placeholder="Min"></td>
+        <td><input id="segundos_input_id" type="number" placeholder="Seg"></td>
+        <td><input id="milisegundos_input_id" type="number" placeholder="Milis"></td>
+        <td><input id="peso_input_id" type="number" placeholder="Peso"></td>
+        <td>
+          <select id="tipos_despegue_id">
+            <option value="Corto">15m</option>
+            <option value="Correcto">60m</option>
+            <option value="Fallido">Fallido</option>
+            <option value="Ilegal">Ilegal</option>
+            <option value="Pendiente">Pendiente</option>
+          </select>
+        </td>
+        <td>
+          <button onclick="enviarRanking()">Enviar</button>
+          <button onclick="enviarTodosCeros()">Enviar ceros</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="../js/controlTX.js"></script>
+  <script src="../js/controlRX.js"></script>
+  <script src="../js/control.js"></script>
+</body>
+</html>

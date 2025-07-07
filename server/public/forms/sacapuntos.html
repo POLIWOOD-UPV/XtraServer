@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos vuelo puntos</title>
+</head>
+<body>
+  <h1>Datos de vuelo para calcular puntos</h1>
+  <p>
+    <label for="ronda">Ronda:</label>
+    <select id="ronda">
+    </select>
+  </p>
+  <p>
+    <label for="equipo">Equipo:</label>
+    <select id="equipo">    </select>
+  </p>
+  <hr>
+  <div id="resultado">
+    <p>Selecciona una ronda y un equipo para ver los resultados.</p>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/sacapuntos.js"></script>
+</body>
+</html>
