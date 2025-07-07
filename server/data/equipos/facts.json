@@ -1,0 +1,122 @@
+[
+  {
+    "id": "urn:ngsi-ld:Fact:01",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 1 },
+    "weight": { "type": "Number", "value": 1.6 },
+    "span": { "type": "Number", "value": 1.5 },
+    "fact": { "type": "Text", "value": "First ever participation of the team" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:02",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 2 },
+    "weight": { "type": "Number", "value": 2.6 },
+    "span": { "type": "Number", "value": 2.6 },
+    "fact": { "type": "Text", "value": "Best propulsion system study" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:03",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 3 },
+    "weight": { "type": "Number", "value": 2.1 },
+    "span": { "type": "Number", "value": 2.4 },
+    "fact": { "type": "Text", "value": "Best result: 3rd Place (2024)" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:04",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 4 },
+    "weight": { "type": "Number", "value": 1.6 },
+    "span": { "type": "Number", "value": 2.0 },
+    "fact": { "type": "Text", "value": "Folding prop and retractable gear" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:05",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 5 },
+    "weight": { "type": "Number", "value": 3.0 },
+    "span": { "type": "Number", "value": 2.5 },
+    "fact": { "type": "Text", "value": "Only eliptical tip on the grid" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:06",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 6 },
+    "weight": { "type": "Number", "value": 1.8 },
+    "span": { "type": "Number", "value": 1.9 },
+    "fact": { "type": "Text", "value": "Unique wheel fairings" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:07",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 7 },
+    "weight": { "type": "Number", "value": 1.7 },
+    "span": { "type": "Number", "value": 1.6 },
+    "fact": { "type": "Text", "value": "Best aircraft performance study" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:08",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 8 },
+    "weight": { "type": "Number", "value": 2.0 },
+    "span": { "type": "Number", "value": 2.0 },
+    "fact": { "type": "Text", "value": "Simple and reliable design" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:09",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 9 },
+    "weight": { "type": "Number", "value": 1.6 },
+    "span": { "type": "Number", "value": 1.5 },
+    "fact": { "type": "Text", "value": "Most veteran team: 8 ACC entries" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:10",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 10 },
+    "weight": { "type": "Number", "value": 2.1 },
+    "span": { "type": "Number", "value": 2.1 },
+    "fact": { "type": "Text", "value": "Only aircraft with a tail skid" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:11",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 11 },
+    "weight": { "type": "Number", "value": 2.4 },
+    "span": { "type": "Number", "value": 2.2 },
+    "fact": { "type": "Text", "value": "Lightest powerplant on the grid" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:12",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 12 },
+    "weight": { "type": "Number", "value": 1.8 },
+    "span": { "type": "Number", "value": 3.0 },
+    "fact": { "type": "Text", "value": "Largest wingspan on the grid" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:13",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 13 },
+    "weight": { "type": "Number", "value": 2.4 },
+    "span": { "type": "Number", "value": 2.2 },
+    "fact": { "type": "Text", "value": "Shares wing planform with #11" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:14",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 14 },
+    "weight": { "type": "Number", "value": 1.3 },
+    "span": { "type": "Number", "value": 2.2 },
+    "fact": { "type": "Text", "value": "Only flying wing on the grid" }
+  },
+  {
+    "id": "urn:ngsi-ld:Fact:15",
+    "type": "Fact",
+    "team": { "type": "Number", "value": 15 },
+    "weight": { "type": "Number", "value": 3.0 },
+    "span": { "type": "Number", "value": 2.6 },
+    "fact": { "type": "Text", "value": "Best result: 2nd Place (2024)" }
+  }
+]
