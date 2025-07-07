@@ -56,11 +56,12 @@ function creaFila(nom, pos, tiemp, pes, despegue) {
     const dot = document.createElement("span");
     dot.className = "dot";
     const colorMap = {
-      "Corto":      "#9000ff",
-      "Correcto":   "#0dff00",
-      "Ilegal":     "#ff0000",
+      "15m":        "#9000ff",
+      "20m":        "#ff00e6",
+      "40m":        "#0062ff",
+      "60m":        "#0dff00",
       "Pendiente":  "#ffffff",
-      "Fallido":    "#E6FE00"
+      "Fallido":    "#ff0000"
     };
     dot.style.backgroundColor = colorMap[despegue] || "#ffffff";
     dot.style.display = despegues_visibles ? "flex" : "none";
