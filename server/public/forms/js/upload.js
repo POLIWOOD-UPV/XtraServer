@@ -110,14 +110,15 @@ const parseForm = (obj) => {
                 obj[key] = Number(obj[key]);
                 break;
             case "Boolean":
-                obj[key] = Boolean(obj[key]);
+                // obj[key] = Boolean(obj[key]); ESTO DABA SIEMPRE TRUE Y NO FUNCIONABA SACATIEMPOS
+                obj[key] = obj[key] === "true";
                 break;
             default:
                 break;
         }
     }
     return obj;
-}
+};
 
 // LA FORMA NUEVA NO LO CODIFICA EN "options=keyValues" RICARDO, cambia solo el link no el objeto etero (la vida puede ser sencilla, aprovechala)
 /*
@@ -171,6 +172,7 @@ const uploadForm = async () => {
                 method: "post",
                 body: JSON.stringify(content)
             });
+            console.log(JSON.stringify(content))
         } else {
             let id = content.id;
             delete content.id;
