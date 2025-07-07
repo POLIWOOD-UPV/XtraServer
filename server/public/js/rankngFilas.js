@@ -3,19 +3,18 @@ Javascript para la creación e inserción de filas en el ranking
 */
 
 // Construir la fila
-function creaFila(nom, pos, tiemp, pes, despegue) {
+function creaFila(nom, pos, rawMs, tiemp, pes, despegue) {
     // Creamos la fila con sus partes
     const fila = document.createElement("div");
   
-    // Primero hay que determinar a cual de los dos va (clubes / unis)
-    let clase;
-    if (equiposAcademicos.has(nom)) {
-      clase = "filaUni"
-    }else {
-      clase = "filaClub"
-    }
-    fila.className = clase
+    // Determinar si es universitario consultando equiposJSON
+    const equipoData = equiposJSON.find(e => e.acr.value === nom);
+    const esUni      = equipoData?.acad.value === true;
+    fila.className   = esUni ? "filaUni" : "filaClub";
     
+    // Asignamos el id igual a la posición para que meter_en_ranking la encuentre
+    fila.id = String(pos);
+
     // Número
     const numero = document.createElement("div");
     numero.className = "numero";
@@ -32,18 +31,17 @@ function creaFila(nom, pos, tiemp, pes, despegue) {
 
     // Logo dinámico
     const logo = meterLogos(nom);
-    if (logos_visibles) logo.style.display = "flex";
-    else            logo.style.display = "none";
+    logo.style.display = logos_visibles ? "flex" : "none";
 
     // Dorsal dinámico
     const dor = meterDorsal(nom);
-    if (dorsal_visible) dor.style.display = "flex";
-    else               dor.style.display = "none";
+    dor.style.display = dorsal_visible ? "flex" : "none";
 
     // Tiempo
     const tiempoDiv = document.createElement("div");
     tiempoDiv.className = "tiempo";
     tiempoDiv.textContent = tiemp;
+    tiempoDiv.dataset.raw = rawMs;
     tiempoDiv.style.display = tiempo_visible ? "block" : "none";
 
     // Peso
@@ -75,6 +73,7 @@ function creaFila(nom, pos, tiemp, pes, despegue) {
     return fila;
 }
 
+
 function meterLogos(nom) {
   const div = document.createElement("div");
   div.className = "logo";
@@ -93,24 +92,20 @@ function meterDorsal(nom) {
 }
 
 // Calcula la posición (1-based) de un nuevo piloto comparando su tiempo con los existentes
-function sacar_pos_piloto(tiempoStr, filasControl) {
-  // 1) Convertir el tiempo nuevo a ms
-  const tiempoNuevo = convertirTiempoAMilisegundos(tiempoStr);
-
-  // 2) Extraer y convertir todos los tiempos actuales a ms
-  const tiempos = filasControl.map((f, idx) => {
-    const tText = f.querySelector('.tiempo').textContent;
-    const tMs = convertirTiempoAMilisegundos(tText);
-    return tMs;
+function sacar_pos_piloto(rawMs, filas) {
+  // 1) Leer todos los rawMs de las filas existentes
+  const tiemposExistentes = filas.map(fila => {
+    const attr = fila.querySelector(".tiempo")?.dataset.raw;
+    return attr != null ? Number(attr) : Infinity;
   });
 
-  // 3) Insertar el tiempo nuevo en el array y ordenar de menor a mayor
-  const ordenados = [...tiempos, tiempoNuevo].sort((a, b) => a - b);
+  // 2) Meter el nuevo tiempo y ordenar numéricamente
+  const todos = [...tiemposExistentes, rawMs].sort((a, b) => a - b);
 
-  // 4) Determinar posición (lastIndexOf +1)
-  const pos = ordenados.lastIndexOf(tiempoNuevo) + 1;
-  return pos;
+  // 3) La posición es el índice de rawMs + 1
+  return todos.indexOf(rawMs) + 1;
 }
+
 
 
 // Inserta la fila 

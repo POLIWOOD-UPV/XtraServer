@@ -39,9 +39,9 @@ let filas_visible   = true;
 // Pedimos la ronda activa al cargar
 // Mostramos siempre el número de ronda actual
 document.addEventListener("DOMContentLoaded", async () => {
+    await cogerEquipos();
     await actualizarRondaActiva(); // Mostramos la ronda al arrancar
     await cogerDorsales(); // Cargamos los dorsales
-    await cogerEquipos();
 
     // Coger los vuelos de esta ronda
 });
@@ -84,109 +84,172 @@ async function cogerDorsales() {
 // Actualiza la ronda activa en pantalla
 async function actualizarRondaActiva() {
   try {
-    // Pedimos las rondas al broker
-    const res = await fetch("/v2/entities?type=Ronda&limit=40");
-    const rondas = await res.json();
+    // 1) Obtener todas las rondas
+    const resRondas = await fetch("/v2/entities?type=Ronda&limit=40");
+    if (!resRondas.ok) throw new Error(resRondas.statusText);
+    const rondas = await resRondas.json();
 
-    // Buscamos la ronda con actv = 1
-    const activa = rondas.find(r => r.actv?.value == 1);
+    // 2) Encontrar la activa (actv.value === 1)
+    const activa = rondas.find(r => r.actv?.value === 1);
 
-    // Si hay una ronda activa, la mostramos
-    if (activa) {
-      const num = activa.num?.value ?? "-";
-      rondaActual = num
-      document.getElementById("num_ronda").textContent = num;
+    // 3) Si no hay ronda activa, limpio y salgo
+    if (!activa) {
+      rondaActual = "-";
+      document.getElementById("num_ronda").textContent = "-";
+      document.getElementById("filasUni").innerHTML  = "";
+      document.getElementById("filasClub").innerHTML = "";
+      console.log("No hay ronda activa, tablas limpias.");
+      return;
     }
+
+    // 4) Mostrar número de ronda y limpiar filas anteriores
+    rondaActual = activa.num?.value ?? "-";
+    document.getElementById("num_ronda").textContent = rondaActual;
+    document.getElementById("filasUni").innerHTML  = "";
+    document.getElementById("filasClub").innerHTML = "";
+
+    // 5) Traer todos los Crono de esta ronda
+    const resCronos = await fetch(
+      `/v2/entities?type=Crono&q=ronda==${rondaActual}&limit=100`
+    );
+    if (!resCronos.ok) throw new Error(resCronos.statusText);
+    let cronos = await resCronos.json();
+    // Filtrar solo tipo CIRC
+    cronos = cronos.filter(c => c.tipo.value === "CIRC");
+
+    // 6) Ordenar cronos por tiempo ascendente (stop - start)
+    cronos.sort((a, b) => 
+      (a.stop.value - a.start.value) - (b.stop.value - b.start.value)
+    );
+
+    // 7) Procesar cada crono secuencialmente
+    for (const cronoData of cronos) {
+      const equipoNum = cronoData.equipo.value;
+      const equipoStr = String(equipoNum).padStart(2, "0");
+      const key       = `${rondaActual}-${equipoStr}`;
+      const fichaId   = `urn:ngsi-ld:Ficha:${key}`;
+      const vueloId   = `urn:ngsi-ld:Vuelo:${key}`;
+
+      try {
+        // Pedir ficha y vuelo en paralelo
+        const [resFicha, resVuelo] = await Promise.all([
+          fetch(`/v2/entities/${fichaId}`),
+          fetch(`/v2/entities/${vueloId}`)
+        ]);
+        if (!resFicha.ok || !resVuelo.ok) {
+          console.warn(`Falta Ficha o Vuelo para ${key}`);
+          continue;
+        }
+        const [fichaData, vueloData] = await Promise.all([
+          resFicha.json(),
+          resVuelo.json()
+        ]);
+
+        // Disparar ranking para este equipo
+        await procesarRanking({
+          tipo: "ngsiRanking",
+          crono: cronoData,
+          ficha: fichaData,
+          vuelo: vueloData
+        });
+
+        // Pequeña pausa para que el DOM reordene antes de añadir la siguiente
+        await new Promise(resolve => setTimeout(resolve, 30));
+      } catch (err) {
+        console.error(`Error cargando datos para ${key}:`, err);
+      }
+    }
+
   } catch (err) {
     console.error("Error al obtener ronda activa:", err);
   }
 }
 
+
 // Funciones utiles
-// Parser para mensajes de rankingTest
-// Nuevo parseRanking que entiende el mensaje NGSI/
+// Parser los mensajes que nos llegan
 function parseRanking(msg) {
   // ——— Flujo NGSI ———
   if (msg.tipo === "ngsiRanking") {
     const { crono, ficha, vuelo } = msg;
 
-    // 1) Acrónimo
+    // 1) Acrónimo según dorsal
     const dorsal    = ficha.equipo.value;
     const equipoEnt = equiposJSON.find(e => e.dorsal.value === dorsal);
     const acr       = equipoEnt?.acr.value ?? String(dorsal);
 
-    // 2) Tiempo en ms
-    const tiempoMs = crono.stop.value - crono.start.value;
+    // 2) Tiempo en ms (stop - start)
+    const rawMs     = crono.stop.value - crono.start.value;
 
-    // 3) Peso: sólo el resultante del vuelo
-    const peso = vuelo.carga.value;
+    // 3) Peso resultante del vuelo
+    const peso      = vuelo.carga.value;
 
-    // 4) Despegue
+    // 4) Despegue: si no aterrizó, "Fallido", si no, mapeo 0–3 a distancia
     let despegueStr;
     if (!vuelo.aterrizaje.value) {
       despegueStr = "Fallido";
     } else {
-      // keys 0–3 según los 4 tipos de distancia
       const distMap = {
         0: "60m",
         1: "40m",
         2: "20m",
         3: "15m"
       };
-      const code = ficha.despegue.value;
-      despegueStr = distMap[code] ?? `${code}m`;
+      despegueStr = distMap[ficha.despegue.value] ?? `${ficha.despegue.value}m`;
     }
 
-    return [acr, tiempoMs, peso, despegueStr];
+    return [acr, rawMs, peso, despegueStr];
   }
 
   // ——— Flujo clásico rankingTest ———
   const { acr, tiempo, peso, despegue } = msg;
-  return [acr, tiempo, peso, despegue];
+
+  // convertir "M:SS" o "M:SS:cs" a ms
+  let rawMs;
+  if (typeof tiempo === "number") {
+    rawMs = tiempo;
+  } else {
+    const parts = String(tiempo).split(":").map(Number);
+    if (parts.length === 2) {
+      const [m, s] = parts;
+      rawMs = (m * 60 + s) * 1000;
+    } else if (parts.length === 3) {
+      const [m, s, c] = parts;
+      rawMs = (m * 60 + s) * 1000 + c;
+    } else {
+      console.warn("Tiempo con formato inesperado en rankingTest:", tiempo);
+      rawMs = 0;
+    }
+  }
+
+  return [acr, rawMs, peso, despegue];
 }
 
 
 // Convierte un string de tiempo (MM:SS:ms o HH:MM:SS) a milisegundos
 function convertirTiempoAMilisegundos(t) {
-  // 0) Si ya es número, lo devolvemos (flujo NGSI)
-  if (typeof t === "number") {
-    return t;
-  }
-
-  // 1) Si no es string, advertimos y devolvemos 0
-  if (typeof t !== "string") {
-    console.warn("convertirTiempoAMilisegundos recibió:", t);
-    return 0;
-  }
-
-  // 2) Partimos por ":" y convertimos a números
+  if (typeof t === "number") return t;
+  if (typeof t !== "string") return 0;
   const parts = t.split(":").map(Number);
-  let ms = 0; 
-
-  // 3) MM:SS
   if (parts.length === 2) {
     const [m, s] = parts;
-    ms = (m * 60 + s) * 1000;
-
-  // 4) MM:SS:cs (centisegundos o milisegundos)
+    return (m * 60 + s) * 1000;
   } else if (parts.length === 3) {
     const [m, s, c] = parts;
-    ms = (m * 60 + s) * 1000 + c;
-
-  // 5) Formato inesperado
+    return (m * 60 + s) * 1000 + c;
   } else {
-    console.error("Formato de tiempo inesperado en convertirTiempoAMilisegundos:", t);
+    console.error("Formato inesperado:", t);
+    return 0;
   }
-
-  return ms;
 }
 
 
+
 // FILAS ENTRYPOINT
-function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
+function sumaPiloto(piloto, pos, rawMs, tiempoStr, peso, estado, despegue) {
     if (piloto === "WOOD") {return} // Evitamos el de POLIWOOD
     // 1) Creamos la fila
-    let nueva_fila = creaFila(piloto, pos, tiempo, peso, despegue);
+    const nueva_fila = creaFila(piloto, pos, rawMs, tiempoStr, peso, despegue);
     ++controla_pilotos;
 
     // 2) Buscamos en el JSON el equipo cuyo acrónimo coincide con 'piloto'
@@ -223,25 +286,19 @@ function sumaPiloto(piloto, pos, tiempo, peso, estado, despegue) {
 }
 
 
-function procesarRanking(msg) {
+async function procesarRanking(msg) {
   // 1) Parsear datos
   const [acr, rawMs, peso, despegueStr] = parseRanking(msg);
 
-  // 1b) Formatear rawMs → "M:SS:ms"
+  // 1b) Formatear rawMs → "M:SS:cs"
   const m  = Math.floor(rawMs / 60000);
   const s  = Math.floor((rawMs % 60000) / 1000);
-  const ms = Math.floor((rawMs % 1000) / 10);
-  const tiempoStr = `${m}:${String(s).padStart(2, "0")}:${String(ms).padStart(2, "0")}`;
+  const cs = Math.floor((rawMs % 1000) / 10);
+  const tiempoStr = `${m}:${String(s).padStart(2,"0")}:${String(cs).padStart(2,"0")}`;
 
-  // —— Log de depuración —— 
-  console.log("Datos parseados para ranking:", {
-    acr,
-    tiempo: tiempoStr,
-    peso,
-    despegue: despegueStr
-  });
+  console.log("Datos parseados para ranking:", { acr, tiempo: tiempoStr, peso, despegue: despegueStr });
 
-  // 2) Determinar contenedor y selector
+  // 2) Elegir contenedor y selector
   const equipoData = equiposJSON.find(e => e.acr.value === acr);
   const esUni      = equipoData?.acad.value === true;
   const cont       = document.getElementById(esUni ? "filasUni" : "filasClub");
@@ -252,15 +309,23 @@ function procesarRanking(msg) {
                       .find(f => f.querySelector(".nombre").textContent === acr);
   if (previa) previa.remove();
 
-  // 4) Re-extraer filas limpias
+  // 4) Pequeño delay para que el DOM procese el remove
+  await new Promise(r => setTimeout(r, 20));
+
+  // 5) Re-extraer filas limpias
   const filasExistentes = Array.from(cont.querySelectorAll(selector));
 
-  // 5) Calcular posición (se pasa rawMs para comparar en ms)
+  // 6) Calcular posición (usando rawMs)
   const pos = sacar_pos_piloto(rawMs, filasExistentes);
 
-  // 6) Insertar/animar: aquí uso tiempoStr para mostrar
-  sumaPiloto(acr, pos, tiempoStr, peso, "animado", despegueStr);
+  // 7) Insertar/animar: ¡ojo al orden de los parámetros!
+  //          piloto, pos, rawMs, tiempoStr, peso, estado, despegue
+  setTimeout(() => {
+    sumaPiloto(acr, pos, rawMs, tiempoStr, peso, "animado", despegueStr);
+  }, 50);
 }
+
+
 
 
 socket.on("message", async (msg) => {
