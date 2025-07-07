@@ -41,9 +41,9 @@ function mostrarDatos(){
     <h2>Resultados de ${dorsal} - ${nombre} en Ronda ${ronda}</h2>
     <p><strong>Requested Payload:</strong> ${ficha?.carga ?? "?"} ml</p>
     <p><strong>Unloaded Payload:</strong> ${vuelo?.carga ?? "?"} ml</p>
-    <p><strong>Time Circuit:</strong> ${getTiempo("Circuito", ronda, equipo)} </p>
-    <p><strong>Time Glide:</strong> ${getTiempo("Planeo", ronda, equipo)} </p>
-    <p><strong>Time Load:</strong> ? seconds (to be implemented)</p>
+    <p><strong>Time Circuit:</strong> ${getTiempo("CIRC", ronda, equipo)} </p>
+    <p><strong>Time Glide:</strong> ${getTiempo("PLAN", ronda, equipo)} </p>
+    <p><strong>Time Load:</strong>  ${getTiempo("CARG", ronda, equipo)}</p>
     <p><strong>Altitude:</strong> ${vuelo?.altura ?? "?"} m</p>
     <p><strong>Pilot:</strong> ${decide(ficha?.piloto, "external pilot", "team pilot")}</p>
     <p><strong>Legal Flight:</strong> ${decide(vuelo?.nulo, "legal", "not legal")}</p>
@@ -96,9 +96,16 @@ socket.on("message", async (msg) => {
 });
 
 // Buscar cronos por ronda y equipo
-const getTiempo = (tipo) => {
-    let crono = cronos.find(c => c.ronda === ronda && c.equipo === equipo && c.tipo === tipo);
-    return crono ? ((crono.stop - crono.start) / 1000).toFixed(2) + " s" : "?";
+const getTiempo = (tipo, ronda, equipo) => {
+    let crono = cronos.find(
+        c =>
+            c.ronda === ronda &&
+            c.equipo === equipo &&
+            c.tipo === tipo
+    );
+    return crono
+        ? ((crono.stop - crono.start) / 1000).toFixed(2) + " s"
+        : "?";
 };
 
 window.addEventListener("DOMContentLoaded", cargarDatos);
