@@ -1,14 +1,16 @@
-html {
-  box-sizing: border-box;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 body {
-  font-size: clamp(16px, 3vw, 20px);
-  background-color: rgb(255, 255, 255);
-  margin: 0;
-  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  min-height: min-content;   
   padding: clamp(0.5rem, 1vh, 1rem);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: rgb(255, 255, 255);
   box-sizing: border-box;
 }
 
@@ -16,9 +18,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
   padding: clamp(1rem, 3vh, 4rem);
   box-sizing: border-box;
+  width: 100%;
+  max-width: 900px;
 }
 
 .contenido {
@@ -27,9 +30,6 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 900px; /* Fijo para evitar estrechamiento prematuro */
-  height: 100%;
-  max-height: clamp(300px, 90vh, 900px);
   padding: clamp(1rem, 2vw, 2.5rem);
   box-sizing: border-box;
   background-color: white;
@@ -38,6 +38,7 @@ body {
   gap: clamp(1rem, 2.5vh, 3rem);
   margin: 0 auto;
 }
+
 
 .boton {
   all: unset;
@@ -118,9 +119,86 @@ h1 {
   cursor: not-allowed;
 }
 
+form {
+  width: 100%;
+  max-width: 600px;
+}
+
+form p {
+  display: flex;
+  align-items: center;
+  margin: 0.625rem 0; 
+  gap: 0.5rem; 
+  flex-wrap: nowrap; 
+}
+
+form label {
+  flex: 0 0 30%;       
+  min-width: auto;   
+  white-space: nowrap;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="datetime-local"],
+form select {
+  flex: 1 1 auto;       
+  padding: 0.3125rem;
+  box-sizing: border-box;
+  min-width: auto;  
+}
+
+form span {
+  flex: 0 0 auto;
+  margin-left: 0.5rem;  
+  white-space: nowrap;
+}
+
+
+.select-corto {
+  display: block;
+  align-items: unset;
+  margin: 0.625rem 0;
+}
+
+.grupo-tiempo {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+}
+
+.grupo-tiempo label {
+  flex: 0 0 30%;
+  white-space: nowrap;
+}
+
+.grupo-tiempo input[type="number"] {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+
 
 @media (orientation: portrait) {
   .contenido {
     box-shadow: none;
+  }
+}
+
+@media (max-width: 400px) {
+  form p {
+    flex-wrap: wrap;
+  }
+  form label {
+    flex-wrap: wrap;
+  }
+  form span {
+    margin-left: 0rem;
   }
 }

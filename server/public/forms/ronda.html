@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ronda</title>
+    <link rel="stylesheet" href="../estilos/subir.css">
     <script type="module">
         import upload from "/forms/js/upload.js";
 
@@ -14,6 +15,8 @@
     </script>
 </head>
 <body>
+    <div class="wrapper">
+    <div class="contenido">
     <h1>Entrega de Puntos</h1>
     <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
     <form method="post" enctype="application/json" formenctype="application/json">
@@ -48,7 +51,7 @@
             <span>m/s</span>
         </p>
         <h3>Pista activa:</h3>
-        <p>
+        <p >
             <label for="actv">Pista en dirección </label>
             <select name="actv">
                 <option value=0>Este</option>
@@ -63,7 +66,9 @@
             <input type="datetime-local" name="time">
             <span> mas o menos</span>
         </p>
-        <input type="submit" value="Subir">
+        <input type="submit" value="Subir" class="boton">
     </form>
+    </div>
+</div>
 </body>
 </html>

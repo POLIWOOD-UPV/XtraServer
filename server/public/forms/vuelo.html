@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vuelo</title>
+    <link rel="stylesheet" href="../estilos/subir.css">
     <script type="module" src="/forms/js/form.js"></script>
 </head>
 <body>
+    <div class="wrapper">
+    <div class="contenido">
     <h1>Registro de Vuelo</h1>
     <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
     <form method="post" enctype="application/json" formenctype="application/json">
@@ -55,14 +58,16 @@
         <h3>Aterrizaje:</h3>
         <p>
             <!-- para los booleanos es recomendable trabajar con select por la legibilidad -->
-            <label for="aterrizaje"></label>
+            <!--<label for="aterrizaje"></label>-->
             <select name="aterrizaje">
                 <option value=false>Fuera de pista</option>
                 <option value=true>Dentro de pista</option>
             </select>
             <span></span>
         </p>
-        <input type="submit" value="Subir">
+        <input type="submit" value="Subir" class="boton">
     </form>
+    </div>
+</div>
 </body>
 </html>

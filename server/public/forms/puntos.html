@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puntos</title>
+    <link rel="stylesheet" href="../estilos/subir.css">
     <script type="module" src="/forms/js/form.js"></script>
 </head>
 <body>
+    <div class="wrapper">
+    <div class="contenido">
     <h1>Entrega de Puntos</h1>
     <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
     <form method="post" enctype="application/json" formenctype="application/json">
@@ -32,7 +35,9 @@
             <span>puntos</span>
             <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
         </p>
-        <input type="submit" value="Subir">
+        <input type="submit" value="Subir" class="boton">
     </form>
+    </div>
+</div>
 </body>
 </html>

@@ -1,48 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Crono</title>
+    <link rel="stylesheet" href="../estilos/subir.css">
     <script type="module" src="/forms/js/crono.js"></script>
 </head>
+
 <body>
-    <h1>Formulario Cronometro</h1>
-    <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
-    <form method="post" enctype="application/json" formenctype="application/json">
-        <!-- https://www.w3.org/TR/html-json-forms/ -->
-        <p style="display: none;">
-            <input type="text" name="type" value="Crono" readonly>
-        </p> <!-- Esto permite a form.js saber que tipo esta trabajando -->
-        <p>
-            <label for="id">ID: </label><input name="id" type="text" value="urn:ngsi-ld:Crono:0-00-AUXI" readonly>
-        </p> <!-- Esto permite al usuario saber que entidad va a crear/modificar -->
-        <p>
-            <label for="ronda">Ronda: </label><select name="ronda" required></select>
-        </p> <!-- form.js actualizara automaticamente este select -->
-        <p>
-            <label for="equipo">Equipo: </label><select name="equipo" required></select>
-        </p> <!-- form.js actualizara automaticamente este select -->
-        <p>
-            <label for="tipo">Tipo: </label><select name="tipo" required></select>
-        </p> <!-- crono.js actualizara automaticamente este select -->
-        <hr>
-        <h3>Temporización:</h3>
-        <p>
-            <!-- el "name" del input debe de ser igual al atributo que enviar -->
-            <label for="start">Inicio: </label>
-            <input type="number" name="start" step=1 pattern="[0-9]*">
-            <span>microsegundos</span>
-            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
-        </p>
-        <p>
-            <!-- el "name" del input debe de ser igual al atributo que enviar -->
-            <label for="stop">Final:  </label>
-            <input type="number" name="stop" step=1 pattern="[0-9]*">
-            <span>microsegundos</span>
-            <!-- <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> -->
-        </p>
-        <input type="submit" value="Subir">
-    </form>
+    <div class="wrapper">
+        <div class="contenido">
+            <h1>Formulario Cronometro</h1>
+            <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
+            <form method="post" enctype="application/json" formenctype="application/json">
+                <!-- https://www.w3.org/TR/html-json-forms/ -->
+                <p style="display: none;">
+                    <input type="text" name="type" value="Crono" readonly>
+                </p> <!-- Esto permite a form.js saber que tipo esta trabajando -->
+                <p>
+                    <label for="id">ID: </label><input name="id" type="text" value="urn:ngsi-ld:Crono:0-00-AUXI"
+                        readonly>
+                </p> <!-- Esto permite al usuario saber que entidad va a crear/modificar -->
+                <p>
+                    <label for="ronda">Ronda: </label><select name="ronda" required></select>
+                </p> <!-- form.js actualizara automaticamente este select -->
+                <p>
+                    <label for="equipo">Equipo: </label><select name="equipo" required></select>
+                </p> <!-- form.js actualizara automaticamente este select -->
+                <p>
+                    <label for="tipo">Tipo: </label><select name="tipo" required></select>
+                </p> <!-- crono.js actualizara automaticamente este select -->
+                <hr>
+                <h3>Temporización:</h3>
+                <!--
+                <p>
+                    el "name" del input debe de ser igual al atributo que enviar 
+                    <label for="start">Inicio: </label>
+                    <input type="number" name="start" step=1 pattern="[0-9]*">
+                    <span>milisegundos</span>
+                    <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> 
+                </p>
+                <p>
+                    el "name" del input debe de ser igual al atributo que enviar 
+                    <label for="stop">Final:  </label>
+                    <input type="number" name="stop" step=1 pattern="[0-9]*">
+                    <span>milisegundos</span>
+                    <input type="text" name="carga[type]" value="Float" readonly style="display: none;"> 
+                </p>
+                -->
+                <p class="grupo-tiempo">
+                    <label for="start-min">Inicio:</label>
+                    <input type="number" id="start-min" placeholder="min" min="0" required>:
+                    <input type="number" id="start-sec" placeholder="seg" min="0" max="59" required>:
+                    <input type="number" id="start-ms" placeholder="ms" min="0" max="999" required>
+                </p>
+
+                <p class="grupo-tiempo">
+                    <label for="stop-min">Final:</label>
+                    <input type="number" id="stop-min" placeholder="min" min="0" required>:
+                    <input type="number" id="stop-sec" placeholder="seg" min="0" max="59" required>:
+                    <input type="number" id="stop-ms" placeholder="ms" min="0" max="999" required>
+                </p>
+
+                <input type="hidden" name="start" id="start-total">
+                <input type="hidden" name="stop" id="stop-total">
+                <input type="submit" value="Subir" class="boton">
+            </form>
+        </div>
+    </div>
+    <script>
+        document.querySelector("form").addEventListener("submit", function (e) {
+            const minStart = parseInt(document.getElementById("start-min").value) || 0;
+            const secStart = parseInt(document.getElementById("start-sec").value) || 0;
+            const msStart = parseInt(document.getElementById("start-ms").value) || 0;
+            document.getElementById("start-total").value = (minStart * 60 + secStart) * 1000 + msStart;
+
+            const minStop = parseInt(document.getElementById("stop-min").value) || 0;
+            const secStop = parseInt(document.getElementById("stop-sec").value) || 0;
+            const msStop = parseInt(document.getElementById("stop-ms").value) || 0;
+            document.getElementById("stop-total").value = (minStop * 60 + secStop) * 1000 + msStop;
+        });
+    </script>
 </body>
+
 </html>

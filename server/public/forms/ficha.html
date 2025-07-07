@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha</title>
+    <link rel="stylesheet" href="../estilos/subir.css">
     <script type="module" src="/forms/js/form.js"></script>
 </head>
 <body>
+    <div class="wrapper">
+    <div class="contenido">
     <h1>Ficha de Carga</h1>
     <!-- Importante que haya solo un único form para que form.js pueda trabajar -->
     <form method="post" enctype="application/json" formenctype="application/json">
@@ -49,7 +52,7 @@
         <h3>Piloto Externo:</h3>
         <p>
             <!-- para los booleanos es recomendable trabajar con select por la legibilidad -->
-            <label for="piloto"></label>
+            <!--<label for="piloto"></label>-->
             <select name="piloto">
                 <option value=false>Externo</option>
                 <option value=true>Propio</option>
@@ -59,14 +62,17 @@
         <hr>
         <h3>Repuestos:</h3>
         <p>
-            <label for="repuestos"></label>
+            <!--<label for="repuestos"></label>-->
             <select name="repuestos">
                 <option value=true>Declarados</option>
                 <option value=false>No declarados</option>
             </select>
             <span></span>
         </p>
-        <input type="submit" value="Subir">
+        <input type="submit" value="Subir" class="boton">
     </form>
+    </div>
+</div>
 </body>
+
 </html>
