@@ -48,6 +48,13 @@ class Cronometro {
         this.html_sec.textContent = "--";
         this.html_milsec.textContent = "---";
 
+        this.listener = this.listener.bind(this);
+        this.step = this.step.bind(this);
+        this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
+        this.reset = this.reset.bind(this);
+        this.load = this.load.bind(this);
+        this.add = this.add.bind(this);
         this.socket.send("New Cronometro!"); // Debug only
     }
 
@@ -120,16 +127,24 @@ class Cronometro {
             this.entity = await res.json();
         }
         if (this.entity.stop > 0) {
+            console.log("Time Finished");
+            clearInterval(this.stepper);
+            this.stepper = null;
             this.value = this.entity.stop - this.entity.start;
         } else {
             if (this.entity.start > 0) {
+                console.log("Time Started");
                 this.stepper = setInterval(this.step, 10);
                 let tiempo_actual = Date.now();
                 this.value = tiempo_actual - this.entity.start;
             } else {
+                console.log("Time Null");
+                clearInterval(this.stepper);
+                this.stepper = null;
                 this.value = 0;
             }
         }
+        console.log(this.stepper)
         this.interface()
     }
 
@@ -214,7 +229,7 @@ class Cronometro {
         this.#send();
     }
 
-    set(value){
+    load(value){
         if (this.stepper) {
             clearInterval(this.stepper);    // Detenemos los incrementos¡
             this.stepper = null;            // Volver a poner a null para que la otra lógica funcione
@@ -242,6 +257,46 @@ class Cronometro {
         } else {
             this.start();
         }
+    }
+
+    read(idMinutos, idSegundos, idMilisegundos) {
+        const min = document.getElementById(idMinutos).value;
+        const sec = document.getElementById(idSegundos).value;
+        const mil = document.getElementById(idMilisegundos).value;
+        return parseInt(min)*60000 + parseInt(sec)*1000 + parseInt(mil);
+    }
+
+    set_start_button(id, event){
+        document.getElementById(id).addEventListener(event, () => {
+            this.start()
+        })
+    }
+    set_stop_button(id, event){
+        document.getElementById(id).addEventListener(event, () => {
+            this.stop()
+        })
+    }
+    set_reset_button(id, event){
+        document.getElementById(id).addEventListener(event, () => {
+            this.reset()
+        })
+    }
+    set_button(id, event){
+        document.getElementById(id).addEventListener(event, () => {
+            this.button()
+        })
+    }
+
+    set_load_button(id, event, get_value){
+        document.getElementById(id).addEventListener(event, () => {
+            this.load(get_value());
+        })
+    }
+
+    set_add_button(id, event, get_value){
+        document.getElementById(id).addEventListener(event, () => {
+            this.add(get_value());
+        })
     }
 };
 

@@ -148,14 +148,14 @@ exports.subscribeALL = async () => {
             subject: {entities:[{idPattern: ".*"}],condition:{alterationTypes:["entityDelete"]}},
             format: "keyValues",
             notification: { http:{url: HTTP+this.URL+"entityDelete", accept:"application/json"}}
-        },
+        },/*
         {
             description: `Subscription for action: Change`,
             type: "NGSI_2_SQL",
             subject: {entities:[{idPattern: ".*"}],condition:{alterationTypes:["entityChange"]}},
             format: "keyValues",
             notification: { http:{url: HTTP+this.URL+"entityChange", accept:"application/json"}}
-        },
+        },*/
         {
             description: `Subscription for action: Update`,
             type: "NGSI_2_SQL",
@@ -323,6 +323,14 @@ exports.crear_ceros = async () => {
     return res;
 }    
 
+// crear entidad de las curiosidades
+exports.crear_facts = async () => {
+    // Coger los datos del facts.json
+    let facts = JSON.parse(fs.readFileSync("./data/equipos/facts.json"))
+    let res = await this.update("append", facts)
+    return res;
+}
+
 // crear la entidad de los anuncios
 exports.crear_anuncio = async ()=> {
     let anuncio = {
@@ -402,6 +410,8 @@ exports.start = async () => {
         }
         console.log("NGSI Ready!");
         let res = await fetch(HTTP+"/");
+
+        // Equipos y Rondas
         res = await this.crear_universidades();
         console.log("Universidades Creadas:", res.status);
         res = await this.crear_equipos();
@@ -409,7 +419,9 @@ exports.start = async () => {
         res = await this.crear_ceros();
         console.log("Ronda y Equipo 0 Creados:", res.status);
         
-        
+        // Curiosidades
+        res = await this.crear_facts();
+        console.log("Curiosidades Creadas:", res.status);
         
         // Staff y tareas
         res = await this.crear_staff();

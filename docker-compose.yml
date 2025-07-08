@@ -24,10 +24,10 @@ services:
       - type: volume
         source: mongo-db
         target: /data
-      - type: bind
-        source: ./mongodb
-        target: /data
-        read_only: false
+      #- type: bind
+      #  source: ./mongodb
+      #  target: /data
+      #  read_only: false
 
   # Databases - Excel uses MySQL
   mariadb:
@@ -84,4 +84,3 @@ services:
 
 volumes:
   mongo-db: ~
-  mysql-db: ~

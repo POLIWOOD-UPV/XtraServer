@@ -66,18 +66,18 @@
             setOptions();
             crono = new Cronometro("minutos", "segundos", "milisegundos");
             // update()
-            document.getElementById("play").onclick = () => {crono.play()};
-            document.getElementById("stop").onclick = () => {crono.stop()};
-            document.getElementById("reset").onclick = () => {crono.reset()};
+            crono.set_play_button("play", "onclick");
+            crono.set_stop_button("stop", "onclick");
+            crono.set_reset_button("reset", "onclick");
 
-            document.getElementById("b_set").onclick = () => {
+            crono.set_load_button("b_set", "onclick", () => {
                 const inp_min = document.querySelector("div#set input[name=min]")
                 const inp_sec = document.querySelector("div#set input[name=sec]")
                 const inp_mil = document.querySelector("div#set input[name=mil]")
                 let value = parseInt(inp_min.value)*60000 + parseInt(inp_sec)*1000 + parseInt(inp_mil);
                 value = value? value : 0;
-                crono.set(value);
-            };
+                return value;
+            });
         });
     </script>
     <style>
@@ -116,11 +116,11 @@
     </div>
     <br>
     <div>
-        <button id="play" onclick="start()">Start</button>
+        <button id="play">Start</button>
         <b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b>
-        <button id="stop" onclick="stop()">Stop</button>
+        <button id="stop">Stop</button>
         <b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b><b>&nbsp;</b>
-        <button id="reset" onclick="reset()">Reset</button>
+        <button id="reset">Reset</button>
     </div>
     <br>
     <div id="set">
@@ -129,7 +129,7 @@
         <input type="number" name="mil" value="0">
         <br>
         <br>
-        <button id="b_set" onclick="set()">SET</button>
+        <button id="b_set">SET</button>
     </div>
 </body>
 </html>
