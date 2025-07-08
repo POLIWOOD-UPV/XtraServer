@@ -4,6 +4,7 @@ const fs = require("fs");
 const {ngsi_logger, proxy_logger} = require("./log");
 const {notify} = require("./io_server");
 const {syncronize} = require("./sql");
+const { type } = require("os");
 
 const DOCKER = "host.docker.internal"
 const HTTP = "http://xtraserver:80"
@@ -183,13 +184,7 @@ exports.subscribeALL = async () => {
 exports.cleanSubsctiptions = async () => {
     let res;
     try {
-        res = await fetch(subscriptions, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
+        res = await fetch(subscriptions)
         if (!res.ok) {
             console.error(`ngsi.cleanSubsctiptions(${res.status}):`, await res.text());
             return;
@@ -204,8 +199,9 @@ exports.cleanSubsctiptions = async () => {
 // Para actualizar varias entidades a la vez
 // action: append | appendStric | delete | replace | update
 // entities: Array<NGSI_Object>
-exports.update = async (action, entities) => {
-    let res = await fetch(update, {
+exports.update = async (action, entities, keyValues = false) => {
+    let url = keyValues? update+"/?options=keyValues": update;
+    let res = await fetch(url, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -395,6 +391,39 @@ exports.crear_animaciones = async () => {
     return await this.update("append", [animaciones]);
 };
 
+exports.montar = async () => {
+    // Equipos y Rondas
+    res = await this.crear_universidades();
+    console.log("Universidades Creadas:", res.status);
+    res = await this.crear_equipos();
+    console.log("Equipos Creados:", res.status);
+    res = await this.crear_ceros();
+    console.log("Ronda y Equipo 0 Creados:", res.status);
+    
+    // Curiosidades
+    res = await this.crear_facts();
+    console.log("Curiosidades Creadas:", res.status);
+    
+    // Staff y tareas
+    res = await this.crear_staff();
+    console.log("Staff montados:", res.status);
+    res = await this.crear_tareas();
+    console.log("Tareas montados:", res.status);
+    res = await this.crear_recursos();
+    console.log("Recursos montados:", res.status);
+    
+    
+    // Contenido mostado en pantalla
+    res = await this.crear_anuncio();
+    console.log("Anuncio montados:", res.status);
+
+    res = await this.crear_equipoMostrado();
+    console.log("Equipos mostrados montados:", res.status)
+    
+    // Animaciones
+    res = await this.crear_animaciones();
+    console.log("Animaciones montados:", res.status)
+}
 
 // espieza todo el sistema NGSI
 exports.start = async () => {
@@ -402,6 +431,11 @@ exports.start = async () => {
         console.log("NGSI Starting...")
         try {
             await this.cleanSubsctiptions();
+
+            let res = await fetch(HTTP+"/");
+            // restaurar datos SQL
+            // await this.restaurar_datos();
+
             await this.subscribeALL();
         }
         catch {
@@ -409,41 +443,80 @@ exports.start = async () => {
             return;
         }
         console.log("NGSI Ready!");
-        let res = await fetch(HTTP+"/");
-
-        // Equipos y Rondas
-        res = await this.crear_universidades();
-        console.log("Universidades Creadas:", res.status);
-        res = await this.crear_equipos();
-        console.log("Equipos Creados:", res.status);
-        res = await this.crear_ceros();
-        console.log("Ronda y Equipo 0 Creados:", res.status);
-        
-        // Curiosidades
-        res = await this.crear_facts();
-        console.log("Curiosidades Creadas:", res.status);
-        
-        // Staff y tareas
-        res = await this.crear_staff();
-        console.log("Staff montados:", res.status);
-        res = await this.crear_tareas();
-        console.log("Tareas montados:", res.status);
-        res = await this.crear_recursos();
-        console.log("Recursos montados:", res.status);
-        
-        
-        // Contenido mostado en pantalla
-        res = await this.crear_anuncio();
-        console.log("Anuncio montados:", res.status);
-
-        res = await this.crear_equipoMostrado();
-        console.log("Equipos mostrados montados:", res.status)
-        
-        // Animaciones
-        res = await this.crear_animaciones();
-        console.log("Animaciones montados:", res.status)
+        // let res = await fetch(HTTP+"/");
+        // montamos la base de datos
+        await this.montar();
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
     }
+}
+
+// crea una ID a partir del tipo y la entidad en keyValues
+exports.crearID = (type, entity) => {
+    let id_arr = [] 
+    const table = types[type];
+    // segun tablas.json sabemos la estructura de la id que queremos
+    for (let i = 0; i < table.idLen.length; i++) {
+        if (table.idLen[i] == 0) { // la longitud es 0 es un string
+            id_arr.push(String(
+                entity[table.keys[i]]
+            ));
+        } else { // si no, el resultado debe de ser un numero con los 0s especificados
+            id_arr.push(Number(
+                entity[table.keys[i]]
+            ).toFixed(0).padStart(
+                table.idLen[i],"0"
+            ));
+        }
+    }// juntamos los atributos clave por guiones
+    let id = id_arr.join("-");
+    return `urn:ngsi-ld:${type}:${id}`; // rellenamos la ID final
+}
+
+exports.restaurar_datos = async () => {
+    let res;
+    for (const key in types) {
+        const table = types[key].table;
+        const template = JSON.parse(fs.readFileSync(`./public/templates/${key.toLocaleLowerCase()}.json`));
+        let prompt = `SELECT * FROM xtrachallenge25.${table}` // LIMIT 1000`
+        console.log(`Recogiendo... ${table}`)
+        try {
+            res = await fetch(HTTP+`/sql/${prompt}`); // .replaceAll(" ", "%20")
+            if (!res.ok) {
+                console.error(await res.text());
+                continue
+            }
+        } catch (error) {
+            console.error(`ngsi.restaurar_datos(${key}):`, error.message);
+        }
+        let objects = await res.json();
+        console.log(`Restaurando... ${objects.length} objetos`)
+        let entities = [];
+        /*
+        objects = objects.map(object => ({
+            ...object,
+            id: this.crearID(key, object),
+            type: key
+        }));
+        */
+        objects.forEach((object) => {
+            let entity = template;
+            for (const attr in entity) {
+                if (attr == "id") {
+                    entity.id = this.crearID(key, object);
+                } else if (attr == "type") {
+                    entity.type = key;
+                } else {
+                    entity[attr].value = object[attr];
+                }
+            }
+            entities.push(entity);
+        })
+        res = await this.update("append", entities);
+        if (!res.ok) {
+            console.error(`ngsi.restaurar_datos(${key}):`, await res.text());
+        }
+    }
+    console.log("DATOS RESTAURADOS");
 }

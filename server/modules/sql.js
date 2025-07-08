@@ -114,18 +114,21 @@ exports.syncronize = (action, entity) => {
 };
 
 exports.prompt = (req, res) => {
+    const head = "<html><head><title>Menu</title></head>";
+    const leg = "</html>"
     const response = (error, results, fields) => {
         if (error) {
             console.error(`SQL.CallBack(): ${error}`);
             res.status(400);
             res.send(`Error: ${error}`);
         } else {
-            res.status(200);
-            res.send(`${fields}\n${results}`)
+            res.status(200, {"Content-Type": "application/json"});
+            res.send(results);
         }
     };
+    response.bind(res);
     try {
-        fs.appendFileSync("./logs/mariadb.sql", prompt+"\n");
+        fs.appendFileSync("./logs/mariadb.sql", req.params.prompt+"\n");
         let query = connection.query(req.params.prompt, response);
     } catch (error) {
         console.error(`SQL.syncronize(): ${query}\n${error}`);

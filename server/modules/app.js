@@ -15,6 +15,12 @@ const sql = require("./sql.js")
 
 const app = express()
 
+app.get("/montar/?*", (req, res) => {
+  ngsi.montar();
+  res.status(201);
+  res.send("Check if worked");
+});
+
 // ## PROXY ## => localhost = [xtraserver, orion, mariadb, mongodb]
 // ENVIAR xtraserver -> Orion  por el proxy
 app.all("/v2/*", (req, res) => {
@@ -23,7 +29,8 @@ app.all("/v2/*", (req, res) => {
 
 // ## SQL ## => mariadb
 // ENVIAR xtraserver -> MySQL prompt
-app.get("/sql/[:prompt]", (req, res) => {
+app.get("/sql/:prompt", (req, res) => {
+  console.log(`SQL=>{${req.params.prompt}}`)
   sql.prompt(req, res)
 }); // Esto no debe tener el middleware del bodyparser
 
