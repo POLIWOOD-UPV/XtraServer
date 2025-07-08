@@ -11,6 +11,7 @@ const multer = require("multer");
 const dir = require("./dir");
 const { http_logger } = require("./log");
 const ngsi = require("./ngsi.js")
+const sql = require("./sql.js")
 
 const app = express()
 
@@ -18,6 +19,12 @@ const app = express()
 // ENVIAR xtraserver -> Orion  por el proxy
 app.all("/v2/*", (req, res) => {
   ngsi.proxy(req, res)
+}); // Esto no debe tener el middleware del bodyparser
+
+// ## SQL ## => mariadb
+// ENVIAR xtraserver -> MySQL prompt
+app.get("/sql/[:prompt]", (req, res) => {
+  sql.prompt(req, res)
 }); // Esto no debe tener el middleware del bodyparser
 
 // Leer JSONS de los request (ngsi)
