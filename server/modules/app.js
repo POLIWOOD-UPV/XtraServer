@@ -15,7 +15,7 @@ const sql = require("./sql.js")
 
 const app = express()
 
-app.get("/montar/?*", (req, res) => {
+app.get(ngsi.URL+"montar/?*", (req, res) => {
   ngsi.montar();
   res.status(201);
   res.send("Check if worked");

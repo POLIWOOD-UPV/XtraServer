@@ -434,7 +434,7 @@ exports.start = async () => {
 
             let res = await fetch(HTTP+"/");
             // restaurar datos SQL
-            // await this.restaurar_datos();
+            await this.restaurar_datos();
 
             await this.subscribeALL();
         }
@@ -445,7 +445,7 @@ exports.start = async () => {
         console.log("NGSI Ready!");
         // let res = await fetch(HTTP+"/");
         // montamos la base de datos
-        await this.montar();
+        // await this.montar();
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
