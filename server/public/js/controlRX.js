@@ -6,7 +6,7 @@ Javascript para recibir datos del servidor
 
 function cogerEquipos() {
     // Cogemos los equipos del servidor
-    fetch("http://localhost/v2/entities?type=Equipo&limit=40")
+    fetch("/v2/entities?type=Equipo&limit=40")
     .then(res =>{
         if (!res.ok)  throw new Error("No se pudo coger los equipos del servidor")
             return res.json()
@@ -50,7 +50,7 @@ async function cogerAnimaciones() {
 
 function cogerRondas() {
     // Cogemos los equipos del servidor
-    fetch("http://localhost/v2/entities?type=Ronda&limit=40")
+    fetch("/v2/entities?type=Ronda&limit=40")
     .then(res =>{
         if (!res.ok)  throw new Error("No se pudo coger las rondas del servidor")
             return res.json()
