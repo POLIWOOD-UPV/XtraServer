@@ -181,12 +181,17 @@ const uploadForm = async () => {
             res = await fetch(`/v2/entities/${id}/attrs?options=keyValues`, {
                 headers: {"Content-Type": "application/json"},
                 method: "patch",
-                body: JSON.stringify(content)
+                body: JSON.stringify(content),
+                redirect: "follow"
             });
+            console.log(JSON.stringify(content))
         }
         let msg = res.ok? "SUCCES!" : "FAIL!"
         // si todo va bien, mostramos el codigo de estado
         alert(`Sent (${res.status}): ${msg}`);
+        if (!res.ok) {
+            console.error(await res.text());
+        }
     } catch (error) {
         console.error(error.message, res); // si algo sale mal, se notifica al usuario
         alert(`ERROR WHILE SENDING MESSAGE\n${error.message}`);

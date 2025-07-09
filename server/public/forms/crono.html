@@ -34,17 +34,17 @@
         <hr>
         <h3>Datos:</h3>
         <p class="grupo-tiempo">
-                    <label for="start-min">Inicio:</label>
-                    <input type="number" id="start-min" placeholder="min" min="0" required>:
-                    <input type="number" id="start-sec" placeholder="seg" min="0" max="59" required>:
-                    <input type="number" id="start-ms" placeholder="ms" min="0" max="999" required>
+                    <label for="start-min">Inicio (min:sec:ms):</label>
+                    <input type="number" id="start-min" value="0" min="0" required>:
+                    <input type="number" id="start-sec" value="0" min="0" max="59" required>:
+                    <input type="number" id="start-ms" value="0"  min="0" max="999" required>
                 </p>
 
                 <p class="grupo-tiempo">
-                    <label for="stop-min">Final:</label>
-                    <input type="number" id="stop-min" placeholder="min" min="0" required>:
-                    <input type="number" id="stop-sec" placeholder="seg" min="0" max="59" required>:
-                    <input type="number" id="stop-ms" placeholder="ms" min="0" max="999" required>
+                    <label for="stop-min">Final (min:sec:ms):</label>
+                    <input type="number" id="stop-min" value="0" min="0" required>:
+                    <input type="number" id="stop-sec" value="0" min="0" max="59" required>:
+                    <input type="number" id="stop-ms" value="0" min="0" max="999" required>
                 </p>
 
                 <input type="hidden" name="start" id="start-total">

@@ -19,7 +19,7 @@
     },
     "carga": {
         "type": "Number",
-        "value": -1.0
+        "value": 0.0
     },
     "altura": {
         "type": "Number",

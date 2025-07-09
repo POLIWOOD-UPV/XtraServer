@@ -18,7 +18,7 @@ exports.connect = (socket) => {
 
 exports.disconnect = (socket) => {
   try {
-    log_sockets.pop(socket);
+    socketsList.pop(socket);
     io_logger.disconnection(socket.id,socketsList);
   } catch (error) {
     console.error(`io_server.disconnect(${socket.id}):`, error.message);

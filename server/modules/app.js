@@ -12,6 +12,7 @@ const dir = require("./dir");
 const { http_logger } = require("./log");
 const ngsi = require("./ngsi.js")
 const sql = require("./sql.js")
+const save = require("./save.js")
 
 const app = express()
 
@@ -20,6 +21,9 @@ app.get(ngsi.URL+"montar/?*", (req, res) => {
   res.status(201);
   res.send("Check if worked");
 });
+
+app.get("/save/:name", save.save);
+app.get("/load/:name", save.load);
 
 // ## PROXY ## => localhost = [xtraserver, orion, mariadb, mongodb]
 // ENVIAR xtraserver -> Orion  por el proxy
