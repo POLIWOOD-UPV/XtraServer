@@ -48,7 +48,7 @@ body {
 
 /* Presentadores (columna izquierda, filas 1–2) */
 .presentadores {
-  background: rgba(0, 0, 0, 0.6);
+  /* background: rgba(0, 0, 0, 0.6); */
   grid-column: 1;
   grid-row: 1 / span 2;
 }
