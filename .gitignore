@@ -11,3 +11,8 @@ mona-rtmp/*
 **/logs/*
 
 **/node_modules/*
+
+
+# Stream
+server/public/directoV2/stream/*
+!server/public/directoV2/stream/.gitkeep

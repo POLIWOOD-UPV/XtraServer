@@ -1,0 +1,1 @@
+ffmpeg -i rtmp://192.168.1.44/live/stream -c:v copy -c:a copy -f hls -hls_time 2 -hls_list_size 5 -hls_flags delete_segments stream/playlist.m3u8
