@@ -10,8 +10,10 @@
   <video id="video" controls autoplay></video>
 
   <script>
+    const urlQuery = new URLSearchParams(window.location.search)
+    const id = urlQuery.get("id");
     const video = document.getElementById('video');
-    const url = 'stream/playlist.m3u8';
+    const url = `/directos/${id}/live.m3u8`;
 
     if (Hls.isSupported()) {
       const hls = new Hls();

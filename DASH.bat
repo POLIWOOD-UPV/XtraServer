@@ -2,9 +2,9 @@ mkdir server\public\directos\%1
 cd server\public\directos\%1
 ffmpeg ^
 -f flv ^
--i rtmp://localhost/live ^
--f dash ^
-live.mpd
+-i rtmp://localhost/%1 ^
+-f hls ^
+live.m3u8
 :: -listen 1 ^
 :: init_seg_name
 :: media_seg_name

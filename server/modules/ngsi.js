@@ -431,11 +431,9 @@ exports.start = async () => {
         console.log("NGSI Starting...")
         try {
             await this.cleanSubsctiptions();
-
-            let res = await fetch(HTTP+"/");
             // restaurar datos SQL
             await this.restaurar_datos();
-
+            // No sobreescribimos sobre el server
             await this.subscribeALL();
         }
         catch {
@@ -443,6 +441,17 @@ exports.start = async () => {
             return;
         }
         console.log("NGSI Ready!");
+
+        let res = await fetch(HTTP+"/");
+        if (!res.ok) {
+            console.error("ngsi.start(): HTTP FAILED");
+            process.exit(1);
+        }
+        res = await this.crear_ceros();
+        if (!res.ok) {
+            console.error("ngsi.start(): NGSI FAILED");
+            process.exit(1);
+        }
         // let res = await fetch(HTTP+"/");
         // montamos la base de datos
         // await this.montar();
@@ -453,8 +462,8 @@ exports.start = async () => {
 }
 
 // crea una ID a partir del tipo y la entidad en keyValues
-exports.crearID = (type, entity) => {
-    let id_arr = [] 
+const crearID = (type, entity) => {
+    let id_arr = [];
     const table = types[type];
     // segun tablas.json sabemos la estructura de la id que queremos
     for (let i = 0; i < table.idLen.length; i++) {
@@ -471,7 +480,9 @@ exports.crearID = (type, entity) => {
         }
     }// juntamos los atributos clave por guiones
     let id = id_arr.join("-");
-    return `urn:ngsi-ld:${type}:${id}`; // rellenamos la ID final
+    let str = `urn:ngsi-ld:${type}:${id}`;
+    // console.log(str);
+    return str; // rellenamos la ID final
 }
 
 exports.restaurar_datos = async () => {
@@ -492,7 +503,7 @@ exports.restaurar_datos = async () => {
         }
         let objects = await res.json();
         console.log(`Restaurando... ${objects.length} objetos`)
-        let entities = [];
+        // let entities = [];
         /*
         objects = objects.map(object => ({
             ...object,
@@ -500,23 +511,34 @@ exports.restaurar_datos = async () => {
             type: key
         }));
         */
-        objects.forEach((object) => {
+        objects.forEach(async (object) => {
             let entity = template;
             for (const attr in entity) {
                 if (attr == "id") {
-                    entity.id = this.crearID(key, object);
+                    entity.id = crearID(key, object);
                 } else if (attr == "type") {
                     entity.type = key;
                 } else {
                     entity[attr].value = object[attr];
                 }
             }
-            entities.push(entity);
-        })
-        res = await this.update("append", entities);
-        if (!res.ok) {
-            console.error(`ngsi.restaurar_datos(${key}):`, await res.text());
-        }
+            let res = await fetch(entities, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(entity)
+                }
+            );
+            if (!res.ok) {
+                console.error(`ngsi.restaurar_datos(${entity.id}):`, await res.text());
+            }
+            //entities.push(entity);
+            // console.log(entity.id);
+        });
+        // res = await this.update("append", entities);
+        // if (!res.ok) {console.error(`ngsi.restaurar_datos(${key}):`, await res.text());} else {console.log(`ID restored ${entities.map((e) => {e.id})}`)}
     }
     console.log("DATOS RESTAURADOS");
 }
