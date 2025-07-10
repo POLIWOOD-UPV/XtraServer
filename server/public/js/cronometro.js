@@ -90,6 +90,14 @@ class Cronometro {
         this.listener(`!${this.id}`); // update the entity;
     }
 
+    bind(id_str) {
+        let id_arr = String(id_str).split(":")[3].split("-");
+        const ronda = parseInt(id_arr[0]);
+        const equipo = parseInt(id_arr[1]);
+        const tipo = String(id_arr[2]);
+        this.bind(ronda, equipo, tipo);
+    }
+
     check(msg){
         if (!String(msg).startsWith("!")) {return false;}
         const data = msg.split(" ");

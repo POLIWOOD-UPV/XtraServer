@@ -16,7 +16,7 @@ socket.addEventListener("message", (event)=>{
 });
 
 function cogerAnuncio() {
-    fetch("http://localhost/v2/entities?type=Anuncio")
+    fetch("/v2/entities?type=Anuncio")
         .then(res => {
             if (!res.ok) throw new Error("No se pudo obtener el anuncio");
             return res.json();

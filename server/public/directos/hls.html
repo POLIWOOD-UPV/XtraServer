@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>PRACTICA STREAMING</title>
+  <title>REPETICION</title>
   <!-- https://github.com/video-dev/hls.js/ -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
@@ -11,7 +11,8 @@
 
   <script>
     const urlQuery = new URLSearchParams(window.location.search)
-    const id = urlQuery.get("id");
+    let id = urlQuery.get("id");
+    if (!id) {id = "live"}
     const video = document.getElementById('video');
     const url = `/directos/${id}/live.m3u8`;
 

@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `cronos` (
   `ronda` tinyint unsigned NOT NULL,
   `equipo` tinyint unsigned NOT NULL,
   `tipo` char(4) NOT NULL,
-  `start` integer DEFAULT 0,
-  `stop` integer DEFAULT 0,
+  `start` bigint DEFAULT 0,
+  `stop` bigint DEFAULT 0,
   PRIMARY KEY (`ronda`, `equipo`, `tipo`),
   CONSTRAINT `FK_ronda_cronos` FOREIGN KEY (`ronda`)
     REFERENCES `rondas` (`num`),

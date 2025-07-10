@@ -12,7 +12,8 @@ mona-rtmp/*
 
 **/node_modules/*
 
-
 # Stream
-server/public/directoV2/stream/*
-!server/public/directoV2/stream/.gitkeep
+server/public/directos/*
+!server/public/directos/hls.html
+!server/public/directos/myapp.js
+!server/public/directos/shaka-player.compiled.js

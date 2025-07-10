@@ -411,18 +411,6 @@ exports.montar = async () => {
     console.log("Tareas montados:", res.status);
     res = await this.crear_recursos();
     console.log("Recursos montados:", res.status);
-    
-    
-    // Contenido mostado en pantalla
-    res = await this.crear_anuncio();
-    console.log("Anuncio montados:", res.status);
-
-    res = await this.crear_equipoMostrado();
-    console.log("Equipos mostrados montados:", res.status)
-    
-    // Animaciones
-    res = await this.crear_animaciones();
-    console.log("Animaciones montados:", res.status)
 }
 
 // espieza todo el sistema NGSI
@@ -447,14 +435,20 @@ exports.start = async () => {
             console.error("ngsi.start(): HTTP FAILED");
             process.exit(1);
         }
+        // para testear NGSI
         res = await this.crear_ceros();
-        if (!res.ok) {
-            console.error("ngsi.start(): NGSI FAILED");
-            process.exit(1);
-        }
-        // let res = await fetch(HTTP+"/");
-        // montamos la base de datos
-        // await this.montar();
+        console.log("Ceros montados:", res.status);
+
+         // Contenido mostado en pantalla
+        res = await this.crear_anuncio();
+        console.log("Anuncio montados:", res.status);
+
+        res = await this.crear_equipoMostrado();
+        console.log("Equipos mostrados montados:", res.status)
+        
+        // Animaciones
+        res = await this.crear_animaciones();
+        console.log("Animaciones montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

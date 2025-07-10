@@ -177,10 +177,10 @@ const uploadForm = async () => {
             let id = content.id;
             delete content.id;
             delete content.type;
-            console.log("patch", content);
+            console.log("put", content);
             res = await fetch(`/v2/entities/${id}/attrs?options=keyValues`, {
                 headers: {"Content-Type": "application/json"},
-                method: "patch",
+                method: "put",
                 body: JSON.stringify(content),
                 redirect: "follow"
             });

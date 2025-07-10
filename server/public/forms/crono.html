@@ -35,16 +35,18 @@
         <h3>Datos:</h3>
         <p class="grupo-tiempo">
                     <label for="start-min">Inicio (min:sec:ms):</label>
-                    <input type="number" id="start-min" value="0" min="0" required>:
-                    <input type="number" id="start-sec" value="0" min="0" max="59" required>:
-                    <input type="number" id="start-ms" value="0"  min="0" max="999" required>
+                    <input type="number" id="start-min" value="0" min="0">:
+                    <input type="number" id="start-sec" value="0" min="0" max="59">:
+                    <input type="number" id="start-ms" value="0"  min="0" max="999">
+                    <button id="start-button">NOW</button>
                 </p>
 
                 <p class="grupo-tiempo">
                     <label for="stop-min">Final (min:sec:ms):</label>
-                    <input type="number" id="stop-min" value="0" min="0" required>:
-                    <input type="number" id="stop-sec" value="0" min="0" max="59" required>:
-                    <input type="number" id="stop-ms" value="0" min="0" max="999" required>
+                    <input type="number" id="stop-min" value="0" min="0">:
+                    <input type="number" id="stop-sec" value="0" min="0" max="59">:
+                    <input type="number" id="stop-ms" value="0" min="0" max="999">
+                    <button id="stop-button">NOW</button>
                 </p>
 
                 <input type="hidden" name="start" id="start-total">
@@ -65,6 +67,36 @@
             const msStop = parseInt(document.getElementById("stop-ms").value) || 0;
             document.getElementById("stop-total").value = (minStop * 60 + secStop) * 1000 + msStop;
         });
+
+        document.getElementById("start-button").onclick = (event) => {
+            event.preventDefault();
+            const now = Date.now();
+            document.getElementById("start-min").value = Math.floor(now / (1000 * 60));
+            document.getElementById("start-sec").value = Math.floor((now % (1000 * 60)) / 1000);
+            docuemtn.getElementById("start-ms").value = Math.floor((now % 1000));
+        }
+
+        document.getElementById("stop-button").onclick = (event) => {
+            event.preventDefault();
+            const now = Date.now();
+            document.getElementById("stop-min").value = Math.floor(now / (1000 * 60));
+            document.getElementById("stop-sec").value = Math.floor((now % (1000 * 60)) / 1000);
+            document.getElementById("stop-ms").value = Math.floor((now % 1000));
+        }
+
+        const no_set = () => {
+            console.log("a");
+            document.getElementById("start-min").value = 0;
+            document.getElementById("start-sec").value = 0;
+            document.getElementById("start-ms").value = 0;
+            document.getElementById("stop-min").value = 0;
+            document.getElementById("stop-sec").value = 0;
+            document.getElementById("stop-ms").value = 0;
+        }
+
+        document.querySelector('select[name="ronda"]').addEventListener("oninput", no_set);
+        document.querySelector('select[name="equipo"]').addEventListener("oninput", no_set);
+        document.querySelector('select[name="tipo"]').addEventListener("oninput", no_set);
     </script>    
 </body>
 

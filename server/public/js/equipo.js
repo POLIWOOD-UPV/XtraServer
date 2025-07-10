@@ -24,7 +24,7 @@ socket.addEventListener("message", (event) => {
 });
 
 async function pedirEquipos(){
-    const resEquipos = await fetch("http://localhost:80/v2/entities?type=Equipo&limit=100");
+    const resEquipos = await fetch("/v2/entities?type=Equipo&limit=100");
     equipos = await resEquipos.json();
 }
 
@@ -46,7 +46,7 @@ async function actualizarEquipoMostrado() {
         contenedor.replaceChildren();
 
         // Cogemos el ultimo equipo
-        const res = await fetch("http://localhost:80/v2/entities/urn:ngsi-ld:equipoMostrado:001");
+        const res = await fetch("/v2/entities/urn:ngsi-ld:equipoMostrado:001");
         const mostrado = await res.json();
 
         // Comprobamos el acronimo

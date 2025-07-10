@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">  
+  <meta charset="UTF-8">
+  <script type="module">
+      import Cronometro from "/js/cronometro.js";
+      let crono; // Cronometro
+      addEventListener("DOMContentLoaded", () => {
+            crono = new Cronometro("min", "sec", "ms");
+            const urlQuery = new URLSearchParams(window.location.search)
+            const id = String(urlQuery.get("id"));
+            crono.bind(id);
+      });
+  </script>
 </head>
 <body>
     <link href = "../css/timer.css" rel="stylesheet">
-
+    <span id="min"></span>
+    <span>:</span>
+    <span id="sec"></span>
+    <span>.</span>
+    <span id="ms"></span>
 </body>
 </html>
