@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "socket.io": "^4.7.4",
-    "ip": "^1.1.8"
-  }
-}
