@@ -59,7 +59,7 @@ exports.http_logger = new class extends Logger{
             JSON.stringify(request.headers)
         ]);
         this.console([
-            request.headers.host,
+            request.socket.remoteAddress,
             request.method, 
             request.url
         ]);
