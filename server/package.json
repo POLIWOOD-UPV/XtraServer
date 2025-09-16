@@ -10,12 +10,15 @@
   "version": "2.0.0",
   "description": "Nueva versión del Xtraserver, esta vez trabaja con Express junto a otros dos servicios: un brocker NGSI y un servidor SQL.",
   "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "test": "source test.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/POLIWOOD-git/XtraServer.git"
+    "url": "git+https://github.com/POLIWOOD-UPV/XtraServer.git"
   },
   "keywords": [
     "WebApp",
@@ -31,7 +34,7 @@
   "author": "PoliWood",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/POLIWOOD-git/XtraServer/issues"
+    "url": "https://github.com/POLIWOOD-UPV/XtraServer/issues"
   },
-  "homepage": "https://github.com/POLIWOOD-git/XtraServer#readme"
+  "homepage": "https://github.com/POLIWOOD-UPV/XtraServer#readme"
 }
