@@ -68,19 +68,28 @@ services:
         target: /home/app
         read_only: false
 
-  mona-rtmp:
-    image: monaserver/monaserver
-    container_name: mona-rtmp
+  mediamtx:
+    image: bluenviron/mediamtx:latest
+    container_name: mediamtx
     restart: unless-stopped
     ports:
-      - "554:554"
-      - "1935:1935"
-      - "1935:1935/udp"
+      - "1935:1935"      # RTMP
+      - "8554:8554"      # RTSP
+      - "8888:8888"      # HLS
+      - "8889:8889"      # WebRTC HTTP
+      - "8189:8189/udp"  # WebRTC ICE/UDP
+      - "9997:9997"      # API HTTP
     volumes:
       - type: bind
-        source: ./mona-rtmp
-        target: /usr/local/bin/www/
+        source: ./mediamtx/mediamtx.yml
+        target: /mediamtx.yml
         read_only: false
+    environment:
+      - MTX_PROTOCOLS=tcp
+      - MTX_RTMPADDRESS=:1935
+      - MTX_RTSPADDRESS=:8554
+      - MTX_HLSADDRESS=:8888
+      - MTX_WEBRTCADDRESS=:8889
 
 volumes:
   mongo-db: ~
