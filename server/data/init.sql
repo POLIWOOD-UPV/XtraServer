@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS `xtrachallenge25`;
+CREATE DATABASE IF NOT EXISTS `xtrachallenge26`;
 
-USE `xtrachallenge25`;
+USE `xtrachallenge26`;
 
 CREATE TABLE IF NOT EXISTS `universidades` (
   `acr` varchar(6) NOT NULL,
@@ -87,32 +87,6 @@ CREATE TABLE IF NOT EXISTS `vuelos` (
     REFERENCES `rondas` (`num`),
   CONSTRAINT `FK_equipo_vuelos` FOREIGN KEY (`equipo`)
     REFERENCES `equipos` (`dorsal`)
-);
-
-CREATE TABLE IF NOT EXISTS `staff` (
-  `num` TINYINT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(50) NOT NULL,
-  `abreviacion` VARCHAR(10) NOT NULL,
-  `puesto` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`abreviacion`)
-);
-
-CREATE TABLE IF NOT EXISTS `tareas` (
-  `num` TINYINT UNSIGNED NOT NULL,
-  `tarea` VARCHAR(100) NOT NULL,
-  `inicio` DATETIME,
-  `final` DATETIME,
-  `horario` VARCHAR(10),
-  `tipo` VARCHAR(50),
-  PRIMARY KEY (`num`)
-);
-
-CREATE TABLE IF NOT EXISTS `recursos` (
-  `num` TINYINT UNSIGNED NOT NULL,
-  `staff` VARCHAR(10) NOT NULL,
-  `prioridad` TINYINT UNSIGNED NOT NULL,
-  `tarea` TINYINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`num`)
 );
 
 CREATE TABLE IF NOT EXISTS `facts` (

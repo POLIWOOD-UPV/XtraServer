@@ -143,7 +143,7 @@ exports.setup = (callback) => {
                     host     : 'mariadb',
                     user     : 'root',
                     password : 'password',
-                    // database : 'xtrachallenge25'
+                    // database : 'xtrachallenge26'
                 });
             } catch (error) {
                 console.error(`SQL.while(): ${error}`);
@@ -164,7 +164,7 @@ exports.setup = (callback) => {
                 index++;
                 connection.query(prompts[index] + ";", loop);
             } else {
-                fs.writeFileSync("./logs/mariadb.sql", "USE `xtrachallenge25`;\n");
+                fs.writeFileSync("./logs/mariadb.sql", "USE `xtrachallenge26`;\n");
                 console.log("SQL ready!");
                 callback();
             }

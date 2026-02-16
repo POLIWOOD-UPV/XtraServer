@@ -337,27 +337,6 @@ exports.crear_anuncio = async ()=> {
     return await this.update("append", [anuncio]);
 }
 
-// crear entidad de los recursos (staff, recursos, tareas)
-exports.crear_staff = async () => {
-    // Coger los datos del staff
-    let staff = JSON.parse(fs.readFileSync("./data/jurado/staff.json"))
-    let res = await this.update("append", staff)
-    return res;
-
-}
-
-exports.crear_tareas = async () => {
-    let tareas = JSON.parse(fs.readFileSync("./data/jurado/tareas.json"))
-    let res = await this.update("append",tareas)
-    return res
-}
-
-exports.crear_recursos = async () => {
-    const recursos = JSON.parse(fs.readFileSync("./data/jurado/recursos.json"));
-    const res = await exports.update("append", recursos);
-    return res;
-};
-
 // crear las entidades de la imagen mosta
 exports.crear_equipoMostrado = async () => {
     let equipoMostrado = {
@@ -404,13 +383,6 @@ exports.montar = async () => {
     res = await this.crear_facts();
     console.log("Curiosidades Creadas:", res.status);
     
-    // Staff y tareas
-    res = await this.crear_staff();
-    console.log("Staff montados:", res.status);
-    res = await this.crear_tareas();
-    console.log("Tareas montados:", res.status);
-    res = await this.crear_recursos();
-    console.log("Recursos montados:", res.status);
 }
 
 // espieza todo el sistema NGSI
@@ -484,7 +456,7 @@ exports.restaurar_datos = async () => {
     for (const key in types) {
         const table = types[key].table;
         const template = JSON.parse(fs.readFileSync(`./public/templates/${key.toLocaleLowerCase()}.json`));
-        let prompt = `SELECT * FROM xtrachallenge25.${table}` // LIMIT 1000`
+        let prompt = `SELECT * FROM xtrachallenge26.${table}` // LIMIT 1000`
         console.log(`Recogiendo... ${table}`)
         try {
             res = await fetch(HTTP+`/sql/${prompt}`); // .replaceAll(" ", "%20")
