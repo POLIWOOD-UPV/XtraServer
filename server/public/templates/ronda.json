@@ -1,0 +1,24 @@
+{
+    "id": "urn:ngsi-ld:Ronda:0",
+    "type": "Ronda",
+    "num": {
+      "type": "Number",
+      "value": 0
+    },
+    "pres": {
+      "type": "Number",
+      "value": 0.0
+    },
+    "velv": {
+      "type": "Number",
+      "value": 0.0
+    },
+    "actv": {
+      "type": "Number",
+      "value": 0
+    },
+    "time": {
+        "type": "DateTime",
+        "value": 0
+    }
+}

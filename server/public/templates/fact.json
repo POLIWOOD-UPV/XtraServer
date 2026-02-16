@@ -1,0 +1,20 @@
+{
+    "id": "urn:ngsi-ld:Fact:00",
+    "type": "Fact",
+    "team": {
+        "type": "Number",
+        "value": 0
+    },
+    "weight": {
+        "type": "Number",
+        "value": 0
+    },
+    "span": {
+        "type": "Number",
+        "value": 0
+    },
+    "fact": {
+        "type": "Text",
+        "value": "..."
+    }
+}

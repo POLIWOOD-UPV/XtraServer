@@ -1,0 +1,32 @@
+{
+    "id": "urn:ngsi-ld:Vuelo:0-00",
+    "type": "Vuelo",
+    "ronda": {
+        "type": "Number",
+        "value": 0
+    },
+    "equipo": {
+        "type": "Number",
+        "value": 0
+    },
+    "nulo": {
+        "type": "Boolean",
+        "value": null
+    },
+    "aterrizaje": {
+        "type": "Boolean",
+        "value": null
+    },
+    "carga": {
+        "type": "Number",
+        "value": 0.0
+    },
+    "altura": {
+        "type": "Number",
+        "value": 0.0
+    },
+    "observaciones": {
+        "type": "Text",
+        "value": ""
+    }
+}

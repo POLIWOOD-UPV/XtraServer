@@ -1,0 +1,16 @@
+{
+    "id": "urn:ngsi-ld:Puntos:0-00",
+    "type": "Puntos",
+    "ronda": {
+        "type": "Number",
+        "value": 0
+    },
+    "equipo": {
+        "type": "Number",
+        "value": 0
+    },
+    "valor": {
+        "type": "Number",
+        "value": 0
+    }
+}

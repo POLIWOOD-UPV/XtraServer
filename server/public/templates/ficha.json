@@ -1,0 +1,28 @@
+{
+    "id": "urn:ngsi-ld:Ficha:0-00",
+    "type": "Ficha",
+    "ronda": {
+        "type": "Number",
+        "value": 0
+    },
+    "equipo": {
+        "type": "Number",
+        "value": 0
+    },
+    "carga": {
+        "type": "Number",
+        "value": 0
+    },
+    "piloto": {
+        "type": "Boolean",
+        "value": false
+    },
+    "repuestos": {
+        "type": "Boolean",
+        "value": false
+    },
+    "despegue": {
+        "type": "Number",
+        "value": 0
+    }
+}

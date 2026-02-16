@@ -8,8 +8,8 @@ const fs = require("fs");
 const multer = require("multer");
 
 // Modulos
-const dir = require("./dir");
-const { http_logger } = require("./log");
+const dir = require("./dir.js");
+const { http_logger } = require("./log.js");
 const ngsi = require("./ngsi.js")
 const sql = require("./sql.js")
 const save = require("./save.js")
