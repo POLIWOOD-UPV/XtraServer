@@ -1,0 +1,69 @@
+{
+    "Universidad": {
+        "table": "universidades",
+        "keys": ["acr"],
+        "idLen": [0],
+        "dateTime": []
+    },
+    "Equipo": {
+        "table": "equipos",
+        "keys": ["dorsal"],
+        "idLen": [2],
+        "dateTime": []
+    },
+    "Ronda": {
+        "table": "rondas",
+        "keys": ["num"],
+        "idLen": [1],
+        "dateTime": ["time"]
+    },
+    "Puntos": {
+        "table": "puntos",
+        "keys": ["ronda", "equipo"],
+        "idLen": [1, 2],
+        "dateTime": []
+    },
+    "Crono": {
+        "table": "cronos",
+        "keys": ["ronda", "equipo", "tipo"],
+        "idLen": [1, 2, 0],
+        "dateTime": []
+    },
+    "Ficha": {
+        "table": "fichas",
+        "keys": ["ronda", "equipo"],
+        "idLen": [1, 2],
+        "dateTime": []
+    },
+    "Vuelo": {
+        "table": "vuelos",
+        "keys": ["ronda", "equipo"],
+        "idLen": [1, 2],
+        "dateTime": []
+    },
+    "Staff": {
+        "table": "staff",
+        "keys": ["abreviacion"],
+        "idLen": [0],
+        "dateTime": []
+    },
+    "Tarea": {
+        "table": "tareas",
+        "keys": ["num"],
+        "idLen": [1],
+        "dateTime": ["inicio", "final"]
+    },
+    "Recurso": {
+        "table": "recursos",
+        "keys": ["num"],
+        "idLen": [3],
+        "dateTime": []
+    },
+    "Fact": {
+        "table": "facts",
+        "keys": ["team"],
+        "idLen": [2],
+        "dateTime": []
+    }
+
+}

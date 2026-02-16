@@ -1,0 +1,34 @@
+{
+  "subscriptionId": "67fccf92a44667f6630862cb",
+  "data": [
+    {
+      "id": "urn:ngsi-ld:Crono:0000",
+      "type": "Crono",
+      "ronda": {
+        "type": "Number",
+        "value": 0,
+        "metadata": {}
+      },
+      "equipo": {
+        "type": "Number",
+        "value": 0,
+        "metadata": {}
+      },
+      "tipo": {
+        "type": "Text",
+        "value": "AUXI",
+        "metadata": {}
+      },
+      "start": {
+        "type": "Number",
+        "value": 0,
+        "metadata": {}
+      },
+      "stop": {
+        "type": "Number",
+        "value": 0,
+        "metadata": {}
+      }
+    }
+  ]
+}

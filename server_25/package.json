@@ -1,0 +1,40 @@
+{
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.2",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7",
+    "socket.io": "^4.8.1"
+  },
+  "name": "xtraserver",
+  "version": "2.0.0",
+  "description": "Nueva versión del Xtraserver, esta vez trabaja con Express junto a otros dos servicios: un brocker NGSI y un servidor SQL.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "source test.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/POLIWOOD-UPV/XtraServer.git"
+  },
+  "keywords": [
+    "WebApp",
+    "Stream",
+    "Broker",
+    "SQL",
+    "NGSI",
+    "WebSocket",
+    "SocketIO",
+    "API",
+    "REST"
+  ],
+  "author": "PoliWood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/POLIWOOD-UPV/XtraServer/issues"
+  },
+  "homepage": "https://github.com/POLIWOOD-UPV/XtraServer#readme"
+}
