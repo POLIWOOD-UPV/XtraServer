@@ -9,6 +9,11 @@ class Logger {
         this.structure = new Array(["Time"]).concat(structure);
         this.cmd = cmd;
 
+        // Crear el directorio si no existe
+        if (!fs.existsSync(this.folder)) {
+            fs.mkdirSync(this.folder, { recursive: true });
+        }
+
         this.file = this.folder+this.filename;
         let header = Array(this.structure).join(";")+"\n";
         header = header.replaceAll(",", ";");
