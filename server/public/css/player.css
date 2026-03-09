@@ -1,0 +1,14 @@
+#contenedor {
+    background-image: linear-gradient(to top, rgb(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    display: inline-block;
+
+    position: fixed;
+    top: 30%;
+    right:0%;
+} 
