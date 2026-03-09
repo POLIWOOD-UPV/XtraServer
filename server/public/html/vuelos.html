@@ -1,5 +1,6 @@
-<!-- Holi, cuidado con el copy :) -->
-<!-- Archivo html donde se muestra el equipo que está volando con su respectiva información-->
+<!-- Archivo html, con estilos aplicados, donde se muestra el equipo que está volando con su respectiva información-->
+<!-- Gracias a Rick no he perdido horas de mi vida averiguando porque no se alineaba :) -->
+<!-- Tengo pensado hacerlo mucho mejor cuando tenga más tiempo (en fallas), lo prometo -->
 <!DOCTYPE html>
 <html lang="es" 
         xmlns:mso="urn:schemas-microsoft-com:office:office" 
@@ -9,29 +10,134 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Equipo en Vuelo</title>
-        <link rel="stylesheet" href="./css/vuelos.css">
+        <link rel="stylesheet" href="vuelos.css">
+
+        <style>
+/* Estilos para la información de los equipos */
+        .informacion_vuelos{
+            position: fixed;
+            left: -10px;
+            top: 250px;
+            width: 300px;
+            height: 150px;
+
+            padding: 15px;
+            border-radius: 0px 0px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+/* Estilos para la cabecera (Nombre del equipo y logo) */        
+        .cabecera_vuelos{
+            position: fixed;
+            left: -13px;
+            top: 200px;
+            width: 305px;
+            height: 50px;
+
+            padding: 15px;
+            border-radius: 20px 20px 0px 0px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+/* Estilos para el nombre del equipo */
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+/* Estilos para el nombre del equipo */
+        #nombre_equipo {
+            display: flex;
+            flex-direction: row;
+            width: 155%;
+            height: 100%;
+            background-color: gray;
+            border: 1px solid black;
+            border-top: 3px solid black ;
+            border-left: 3px solid black;
+        }
+/* Estilos para el logo del equipo (de mientras es Siete de Marzo) */
+        #logo_equipo {
+
+            display: flex;
+            flex-direction: row;
+            width: 55%;
+            height: 100%;
+            background-color: gray;
+            border: 1px solid black;
+            border-top: 3px solid black ;
+            border-right: 3px solid black;
+        }
+/* Estilos para el volumen del equipo */
+        #volumen_equipo {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            border: 1px solid black;
+            border-left: 3px solid black;
+            border-right: 3px solid black;
+        }
+/* Estilos para la puntuación del equipo */
+        #puntuacion_equipo {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            border: 1px solid black;
+            border-left: 3px solid black;
+            border-right: 3px solid black;
+        }
+/* Estilos para la información extra del equipo */
+        #informacion_extra_equipo {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background-color: gray;
+            border: 1px solid black;
+            border-bottom: 3px solid black;
+            border-left: 3px solid black;
+            border-right: 3px solid black;
+        }
+        </style>
     </head>
     <body>
-        <div id = "bloque_vuelos">
+<!-- Bloque de cabecera de los vuelos -->
+        <div class="cabecera_vuelos">
+            <div id = "nombre_equipo">
+                Equipo Devs
+            </div>
+            <div id = "logo_equipo">
+                <img src="https://img.game8.co/3642210/daaaa1c27a3ad015412368150d5f712a.png/thumb" 
+                alt="Logo del equipo Devs" 
+                style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+        </div>
 
-            <div id = "equipo_en_vuelo">
-                Equipo Pepe
+<!-- Bloque de información de los vuelos -->
+        <div class = "informacion_vuelos">
+
+            <div id = "volumen_equipo">
+                Devs lleva agua?
             </div>
 
-            <div id = "logo_equipo_en_vuelo">
-                <img src="lo que sea">
-            </div>
-
-            <div id = "volumen_equipo_en_vuelo">
-                La cantidad de agua que lleva Pepe
-            </div>
-
-            <div id = "puntuacion_equipo_en_vuelo">
-                La puntuacion de Pepe
+            <div id = "puntuacion_equipo">
+                Puntuación de Devs: El máximo obvio
             </div>
             
-            <div id = "informacion_extra_equipo_en_vuelo">
-                Informacion extra de Pepe
+            <div id = "informacion_extra_equipo">
+                Informacion extra de Devs (No hay)
             </div>
 
         </div>
