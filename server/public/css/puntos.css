@@ -1,0 +1,85 @@
+body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-family: Arial, sans-serif;
+}
+
+/* CONTENEDOR PRINCIPAL  */
+.contenedor {
+        width: 60%;
+        margin: 12px;
+        padding: 12px;
+        border-radius: 10px;
+        background-image: linear-gradient(to top, rgba(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
+        color: #ffffff;
+
+        display: flex;
+        flex-direction: column;
+
+        position: fixed;
+        top: 15%;
+
+
+}
+
+.contenedor h1 {
+        margin: 0 0 8px 0;
+        font-size: 20px;
+        font-weight: bold;
+}
+
+/* TABLAS */
+.tablas-grid {
+        display: grid;
+        gap: 12px;
+}
+/* fr es una fraccion */
+.tablas-grid.modo-una {
+        grid-template-columns: 1fr;
+}
+
+.tablas-grid.modo-dos {
+        grid-template-columns: 1fr 1fr;
+}
+
+.tabla-puntos {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 20px;
+}
+
+.tabla-puntos thead {
+        background: rgba(255, 255, 255, 0.12);
+}
+
+.tabla-puntos th,
+.tabla-puntos td {
+        padding: 4px 8px;
+        line-height: 1.5;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tabla-puntos tbody tr:last-child td {
+        border-bottom: none;
+}
+
+.tabla-puntos th:nth-child(1),
+.tabla-puntos th:nth-child(2),
+.tabla-puntos td:nth-child(2),
+.tabla-puntos th:nth-child(4),
+.tabla-puntos td:nth-child(4) {
+        text-align: center;
+        width: 70px;
+}
+
+.team-logo {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+}
