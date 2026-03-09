@@ -29,8 +29,15 @@ body {
 /* TABLAS */
 .tablas-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
         gap: 12px;
+}
+/* fr es una fraccion */
+.tablas-grid.modo-una {
+        grid-template-columns: 1fr;
+}
+
+.tablas-grid.modo-dos {
+        grid-template-columns: 1fr 1fr;
 }
 
 .tabla-puntos {
