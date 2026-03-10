@@ -19,6 +19,7 @@ body{
     flex-direction: column;
     flex-flow: column nowrap;
     border: 3px solid black;
+    border-radius: 0px 10px 10px 0px;
 }
 
 /* Estilos para la cabecera (Nombre del equipo y logo) */        
