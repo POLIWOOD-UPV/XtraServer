@@ -1,6 +1,9 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
     font-family: 'Lucida Sans', 'Lucida Grande', 'Geneva', Verdana, sans-serif;
     display: flex;
+    background: transparent;
 }
 
 /*Anunciero*/
@@ -8,7 +11,8 @@ body {
     width: 100%;
     display: flex;
     color: white;
-    font-size: 18px;
+    font-size: 1.75em;
+    font-weight: bold;
     justify-content: center;
     position: relative;
     top: 0px;
@@ -17,8 +21,8 @@ body {
 
 #anunciero {
     background-image: linear-gradient(to top, rgba(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
-    width: 60%;
-    height: auto; 
+    width: 45%;
+    min-height: 10vh; 
     max-height: 150%; 
     display: flex;
     flex-wrap: wrap; 
