@@ -10,7 +10,7 @@ body{
     /*Posición del bloque principal */
     position: fixed;
     left: 2px;
-    top: 213px;
+    top: 233px;
     width: 280px;
     height: 180px;
     padding: 10px;
@@ -28,7 +28,7 @@ body{
     /*Posición del bloque cabecera */
     position: fixed;
     left: -10px;
-    top: 200px;
+    top: 220px;
     width: 300px;
     height: 50px;
 
@@ -42,7 +42,7 @@ body{
     /*Posición del bloque de información */
     position: fixed;
     left: -10px;
-    top: 250px;
+    top: 270px;
     width: 300px;
     height: 150px;
 
