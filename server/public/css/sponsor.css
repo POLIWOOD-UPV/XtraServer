@@ -11,7 +11,7 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #0d0757;
+    background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
     padding: 20px 0 16px;
     font-size: 1.3em
 

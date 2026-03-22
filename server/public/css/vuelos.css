@@ -14,6 +14,7 @@ body{
     width: 280px;
     height: 180px;
     padding: 10px;
+    background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
 
     display: flex;
     flex-direction: column;
@@ -68,7 +69,6 @@ body{
     flex-direction: row;
     width: 55%;
     height: 100%;
-    background-color: gray;
     border-left: 1px solid black;
 }
 
@@ -79,7 +79,6 @@ body{
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: gray;
     border-top: 1px solid black;
 }
 
@@ -90,7 +89,6 @@ body{
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: gray;
     border-top: 1px solid black;
 }
 
@@ -101,6 +99,5 @@ body{
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: gray;
     border-top: 1px solid black;
 }

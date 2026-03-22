@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Lucida Sans', 'Lucida Grande', 'Geneva', Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     display: flex;
     background: transparent;
 }
@@ -20,7 +20,7 @@ body {
 }
 
 #anunciero {
-    background-image: linear-gradient(to top, rgba(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
+    background-image: linear-gradient(145deg, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
     width: 45%;
     min-height: 10vh; 
     max-height: 150%; 

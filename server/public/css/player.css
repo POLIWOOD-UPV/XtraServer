@@ -8,7 +8,9 @@
 
     padding: 15px;
     border-radius: 10px;
-    background-image: linear-gradient(to top, rgba(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
+    background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
+    border-left: 4px solid #fb8500;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
 
     display: flex;
     flex-direction: column;
@@ -19,7 +21,6 @@
 #tituloPlayer p {
     margin: 0 0 8px 0;
     font-size: 20px;
-    color: #ffffff;
     font-family: Arial, sans-serif;
     font-weight: bold;
 }
