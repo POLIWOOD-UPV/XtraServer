@@ -2,21 +2,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mejor puntuacion</title>
-    <link href="../css/mejores.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mejores puntuaciones</title>
+    <link rel="stylesheet" href="../css/mejores.css">
 </head>
-
 <body>
     <div id="contenedor-mejores">
-        <p>MEJORES PUNTUACIONES</p>
-        <div id="mejor-tiempo">
-            <p>MEJOR TIEMPO:</p>
-            <p>EQUIPO:</p>
-        </div>
-        <div id="mejor-carga">
-            <p>MEJOR CARGA:</p>
-            <p>EQUIPO:</p>
-        </div>
+        <table class="tabla-mejores">
+            <thead>
+                <tr>
+                    <th>Best</th>
+                    <th>Value</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="fila-tiempo">
+                    <td>Time</td>
+                    <td id="valor-mejor-tiempo">X</td>
+                    <td id="equipo-mejor-tiempo">Equipo</td>
+                </tr>
+                <tr id="fila-carga">
+                    <td>Load</td>
+                    <td id="valor-mejor-carga">X</td>
+                    <td id="equipo-mejor-carga">Equipo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

@@ -1,41 +1,67 @@
 #contenedor-mejores {
     position: fixed;
-    top:0px;
-    right:0px;
-    background-image: linear-gradient(to top, aquamarine, rgb(93, 93, 195));
-    color:black;
-    width: 300px;
-    height: 150px;
-
-    padding: 20px;
-
-    justify-content:center;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    border-radius: 0px 0px 0px 10px;
-} 
-
-#mejor-tiempo {
-    font-size: 10px;
-    color:white;
-    background-color:blue;
-    border-radius: 5px;
-    margin-left:2px;
-    margin-right:2px;
-    width: 250px;
-    height: 50px;
-    margin-bottom:5px;
+    right: -2px;
+    top: 14px;
+    width: 360px;
+    padding: 14px 14px 12px 14px;
+    border-radius: 10px 0 0 10px;
+    background-image: linear-gradient(to top, rgba(89, 0, 36, 0.65), rgba(0, 0, 0, 0.65));
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    z-index: 20;
 }
 
-#mejor-carga {
-    font-size: 10px;
-    color:white;
-    background-color:rgb(51, 5, 109);
-    border-radius: 5px;
-    margin-left:2px;
-    margin-right:2px;
-    width: 250px;
-    height: 50px;
-    margin-top:5px;
+#contenedor-mejores h2 {
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
+
+.tabla-mejores {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.tabla-mejores thead {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.tabla-mejores th,
+.tabla-mejores td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    line-height: 1.3;
+}
+
+.tabla-mejores tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabla-mejores th {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.tabla-mejores th:nth-child(2),
+.tabla-mejores td:nth-child(2) {
+    text-align: center;
+    width: 84px;
+}
+
+.tabla-mejores th:nth-child(1),
+.tabla-mejores td:nth-child(1) {
+    width: 96px;
+}
+
+#valor-mejor-tiempo,
+#valor-mejor-carga {
+    font-weight: 700;
+}
+
