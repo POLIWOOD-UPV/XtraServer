@@ -4,11 +4,11 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     background: transparent;
-    height: 50vh;
+    height: 55vh;
     align-items: center;
 }
 
-/*Anunciero*/
+/*Contenedor del cronómetro */
 #contenedor_crono {
     width: 100%;
     display: flex;
