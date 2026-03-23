@@ -24,15 +24,15 @@
         },
         "miembros": {
             "type": "Number",
-            "value": 12
+            "value": 7
         },
         "lider": {
             "type": "Text",
-            "value": "Doruk Altinkaya"
+            "value": "Rohan Botta"
         },
         "piloto": {
             "type": "Text",
-            "value": "Fatih Bilgin"
+            "value": "Andrés Sebastián Moreno Moran"
         },
         "foto": {
             "type": "Text",
@@ -52,11 +52,11 @@
         },
         "name": {
             "type": "Text",
-            "value": "UVigo Aerotech: ÁINE"
+            "value": "AEROCOSMOS"
         },
         "acr": {
             "type": "Text",
-            "value": "UVIGA"
+            "value": "AERCO"
         },
         "acad": {
             "type": "Boolean",
@@ -64,27 +64,27 @@
         },
         "uni": {
             "type": "Text",
-            "value": "UVigo"
+            "value": "URJC"
         },
         "miembros": {
             "type": "Number",
-            "value": 12
+            "value": 10
         },
         "lider": {
             "type": "Text",
-            "value": "Marcos Quiroga Rodríguez"
+            "value": "Javier Ruiz Ramos"
         },
         "piloto": {
             "type": "Text",
-            "value": "Marcos Quiroga Rodríguez"
+            "value": "Juan Bueno Nebreda"
         },
         "foto": {
             "type": "Text",
-            "value": "UVIGA.jpg"
+            "value": "AERCO.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "UVIGA.png"
+            "value": "AERCO.png"
         }
     },
     {
@@ -96,11 +96,11 @@
         },
         "name": {
             "type": "Text",
-            "value": "UCA&AIR"
+            "value": "Velair UPV"
         },
         "acr": {
             "type": "Text",
-            "value": "UCAIR"
+            "value": "VELAIR"
         },
         "acad": {
             "type": "Boolean",
@@ -108,27 +108,27 @@
         },
         "uni": {
             "type": "Text",
-            "value": "UCA"
+            "value": "UPV"
         },
         "miembros": {
             "type": "Number",
-            "value": 12
+            "value": 10
         },
         "lider": {
             "type": "Text",
-            "value": "Ángel Moreno Hernández"
+            "value": "Alberto Modroño Beires-Dias"
         },
         "piloto": {
             "type": "Text",
-            "value": "Fabio Fernández Ruíz"
+            "value": "Kyrylo Korolov"
         },
         "foto": {
             "type": "Text",
-            "value": "UCAIR.jpg"
+            "value": "VELAIR.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "UCAIR.png"
+            "value": "VELAIR.png"
         }
     },
     {
@@ -140,11 +140,11 @@
         },
         "name": {
             "type": "Text",
-            "value": "EOLO"
+            "value": "Aurora UPV"
         },
         "acr": {
             "type": "Text",
-            "value": "EOLO"
+            "value": "AURORA"
         },
         "acad": {
             "type": "Boolean",
@@ -156,23 +156,23 @@
         },
         "miembros": {
             "type": "Number",
-            "value": 5
+            "value": 10
         },
         "lider": {
             "type": "Text",
-            "value": "Pau Trull Egea"
+            "value": "Adriana Sande Silveira"
         },
         "piloto": {
             "type": "Text",
-            "value": "Carlos Soler López"
+            "value": "Mario López Langreo"
         },
         "foto": {
             "type": "Text",
-            "value": "EOLO.jpg"
+            "value": "AURORA.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "EOLO.png"
+            "value": "AURORA.png"
         }
     },
     {
@@ -184,187 +184,11 @@
         },
         "name": {
             "type": "Text",
-            "value": "Diana"
+            "value": "Trencalòs Team"
         },
         "acr": {
             "type": "Text",
-            "value": "DIANA"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        },
-        "uni": {
-            "type": "Text",
-            "value": "UCLM"
-        },
-        "miembros": {
-            "type": "Number",
-            "value": 12
-        },
-        "lider": {
-            "type": "Text",
-            "value": "Ana Remedios Armas Palenzuela"
-        },
-        "piloto": {
-            "type": "Text",
-            "value": "Rodrigo Redondo Cabañas"
-        },
-        "foto": {
-            "type": "Text",
-            "value": "DIANA.jpg"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "DIANA.png"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Equipo:06",
-        "type": "Equipo",
-        "dorsal": {
-            "type": "Number",
-            "value": 6
-        },
-        "name": {
-            "type": "Text",
-            "value": "ARTEMIS"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "ARTMS"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        },
-        "uni": {
-            "type": "Text",
-            "value": "UPV"
-        },
-        "miembros": {
-            "type": "Number",
-            "value": 6
-        },
-        "lider": {
-            "type": "Text",
-            "value": "Juan Carlos Juan Serrano"
-        },
-        "piloto": {
-            "type": "Text",
-            "value": "Juan Carlos Juan Serrano"
-        },
-        "foto": {
-            "type": "Text",
-            "value": "ARTMS.jpg"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "ARTMS.png"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Equipo:07",
-        "type": "Equipo",
-        "dorsal": {
-            "type": "Number",
-            "value": 7
-        },
-        "name": {
-            "type": "Text",
-            "value": "S7EAM"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "S7EAM"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        },
-        "uni": {
-            "type": "Text",
-            "value": "UPV"
-        },
-        "miembros": {
-            "type": "Number",
-            "value": 6
-        },
-        "lider": {
-            "type": "Text",
-            "value": "Samuel Laguna Kalínina"
-        },
-        "piloto": {
-            "type": "Text",
-            "value": "Samuel Laguna Kalínina"
-        },
-        "foto": {
-            "type": "Text",
-            "value": "S7EAM.jpg"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "S7EAM.png"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Equipo:08",
-        "type": "Equipo",
-        "dorsal": {
-            "type": "Number",
-            "value": 8
-        },
-        "name": {
-            "type": "Text",
-            "value": "Navy Hawks"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "NVHWS"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        },
-        "uni": {
-            "type": "Text",
-            "value": "UPV"
-        },
-        "miembros": {
-            "type": "Number",
-            "value": 7
-        },
-        "lider": {
-            "type": "Text",
-            "value": "Claudia Martinez Alfaro"
-        },
-        "piloto": {
-            "type": "Text",
-            "value": "Mario González Galindo"
-        },
-        "foto": {
-            "type": "Text",
-            "value": "NVHWS.jpg"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "NVHWS.png"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Equipo:09",
-        "type": "Equipo",
-        "dorsal": {
-            "type": "Number",
-            "value": 9
-        },
-        "name": {
-            "type": "Text",
-            "value": "Trencalòs"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "TRENC"
+            "value": "TRENCALÒS"
         },
         "acad": {
             "type": "Boolean",
@@ -376,119 +200,31 @@
         },
         "miembros": {
             "type": "Number",
-            "value": 11
-        },
-        "lider": {
-            "type": "Text",
-            "value": "Martí Badia Codina"
-        },
-        "piloto": {
-            "type": "Text",
-            "value": "Martí Badia Codina"
-        },
-        "foto": {
-            "type": "Text",
-            "value": "TRENC.jpg"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "TRENC.png"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Equipo:10",
-        "type": "Equipo",
-        "dorsal": {
-            "type": "Number",
-            "value": 10
-        },
-        "name": {
-            "type": "Text",
-            "value": "Kondor Aero"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "KNDAR"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        },
-        "uni": {
-            "type": "Text",
-            "value": "UPV"
-        },
-        "miembros": {
-            "type": "Number",
-            "value": 7
-        },
-        "lider": {
-            "type": "Text",
-            "value": "Guillermo Velencoso García"
-        },
-        "piloto": {
-            "type": "Text",
-            "value": "Kyrylo Korolov"
-        },
-        "foto": {
-            "type": "Text",
-            "value": "KNDAR.jpg"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "KNDAR.png"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Equipo:11",
-        "type": "Equipo",
-        "dorsal": {
-            "type": "Number",
-            "value": 11
-        },
-        "name": {
-            "type": "Text",
-            "value": "VANTUS #1"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "VANT1"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        },
-        "uni": {
-            "type": "Text",
-            "value": "US"
-        },
-        "miembros": {
-            "type": "Number",
             "value": 10
         },
         "lider": {
             "type": "Text",
-            "value": "Paula Terrón Gonzalez"
+            "value": "Bru Codina Mauricio"
         },
         "piloto": {
             "type": "Text",
-            "value": "Álvaro Gomar Gonzalez"
+            "value": "Martí Coma Company"
         },
         "foto": {
             "type": "Text",
-            "value": "VANT1.jpg"
+            "value": "TRENCALÒS.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "VANT1.png"
+            "value": "TRENCALÒS.png"
         }
     },
     {
-        "id": "urn:ngsi-ld:Equipo:12",
+        "id": "urn:ngsi-ld:Equipo:06",
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
-            "value": 12
+            "value": 6
         },
         "name": {
             "type": "Text",
@@ -496,7 +232,7 @@
         },
         "acr": {
             "type": "Text",
-            "value": "ECLFT"
+            "value": "ECL"
         },
         "acad": {
             "type": "Boolean",
@@ -512,35 +248,35 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Ethaniel Tobar"
+            "value": "Djelloul Hugo"
         },
         "piloto": {
             "type": "Text",
-            "value": "Samiksha Prasad"
+            "value": "Sunil Shawn"
         },
         "foto": {
             "type": "Text",
-            "value": "ECLFT.jpg"
+            "value": "ECLift.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "ECLFT.png"
+            "value": "ECLift.png"
         }
     },
     {
-        "id": "urn:ngsi-ld:Equipo:13",
+        "id": "urn:ngsi-ld:Equipo:07",
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
-            "value": 13
+            "value": 7
         },
         "name": {
             "type": "Text",
-            "value": "VANTUS #2"
+            "value": "UCA&AIR 1"
         },
         "acr": {
             "type": "Text",
-            "value": "VANT2"
+            "value": "UA1"
         },
         "acad": {
             "type": "Boolean",
@@ -548,7 +284,7 @@
         },
         "uni": {
             "type": "Text",
-            "value": "US"
+            "value": "UCA"
         },
         "miembros": {
             "type": "Number",
@@ -556,79 +292,35 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Emilio José Granados Alanís"
+            "value": "Roberto Bernal Almadana"
         },
         "piloto": {
             "type": "Text",
-            "value": "Alejandro Luis Rabanal Beltrán"
+            "value": "Fabio Fernandez Ruíz"
         },
         "foto": {
             "type": "Text",
-            "value": "VANT2.jpg"
+            "value": "UCA&AIR 1.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "VANT2.png"
+            "value": "UCA&AIR 1.png"
         }
     },
     {
-        "id": "urn:ngsi-ld:Equipo:14",
+        "id": "urn:ngsi-ld:Equipo:08",
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
-            "value": 14
+            "value": 8
         },
         "name": {
             "type": "Text",
-            "value": "SAETA T1"
+            "value": "Saeta Halcón"
         },
         "acr": {
             "type": "Text",
-            "value": "SAET1"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        },
-        "uni": {
-            "type": "Text",
-            "value": "UC3M"
-        },
-        "miembros": {
-            "type": "Number",
-            "value": 10
-        },
-        "lider": {
-            "type": "Text",
-            "value": "Sergio Palacio Mažuran"
-        },
-        "piloto": {
-            "type": "Text",
-            "value": "Carlos de Quinto"
-        },
-        "foto": {
-            "type": "Text",
-            "value": "SAET1.jpg"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "SAET1.png"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Equipo:15",
-        "type": "Equipo",
-        "dorsal": {
-            "type": "Number",
-            "value": 15
-        },
-        "name": {
-            "type": "Text",
-            "value": "SAETA T2"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "SAET2"
+            "value": "SAETA"
         },
         "acad": {
             "type": "Boolean",
@@ -644,19 +336,151 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Victor Salas Gómez"
+            "value": "Unai Martínez Sanz"
         },
         "piloto": {
             "type": "Text",
-            "value": "Javier Materos Seirul-lo"
+            "value": "Carlos de Quinto Cáceres"
         },
         "foto": {
             "type": "Text",
-            "value": "SAET2.jpg"
+            "value": "SAETA.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "SAET2.png"
+            "value": "SAETA.png"
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Equipo:09",
+        "type": "Equipo",
+        "dorsal": {
+            "type": "Number",
+            "value": 9
+        },
+        "name": {
+            "type": "Text",
+            "value": "Zenit UPV"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "ZENIT"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        },
+        "uni": {
+            "type": "Text",
+            "value": "UPV"
+        },
+        "miembros": {
+            "type": "Number",
+            "value": 10
+        },
+        "lider": {
+            "type": "Text",
+            "value": "Raúl Ballesteros Navío"
+        },
+        "piloto": {
+            "type": "Text",
+            "value": "Iciar Sauce Pereira"
+        },
+        "foto": {
+            "type": "Text",
+            "value": "ZENIT.jpg"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "ZENIT.png"
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Equipo:10",
+        "type": "Equipo",
+        "dorsal": {
+            "type": "Number",
+            "value": 10
+        },
+        "name": {
+            "type": "Text",
+            "value": "DESDENTAO"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "DESDENTAO"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        },
+        "uni": {
+            "type": "Text",
+            "value": "UC3M"
+        },
+        "miembros": {
+            "type": "Number",
+            "value": 10
+        },
+        "lider": {
+            "type": "Text",
+            "value": "Ana Belén Romera Baena"
+        },
+        "piloto": {
+            "type": "Text",
+            "value": "Boris Ivanov"
+        },
+        "foto": {
+            "type": "Text",
+            "value": "DESDENTAO.jpg"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "DESDENTAO.png"
+        }
+    },
+    {
+        "id": "urn:ngsi-ld:Equipo:11",
+        "type": "Equipo",
+        "dorsal": {
+            "type": "Number",
+            "value": 11
+        },
+        "name": {
+            "type": "Text",
+            "value": "UCA&AIR 2"
+        },
+        "acr": {
+            "type": "Text",
+            "value": "UA2"
+        },
+        "acad": {
+            "type": "Boolean",
+            "value": true
+        },
+        "uni": {
+            "type": "Text",
+            "value": "UCA"
+        },
+        "miembros": {
+            "type": "Number",
+            "value": 10
+        },
+        "lider": {
+            "type": "Text",
+            "value": "Francisco Javier Díaz Muñoz"
+        },
+        "piloto": {
+            "type": "Text",
+            "value": "David Bellido Barrios"
+        },
+        "foto": {
+            "type": "Text",
+            "value": "UA2.jpg"
+        },
+        "logo": {
+            "type": "Text",
+            "value": "UA2.png"
         }
     }
 ]
