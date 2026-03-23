@@ -4,11 +4,11 @@
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
-            "value": 17
+            "value": 12
         },
         "name": {
             "type": "Text",
-            "value": "Guardo"
+            "value": "Xaloc Guardo"
         },
         "acr": {
             "type": "Text",
@@ -28,11 +28,11 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Gregorio Moreno Ruiz"
+            "value": "Nicolás Trejo García"
         },
         "piloto": {
             "type": "Text",
-            "value": "Nicolas Trejo Garcia"
+            "value": "Gregorio Moreno Ruiz"
         },
         "foto": {
             "type": "Text",
@@ -48,15 +48,15 @@
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
-            "value": 18
+            "value": 13
         },
         "name": {
             "type": "Text",
-            "value": "Espigüete"
+            "value": "Xaloc Valencia"
         },
         "acr": {
             "type": "Text",
-            "value": "ESPIG"
+            "value": "VLC"
         },
         "acad": {
             "type": "Boolean",
@@ -92,7 +92,7 @@
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
-            "value": 19
+            "value": 14
         },
         "name": {
             "type": "Text",
@@ -112,11 +112,11 @@
         },
         "miembros": {
             "type": "Number",
-            "value": 3
+            "value": 1
         },
         "lider": {
             "type": "Text",
-            "value": "Francisco Soto Morales"
+            "value": "Leopoldo Martinez Magraner"
         },
         "piloto": {
             "type": "Text",
@@ -136,7 +136,7 @@
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
-            "value": 20
+            "value": 15
         },
         "name": {
             "type": "Text",
@@ -160,7 +160,7 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Leopoldo Martinez Magraner"
+            "value": "Francisco Soto Morales"
         },
         "piloto": {
             "type": "Text",
