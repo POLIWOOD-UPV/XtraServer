@@ -32,7 +32,7 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Andrés Sebastián Moreno Moran"
+            "value": "Andres Sebastian Moreno Moran"
         },
         "foto": {
             "type": "Text",
@@ -100,7 +100,7 @@
         },
         "acr": {
             "type": "Text",
-            "value": "VELAIR"
+            "value": "VLAIR"
         },
         "acad": {
             "type": "Boolean",
@@ -116,7 +116,7 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Alberto Modroño Beires-Dias"
+            "value": "Alberto Modroño Beires Dias"
         },
         "piloto": {
             "type": "Text",
@@ -144,7 +144,7 @@
         },
         "acr": {
             "type": "Text",
-            "value": "AURORA"
+            "value": "AURA"
         },
         "acad": {
             "type": "Boolean",
@@ -164,7 +164,7 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Mario López Langreo"
+            "value": "Mario Lopez Langreo"
         },
         "foto": {
             "type": "Text",
@@ -184,11 +184,11 @@
         },
         "name": {
             "type": "Text",
-            "value": "Trencalòs Team"
+            "value": "Trencalos Team"
         },
         "acr": {
             "type": "Text",
-            "value": "TRENCALÒS"
+            "value": "TRENC"
         },
         "acad": {
             "type": "Boolean",
@@ -208,15 +208,15 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Martí Coma Company"
+            "value": "Marti Coma Company"
         },
         "foto": {
             "type": "Text",
-            "value": "TRENCALÒS.jpg"
+            "value": "TRENCALOS.jpg"
         },
         "logo": {
             "type": "Text",
-            "value": "TRENCALÒS.png"
+            "value": "TRENCALOS.png"
         }
     },
     {
@@ -296,7 +296,7 @@
         },
         "piloto": {
             "type": "Text",
-            "value": "Fabio Fernandez Ruíz"
+            "value": "Fabio Fernandez Ruiz"
         },
         "foto": {
             "type": "Text",
@@ -316,7 +316,7 @@
         },
         "name": {
             "type": "Text",
-            "value": "Saeta Halcón"
+            "value": "Saeta Halcon"
         },
         "acr": {
             "type": "Text",
@@ -336,11 +336,11 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Unai Martínez Sanz"
+            "value": "Unai Martinez Sanz"
         },
         "piloto": {
             "type": "Text",
-            "value": "Carlos de Quinto Cáceres"
+            "value": "Carlos de Quinto Caceres"
         },
         "foto": {
             "type": "Text",
@@ -380,7 +380,7 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Raúl Ballesteros Navío"
+            "value": "Raul Ballesteros Navio"
         },
         "piloto": {
             "type": "Text",
@@ -408,7 +408,7 @@
         },
         "acr": {
             "type": "Text",
-            "value": "DESDENTAO"
+            "value": "DSDTA"
         },
         "acad": {
             "type": "Boolean",
@@ -424,7 +424,7 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Ana Belén Romera Baena"
+            "value": "Ana Belen Romera Baena"
         },
         "piloto": {
             "type": "Text",
@@ -468,7 +468,7 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Francisco Javier Díaz Muñoz"
+            "value": "Francisco Javier Diaz Muñoz"
         },
         "piloto": {
             "type": "Text",

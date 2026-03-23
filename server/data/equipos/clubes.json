@@ -1,6 +1,6 @@
 [
     {
-        "id": "urn:ngsi-ld:Equipo:17",
+        "id": "urn:ngsi-ld:Equipo:12",
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
@@ -28,7 +28,7 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Nicolás Trejo García"
+            "value": "Nicolas Trejo Garcia"
         },
         "piloto": {
             "type": "Text",
@@ -44,7 +44,7 @@
         }
     },
     {
-        "id": "urn:ngsi-ld:Equipo:18",
+        "id": "urn:ngsi-ld:Equipo:13",
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
@@ -72,11 +72,11 @@
         },
         "lider": {
             "type": "Text",
-            "value": "Jose Manuel Gillem Méndez"
+            "value": "Jose Manuel Gillem Mendez"
         },
         "piloto": {
             "type": "Text",
-            "value": "Jose García García"
+            "value": "Jose Garcia Garcia"
         },
         "foto": {
             "type": "Text",
@@ -88,7 +88,7 @@
         }
     },
     {
-        "id": "urn:ngsi-ld:Equipo:19",
+        "id": "urn:ngsi-ld:Equipo:14",
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
@@ -132,7 +132,7 @@
         }
     },
     {
-        "id": "urn:ngsi-ld:Equipo:20",
+        "id": "urn:ngsi-ld:Equipo:15",
         "type": "Equipo",
         "dorsal": {
             "type": "Number",
