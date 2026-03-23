@@ -38,6 +38,41 @@ body{
     width: 100%;
     height: 100%;
     border-top: 1px solid black;
+    justify-content: space-around;
+
+}
+
+#nombre_equipo{
+    font-weight: bold;
+}
+#origen_equipo:nth-child(1){
+    border-width: 0px 0px 1px 0px;
+}
+
+#logo_equipo{
+    /* Ajusta el tamaño del logo para que se vea bien */
+    object-fit: contain; 
+    margin-right: 0px;
+   
+
+}
+
+#dorsal_equipo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid black;
+}
+
+#dorsal_label{
+    font-weight: bold;
+}
+
+#dorsal_number{
+    color: orange;
 }
 
 /* Estilos para el bloque del club/universidad + escudo */
