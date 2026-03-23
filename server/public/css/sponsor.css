@@ -20,7 +20,7 @@ div {
     display: flex;
     justify-content: center;
     gap: 20px;
-    color: rgb(212, 16, 196);
+    color: #fb8500;
 }
 
 .titulo {
