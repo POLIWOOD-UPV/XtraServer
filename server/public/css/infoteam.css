@@ -13,7 +13,7 @@ body{
     left: 2px;
     top: 460px;
     width: 280px;
-    height: 160px;
+    height: 190px;
     padding: 10px;
     background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
 
@@ -71,8 +71,8 @@ body{
 }
 
 
-/* Estilos para el bloque de victorias en la competición */
-#victorias_equipo{
+/* Estilos para el bloque del líder */
+#lider_equipo{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -82,19 +82,29 @@ body{
     border-top: 1px solid black;
 }
 
-/* Estilos para la etiqueta "Campeones:" */
-#victorias_label{
+#lider_label{
     font-weight: bold;
 }
 
-/* Estilos para el resultado (Sí / No) */
-#victorias_resultado{
-    /* Valor resaltado */
+#lider_resultado{
     color: orange;
 }
 
-/* Estilos para los años */
-#victorias_anos{
-    /* Años de victoria */
-    color: purple;
+/* Estilos para el bloque del piloto */
+#piloto_equipo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid black;
+}
+
+#piloto_label{
+    font-weight: bold;
+}
+
+#piloto_resultado{
+    color: orange;
 }
