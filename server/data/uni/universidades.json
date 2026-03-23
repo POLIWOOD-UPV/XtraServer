@@ -52,11 +52,11 @@
         "type": "Universidad",
         "name": {
             "type": "Text",
-            "value": "Universidad de Vigo"
+            "value": "Universidad Rey Juan Carlos"
         },
         "acr": {
             "type": "Text",
-            "value": "UVigo"
+            "value": "URJC"
         },
         "pais": {
             "type": "Text",
@@ -64,7 +64,7 @@
         },
         "logo": {
             "type": "Text",
-            "value": "uvigo.png"
+            "value": "urjc.png"
         },
         "acad": {
             "type": "Boolean",
@@ -89,54 +89,6 @@
         "logo": {
             "type": "Text",
             "value": "uca.png"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Universidad:US",
-        "type": "Universidad",
-        "name": {
-            "type": "Text",
-            "value": "Universidad de Sevilla"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "US"
-        },
-        "pais": {
-            "type": "Text",
-            "value": "ES"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "us.png"
-        },
-        "acad": {
-            "type": "Boolean",
-            "value": true
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:Universidad:UCLM",
-        "type": "Universidad",
-        "name": {
-            "type": "Text",
-            "value": "Universidad de Castilla la Mancha"
-        },
-        "acr": {
-            "type": "Text",
-            "value": "UCLM"
-        },
-        "pais": {
-            "type": "Text",
-            "value": "ES"
-        },
-        "logo": {
-            "type": "Text",
-            "value": "uclm.png"
         },
         "acad": {
             "type": "Boolean",
