@@ -15,6 +15,10 @@
     z-index: 20;
 }
 
+#contenedor-mejores.oculto-derecha{
+    transform: translateX(100%); /*lo mueve hacia la derecha */
+}
+
 #contenedor-mejores h2 {
     margin: 0 0 6px 0;
     font-size: 16px;
@@ -69,5 +73,23 @@
 #valor-mejor-tiempo,
 #valor-mejor-carga {
     font-weight: 700;
+}
+
+
+
+#mover {
+    position: absolute;
+    top: 50%;
+    left: -40px; /* Lo saca hacia la izquierda del panel */
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: center;
+    padding: 10px 20px;
+    background: #fb8500;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 30; 
 }
 
