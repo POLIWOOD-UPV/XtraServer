@@ -1,93 +1,115 @@
-/* Estilos para el nombre del equipo */
-body{
-    display: flex;
-    width: 100%;
-    height: 100%;
+/* Body */
+body {
+    margin: 0;
+    padding: 0;
     background: transparent;
 }
-/* Estilos para el bloque principal */
 
-/* Estilos del contenido de cada parte */
-.content{
-    justify-items: stretch;
-    justify-content: center;
-    align-items: center;
-    align-content: start;
-    color: white;
-    display: flex;
-}
-
-
-#main_block{
-    /*Posición del bloque principal */
+/* Bloque principal */
+#main_block {
     position: fixed;
     left: 2px;
     top: 235px;
+
     width: 280px;
     height: 180px;
     padding: 10px;
-    background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
+
     display: flex;
     flex-direction: column;
-    flex-flow: column nowrap;
+
+    background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
     border-radius: 0px 10px 10px 0px;
 }
 
-/* Estilos para la cabecera (Nombre del equipo y logo) */        
-#header_block{
-    /*Posición del bloque cabecera */
-    position: fixed;
-    left: -10px;
-    top: 222px;
-    width: 300px;
-    height: 51px;
-
-    padding: 15px;
+/* Cabecera del bloque */
+#header_block {
     display: flex;
     flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
 }
 
-/* Estilos para el bloque de información */
-#info_block{
-    /*Posición del bloque de información */
-    position: fixed;
-    left: -10px;
-    top: 273px;
-    width: 300px;
-    height: 150px;
-
-    padding: 15px;
+/* Información del bloque*/
+#info_block {
     display: flex;
     flex-direction: column;
-}
 
-/* Estilos para el nombre del equipo */
-#team_name {
-    width: 155%;
+    width: 100%;
     height: 100%;
 }
 
-/* Estilos para el logo del equipo (de mientras es Siete de Marzo) */
+/* Bloque de info */
+.content {
+    /* Indica las propiedades del contenido */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* Nombre */
+#team_name {
+    width: 155%; 
+    height: 100%;
+
+    /* Línea inferior y lateral */
+    border-right: 2px solid white;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+
+/* Logo */
 #team_logo {
-    object-position: 50% 50%;
     width: 55%;
     height: 100%;
 }
 
-/* Estilos para el volumen del equipo */
-#team_bulk {
+/* Info */
+#team_bulk{
     width: 100%;
     height: 100%;
+
+    /* Línea inferior */
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
 }
 
-/* Estilos para la puntuación del equipo */
-#team_points {
+#team_points{
     width: 100%;
     height: 100%;
+
+    /* Línea inferior */
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
 }
 
-/* Estilos para la información extra del equipo */
 #extra_info {
     width: 100%;
     height: 100%;
+}
+
+/* Botón muy guay */
+#up_down_button {
+    /* Posición del botón*/
+    position: absolute;
+    top: 10px;
+    right: 0;
+
+    /* Rotación del botón */
+    transform: translateX(95%) scaleY(-1);
+    writing-mode: vertical-rl;
+
+    padding: 10px 5px;
+    background: #fb8500;
+    border: none;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-weight: bold;
 }
