@@ -3,7 +3,7 @@ let showMainBlock = true;
 
 // Cogemos los elementos del HTML
 const button = document.getElementById("up_down_button");
-const main_block = document.querySelector("footer");
+const main_block = document.querySelector(".bloque_info_extra");
 
 // Evento para el botón, se activa al hacer click
 button.addEventListener("click", function () {
@@ -11,11 +11,11 @@ button.addEventListener("click", function () {
 
     // Si showMainBlock es true, el bloque vuelve a la posición original
     if (showMainBlock) {
-        main_block.style.transform = "translateY(0px)";
+        main_block.style.transform = "translateX(0px)";
     }
 
-    // Si showMainBlock es false, se oculta el bloque hacia abajo
+    // Si showMainBlock es false, se oculta el bloque hacia la izquierda
     else {
-        main_block.style.transform = "translateY(100%)";
+        main_block.style.transform = "translateX(-100%)";
     }
 });
