@@ -354,18 +354,8 @@ exports.crear_animaciones = async () => {
     let animaciones = {
         id: "urn:ngsi-ld:Animaciones:001",
         type: "Animaciones",
-        rankings:  { type:"Text", value:"visible" },
         anuncios:  { type:"Text", value:"visible" },
-        equipos:   { type:"Text", value:"visible" },
-        cronos:    { type:"Text", value:"visible" },
-        datos:     { type:"Text", value:"visible" },
-        dot:       { type:"Text", value:"visible" },
-        pos:       { type:"Text", value:"visible" },
-        nombre:       { type:"Text", value:"visible" },
-        tiempos:   { type:"Text", value:"visible" },
-        logos:     { type:"Text", value:"visible" },
-        dorsales:  { type:"Text", value:"oculto" },
-        pesos:     { type:"Text", value:"oculto" }
+        player: { type:"Text", value:"visible" }
     };
     return await this.update("append", [animaciones]);
 };
