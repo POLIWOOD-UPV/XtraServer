@@ -6,39 +6,47 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Equipo en Vuelo</title>
+        <title>Team in flight</title>
         <link rel="stylesheet" href="../css/vuelos.css">
 </head>
     <body>
         <!-- Bloque principal -->
-        <div class="bloque_principal">
-            <!-- Bloque de cabecera de los vuelos -->
-            <div id="cabecera_vuelos">
-                <div id = "nombre_equipo">
-                    Equipo Devs
+        <div id="main_block">
+
+            <!-- Cabecera de vuelos-->
+            <div id="header_block">
+                <div id="team_name" class="content">
+                    TEAM DEVS
                 </div>
-                <div id = "logo_equipo">
-                    <img src="https://img.game8.co/3642210/daaaa1c27a3ad015412368150d5f712a.png/thumb" 
-                    alt="Logo del equipo Devs" 
-                    style="width: 100%; height: 100%; object-fit: contain;">
+
+                <div id="team_logo">
+                    <img src="https://img.game8.co/3642210/daaaa1c27a3ad015412368150d5f712a.png/thumb"
+                        alt="Es Marzo tío"
+                        style="width: 100%; height: 100%; object-fit: contain;">
                 </div>
             </div>
 
-            <!-- Bloque de información de los vuelos -->
-            <div id = "informacion_vuelos">
-
-                <div id = "volumen_equipo">
+            <!-- Información de vuelos-->
+            <div id="info_block">
+                <div id="team_bulk" class="content">
                     Devs lleva agua?
                 </div>
 
-                <div id = "puntuacion_equipo">
-                    Puntuación de Devs: El máximo obvio
+                <div id="team_points" class="content">
+                    SCORE: El máximo obvio
                 </div>
-                
-                <div id = "informacion_extra_equipo">
-                    Informacion extra de Devs (No hay)
+
+                <div id="extra_info" class="content">
+                    Estoy aprendiendo más aquí que en cualquier carrera
                 </div>
             </div>
-        </div>
+
+            <!-- Botón muy guay-->
+            <button id="up_down_button" class="content"></button>
+
+            </div>
+        
+        <script src="../js/vuelos.js"></script>
+
     </body>
 </html>
