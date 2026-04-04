@@ -8,7 +8,6 @@ body{
 
 /* Estilos para el bloque principal */
 .bloque_info_extra{
-    /*Posición del bloque principal — recuadro independiente */
     position: fixed;
     left: 2px;
     top: 460px;
@@ -23,14 +22,23 @@ body{
     border: 3px solid black;
     border-radius: 0px 10px 10px 0px;
     initial-letter: 10px;
+
+    /* Elegant slide transition — cubic-bezier gives a natural ease in/out feel */
+    transform: translateX(0px);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hidden state — slides off to the left */
+.bloque_info_extra.hidden {
+    transform: translateX(calc(-100% - 5px));
+    pointer-events: none;
 }
 
 .bloque_continuo {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Crea dos columnas iguales */
+  grid-template-columns: repeat(2, 1fr);
 }
 
-/* Estilos para el bloque de origen del equipo (ciudad/país + bandera) */
 #origen_equipo{
     display: flex;
     flex-direction: row;
@@ -39,7 +47,6 @@ body{
     height: 100%;
     border-top: 1px solid black;
     justify-content: space-around;
-
 }
 
 #nombre_equipo{
@@ -50,11 +57,8 @@ body{
 }
 
 #logo_equipo{
-    /* Ajusta el tamaño del logo para que se vea bien */
     object-fit: contain; 
     margin-right: 0px;
-   
-
 }
 
 #dorsal_equipo{
@@ -75,7 +79,6 @@ body{
     color: orange;
 }
 
-/* Estilos para el bloque del club/universidad + escudo */
 #club_equipo{
     display: flex;
     flex-direction: row;
@@ -85,7 +88,6 @@ body{
     border-top: 1px solid black;
 }
 
-/* Estilos para el bloque de miembros del equipo */
 #miembros_equipo{
     display: flex;
     flex-direction: row;
@@ -101,12 +103,9 @@ body{
 }
 
 #miembros_resultado{
-    /* Valor resaltado */
     color: orange;
 }
 
-
-/* Estilos para el bloque del líder */
 #lider_equipo{
     display: flex;
     flex-direction: row;
@@ -125,7 +124,6 @@ body{
     color: orange;
 }
 
-/* Estilos para el bloque del piloto */
 #piloto_equipo{
     display: flex;
     flex-direction: row;

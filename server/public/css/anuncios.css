@@ -6,7 +6,6 @@ body {
     background: transparent;
 }
 
-/*Anunciero*/
 #contenedor_anuncios {
     width: 100%;
     display: flex;
@@ -15,8 +14,16 @@ body {
     font-weight: bold;
     justify-content: center;
     position: relative;
-    top: 0px;
-    transition: top 0.5s ease;
+
+    /* Elegant slide transition */
+    transform: translateY(0px);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hidden state — slides off to the top */
+#contenedor_anuncios.hidden {
+    transform: translateY(-150%);
+    pointer-events: none;
 }
 
 #anunciero {
