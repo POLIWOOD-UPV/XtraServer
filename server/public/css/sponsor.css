@@ -13,9 +13,19 @@ footer {
     width: 100%;
     background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
     padding: 20px 0 16px;
-    font-size: 1.3em
+    font-size: 1.3em;
 
+    /* Elegant slide transition */
+    transform: translateY(0px);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Hidden state — slides off to the bottom */
+footer.hidden {
+    transform: translateY(100%);
+    pointer-events: none;
+}
+
 div {
     display: flex;
     justify-content: center;

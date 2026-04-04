@@ -9,13 +9,13 @@ const main_block = document.querySelector("footer");
 button.addEventListener("click", function () {
     showMainBlock = !showMainBlock;
 
-    // Si showMainBlock es true, el bloque vuelve a la posición original
+    // Si showMainBlock es true, el bloque vuelve a la posición original (slide in desde abajo)
     if (showMainBlock) {
-        main_block.style.transform = "translateY(0px)";
+        main_block.classList.remove("hidden");
     }
 
     // Si showMainBlock es false, se oculta el bloque hacia abajo
     else {
-        main_block.style.transform = "translateY(100%)";
+        main_block.classList.add("hidden");
     }
 });
