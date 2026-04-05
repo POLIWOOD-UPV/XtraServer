@@ -10,6 +10,7 @@ let estadoPlayer = document.getElementById("estadoPlayer");
 let estadoAnuncios = document.getElementById("estadoAnuncios");
 let streamPublish = document.getElementById("playStream");
 let urlStreamInput = document.getElementById("urlStream");
+let streamStop = document.getElementById("stopStream");
 /**Valores globales */
 let animaciones;
 
@@ -124,6 +125,29 @@ streamPublish.addEventListener("click", () => {
         });
 });
 
+streamStop.addEventListener("click", () => {
+
+    // Publicar un endpoint vacío para detener el stream.
+    let entidad = {
+        id: "urn:ngsi-ld:Player:001",
+        type: "Player",
+        endpoint: {
+            type: "Text",
+            value: ""
+        }
+    };
+
+    POST("/v2/op/update", {
+        actionType: "update",
+        entities: [entidad]
+    })
+        .then(() => {
+            console.log("Stream detenido");
+        })
+        .catch(err => {
+            console.error("Error al detener el stream:", err);
+        });
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Controlador de HUD cargado");
