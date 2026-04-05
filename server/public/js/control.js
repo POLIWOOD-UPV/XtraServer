@@ -8,7 +8,8 @@ let animPlayer = document.getElementById("animPlayer");
 let animAnuncios = document.getElementById("animAnuncios");
 let estadoPlayer = document.getElementById("estadoPlayer");
 let estadoAnuncios = document.getElementById("estadoAnuncios");
-
+let streamPublish = document.getElementById("playStream");
+let urlStreamInput = document.getElementById("urlStream");
 /**Valores globales */
 let animaciones;
 
@@ -81,7 +82,7 @@ function toggleAnimacion(nombreAttr) {
 }
 
 
-// Botones de animaciones
+// Botones de control
 /////////////////////////////////////////////////////////////
 animPlayer.addEventListener("click", () => {
     toggleAnimacion("player");
@@ -89,6 +90,38 @@ animPlayer.addEventListener("click", () => {
 
 animAnuncios.addEventListener("click", () => {
     toggleAnimacion("anuncios");
+});
+
+
+streamPublish.addEventListener("click", () => {
+    let endpoint = urlStreamInput?.value.trim();
+
+    if (!endpoint) {
+        alert("Por favor, introduce un endpoint de stream válido.");
+        return;
+    }
+
+    // Publicar el endpoint seleccionado en la entidad Player.
+    let entidad = {
+        id: "urn:ngsi-ld:Player:001",
+        type: "Player",
+        endpoint: {
+            type: "Text",
+            value: endpoint
+        }
+    };
+
+    // Actualizar la entidad NGSI con el nuevo valor
+    POST("/v2/op/update", {
+        actionType: "update",
+        entities: [entidad]
+    })
+        .then(() => {
+            console.log(`Stream endpoint -> ${endpoint}`);
+        })
+        .catch(err => {
+            console.error("Error al actualizar el endpoint del stream:", err);
+        });
 });
 
 
