@@ -360,6 +360,17 @@ exports.crear_animaciones = async () => {
     return await this.update("append", [animaciones]);
 };
 
+// crear la entidad de los streams
+exports.crear_streams = async () => {
+    let streams = {
+        id: "urn:ngsi-ld:Streams:001",
+        type: "Streams",
+        endpoint: { type: "Text", value: "" }
+    };
+    return await this.update("append", [streams]);
+};
+
+
 exports.montar = async () => {
     // Equipos y Rondas
     res = await this.crear_universidades();
@@ -411,6 +422,11 @@ exports.start = async () => {
         // Animaciones
         res = await this.crear_animaciones();
         console.log("Animaciones montados:", res.status)
+
+
+        // Stream
+        res = await this.crear_streams();
+        console.log("Streams montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
