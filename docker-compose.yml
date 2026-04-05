@@ -58,14 +58,10 @@ services:
     depends_on:
       - orion
       - mariadb
-      - mediamtx
     ports:
       - "80:80"
     restart: unless-stopped
     entrypoint: ["node", "server.js"]
-    environment:
-      - MEDIAMTX_HOST=mediamtx
-      - MEDIAMTX_PORT=9997
     volumes:
       - type: bind
         source: ./server
