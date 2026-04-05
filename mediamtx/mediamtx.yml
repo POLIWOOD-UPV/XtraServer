@@ -58,6 +58,28 @@ webrtcAdditionalHosts: [172.18.0.6]
 api: yes
 apiAddress: :9997
 
+# Auth (sin autenticacion)
+# Permitimos acceso sin credenciales a lectura/publicacion y API admin.
+authMethod: internal
+authInternalUsers:
+  - user: any
+    pass:
+    ips: []
+    permissions:
+      - action: publish
+        path:
+      - action: read
+        path:
+      - action: playback
+        path:
+  - user: any
+    pass:
+    ips: []
+    permissions:
+      - action: api
+      - action: metrics
+      - action: pprof
+
 # Log level: debug, info, warn, error
 logLevel: debug
 

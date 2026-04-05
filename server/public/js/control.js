@@ -11,6 +11,8 @@ let estadoAnuncios = document.getElementById("estadoAnuncios");
 let streamPublish = document.getElementById("playStream");
 let urlStreamInput = document.getElementById("urlStream");
 let streamStop = document.getElementById("stopStream");
+let endpointButtons = document.getElementById("endpointButtons");
+let endpointActual = document.getElementById("EndpointActual");
 /**Valores globales */
 let animaciones;
 
@@ -82,6 +84,47 @@ function toggleAnimacion(nombreAttr) {
         });
 }
 
+// Stream
+async function cogerPathsActivos() {
+    try {
+        const data = await GET("/api/mediamtx/v3/paths/list");
+        const paths = Array.isArray(data?.items)
+            ? data.items.filter(path => path.ready).map(path => path.name)
+            : [];
+
+        pintarBotonesEndpoint(paths);
+        return paths;
+    } catch (err) {
+        console.error("Error al obtener paths activos:", err);
+        pintarBotonesEndpoint([]);
+        return [];
+    }
+
+}
+
+function pintarBotonesEndpoint(paths) {
+    if (!endpointButtons) return;
+
+    endpointButtons.innerHTML = "";
+
+    if (!Array.isArray(paths) || paths.length === 0) {
+        endpointButtons.innerHTML = "<span>Sin endpoints activos</span>";
+        return;
+    }
+
+    paths.forEach(path => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = path;
+        button.addEventListener("click", () => {
+            urlStreamInput.value = path;
+            urlStreamInput.focus();
+        });
+        endpointButtons.appendChild(button);
+    });
+
+}
+
 
 // Botones de control
 /////////////////////////////////////////////////////////////
@@ -123,6 +166,13 @@ streamPublish.addEventListener("click", () => {
         .catch(err => {
             console.error("Error al actualizar el endpoint del stream:", err);
         });
+    
+    // Actualizar la lista de endpoints activos después de publicar el nuevo stream.
+    cogerPathsActivos();
+
+    // Actualizar endpoint actual en la UI
+    endpointActual.textContent = `Endpoint actual: ${endpoint}`;
+    
 });
 
 streamStop.addEventListener("click", () => {
@@ -147,11 +197,13 @@ streamStop.addEventListener("click", () => {
         .catch(err => {
             console.error("Error al detener el stream:", err);
         });
+    cogerPathsActivos();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Controlador de HUD cargado");
     cogerAnimaciones();
+    cogerPathsActivos();
 });
 
 

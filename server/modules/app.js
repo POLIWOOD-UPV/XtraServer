@@ -1,6 +1,7 @@
 //  app.js
 const express = require("express");
 const bodyParser = require('body-parser');
+const http = require("http");
 
 // Archivos
 const path = require("path");
@@ -15,6 +16,9 @@ const sql = require("./sql.js")
 const save = require("./save.js")
 
 const app = express()
+
+const MEDIAMTX_API_HOST = process.env.MEDIAMTX_API_HOST || "mediamtx";
+const MEDIAMTX_API_PORT = Number(process.env.MEDIAMTX_API_PORT || 9997);
 
 app.get(ngsi.URL+"montar/?*", (req, res) => {
   ngsi.montar();
@@ -40,6 +44,57 @@ app.get("/sql/:prompt", (req, res) => {
 
 // Leer JSONS de los request (ngsi)
 app.use(bodyParser.json());
+
+// PROXY API MediaMTX
+// Evita problemas de CORS y centraliza las llamadas del front.
+app.all("/api/mediamtx/*", (req, res) => {
+  const proxyPath = req.originalUrl.replace(/^\/api\/mediamtx/, "") || "/";
+  const hasBody = req.body && Object.keys(req.body).length > 0;
+  const body = hasBody ? JSON.stringify(req.body) : "";
+
+  const options = {
+    hostname: MEDIAMTX_API_HOST,
+    port: MEDIAMTX_API_PORT,
+    path: proxyPath,
+    method: req.method,
+    headers: {
+      Accept: req.headers.accept || "application/json",
+      "Content-Type": req.headers["content-type"] || "application/json",
+      ...(body ? { "Content-Length": Buffer.byteLength(body) } : {})
+    }
+  };
+
+  const proxyReq = http.request(options, proxyRes => {
+    let data = "";
+
+    proxyRes.on("data", chunk => {
+      data += chunk;
+    });
+
+    proxyRes.on("end", () => {
+      res.status(proxyRes.statusCode || 502);
+
+      if (proxyRes.headers["content-type"]) {
+        res.set("Content-Type", proxyRes.headers["content-type"]);
+      }
+
+      if (!data) {
+        res.end();
+        return;
+      }
+
+      res.send(data);
+    });
+  });
+
+  proxyReq.on("error", error => {
+    console.error("Error proxy MediaMTX:", error.message);
+    res.status(500).json({ error: error.message });
+  });
+
+  if (body) proxyReq.write(body);
+  proxyReq.end();
+});
 
 // SUBIR ARCHIVOS
 const storage = multer.diskStorage({
