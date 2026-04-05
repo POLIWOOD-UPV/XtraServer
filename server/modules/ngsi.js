@@ -360,6 +360,20 @@ exports.crear_animaciones = async () => {
     return await this.update("append", [animaciones]);
 };
 
+
+
+// Crear  entidad para el player de video
+exports.crear_stream = async () => {
+    let stream = {
+        id: "urn:ngsi-ld:Stream:001",
+        type: "Stream",
+        endpoint: { type:"Text", value:"" }
+    };
+    return await this.update("append", [stream]);
+}
+
+
+
 exports.montar = async () => {
     // Equipos y Rondas
     res = await this.crear_universidades();
@@ -411,6 +425,10 @@ exports.start = async () => {
         // Animaciones
         res = await this.crear_animaciones();
         console.log("Animaciones montados:", res.status)
+
+        res = await this.crear_stream();
+        console.log("Stream montado:", res.status)
+
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);

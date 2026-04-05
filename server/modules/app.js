@@ -1,6 +1,7 @@
 //  app.js
 const express = require("express");
 const bodyParser = require('body-parser');
+const http = require("http");
 
 // Archivos
 const path = require("path");
@@ -14,6 +15,9 @@ const ngsi = require("./ngsi.js")
 const sql = require("./sql.js")
 const save = require("./save.js")
 
+const MEDIAMTX_HOST = process.env.MEDIAMTX_HOST || "mediamtx";
+const MEDIAMTX_PORT = Number(process.env.MEDIAMTX_PORT || 9997);
+
 const app = express()
 
 app.get(ngsi.URL+"montar/?*", (req, res) => {
@@ -24,6 +28,58 @@ app.get(ngsi.URL+"montar/?*", (req, res) => {
 
 app.get("/save/:name", save.save);
 app.get("/load/:name", save.load);
+
+app.use("/api/mediamtx", bodyParser.json());
+
+// ## PROXY ## => MediaMTX control API
+app.all("/api/mediamtx/*", (req, res) => {
+  const path = req.params[0];
+  const queryIndex = req.originalUrl.indexOf("?");
+  const query = queryIndex >= 0 ? req.originalUrl.slice(queryIndex) : "";
+  const body = req.body && Object.keys(req.body).length > 0 ? JSON.stringify(req.body) : "";
+
+  const options = {
+    hostname: MEDIAMTX_HOST,
+    port: MEDIAMTX_PORT,
+    path: `/${path}${query}`,
+    method: req.method,
+    headers: {
+      Accept: req.headers.accept || "application/json",
+    },
+  };
+
+  if (body) {
+    options.headers["Content-Type"] = req.headers["content-type"] || "application/json";
+    options.headers["Content-Length"] = Buffer.byteLength(body);
+  }
+
+  const proxyReq = http.request(options, (proxyRes) => {
+    res.status(proxyRes.statusCode || 500);
+
+    Object.entries(proxyRes.headers).forEach(([headerName, headerValue]) => {
+      if (headerValue !== undefined) {
+        res.setHeader(headerName, headerValue);
+      }
+    });
+
+    proxyRes.pipe(res);
+  });
+
+  proxyReq.on("error", (error) => {
+    console.error("Error proxy MediaMTX:", error.message);
+    if (!res.headersSent) {
+      res.status(500).json({ error: error.message });
+    } else {
+      res.end();
+    }
+  });
+
+  if (body) {
+    proxyReq.write(body);
+  }
+
+  proxyReq.end();
+});
 
 // ## PROXY ## => localhost = [xtraserver, orion, mariadb, mongodb]
 // ENVIAR xtraserver -> Orion  por el proxy
@@ -113,6 +169,5 @@ app.use((req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 module.exports = app

@@ -69,6 +69,19 @@ async function PUT(endpoint, body, options = {}) {
 }
 
 /**
+ * Atajos para consumir MediaMTX a través del proxy local.
+ */
+async function GET_MEDIAMTX(endpoint, options = {}) {
+    const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    return request('GET', `/api/mediamtx${normalizedEndpoint}`, options);
+}
+
+async function POST_MEDIAMTX(endpoint, body, options = {}) {
+    const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    return request('POST', `/api/mediamtx${normalizedEndpoint}`, { ...options, body });
+}
+
+/**
  * API UTILS
  */
 /** Función para unir la ruta de la API al endpoint 
