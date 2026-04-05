@@ -124,7 +124,7 @@ app.post(ngsi.URL+":action", (req, res) => {
 
 // APLICACION
 // Servir ficheros estaticos
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // para acceder al sistema de tablas
 app.get("/tablas/?", (req, res) => {
@@ -139,35 +139,75 @@ app.get("/tablas/?", (req, res) => {
   }
 });
 
-// Ruta general -> listdir
-app.use((req, res) => {
-  http_logger.log(req);
-  try {
-    const urlPath = path.normalize(req.path); // para trabajar los archivos
-    const fullPath = path.join(__dirname, '..', dir.DIR, urlPath);
-    // Es algo de public?
-    if (!fullPath.startsWith(path.join(__dirname, '..', dir.DIR))) {
-      return res.status(403).send(`Fuera de la carpeta ${dir.DIR}!`);
-    }
-    
-    // Existe?
-    if (fs.existsSync(fullPath)) {
-      // Directorio -> listdirs
-      if (fs.statSync(fullPath).isDirectory()) {
-        dir.http_listdir(res, urlPath);
-      // Archivo -> Servir
-      } else {
-        res.sendFile(fullPath);
-      }
-    // No existe
-    } else {
-      res.status(404).send("404 Not Found");
-    }
-  } catch (err) {
-    console.error("Error en middleware:", err);
-    res.status(500).send("Internal Server Error");
-  }
+// Index home
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/html/index.html"));
 });
 
+
+// Ruta general -> listdir
+// app.use((req, res) => {
+//   http_logger.log(req);
+//   try {
+//     const urlPath = path.normalize(req.path); // para trabajar los archivos
+//     const fullPath = path.join(__dirname, '..', dir.DIR, urlPath);
+//     // Es algo de public?
+//     if (!fullPath.startsWith(path.join(__dirname, '..', dir.DIR))) {
+//       return res.status(403).send(`Fuera de la carpeta ${dir.DIR}!`);
+//     }
+    
+//     // Existe?
+//     if (fs.existsSync(fullPath)) {
+//       // Directorio -> listdirs
+//       if (fs.statSync(fullPath).isDirectory()) {
+//         dir.http_listdir(res, urlPath);
+//       // Archivo -> Servir
+//       } else {
+//         res.sendFile(fullPath);
+//       }
+//     // No existe
+//     } else {
+//       res.status(404).send("404 Not Found");
+//     }
+//   } catch (err) {
+//     console.error("Error en middleware:", err);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
+
+app.get("/browse", (req, res) => {
+  handleBrowse(req, res, "/");
+});
+app.get("/browse/*", (req, res) => {
+  const subPath = "/"+req.params[0];
+  handleBrowse(req, res, subPath);
+});
+
+function handleBrowse(req, res, subPath) {
+  http_logger.log(req);
+  try {
+    const publicRoot = path.join(__dirname, '..', dir.DIR);
+    const urlPath = path.normalize(subPath);
+    const fullPath = path.join(publicRoot, urlPath);
+    if (!fullPath.startsWith(publicRoot)) {
+      return res.status(403).send("Ruta fuera de public");
+    }
+    if (!fs.existsSync(fullPath)) {
+        return res.status(404).send("404 Not Found");
+    }
+    if (fs.statSync(fullPath).isDirectory()) {
+      dir.http_listdir(res, urlPath, "/browse");
+      return;
+    }
+    res.sendFile(fullPath);
+  } catch (err) {
+    console.error("Error en browse:", err);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+app.get("/upload", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/html/upload.html"));
+});
 
 module.exports = app

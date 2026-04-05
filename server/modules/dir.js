@@ -5,7 +5,8 @@ const URL = require("url")
 const DIR = "public";
 exports.DIR = DIR;
 
-exports.http_listdir = (res, url) => {
+exports.http_listdir = (res, url, basePath = "/browse") => {
+  const base = basePath.endsWith("/") ? basePath.slice(0, -1) : basePath;
   try {
     url = url.replace(/\\/g, '/');
     const dir = fs.readdirSync(path.join(DIR, url));
@@ -26,8 +27,8 @@ exports.http_listdir = (res, url) => {
 
     // Solo mostrar padre si no estamos en /
     if (url !== "/") {
-      res.write("<a href='/'>Volver al inicio </a>");
-      res.write(`<a href="${parent}">.. (${parent})</a>`);
+      res.write("<a href='" + base + "/'>Volver al inicio </a>");
+      res.write("<a href='" + base + parent + "'>.. (" + parent + ")</a>");
     }
 
     // Aseguramos que acabe en /
@@ -50,7 +51,7 @@ exports.http_listdir = (res, url) => {
         }
         
         // Construimos el enlace usando la URL base (urlFixed) y el elemento codificado
-        const elementUrl = urlFixed + encodedElement;
+        const elementUrl = base + urlFixed + encodedElement;
         res.write(`<a href="${elementUrl}">${element}</a>`);
       }
     });

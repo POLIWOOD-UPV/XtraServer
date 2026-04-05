@@ -1,0 +1,98 @@
+:root {
+  --bg-main: #990000;
+  --panel: #fff5f5;
+  --text-main: #2a1010;
+  --text-muted: #5e3b3b;
+  --btn-primary: #fcf7d7;
+  --btn-primary-hover: #670000;
+  --btn-secondary: #ffffff;
+  --btn-secondary-hover: #f7e2e2;
+  --btn-border: #7f0000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+.page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #990000;
+}
+
+.landing {
+  width: min(100%, 30rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background-color: var(--panel);
+  border-radius: 0.85rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+.landing__header {
+  margin-bottom: 1.2rem;
+}
+
+.landing__title {
+  margin: 0;
+  color: var(--text-main);
+  font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+}
+
+.landing__subtitle {
+  margin: 0.55rem 0 0;
+  color: var(--text-muted);
+}
+
+.landing__actions {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid transparent;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:focus-visible {
+  outline: 3px solid #0f62fe;
+  outline-offset: 2px;
+}
+
+.button--primary {
+  background-color: var(--btn-primary);
+  color: #000000;
+}
+
+.button--primary:hover {
+  background-color: var(--btn-primary-hover);
+  box-shadow: 0 8px 18px rgba(127, 0, 0, 0.35);
+}
+
+.button--secondary {
+  background-color: var(--btn-secondary);
+  color: var(--btn-border);
+  border-color: var(--btn-border);
+}
+
+.button--secondary:hover {
+  background-color: var(--btn-secondary-hover);
+}
