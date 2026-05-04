@@ -37,10 +37,9 @@ exports.recv = async (req, res, action = "entityUpdate") => {
         res.status(202);
         entities.forEach((entity) => {
             notify(action, entity.id);
-            if (entity.type == "Anuncio" || 
-                entity.type === "EquipoMostrado" || 
-                entity.type === "Animaciones") 
-                { return } // Para que no salte error ya que no hay SQL para anuncios
+            if (!(entity.type in types)) {
+                return;
+            }
             syncronize(action, entity);
         });
         // TODO 
@@ -189,8 +188,21 @@ exports.cleanSubsctiptions = async () => {
             console.error(`ngsi.cleanSubsctiptions(${res.status}):`, await res.text());
             return;
         }
-        let subs = await res.json();
-        this.update("delete", subs.map((obj) => {obj.id}));
+        const subs = await res.json();
+        for (const sub of subs) {
+            if (!sub.id) {
+                continue;
+            }
+            const delRes = await fetch(`${subscriptions}/${sub.id}`, {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json"
+                }
+            });
+            if (!delRes.ok && delRes.status !== 404) {
+                console.error(`ngsi.cleanSubsctiptions(${sub.id}):`, await delRes.text());
+            }
+        }
     } catch (error) {
         console.error(`ngsi.cleanSubsctiptions():`, error);
     }
@@ -370,6 +382,34 @@ exports.crear_player = async () => {
     return await this.update("append", [player]);
 };
 
+exports.crear_PosVueloXtra2 = async () => {
+    let PosVuelo = {
+        id: "urn:ngsi-ld:PosVuelo:001",
+        type: "PosVuelo",
+        ronda: { type: "Number", value: 0 },
+        dorsal: { type: "Number", value: 0 },
+        lat: { type: "Float", value: 0.0 },
+        lon: { type: "Float", value: 0.0 },
+        ax : { type: "Float", value: 0.0 },
+        ay : { type: "Float", value: 0.0 },
+        az : { type: "Float", value: 0.0 },
+        altura: { type: "Float", value: 0.0 },
+        fix: { type: "String", value: "No fix" }
+    };
+    return await this.update("append", [PosVuelo]);
+}
+
+exports.crear_PuntosXtra2 = async () => {
+    let puntos = {
+        id: "urn:ngsi-ld:PuntosXtra2:001",
+        type: "PuntosXtra2",
+        ronda: { type: "Number", value: 0 },
+        dorsal: { type: "Number", value: 0 },
+        puntos: { type: "Number", value: 0 }
+    };
+    return await this.update("append", [puntos]);
+};
+
 
 exports.montar = async () => {
     // Equipos y Rondas
@@ -423,6 +463,12 @@ exports.start = async () => {
         res = await this.crear_animaciones();
         console.log("Animaciones montados:", res.status)
 
+        // Xtra2
+        res = await this.crear_PosVueloXtra2();
+        console.log("PosVuelo montados:", res.status)
+        res = await this.crear_PuntosXtra2();
+        console.log("PuntosXtra2 montados:", res.status)
+
 
         // Stream
         res = await this.crear_player();
@@ -475,16 +521,8 @@ exports.restaurar_datos = async () => {
         }
         let objects = await res.json();
         console.log(`Restaurando... ${objects.length} objetos`)
-        // let entities = [];
-        /*
-        objects = objects.map(object => ({
-            ...object,
-            id: this.crearID(key, object),
-            type: key
-        }));
-        */
-        objects.forEach(async (object) => {
-            let entity = template;
+        for (const object of objects) {
+            const entity = JSON.parse(JSON.stringify(template));
             for (const attr in entity) {
                 if (attr == "id") {
                     entity.id = crearID(key, object);
@@ -494,7 +532,7 @@ exports.restaurar_datos = async () => {
                     entity[attr].value = object[attr];
                 }
             }
-            let res = await fetch(entities, {
+            const res = await fetch(entities, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -504,13 +542,12 @@ exports.restaurar_datos = async () => {
                 }
             );
             if (!res.ok) {
-                console.error(`ngsi.restaurar_datos(${entity.id}):`, await res.text());
+                const body = await res.text();
+                if (res.status !== 422 || !body.includes("Already Exists")) {
+                    console.error(`ngsi.restaurar_datos(${entity.id}):`, body);
+                }
             }
-            //entities.push(entity);
-            // console.log(entity.id);
-        });
-        // res = await this.update("append", entities);
-        // if (!res.ok) {console.error(`ngsi.restaurar_datos(${key}):`, await res.text());} else {console.log(`ID restored ${entities.map((e) => {e.id})}`)}
+        }
     }
     console.log("DATOS RESTAURADOS");
 }

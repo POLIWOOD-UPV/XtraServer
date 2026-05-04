@@ -206,6 +206,93 @@ function handleBrowse(req, res, subPath) {
   }
 }
 
+app.post("/xtra2", async (req, res) => {
+  http_logger.log(req);
+  const data = req.body || {};
+  let entidad;
+
+  // Permite enviar la entidad NGSI ya construida desde cliente.
+  if (data.id && data.type) {
+    entidad = { ...data };
+    if (!entidad.fix && entidad.fixGPS) {
+      entidad.fix = entidad.fixGPS;
+      delete entidad.fixGPS;
+    }
+  } else if (data.clase === "PosVueloXtra2") {
+    entidad = {
+      id: "urn:ngsi-ld:PosVuelo:001",
+      type: "PosVuelo",
+      ronda: { type: "Number", value: Number(data.ronda ?? 0) },
+      dorsal: { type: "Number", value: Number(data.dorsal ?? 0) },
+      lat: { type: "Float", value: Number(data.lat ?? 0.0) },
+      lon: { type: "Float", value: Number(data.lon ?? 0.0) },
+
+
+      /* Aceleraac
+      
+      ax -> Aceleración en el eje X (adelante-atrás)m/s**2
+      ay -> Aceleración en el eje Y (izquierda-derecha)m/s**2
+      az -> Aceleración en el eje Z (arriba-abajo) m/s**2
+
+      Hasta -8 a 8, ya no es 4
+      */
+      ax : { type: "Float", value: Number(data.ax ?? 0.0) },
+      ay : { type: "Float", value: Number(data.ay ?? 0.0) },
+      az : { type: "Float", value: Number(data.az ?? 0.0) },
+      altura: { type: "Float", value: Number(data.altura ?? 0.0) },
+
+      // fix es que hay señal GPS o no, no la precisión, así que lo guardamos como string para evitar confusiones. Si no hay fix, se guarda "No fix", si hay fix se guarda "Fix" o el valor que venga.
+      /* 
+      No fix -> No hay señal
+      Fix 2D -> Señal GPS 2D (lat, lon)
+      Fix 3D -> Señal GPS 3D (lat, lon, alt) MEJOR
+      */
+      fix: { type: "String", value: String(data.fix ?? data.fixGPS ?? "No fix") }
+
+      // Posbile: Temperatura del aire dentro de la caja
+
+    };
+  } else if (data.clase === "PuntosXtra2") {
+    entidad = {
+      id: "urn:ngsi-ld:PuntosXtra2:001",
+      type: "PuntosXtra2",
+      ronda: { type: "Number", value: Number(data.ronda ?? 0) },
+      dorsal: { type: "Number", value: Number(data.dorsal ?? 0) },
+      puntos: { type: "Number", value: Number(data.puntos ?? 0) }
+    };
+  } else {
+    return res.status(400).json({
+      error: "Formato no reconocido",
+      clase: data.clase,
+      clasesValidas: ["PosVueloXtra2", "PuntosXtra2"],
+      requerido: "Enviar id+type (entidad NGSI) o clase válida"
+    });
+  }
+
+  try {
+    const ngsiRes = await ngsi.update("update", [entidad]);
+    const details = await ngsiRes.text();
+
+    if (!ngsiRes.ok) {
+      return res.status(ngsiRes.status).json({
+        error: "Error actualizando entidad Xtra2",
+        details
+      });
+    }
+
+    return res.status(200).json({
+      ok: true,
+      updated: entidad.type,
+      details: details || "OK"
+    });
+  } catch (error) {
+    console.error("/xtra2:", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
 app.get("/upload", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/html/upload.html"));
 });
