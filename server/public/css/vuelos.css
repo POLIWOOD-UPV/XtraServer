@@ -12,7 +12,7 @@ body {
     top: 235px;
 
     width: 280px;
-    height: 180px;
+    height: 380px;
     padding: 10px;
 
     display: flex;
@@ -22,94 +22,52 @@ body {
     border-radius: 0px 10px 10px 0px;
 }
 
-/* Cabecera del bloque */
-#header_block {
+#values_block {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-
+    flex-direction: column;
     width: 100%;
     height: 50px;
-    margin-bottom: 10px;
 
     border-bottom: 2px solid white;
     padding-bottom: 5px;
 }
 
+/* Cada bloque ocupa la mitad */
+#latitude,
+#length {
+    flex: 1;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
 /* Información del bloque*/
-#info_block {
+#telemetry_block {
     display: flex;
     flex-direction: column;
 
     width: 100%;
-    height: 100%;
+    height: 165px;
 }
 
-/* Bloque de info */
+#map_block {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 165px;
+}
+
 .content {
     /* Indica las propiedades del contenido */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 12px;
     color: white;
-}
-
-/* Nombre */
-#team_name {
-    width: 155%; 
-    height: 100%;
-
-    /* Línea inferior y lateral */
-    border-right: 2px solid white;
-    margin-right: 10px;
-    padding-right: 10px;
-}
-
-/* Logo */
-#team_logo {
-    width: 55%;
-    height: 100%;
-}
-
-/* Info */
-#team_bulk{
-    width: 100%;
-    height: 100%;
-
-    /* Línea inferior */
-    border-bottom: 2px solid white;
-    padding-bottom: 5px;
-}
-
-#team_points{
-    width: 100%;
-    height: 100%;
-
-    /* Línea inferior */
-    border-bottom: 2px solid white;
-    padding-bottom: 5px;
-}
-
-#extra_info {
-    width: 100%;
-    height: 100%;
-}
-
-/* Botón muy guay */
-#up_down_button {
-    /* Posición del botón*/
-    position: absolute;
-    top: 10px;
-    right: 0;
-
-    /* Rotación del botón */
-    transform: translateX(95%) scaleY(-1);
-    writing-mode: vertical-rl;
-
-    padding: 10px 5px;
-    background: #fb8500;
-    border: none;
-    border-radius: 0 6px 6px 0;
-    cursor: pointer;
-    font-weight: bold;
 }
