@@ -29,7 +29,7 @@ body {
     height: 50px;
 
     border-bottom: 2px solid white;
-    padding-bottom: 5px;
+
 }
 
 /* Cada bloque ocupa la mitad */
@@ -49,18 +49,18 @@ body {
 /* Información del bloque*/
 #telemetry_block {
     display: flex;
-    flex-direction: column;
 
     width: 100%;
     height: 165px;
+    border-bottom: 2px solid white;
 }
 
 #map_block {
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
     height: 165px;
+    min-height: 165px;
+    width: 100%;
+
+    box-sizing: border-box;
 }
 
 .content {
@@ -68,4 +68,9 @@ body {
     display: flex;
     font-size: 12px;
     color: white;
+}
+
+.leaflet-container {
+    height: 100%;
+    width: 100%;
 }
