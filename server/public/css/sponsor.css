@@ -15,12 +15,10 @@ footer {
     padding: 20px 0 16px;
     font-size: 1.3em;
 
-    /* Elegant slide transition */
     transform: translateY(0px);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hidden state — slides off to the bottom */
 footer.hidden {
     transform: translateY(100%);
     pointer-events: none;
@@ -37,4 +35,42 @@ div {
     font-size: 1.5em;
     font-weight: bold;
     color: rgb(255, 255, 255);
+}
+
+/* AÑADIDO: oculta lo que se salga del footer para que el scroll no sea visible fuera */
+.sponsors-wrapper {
+    overflow: hidden;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+/* AÑADIDO: mueve todos los logos de derecha a izquierda de forma infinita */
+.sponsors-track {
+    display: flex;
+    gap: 0;                        /* CAMBIADO: gap a 0 para que la costura del bucle sea invisible */
+    width: max-content;
+    animation: ticker 20s linear infinite;
+    justify-content: flex-start;
+}
+
+/* AÑADIDO: cada tarjeta usa padding en vez de gap para que el espaciado sea igual en la costura */
+.sponsor-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0 30px;
+}
+
+/* AÑADIDO: tamaño fijo para todos los logos, manteniendo sus colores originales */
+.sponsor-card img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* AÑADIDO: define el desplazamiento del ticker, se mueve el 50% porque el track tiene los logos duplicados */
+@keyframes ticker {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
