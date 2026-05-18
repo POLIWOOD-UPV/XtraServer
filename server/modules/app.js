@@ -122,6 +122,18 @@ app.post(ngsi.URL+":action", (req, res) => {
   ngsi.recv(req, res, req.params.action);
 });
 
+app.get("/api/puntos", async (req, res) => {
+  try {
+    const response = await fetch("https://public.xc26.didev.es/json");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching puntos:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // APLICACION
 // Servir ficheros estaticos
 app.use(express.static(path.join(__dirname, "../public")));

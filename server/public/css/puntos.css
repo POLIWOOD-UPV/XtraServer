@@ -27,8 +27,8 @@ body {
 }
 
 .contenedor h1 {
-        margin: 0 0 8px 0;
-        font-size: 20px;
+        margin: 0 0 6px 0;
+        font-size: 14px;
         font-weight: bold;
 }
 
@@ -49,7 +49,7 @@ body {
 .tabla-puntos {
         width: 100%;
         border-collapse: collapse;
-        font-size: 20px;
+        font-size: 14px;
 }
 
 .tabla-puntos thead {
@@ -70,6 +70,7 @@ body {
 
 .tabla-puntos th:nth-child(1),
 .tabla-puntos th:nth-child(2),
+.tabla-puntos td:nth-child(1),
 .tabla-puntos td:nth-child(2),
 .tabla-puntos th:nth-child(4),
 .tabla-puntos td:nth-child(4) {
