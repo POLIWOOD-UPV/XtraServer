@@ -49,10 +49,13 @@ body {
 /* Información del bloque*/
 #telemetry_block {
     display: flex;
+    justify-content: center;
+    align-items: center;
 
     width: 100%;
     height: 165px;
     border-bottom: 2px solid white;
+    box-sizing: border-box;
 }
 
 #map_block {
@@ -73,4 +76,29 @@ body {
 .leaflet-container {
     height: 100%;
     width: 100%;
+}
+
+/* Plano cartesiano */
+#plano-cartesiano {
+    position: relative;
+    width: 280px;
+    height: 160px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, transparent 49.5%, white 50%, transparent 50.5%),
+                linear-gradient(to top, transparent 49.5%, white 50%, transparent 50.5%);
+    background-size: 100% 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#bola {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #ff4444;
+    border-radius: 50%;
+    transition: all 0.1s ease-in-out;
 }
