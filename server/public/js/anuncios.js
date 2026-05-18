@@ -1,19 +1,19 @@
 // ─────────────────────────────────────────────
 //  CONFIGURATION
 // ─────────────────────────────────────────────
-const NGSI_BASE_URL  = "http://your-ngsi-server:1026";
-const ENTITY_ID      = "urn:ngsi-ld:Animaciones:001";
 const ATTRIBUTE_NAME = "anuncios";   // attribute inside the Animaciones entity
-const POLL_INTERVAL  = 3000;         // ms
 // ─────────────────────────────────────────────
 
 const contenedor = document.getElementById("contenedor_anuncios");
+
+// Sockets
+const socket = typeof io === "function" ? io() : null;
 
 /**
  * Obtiene la entidad de Animaciones y muestra u oculta el panel dependiendo de su valor
  */
 function cogerAnimaciones() {
-    fetch(`${NGSI_BASE_URL}/v2/entities?type=Animaciones`)
+    fetch("/v2/entities?type=Animaciones")
         .then(res => {
             if (!res.ok) throw new Error("No se pudo obtener la entidad de Animaciones");
             return res.json();
@@ -57,6 +57,19 @@ function mostrarAnuncios() {
     contenedor.style.top = "0px";
 }
 
-// Polling
-cogerAnimaciones();
-setInterval(cogerAnimaciones, POLL_INTERVAL);
+// Sockets de eventos
+if (socket) {
+    socket.on("message", msg => {
+        if (typeof msg !== "string") return;
+        console.log("Mensaje recibido por socket:", msg);
+
+        if (msg.includes("urn:ngsi-ld:Animaciones:")) {
+            cogerAnimaciones();
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Anuncios cargados, obteniendo estado...");
+    cogerAnimaciones();
+});
