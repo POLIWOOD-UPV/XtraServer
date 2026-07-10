@@ -46,7 +46,7 @@ function cogerAnimaciones() {
  */
 function esconderAnuncios() {
     if (!contenedor) return;
-    contenedor.style.top = "-150%";
+    contenedor.classList.add("hidden");
 }
 
 /**
@@ -54,7 +54,7 @@ function esconderAnuncios() {
  */
 function mostrarAnuncios() {
     if (!contenedor) return;
-    contenedor.style.top = "0px";
+    contenedor.classList.remove("hidden");
 }
 
 // Sockets de eventos
