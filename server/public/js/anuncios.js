@@ -5,6 +5,9 @@ const ATTRIBUTE_NAME = "anuncios";   // attribute inside the Animaciones entity
 // ─────────────────────────────────────────────
 
 const contenedor = document.getElementById("contenedor_anuncios");
+const anunciero = document.getElementById("anunciero");
+
+const ID_ANUNCIO = "urn:ngsi-ld:Anuncio:001";
 
 // Sockets
 const socket = typeof io === "function" ? io() : null;
@@ -42,6 +45,23 @@ function cogerAnimaciones() {
 }
 
 /**
+ * Obtiene la entidad Anuncio y actualiza el texto mostrado en el banner
+ */
+function cogerTexto() {
+    fetch(`/v2/entities/${ID_ANUNCIO}`)
+        .then(res => {
+            if (!res.ok) throw new Error("No se pudo obtener la entidad de Anuncio");
+            return res.json();
+        })
+        .then(data => {
+            if (anunciero) anunciero.textContent = data.texto?.value ?? "";
+        })
+        .catch(err => {
+            console.error("Error al recibir texto del anuncio:", err);
+        });
+}
+
+/**
  * Esconde el banner hacia arriba
  */
 function esconderAnuncios() {
@@ -66,10 +86,15 @@ if (socket) {
         if (msg.includes("urn:ngsi-ld:Animaciones:")) {
             cogerAnimaciones();
         }
+
+        if (msg.includes("urn:ngsi-ld:Anuncio:")) {
+            cogerTexto();
+        }
     });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Anuncios cargados, obteniendo estado...");
     cogerAnimaciones();
+    cogerTexto();
 });
