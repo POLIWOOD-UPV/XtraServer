@@ -1,5 +1,5 @@
 const MAX_EQUIPOS_COLUMNA = 15;
-const TABLA_HEADERS = ["Logo", "Dorsal", "Nombre", "Puntos"];
+const TABLA_HEADERS = ["Logo", "No.", "Team", "Points"];
 const LOGO_FALLBACK = "/img/Equipos/default.png";
 const API_URL = "/api/puntos";
 
