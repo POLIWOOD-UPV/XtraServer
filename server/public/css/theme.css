@@ -1,0 +1,38 @@
+/**
+ * Variables de tema compartidas por los overlays de la retransmisión.
+ * Importar al inicio de cada CSS de overlay con:  @import "theme.css";
+ */
+:root {
+    /* Paleta de marca.
+       Principales: cian y naranja. Derivados (aclarando/oscureciendo): dorado y azul. */
+    --cian:    101, 222, 241;  /* #65DEF1 - principal */
+    --naranja: 251, 133, 0;    /* #FB8500 - principal */
+    --dorado:  236, 183, 7;    /* #ECB707 - derivado */
+    --azul:    76, 110, 175;   /* #4C6EAF - derivado */
+
+    /* Degradado de marca: azul -> naranja */
+    --grad-marca: linear-gradient(
+        to bottom,
+        rgba(var(--azul), 0.92),
+        rgba(var(--naranja), 0.80)
+    );
+    /* Variante para la barra inferior: se funde hacia arriba con el vídeo */
+    --grad-barra: linear-gradient(
+        to top,
+        rgba(var(--azul), 0.55),
+        rgba(var(--cian), 0.30) 55%,
+        rgba(var(--naranja), 0.10)
+    );
+
+    /* Superficies y detalles */
+    --texto:            #ffffff;
+    --acento:           rgb(var(--dorado));  /* acrónimos, resaltados */
+    --borde-claro:      rgba(255, 255, 255, 0.18);
+    --divisor:          rgba(255, 255, 255, 0.28);
+    --sombra-panel:     0 8px 24px rgba(0, 0, 0, 0.28);
+    --sombra-texto:     0 1px 2px rgba(0, 0, 0, 0.35);
+
+    /* Tipografía y movimiento */
+    --fuente: "Segoe UI", system-ui, -apple-system, sans-serif;
+    --transicion: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

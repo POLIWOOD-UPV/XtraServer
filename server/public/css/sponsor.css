@@ -1,75 +1,106 @@
+@import "theme.css";
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
     background: transparent;
     width: 100%;
     height: 100%;
+    font-family: var(--fuente);
 }
 
+/* Barra inferior de retransmision: baja y translucida, se funde con el video */
 footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
-    padding: 20px 0 16px;
-    font-size: 1.3em;
+    /* Degradado de marca (azul -> naranja), mas transparente arriba para fundir con el video */
+    background-image: var(--grad-barra);
+    padding: 10px 0 12px;
 
-    transform: translateY(0px);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+    transition: var(--transicion);
 }
 
 footer.hidden {
-    transform: translateY(100%);
+    transform: translateY(110%);
     pointer-events: none;
 }
 
-div {
+/* Fila: etiqueta lateral + ticker de logos */
+.sponsor-bar {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    color: #fb8500;
+    align-items: center;
+    gap: 18px;
+    padding: 0 22px;
 }
 
+/* Etiqueta lateral discreta con divisor sutil */
 .titulo {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
+    flex-shrink: 0;
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+    padding-right: 18px;
+    border-right: 1px solid var(--divisor);
+    text-shadow: var(--sombra-texto);
 }
 
-/* AÑADIDO: oculta lo que se salga del footer para que el scroll no sea visible fuera */
+/* Contenedor del ticker: oculta el desborde y desvanece los bordes */
 .sponsors-wrapper {
+    flex: 1;
     overflow: hidden;
-    width: 100%;
-    justify-content: flex-start;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 6%,
+        #000 94%,
+        transparent
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 6%,
+        #000 94%,
+        transparent
+    );
 }
 
-/* AÑADIDO: mueve todos los logos de derecha a izquierda de forma infinita */
+/* Mueve todos los logos de derecha a izquierda de forma infinita */
 .sponsors-track {
     display: flex;
-    gap: 0;                        /* CAMBIADO: gap a 0 para que la costura del bucle sea invisible */
+    gap: 0;                        /* gap 0 para que la costura del bucle sea invisible */
     width: max-content;
-    animation: ticker 20s linear infinite;
-    justify-content: flex-start;
+    animation: ticker 30s linear infinite;
 }
 
-/* AÑADIDO: cada tarjeta usa padding en vez de gap para que el espaciado sea igual en la costura */
+/* Pausa el ticker al pasar el raton (util al revisar la barra) */
+.sponsors-track:hover {
+    animation-play-state: paused;
+}
+
+/* Cada tarjeta usa padding en vez de gap para que el espaciado sea igual en la costura */
 .sponsor-card {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    padding: 0 30px;
+    padding: 0 26px;
 }
 
-/* AÑADIDO: tamaño fijo para todos los logos, manteniendo sus colores originales */
+/* Logos mas contenidos y homogeneos; ligera atenuacion para que no compitan con la escena */
 .sponsor-card img {
-    height: 56px;
+    height: 38px;
     width: auto;
     object-fit: contain;
+    opacity: 0.92;
+    filter: drop-shadow(var(--sombra-texto));
 }
 
-/* AÑADIDO: define el desplazamiento del ticker, se mueve el 50% porque el track tiene los logos duplicados */
+/* Define el desplazamiento del ticker, se mueve el 50% porque el track tiene los logos duplicados */
 @keyframes ticker {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
