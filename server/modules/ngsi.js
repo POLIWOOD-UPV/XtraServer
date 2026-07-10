@@ -344,7 +344,7 @@ exports.crear_anuncio = async ()=> {
     let anuncio = {
         id: "urn:ngsi-ld:Anuncio:001",
         type: "Anuncio",                 
-        texto: { type: "Text", value: "XC2025" },
+        texto: { type: "Text", value: "XC2026" },
     };
     return await this.update("append", [anuncio]);
 }
@@ -354,9 +354,22 @@ exports.crear_equipoMostrado = async () => {
     let equipoMostrado = {
         id:"urn:ngsi-ld:equipoMostrado:001",
         type: "EquipoMostrado",
-        acr: {type: "Text", value: "SPONSORS"}
+        acr: {type: "Text", value: "SPONSORS"},
+        // Payload (comida + agua) del equipo mostrado; payloadAcr indica a qué equipo aplica
+        payload: {type: "Number", value: 0},
+        payloadAcr: {type: "Text", value: ""}
     };
     return await this.update("append", [equipoMostrado]);
+};
+
+// crear la entidad del siguiente equipo que va a volar (Next in line)
+exports.crear_siguienteEquipo = async () => {
+    let siguiente = {
+        id: "urn:ngsi-ld:SiguienteEquipo:001",
+        type: "SiguienteEquipo",
+        acr: { type: "Text", value: "" }
+    };
+    return await this.update("append", [siguiente]);
 };
 
 // crear la entidad de control de animaciones
@@ -366,7 +379,11 @@ exports.crear_animaciones = async () => {
     let animaciones = {
         id: "urn:ngsi-ld:Animaciones:001",
         type: "Animaciones",
-        anuncios:  { type:"Text", value:"visible" }
+        anuncios:  { type:"Text", value:"visible" },
+        sponsors:  { type:"Text", value:"visible" },
+        infoteam:  { type:"Text", value:"visible" },
+        siguiente: { type:"Text", value:"visible" },
+        clima:     { type:"Text", value:"visible" }
     };
     return await this.update("append", [animaciones]);
 };
@@ -447,7 +464,10 @@ exports.start = async () => {
 
         res = await this.crear_equipoMostrado();
         console.log("Equipos mostrados montados:", res.status)
-        
+
+        res = await this.crear_siguienteEquipo();
+        console.log("Siguiente equipo montado:", res.status)
+
         // Animaciones
         res = await this.crear_animaciones();
         console.log("Animaciones montados:", res.status)

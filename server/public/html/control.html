@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,31 +9,54 @@
         <script src="../js/control.js" defer></script>
     </head>
     <body>
+        <h1>Control XtraChallenge</h1>
+
         <section>
             <h2>Control de Animaciones</h2>
-            <button id="animAnuncios">Anuncios</button>
-            <span id="estadoAnuncios">Estado: cargando...</span>
+            <div class="fila">
+                <button class="btnToggle" data-attr="anuncios">Anuncios</button>
+                <button class="btnToggle" data-attr="sponsors">Sponsors</button>
+                <button class="btnToggle" data-attr="infoteam">InfoTeam</button>
+                <button class="btnToggle" data-attr="siguiente">Siguiente</button>
+                <button class="btnToggle" data-attr="clima">Clima</button>
+            </div>
         </section>
+
         <section>
-            <h2>Control de Anuncios</h2>
+            <h2>Texto del anuncio</h2>
+            <div class="fila">
+                <input type="text" id="inputTexto" placeholder="Texto del anuncio..." />
+                <button id="btnEnviarTexto">Enviar</button>
+            </div>
+            <p class="feedback" id="feedbackTexto"></p>
         </section>
+
         <section>
-            <h2>Control de Crono</h2>
+            <h2>Equipo mostrado (Volando)</h2>
+            <div class="fila">
+                <select id="selectEquipo">
+                    <option value="">Ninguno</option>
+                </select>
+                <button id="btnEnviarEquipo">Enviar</button>
+            </div>
+            <p class="feedback" id="feedbackEquipo"></p>
+
+            <div class="fila">
+                <input type="number" id="inputPayload" min="0" step="1" placeholder="Payload (PL)..." />
+                <button id="btnEnviarPayload">Enviar payload</button>
+            </div>
+            <p class="feedback" id="feedbackPayload"></p>
         </section>
+
         <section>
-            <h2>Control de InfoTeam</h2>
-        </section>
-        <section>
-            <h2>Control de Mejores / Tiempo</h2>
-        </section>
-        <section>
-            <h2>Control de Sponsors</h2>
-        </section>
-        <section>
-            <h2>Control de Puntos</h2>
-        </section>
-        <section>
-            <h2>Control de vuelos</h2>
+            <h2>Siguiente equipo (Next)</h2>
+            <div class="fila">
+                <select id="selectSiguiente">
+                    <option value="">Ninguno</option>
+                </select>
+                <button id="btnEnviarSiguiente">Enviar</button>
+            </div>
+            <p class="feedback" id="feedbackSiguiente"></p>
         </section>
     </body>
 </html>
