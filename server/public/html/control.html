@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Player</title>
+        <title>Control</title>
         <link rel="stylesheet" href="../css/control.css" />
         <script src="../js/api.js" defer></script>
         <script src="../js/control.js" defer></script>
@@ -13,8 +13,6 @@
             <h2>Control de Animaciones</h2>
             <button id="animAnuncios">Anuncios</button>
             <span id="estadoAnuncios">Estado: cargando...</span>
-            <button id="animPlayer">Player</button>
-            <span id="estadoPlayer">Estado: cargando...</span>
         </section>
         <section>
             <h2>Control de Anuncios</h2>
@@ -27,17 +25,6 @@
         </section>
         <section>
             <h2>Control de Mejores / Tiempo</h2>
-        </section>
-        <section>
-            <h2>Control de Player</h2>
-            <label for="urlStream">Endpoint del Stream:</label>
-            <input type="text" id="urlStream" placeholder="ENDPOINT" />
-            <button id="playStream">Reproducir Stream</button>
-            <button id="stopStream">Detener Stream</button>
-            <button id="cogerEndpoints" onclick="cogerPathsActivos()">Coger Endpoint</button>
-            <span id="EndpointActual"> </span>
-            <div id="endpointButtons"></div>
-            <span></span>
         </section>
         <section>
             <h2>Control de Sponsors</h2>

@@ -1,18 +1,11 @@
 /**
- * Controlador de HUD a traves de entidades NGSI (mirar server/modules/ngsi.js) 
+ * Controlador de HUD a traves de entidades NGSI (mirar server/modules/ngsi.js)
  */
 
 
 /** DOM Botones de animaciones */
-let animPlayer = document.getElementById("animPlayer");
 let animAnuncios = document.getElementById("animAnuncios");
-let estadoPlayer = document.getElementById("estadoPlayer");
 let estadoAnuncios = document.getElementById("estadoAnuncios");
-let streamPublish = document.getElementById("playStream");
-let urlStreamInput = document.getElementById("urlStream");
-let streamStop = document.getElementById("stopStream");
-let endpointButtons = document.getElementById("endpointButtons");
-let endpointActual = document.getElementById("EndpointActual");
 /**Valores globales */
 let animaciones;
 
@@ -40,10 +33,8 @@ function getValorAnimacion(nombre) {
 }
 
 function pintarEstados() {
-    const valorPlayer = getValorAnimacion("player");
     const valorAnuncios = getValorAnimacion("anuncios");
 
-    estadoPlayer.textContent = `Estado: ${valorPlayer}`;
     estadoAnuncios.textContent = `Estado: ${valorAnuncios}`;
 }
 
@@ -84,127 +75,15 @@ function toggleAnimacion(nombreAttr) {
         });
 }
 
-// Stream
-async function cogerPathsActivos() {
-    try {
-        const data = await GET("/api/mediamtx/v3/paths/list");
-        const paths = Array.isArray(data?.items)
-            ? data.items.filter(path => path.ready).map(path => path.name)
-            : [];
-
-        pintarBotonesEndpoint(paths);
-        return paths;
-    } catch (err) {
-        console.error("Error al obtener paths activos:", err);
-        pintarBotonesEndpoint([]);
-        return [];
-    }
-
-}
-
-function pintarBotonesEndpoint(paths) {
-    if (!endpointButtons) return;
-
-    endpointButtons.innerHTML = "";
-
-    if (!Array.isArray(paths) || paths.length === 0) {
-        endpointButtons.innerHTML = "<span>Sin endpoints activos</span>";
-        return;
-    }
-
-    paths.forEach(path => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.textContent = path;
-        button.addEventListener("click", () => {
-            urlStreamInput.value = path;
-            urlStreamInput.focus();
-        });
-        endpointButtons.appendChild(button);
-    });
-
-}
-
 
 // Botones de control
 /////////////////////////////////////////////////////////////
-animPlayer.addEventListener("click", () => {
-    toggleAnimacion("player");
-});
-
 animAnuncios.addEventListener("click", () => {
     toggleAnimacion("anuncios");
 });
 
 
-streamPublish.addEventListener("click", () => {
-    let endpoint = urlStreamInput?.value.trim();
-
-    if (!endpoint) {
-        alert("Por favor, introduce un endpoint de stream válido.");
-        return;
-    }
-
-    // Publicar el endpoint seleccionado en la entidad Player.
-    let entidad = {
-        id: "urn:ngsi-ld:Player:001",
-        type: "Player",
-        endpoint: {
-            type: "Text",
-            value: endpoint
-        }
-    };
-
-    // Actualizar la entidad NGSI con el nuevo valor
-    POST("/v2/op/update", {
-        actionType: "update",
-        entities: [entidad]
-    })
-        .then(() => {
-            console.log(`Stream endpoint -> ${endpoint}`);
-        })
-        .catch(err => {
-            console.error("Error al actualizar el endpoint del stream:", err);
-        });
-    
-    // Actualizar la lista de endpoints activos después de publicar el nuevo stream.
-    cogerPathsActivos();
-
-    // Actualizar endpoint actual en la UI
-    endpointActual.textContent = `Endpoint actual: ${endpoint}`;
-    
-});
-
-streamStop.addEventListener("click", () => {
-
-    // Publicar un endpoint vacío para detener el stream.
-    let entidad = {
-        id: "urn:ngsi-ld:Player:001",
-        type: "Player",
-        endpoint: {
-            type: "Text",
-            value: ""
-        }
-    };
-
-    POST("/v2/op/update", {
-        actionType: "update",
-        entities: [entidad]
-    })
-        .then(() => {
-            console.log("Stream detenido");
-        })
-        .catch(err => {
-            console.error("Error al detener el stream:", err);
-        });
-    cogerPathsActivos();
-});
-
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Controlador de HUD cargado");
     cogerAnimaciones();
-    cogerPathsActivos();
 });
-
-
-

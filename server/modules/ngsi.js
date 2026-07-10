@@ -366,20 +366,9 @@ exports.crear_animaciones = async () => {
     let animaciones = {
         id: "urn:ngsi-ld:Animaciones:001",
         type: "Animaciones",
-        anuncios:  { type:"Text", value:"visible" },
-        player: { type:"Text", value:"visible" }
+        anuncios:  { type:"Text", value:"visible" }
     };
     return await this.update("append", [animaciones]);
-};
-
-// crear la entidad de los streams
-exports.crear_player = async () => {
-    let player = {
-        id: "urn:ngsi-ld:Player:001",
-        type: "Player",
-        endpoint: { type: "Text", value: "" }
-    };
-    return await this.update("append", [player]);
 };
 
 exports.crear_PosVueloXtra2 = async () => {
@@ -468,11 +457,6 @@ exports.start = async () => {
         console.log("PosVuelo montados:", res.status)
         res = await this.crear_PuntosXtra2();
         console.log("PuntosXtra2 montados:", res.status)
-
-
-        // Stream
-        res = await this.crear_player();
-        console.log("Player montados:", res.status)
     } catch (error) {
         console.error("ngsi.start():", error.message);
         process.exit(1);
