@@ -1,0 +1,80 @@
+@import "theme.css";
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: transparent;
+    font-family: var(--fuente);
+}
+
+/* Banner compacto del siguiente equipo (Next in line) */
+.siguiente {
+    position: fixed;
+    left: 40px;
+    top: 650px;
+    width: fit-content;
+    max-width: 380px;
+    padding: 12px 20px;
+    color: var(--texto);
+
+    background: var(--grad-marca);
+    border-radius: 16px;
+    border: 1px solid var(--borde-claro);
+    box-shadow: var(--sombra-panel);
+    backdrop-filter: blur(2px);
+
+    transform: translateX(0);
+    transition: var(--transicion);
+}
+
+/* Estado oculto: se desliza hacia la izquierda */
+.siguiente.hidden {
+    transform: translateX(calc(-100% - 60px));
+    pointer-events: none;
+}
+
+.etiqueta {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    opacity: 0.8;
+    margin-bottom: 6px;
+}
+
+.contenido {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    height: 34px;
+    width: 34px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(var(--sombra-texto));
+}
+
+.equipo {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+}
+
+.dorsal {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--acento);
+    flex-shrink: 0;
+}
+
+.nombre {
+    font-size: 18px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
