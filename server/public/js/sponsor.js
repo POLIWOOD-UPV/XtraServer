@@ -1,24 +1,74 @@
-// Declaramos el valor que va a hacer que cambie el evento (True/False)
-let showMainBlock = true;
+// ─────────────────────────────────────────────
+//  CONFIGURATION
+// ─────────────────────────────────────────────
+const ATTRIBUTE_NAME = "sponsors";   // atributo dentro de la entidad Animaciones
+// ─────────────────────────────────────────────
 
 // Cogemos los elementos del HTML
-const button = document.getElementById("up_down_button");
 const main_block = document.querySelector("footer");
 
-// Evento para el botón, se activa al hacer click
-button.addEventListener("click", function () {
-    showMainBlock = !showMainBlock;
+// Sockets
+const socket = typeof io === "function" ? io() : null;
 
-    // Si showMainBlock es true, el bloque vuelve a la posición original (slide in desde abajo)
-    if (showMainBlock) {
-        main_block.classList.remove("hidden");
-    }
+/**
+ * Obtiene la entidad de Animaciones y muestra u oculta la barra segun su valor
+ */
+function cogerAnimaciones() {
+    fetch("/v2/entities?type=Animaciones")
+        .then(res => {
+            if (!res.ok) throw new Error("No se pudo obtener la entidad de Animaciones");
+            return res.json();
+        })
+        .then(data => {
+            const animaciones = data[0];
 
-    // Si showMainBlock es false, se oculta el bloque hacia abajo
-    else {
-        main_block.classList.add("hidden");
-    }
-});
+            // Sacar valor del JSON
+            const estado = String(animaciones[ATTRIBUTE_NAME]?.value || "").toLowerCase();
+
+            // Actualizar el estado
+            switch (estado) {
+                case "visible":
+                    mostrarSponsors();
+                    break;
+                case "oculto":
+                    esconderSponsors();
+                    break;
+                default:
+                    console.warn("Valor desconocido para sponsors:", estado);
+            }
+        })
+        .catch(err => {
+            console.error("Error al recibir animación:", err);
+        });
+}
+
+/**
+ * Esconde la barra hacia abajo
+ */
+function esconderSponsors() {
+    if (!main_block) return;
+    main_block.classList.add("hidden");
+}
+
+/**
+ * Devuelve la barra a su posición original
+ */
+function mostrarSponsors() {
+    if (!main_block) return;
+    main_block.classList.remove("hidden");
+}
+
+// Sockets de eventos
+if (socket) {
+    socket.on("message", msg => {
+        if (typeof msg !== "string") return;
+        console.log("Mensaje recibido por socket:", msg);
+
+        if (msg.includes("urn:ngsi-ld:Animaciones:")) {
+            cogerAnimaciones();
+        }
+    });
+}
 
 // AÑADIDO: lista de sponsors con su nombre y ruta de imagen
 const sponsors = [
@@ -56,3 +106,8 @@ const clones    = buildCards(sponsors);
 
 originals.forEach(c => track.appendChild(c));
 clones.forEach(c    => track.appendChild(c));
+
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Sponsors cargados, obteniendo estado...");
+    cogerAnimaciones();
+});

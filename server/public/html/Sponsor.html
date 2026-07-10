@@ -7,18 +7,20 @@
     <title>Sponsors</title>
 </head>
 <body>
-    <button id="up_down_button">Toggle Sponsors</button>
     <footer>
-        <div class="titulo">Official Sponsors</div>
+        <div class="sponsor-bar">
+            <div class="titulo">Sponsors</div>
 
-        <!-- El JS rellena este div con las tarjetas de sponsor -->
-        <div class="sponsors-wrapper">
-            <div class="sponsors-track">
-                <!-- sponsor-card items inserted by sponsor.js -->
+            <!-- El JS rellena .sponsors-track con las tarjetas de sponsor -->
+            <div class="sponsors-wrapper">
+                <div class="sponsors-track">
+                    <!-- sponsor-card items inserted by sponsor.js -->
+                </div>
             </div>
         </div>
     </footer>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="../js/sponsor.js"></script>
 </body>
 </html>
