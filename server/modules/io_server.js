@@ -18,7 +18,8 @@ exports.connect = (socket) => {
 
 exports.disconnect = (socket) => {
   try {
-    socketsList.pop(socket);
+    const i = socketsList.indexOf(socket);
+    if (i !== -1) socketsList.splice(i, 1);
     io_logger.disconnection(socket.id,socketsList);
   } catch (error) {
     console.error(`io_server.disconnect(${socket.id}):`, error.message);
@@ -39,6 +40,6 @@ exports.notify = (event, id) => {
     io_logger.log("<server>", "!"+event , id);
     socketsList.forEach(sock => {sock.send(`!${event} ${id}`)});
   } catch (error){
-    console.error(`io_server.notify(${socket.id},${event},${id}):`, error.message);
+    console.error(`io_server.notify(${event},${id}):`, error.message);
   }
 }
