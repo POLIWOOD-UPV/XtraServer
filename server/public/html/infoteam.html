@@ -8,45 +8,42 @@
         <link rel="stylesheet" href="../css/infoteam.css">
     </head>
     <body>
-        <button id="up_down_button">Toggle Info</button>
-        <!-- Bloque principal info extra -->
-        <div class="bloque_info_extra">
-            Extra information of the team:
+        <div class="bloque_info_extra" id="bloque_info_extra">
+            <span class="etiqueta">Team info</span>
 
-            <!-- Bloque de nombre + acrónimo -->
-            <div id="origen_equipo">
-                <div class="nombre_equipo">Saka TUDa (SAKA)</div> 
-                <div class="logo_equipo"><img  src="logo_eolorc.jpg" alt="Logo del equipo" style="height: 22px; width: 22px; "></div>
+            <!-- Cabecera: nombre + acrónimo + logo -->
+            <div class="cabecera">
+                <div class="titulo">
+                    <span id="nombre_equipo">—</span>
+                    <span class="acr" id="acr_equipo"></span>
+                </div>
+                <img class="logo_equipo" id="logo_equipo" src="../img/dummy.png" alt="Logo del equipo">
             </div>
 
-            <!-- Bloque de club/universidad + logo -->
-            <div id="club_equipo">
-                <img src="../img/SAKA.png"
-                     alt="Logo del equipo"
-                     style="height: 22px; object-fit: contain; margin-right: 0px;">
-                TUD
+            <!-- Universidad / club -->
+            <div class="uni" id="uni_equipo"></div>
+
+            <!-- Métricas -->
+            <div class="grid">
+                <div class="metrica">
+                    <span class="label">Members</span>
+                    <span class="valor" id="miembros_resultado">—</span>
+                </div>
+                <div class="metrica">
+                    <span class="label">Payload</span>
+                    <span class="valor" id="payload_resultado">—</span>
+                </div>
+                <div class="metrica ancho">
+                    <span class="label">Leader</span>
+                    <span class="valor" id="lider_resultado">—</span>
+                </div>
+                <div class="metrica ancho">
+                    <span class="label">Pilot</span>
+                    <span class="valor" id="piloto_resultado">—</span>
+                </div>
             </div>
-
-
-            <!-- Bloque de miembros del equipo -->
-            <div id="miembros_equipo">
-                <div id="miembros_label">Members:</div>
-                <div id="miembros_resultado">7</div>
-            </div>
-
-            <!-- Bloque de líder -->
-            <div id="lider_equipo">
-                <div id="lider_label">Leader:</div>
-                <div id="lider_resultado">Rohan Botta</div>
-            </div>
-
-            <!-- Bloque de piloto -->
-            <div id="piloto_equipo">
-                <div id="piloto_label">Pilot:</div>
-                <div id="piloto_resultado">Andrés Sebastián Moreno Moran</div>
-            </div>
-
         </div>
     </body>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="../js/infoteam.js"></script>
 </html>

@@ -1,143 +1,127 @@
-/* Estilos para el cuerpo */
-body{
-    display: flex;
-    width: 100%;
-    height: 100%;
+@import "theme.css";
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
     background: transparent;
+    font-family: var(--fuente);
 }
 
-/* Estilos para el bloque principal */
-.bloque_info_extra{
+/* Panel principal: degradado de marca (azul -> naranja) que se funde hacia abajo */
+.bloque_info_extra {
     position: fixed;
-    left: 2px;
-    top: 460px;
-    width: 280px;
-    height: 190px;
-    padding: 10px;
-    background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
+    left: 40px;
+    top: 350px;
+    width: 320px;
+    padding: 14px 22px;
+    color: var(--texto);
 
-    display: flex;
-    flex-direction: column;
-    flex-flow: column nowrap;
-    border: 3px solid black;
-    border-radius: 0px 10px 10px 0px;
-    initial-letter: 10px;
+    background: var(--grad-marca);
+    border-radius: 18px;
+    border: 1px solid var(--borde-claro);
+    box-shadow: var(--sombra-panel);
+    backdrop-filter: blur(2px);
 
-    /* Elegant slide transition — cubic-bezier gives a natural ease in/out feel */
-    transform: translateX(0px);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Transición elegante al ocultar/mostrar */
+    transform: translateX(0);
+    transition: var(--transicion);
 }
 
-/* Hidden state — slides off to the left */
+/* Estado oculto: se desliza hacia la izquierda */
 .bloque_info_extra.hidden {
-    transform: translateX(calc(-100% - 5px));
+    transform: translateX(calc(-100% - 60px));
     pointer-events: none;
 }
 
-.bloque_continuo {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* Etiqueta superior */
+.etiqueta {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    opacity: 0.8;
+    margin-bottom: 6px;
 }
 
-#origen_equipo{
+/* Cabecera: título + logo */
+.cabecera {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid black;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--divisor);
 }
 
-#nombre_equipo{
-    font-weight: bold;
-}
-#origen_equipo:nth-child(1){
-    border-width: 0px 0px 1px 0px;
-}
-
-#logo_equipo{
-    object-fit: contain; 
-    margin-right: 0px;
-}
-
-#dorsal_equipo{
+.titulo {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid black;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
 }
 
-#dorsal_label{
-    font-weight: bold;
+#nombre_equipo {
+    font-size: 19px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-#dorsal_number{
-    color: orange;
+.titulo .acr {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--acento);
+    text-transform: uppercase;
 }
 
-#club_equipo{
+.logo_equipo {
+    height: 42px;
+    width: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(var(--sombra-texto));
+}
+
+/* Universidad / club */
+.uni {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.9;
+    margin-bottom: 10px;
+}
+
+/* Rejilla de métricas */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 18px;
+}
+
+.metrica {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid black;
+    flex-direction: column;
+    min-width: 0;
 }
 
-#miembros_equipo{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid black;
+/* Ocupa toda la fila (p.ej. el piloto, que suele ser largo) */
+.metrica.ancho {
+    grid-column: 1 / -1;
 }
 
-#miembros_label{
-    font-weight: bold;
+.label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.75;
+    margin-bottom: 2px;
 }
 
-#miembros_resultado{
-    color: orange;
-}
-
-#lider_equipo{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid black;
-}
-
-#lider_label{
-    font-weight: bold;
-}
-
-#lider_resultado{
-    color: orange;
-}
-
-#piloto_equipo{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-    border-top: 1px solid black;
-}
-
-#piloto_label{
-    font-weight: bold;
-}
-
-#piloto_resultado{
-    color: orange;
+.valor {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--texto);
 }
