@@ -1,87 +1,112 @@
+@import "theme.css";
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        font-family: Arial, sans-serif;
+    background: transparent;
+    font-family: var(--fuente);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-/* CONTENEDOR PRINCIPAL  */
+/* Panel principal (scoreboard) con el degradado de marca */
 .contenedor {
-        width: 55%;
-        margin: 12px;
-        padding: 12px;
-        border-radius: 10px;
-        background-image: linear-gradient(to top, rgba(76, 110, 175, 0.92), rgba(101, 222, 241, 0.8));
+    width: 55%;
+    padding: 16px 20px;
+    color: var(--texto);
 
-        color: #ffffff;
+    background: var(--grad-marca);
+    border-radius: 18px;
+    border: 1px solid var(--borde-claro);
+    box-shadow: var(--sombra-panel);
+    backdrop-filter: blur(2px);
 
-        display: flex;
-        flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-        position: fixed;
-        top: 15%;
-
-
+    position: fixed;
+    top: 12%;
 }
 
+/* Título como etiqueta, coherente con el resto de infografías */
 .contenedor h1 {
-        margin: 0 0 6px 0;
-        font-size: 14px;
-        font-weight: bold;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    opacity: 0.85;
+    margin-bottom: 12px;
 }
 
 /* TABLAS */
 .tablas-grid {
-        display: grid;
-        gap: 12px;
+    display: grid;
+    gap: 16px;
 }
-/* fr es una fraccion */
+
+/* fr es una fracción */
 .tablas-grid.modo-una {
-        grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
 }
 
 .tablas-grid.modo-dos {
-        grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .tabla-puntos {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
 }
 
-.tabla-puntos thead {
-        background: rgba(255, 255, 255, 0.12);
+.tabla-puntos thead th {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    border-bottom: 1px solid var(--divisor);
 }
 
 .tabla-puntos th,
 .tabla-puntos td {
-        padding: 4px 8px;
-        line-height: 1.5;
-        text-align: left;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 10px;
+    line-height: 1.4;
+    text-align: left;
+    border-bottom: 1px solid var(--borde-claro);
 }
 
 .tabla-puntos tbody tr:last-child td {
-        border-bottom: none;
+    border-bottom: none;
 }
 
+/* Nombre del equipo en negrita; puntos destacados en dorado */
+.tabla-puntos td:nth-child(3) {
+    font-weight: 700;
+}
+
+.tabla-puntos td:nth-child(4) {
+    font-weight: 700;
+    color: var(--acento);
+}
+
+/* Columnas centradas y estrechas: logo, dorsal y puntos */
 .tabla-puntos th:nth-child(1),
 .tabla-puntos th:nth-child(2),
 .tabla-puntos td:nth-child(1),
 .tabla-puntos td:nth-child(2),
 .tabla-puntos th:nth-child(4),
 .tabla-puntos td:nth-child(4) {
-        text-align: center;
-        width: 70px;
+    text-align: center;
+    width: 64px;
 }
 
 .team-logo {
-        width: 20px;
-        height: 20px;
-        object-fit: contain;
-        display: block;
-        margin: 0 auto;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(var(--sombra-texto));
 }
