@@ -11,6 +11,14 @@ const ID_SIGUIENTE = "urn:ngsi-ld:SiguienteEquipo:001";
 
 const botonesToggle = document.querySelectorAll(".btnToggle");
 
+// Socket para señales en tiempo real (recarga manual de puntos)
+const socket = typeof io === "function" ? io() : null;
+const SENAL_RECARGA_PUNTOS = "recargar-puntos";
+
+// Recargar puntos (envía una señal por socket que el overlay de puntos escucha)
+const btnRecargarPuntos = document.getElementById("btnRecargarPuntos");
+const feedbackPuntos = document.getElementById("feedbackPuntos");
+
 // Texto del anuncio
 const inputTexto = document.getElementById("inputTexto");
 const btnEnviarTexto = document.getElementById("btnEnviarTexto");
@@ -32,7 +40,7 @@ const btnEnviarSiguiente = document.getElementById("btnEnviarSiguiente");
 const feedbackSiguiente = document.getElementById("feedbackSiguiente");
 
 // Etiqueta legible por atributo y estado actual (attr -> "visible" | "oculto")
-const ETIQUETAS = { anuncios: "Anuncios", sponsors: "Sponsors", infoteam: "InfoTeam", siguiente: "Siguiente", clima: "Clima" };
+const ETIQUETAS = { anuncios: "Anuncios", sponsors: "Sponsors", infoteam: "InfoTeam", siguiente: "Siguiente", clima: "Clima", puntos: "Puntos" };
 const estados = {};
 
 // Pinta el boton segun el estado actual del atributo
@@ -85,6 +93,22 @@ botonesToggle.forEach(boton => {
             });
     });
 });
+
+// Recarga manual de puntos
+/////////////////////////////////////////////////////////////
+
+if (btnRecargarPuntos) {
+    btnRecargarPuntos.addEventListener("click", () => {
+        if (!socket) {
+            mostrarFeedback(feedbackPuntos, "Sin conexión de socket.", true);
+            return;
+        }
+        // El servidor reemite este mensaje a todos los clientes; el overlay de puntos lo escucha
+        socket.send(SENAL_RECARGA_PUNTOS);
+        mostrarFeedback(feedbackPuntos, "Recargando puntos...");
+        console.log("Señal de recarga de puntos enviada");
+    });
+}
 
 // Texto del anuncio
 /////////////////////////////////////////////////////////////

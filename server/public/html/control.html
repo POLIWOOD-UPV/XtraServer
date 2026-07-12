@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Control</title>
         <link rel="stylesheet" href="../css/control.css" />
+        <script src="/socket.io/socket.io.js" defer></script>
         <script src="../js/api.js" defer></script>
         <script src="../js/control.js" defer></script>
     </head>
@@ -19,7 +20,12 @@
                 <button class="btnToggle" data-attr="infoteam">InfoTeam</button>
                 <button class="btnToggle" data-attr="siguiente">Siguiente</button>
                 <button class="btnToggle" data-attr="clima">Clima</button>
+                <button class="btnToggle" data-attr="puntos">Puntos</button>
             </div>
+            <div class="fila">
+                <button id="btnRecargarPuntos">Recargar puntos</button>
+            </div>
+            <p class="feedback" id="feedbackPuntos"></p>
         </section>
 
         <section>

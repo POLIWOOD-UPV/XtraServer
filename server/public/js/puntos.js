@@ -2,6 +2,13 @@ const MAX_EQUIPOS_COLUMNA = 15;
 const TABLA_HEADERS = ["Logo", "No.", "Team", "Points"];
 const LOGO_FALLBACK = "/img/Equipos/default.png";
 const API_URL = "/api/puntos";
+const REFRESH_MS = 600000;           // auto-refresco periódico de los puntos (10 min)
+const SENAL_RECARGA = "recargar-puntos"; // señal manual emitida desde control
+
+// Visibilidad controlada por la entidad Animaciones (atributo "puntos")
+const ATTRIBUTE_NAME = "puntos";
+const contenedor = document.getElementById("contenedor_puntos");
+const socket = typeof io === "function" ? io() : null;
 
 // Mapeo de nombres de equipos a sus alias para buscar imágenes
 const TEAM_ALIASES = {
@@ -196,6 +203,47 @@ async function cargarDatos() {
   }
 }
 
-// Cargar datos al inicializar el módulo
+// ─────────────────────────────────────────────
+//  VISIBILIDAD (patrón Animaciones)
+// ─────────────────────────────────────────────
+
+/**
+ * Lee la entidad Animaciones y muestra u oculta el overlay según el atributo "puntos"
+ */
+function cogerAnimaciones() {
+  fetch("/v2/entities?type=Animaciones")
+    .then(res => {
+      if (!res.ok) throw new Error("No se pudo obtener la entidad de Animaciones");
+      return res.json();
+    })
+    .then(data => {
+      if (!contenedor) return;
+      const estado = String(data[0]?.[ATTRIBUTE_NAME]?.value || "").toLowerCase();
+      contenedor.classList.toggle("hidden", estado !== "visible");
+    })
+    .catch(err => {
+      console.error("Error al recibir animación:", err);
+    });
+}
+
+if (socket) {
+  socket.on("message", msg => {
+    if (typeof msg !== "string") return;
+    // Notificación de Animaciones: refrescar la visibilidad
+    if (msg.includes("urn:ngsi-ld:Animaciones:")) {
+      cogerAnimaciones();
+    }
+    // Señal manual de recarga emitida desde el control: volver a pedir los puntos
+    if (msg === SENAL_RECARGA) {
+      cargarDatos();
+    }
+  });
+}
+
+// Auto-refresco periódico de los puntos (la fuente puede publicar nuevos valores)
+setInterval(cargarDatos, REFRESH_MS);
+
+// Cargar datos y estado de visibilidad al inicializar el módulo
 cargarDatos();
+cogerAnimaciones();
 

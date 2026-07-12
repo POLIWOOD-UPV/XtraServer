@@ -27,6 +27,16 @@ body {
 
     position: fixed;
     top: 12%;
+
+    /* Aparición/desaparición por fundido (controlado desde control.html) */
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Estado oculto: se desvanece */
+.contenedor.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Título como etiqueta, coherente con el resto de infografías */
