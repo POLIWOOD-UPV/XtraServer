@@ -72,17 +72,22 @@ if (socket) {
 
 // AÑADIDO: lista de sponsors con su nombre y ruta de imagen
 const sponsors = [
-    { name: "AERCO",  img: "../img/Equipos/AERCO.png"  },
-    { name: "AURA",   img: "../img/Equipos/AURA.png"   },
-    { name: "DSDTA",  img: "../img/Equipos/DSDTA.png"  },
-    { name: "ECL",    img: "../img/Equipos/ECL.png"    },
-    { name: "SAETA",  img: "../img/Equipos/SAETA.png"  },
-    { name: "SAKA",   img: "../img/Equipos/SAKA.png"   },
-    { name: "TRENC",  img: "../img/Equipos/TRENC.png"  },
-    { name: "UA1",    img: "../img/Equipos/UA1.png"    },
-    { name: "UA2",    img: "../img/Equipos/UA2.png"    },
-    { name: "VLAIR",  img: "../img/Equipos/VLAIR.png"  },
-    { name: "ZENIT",  img: "../img/Equipos/ZENIT.png"  },
+    { name: "GENERALITAT",  img: "../img/Sponsors/Logos/Photocall XC26 - 9.png"  },
+    { name: "PTAE",  img: "../img/Sponsors/Logos/Photocall XC26 - 10.png"  },
+    { name: "ATLAS",  img: "../img/Sponsors/Logos/Photocall XC26 - 11.png"  },
+    { name: "FCVVSCJ",  img: "../img/Sponsors/Logos/Photocall XC26 - 12.png"  },
+    { name: "HP",  img: "../img/Sponsors/Logos/Photocall XC26 - 13.png"  },
+    { name: "ISTOBAL",  img: "../img/Sponsors/Logos/Photocall XC26 - 14.png"  },
+    { name: "TORRERC",  img: "../img/Sponsors/Logos/Photocall XC26 - 15.png"  },
+    { name: "FUVEX",  img: "../img/Sponsors/Logos/Photocall XC26 - 16.png"  },
+    { name: "AJUNTAMENT",  img: "../img/Sponsors/Logos/Photocall XC26 - 17.png"  },
+    { name: "PARANOID",  img: "../img/Sponsors/Logos/Photocall XC26 - 18.png"  },
+    { name: "UPV",  img: "../img/Sponsors/Logos/Photocall XC26 - 19.png"  },
+    { name: "GE",  img: "../img/Sponsors/Logos/Photocall XC26 - 20.png"  },
+    { name: "GENERALITAT2",  img: "../img/Sponsors/Logos/Photocall XC26 - 21.png"  },
+    { name: "ETSIADI",  img: "../img/Sponsors/Logos/Photocall XC26 - 22.png"  },
+    { name: "FDACV",  img: "../img/Sponsors/Logos/Photocall XC26 - 23.png"  },
+
 ];
 
 const track = document.querySelector(".sponsors-track");
