@@ -383,7 +383,8 @@ exports.crear_animaciones = async () => {
         sponsors:  { type:"Text", value:"visible" },
         infoteam:  { type:"Text", value:"visible" },
         siguiente: { type:"Text", value:"visible" },
-        clima:     { type:"Text", value:"visible" }
+        clima:     { type:"Text", value:"visible" },
+        puntos:    { type:"Text", value:"visible" }
     };
     return await this.update("append", [animaciones]);
 };
