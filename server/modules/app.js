@@ -187,6 +187,20 @@ app.get("/", (req, res) => {
 //   }
 // });
 
+app.get("/api/list/*", (req, res) => {
+
+    const ruta = "/" + (req.params[0] || "");
+
+    res.json(dir.listDir(ruta));
+
+});
+
+app.get("/api/list", (req, res) => {
+
+    res.json(dir.listDir("/"));
+
+});
+
 app.get("/browse", (req, res) => {
   handleBrowse(req, res, "/");
 });

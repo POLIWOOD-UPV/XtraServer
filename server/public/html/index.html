@@ -4,19 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XtraServer</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body class="page">
-    <main class="landing" aria-labelledby="home-title">
-        <header class="landing__header">
-            <h1 id="home-title" class="landing__title">XtraServer</h1>
-            <p class="landing__subtitle">Selecciona una accion para empezar.</p>
-        </header>
+    <main class="dashboard">
+        <section class="panel panel--left">
+            <h1 class="landing__title">
+                XtraServer
+            </h1>
 
-        <nav class="landing__actions" aria-label="Acciones principales">
-            <a class="button button--primary" href="/upload">Subir archivo</a>
-            <a class="button button--secondary" href="/browse">Ver archivos</a>
-        </nav>
+            <nav class="landing__actions">
+                <a class="button button--primary" href="/upload">
+                    Subir archivo
+                </a>
+
+                <a class="button button--secondary" href="/browse">
+                    Ver archivos
+                </a>
+            </nav>
+        </section>
+
+        <section class="panel panel--right">
+            <h2>Archivos</h2>
+            <div id="explorer"></div>
+        </section>
     </main>
+    <script src="../js/explorer.js"></script>
 </body>
 </html>

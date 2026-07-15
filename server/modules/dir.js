@@ -5,11 +5,28 @@ const URL = require("url")
 const DIR = "public";
 exports.DIR = DIR;
 
+exports.listDir = (url) => {
+  url = url.replace(/\\/g, "/");
+
+  const dir = fs.readdirSync(path.join(DIR, url));
+
+  return dir
+    .filter(element =>
+      !element.startsWith(".") &&
+      element !== "css" &&
+      element !== "js"
+    )
+    .map(element => ({
+      name: element,
+      isDirectory: element.search("\\.") === -1
+    }));
+};
+
 exports.http_listdir = (res, url, basePath = "/browse") => {
   const base = basePath.endsWith("/") ? basePath.slice(0, -1) : basePath;
   try {
     url = url.replace(/\\/g, '/');
-    const dir = fs.readdirSync(path.join(DIR, url));
+    const files = exports.listDir(url);
     const parts = url.split("/");
     let parent = parts.slice(0, -2).join("/") || "/";
 
@@ -34,26 +51,22 @@ exports.http_listdir = (res, url, basePath = "/browse") => {
     // Aseguramos que acabe en /
     const urlFixed = url.endsWith("/") ? url : url + "/";
 
-    dir.forEach(element => {
-      if (!element.startsWith(".") && element != "css" && element != "js") {
-        // Si el elemento no contiene un punto, se asume directorio y se le agrega "/"
-        if (element.search("\\.") === -1) {
-          element += "/";
-        }        
-        // esto no lo acabo de entender pero si no daba error
-        // Codificar solo la parte del nombre, evitando codificar la barra final
-        let encodedElement;
-        if (element.endsWith("/")) {
-          // Codificamos sin la última barra y luego la agregamos
-          encodedElement = encodeURIComponent(element.slice(0, -1)) + "/";
-        } else {
-          encodedElement = encodeURIComponent(element);
-        }
-        
-        // Construimos el enlace usando la URL base (urlFixed) y el elemento codificado
-        const elementUrl = base + urlFixed + encodedElement;
-        res.write(`<a href="${elementUrl}">${element}</a>`);
+    files.forEach(file => {
+
+      let text = file.name;
+      let encodedElement;
+
+      if (file.isDirectory) {
+        text += "/";
+        encodedElement = encodeURIComponent(file.name) + "/";
+      } else {
+        encodedElement = encodeURIComponent(file.name);
       }
+
+      const elementUrl = base + urlFixed + encodedElement;
+
+      res.write(`<a href="${elementUrl}">${text}</a>`);
+
     });
     
     
